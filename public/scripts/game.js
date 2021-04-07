@@ -1,4 +1,4 @@
-var BootScene = new Phaser.Class({
+let BootScene = new Phaser.Class({
   Extends: Phaser.Scene,
 
   initialize: function BootScene() {
@@ -26,13 +26,13 @@ var BootScene = new Phaser.Class({
   },
 });
 
-var titleScene = new Phaser.Scene("title");
+let titleScene = new Phaser.Scene("title");
 
 titleScene.preload = function () {};
 
 titleScene.create = function () {};
 
-var WorldScene = new Phaser.Class({
+let WorldScene = new Phaser.Class({
   Extends: Phaser.Scene,
 
   initialize: function WorldScene() {
@@ -44,15 +44,15 @@ var WorldScene = new Phaser.Class({
   create: function () {
     // create the map
     this.add.image(305, 150, "bottom_map");
-    var map = this.make.tilemap({ key: "map" });
-    var background = new Image(0);
+    let map = this.make.tilemap({ key: "map" });
+    let background = new Image(0);
     // first parameter is the name of the tilemap in tiled
-    // var tiles = map.addTilesetImage("spritesheet", "tiles");
+    // let tiles = map.addTilesetImage("spritesheet", "tiles");
 
     // creating the layers
-    // var grass = map.createStaticLayer("Grass", tiles, 0, 0);
+    // let grass = map.createStaticLayer("Grass", tiles, 0, 0);
 
-    // var obstacles = map.createStaticLayer("Obstacles", tiles, 0, 0);
+    // let obstacles = map.createStaticLayer("Obstacles", tiles, 0, 0);
 
     // make all tiles in obstacles collidable
     // obstacles.setCollisionByExclusion([-1]);
@@ -152,7 +152,7 @@ var WorldScene = new Phaser.Class({
   },
 });
 
-var config = {
+let config = {
   type: Phaser.AUTO,
   parent: "content",
   width: 640,
@@ -168,6 +168,6 @@ var config = {
   },
   scene: [BootScene, WorldScene],
 };
-var game = new Phaser.Game(config);
+let game = new Phaser.Game(config);
 
 scene.preload = function () {};
