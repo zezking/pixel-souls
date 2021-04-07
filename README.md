@@ -1,4 +1,4 @@
-A Souls like Pixel-Art RPG game
+A top-down pixelated RPG version of DARK SOULS I.
 
 npm install
 
