@@ -211,8 +211,17 @@
  "tileheight":32,
  "tilesets":[
         {
+        "columns":40,
          "firstgid":1,
-         "source":"..\/..\/MAP TILES\/_Tiled\/FULLMAP_bottom.tsx"
+         "image":"FULLMAP_bottom.png",
+         "imageheight":2240,
+         "imagewidth":1280,
+         "margin":0,
+         "name":"FULLMAP_bottom",
+         "spacing":0,
+         "tilecount":2800,
+         "tileheight":32,
+         "tilewidth":32
         }, 
         {
          "columns":40,
