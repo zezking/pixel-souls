@@ -45,7 +45,7 @@ export default class MainScene extends Phaser.Scene {
 
 
     //test collision character
-    this.enemy = new Enemy({scene:this,x:100,y:100,texture:'skeleton',frame:'sprite_idle0'});
+    this.enemy = new Enemy({scene:this,x:100,y:100,texture:'skeleton',frame:'skele_idle0'});
 
     // character input keys
     this.player.inputKeys = this.input.keyboard.addKeys({
