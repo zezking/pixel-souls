@@ -1,0 +1,27 @@
+{ "frames": {
+   "FULLMAP_merged - Copy.aseprite": {
+    "frame": { "x": 0, "y": 0, "w": 1280, "h": 2240 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1280, "h": 2240 },
+    "sourceSize": { "w": 1280, "h": 2240 },
+    "duration": 100
+   }
+ },
+ "meta": {
+  "app": "http://www.aseprite.org/",
+  "version": "1.2.25-x64",
+  "image": "FULLMAP_collision.png",
+  "format": "RGBA8888",
+  "size": { "w": 1280, "h": 2240 },
+  "scale": "1",
+  "frameTags": [
+  ],
+  "layers": [
+   { "name": "COLLISION_MAP", "opacity": 80, "blendMode": "normal" },
+   { "name": "viewport_markers", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+  ]
+ }
+}

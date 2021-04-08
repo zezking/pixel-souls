@@ -1,0 +1,84 @@
+{
+    "anims": [
+        {
+            "key": "player_right",
+            "type": "frames",
+            "repeat": -1,
+            "frameRate": 12,
+            "frames": [
+                {
+                    "key": "ashen_one",
+                    "frame": "player_6"
+                },
+                {
+                    "key": "ashen_one",
+                    "frame": "player_7"
+                },
+                {
+                    "key": "ashen_one",
+                    "frame": "player_8"
+                }
+            ]
+        },
+        {
+            "key": "player_left",
+            "type": "frames",
+            "repeat": -1,
+            "frameRate": 12,
+            "frames": [
+                {
+                    "key": "ashen_one",
+                    "frame": "player_3"
+                },
+                {
+                    "key": "ashen_one",
+                    "frame": "player_4"
+                },
+                {
+                    "key": "ashen_one",
+                    "frame": "player_5"
+                }
+            ]
+        },
+        {
+            "key": "player_down",
+            "type": "frames",
+            "repeat": -1,
+            "frameRate": 12,
+            "frames": [
+                {
+                    "key": "ashen_one",
+                    "frame": "player_0"
+                },
+                {
+                    "key": "ashen_one",
+                    "frame": "player_1"
+                },
+                {
+                    "key": "ashen_one",
+                    "frame": "player_2"
+                }
+            ]
+        },
+        {
+            "key": "player_up",
+            "type": "frames",
+            "repeat": -1,
+            "frameRate": 12,
+            "frames": [
+                {
+                    "key": "ashen_one",
+                    "frame": "player_9"
+                },
+                {
+                    "key": "ashen_one",
+                    "frame": "player_10"
+                },
+                {
+                    "key": "ashen_one",
+                    "frame": "player_11"
+                }
+            ]
+        }
+    ]
+}
