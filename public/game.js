@@ -2,12 +2,12 @@ const config = {
   type: Phaser.AUTO,
   width: 1280,
   height: 2240,
-  scene: {
+  scene: [
     BootScene,
     TitleScene,
     GameScene,
     // UiScene,
-  },
+  ],
   // zoom: 3,
   pixelArt: true,
   physics: {
