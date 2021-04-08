@@ -1,5 +1,6 @@
 class UiScene extends Phaser.Scene {
   constructor() {
+    console.log("Here")
     super('Ui');
   }
 

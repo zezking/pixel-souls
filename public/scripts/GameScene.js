@@ -1,5 +1,6 @@
 class GameScene extends Phaser.Scene {
   constructor() {
+
     super('Game');
   }
 
@@ -46,8 +47,9 @@ class GameScene extends Phaser.Scene {
   // }
 
   createMap() {
+    
     this.map = this.make.tilemap({ key: 'map' });
-    this.tiles = this.map.addTilesetImage('FULLMAP_bottom', 'bottom', 32, 32, 0, 0);
+    this.tiles = this.map.addTilesetImage('FULLMAP_bottom', 'bottom', 10, 10, 0, 0);
     this.bottomLayer = this.map.createStaticLayer('bottom', this.tiles, 0, 0);
   }
 }

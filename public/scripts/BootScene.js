@@ -1,5 +1,6 @@
 class BootScene extends Phaser.Scene {
   constructor() {
+    console.log("HERERE")
     super('Boot');
   }
 
