@@ -5,7 +5,7 @@ const config = {
   height:512,
   backgroundColor: '#333333',
   type: Phaser.AUTO,
-  parent: 'pixel-game',
+  parent: 'games',
   scene:[MainScene],
   scale: {
     zoom: 2,

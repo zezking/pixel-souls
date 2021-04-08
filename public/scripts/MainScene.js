@@ -9,7 +9,7 @@ export default class MainScene extends Phaser.Scene {
   preload() {
     // console.log("preload")
     Player.preload(this);
-    Enemy.preload(this)
+    Enemy.preload(this);
     this.load.image('bottom_map', 'assets/map/bottom_map_test.png');
     this.load.image("obstacles", "assets/map/overlay_map_test.png");
     // this.load.tilemapTiledJSON('map','assets/images/FULLMAP.json')
@@ -58,5 +58,8 @@ export default class MainScene extends Phaser.Scene {
 
   update(){
     this.player.update();
+
+    // something breaking enemy - Kevin
+    // this.enemy.update();
   }
 }

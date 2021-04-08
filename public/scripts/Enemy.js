@@ -29,7 +29,8 @@ export default class Enemy extends Phaser.Physics.Matter.Sprite {
 
   update() {
 
-    this.enemy.anims.play('skele_idle',true)
+    this.anims.play('skele_idle',true)
+
     // // Player Movement and Animations
     // if (this.inputKeys.left.isDown) {
     //   this.anims.play("player_left",true);
@@ -45,7 +46,7 @@ export default class Enemy extends Phaser.Physics.Matter.Sprite {
     //   this.anims.stop();
     // }
 
-    // Player Speed controls
+    // // Player Speed controls
     const speed = 2.5;
     let playerVelocity = new Phaser.Math.Vector2();
     if(this.inputKeys.left.isDown) {
