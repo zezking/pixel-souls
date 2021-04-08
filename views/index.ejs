@@ -7,20 +7,10 @@
       name="viewport"
       content="width=device-width,initial-scale=1,user-scalable=no"
     />
-    <script src="/scripts/phaser.min.js"></script>
-    <script src="/scripts/game.js"></script>
-    <style>
-      html,
-      body {
-        margin: 0;
-        padding: 0;
-      }
-    </style>
-  </head>
+    <script src="//cdn.jsdelivr.net/npm/phaser@3.54.0/dist/phaser.js"></script>
+    <script src= "https://cdn.jsdelivr.net/npm/phaser-matter-collision-plugin"></script>
   <body>
-    <div
-      id="content"
-      style="display: block; width: 100%; text-align: center"
-    ></div>
+    <div id="game"></div>
+    <script type="module" src="scripts/games.js"></script>
   </body>
 </html>
