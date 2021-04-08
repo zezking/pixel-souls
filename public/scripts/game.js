@@ -13,7 +13,7 @@ let BootScene = new Phaser.Class({
     // map in json format
     // this.load.tilemapTiledJSON("map", "assets/map/map.json");
 
-    // our two characters
+    // our characters
     this.load.spritesheet("player", "assets/AshenOne.png", {
       frameWidth: 31,
       frameHeight: 50,
