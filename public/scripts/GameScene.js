@@ -35,7 +35,17 @@ class GameScene extends Phaser.Scene {
   // }
 
   createInput() {
-    this.cursors = this.input.keyboard.createCursorKeys();
+    this.cursors = this.input.keyboard.addKeys({
+      up: Phaser.Input.Keyboard.KeyCodes.W,
+      down: Phaser.Input.Keyboard.KeyCodes.S,
+      left: Phaser.Input.Keyboard.KeyCodes.A,
+      right: Phaser.Input.Keyboard.KeyCodes.D,
+    })
+    let camera = this.cameras.main;
+    camera.zoom = 1.5;
+    camera.startFollow(this.player);
+    camera.setLerp(0.1,0.1);
+    camera.setBounds(0,0, this.player);
   }
 
   // addCollisions() {

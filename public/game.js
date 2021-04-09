@@ -1,7 +1,7 @@
 const config = {
   type: Phaser.AUTO,
-  width: 1280,
-  height: 2240,
+  width: 1800,
+  height: 900,
   scene: [
     BootScene,
     TitleScene,
@@ -14,7 +14,7 @@ const config = {
     default: "arcade",
     arcade: {
       gravity: { y: 0 },
-      debug: false, // set to true to view zones
+      debug: true, // set to true to view zones
     },
   },
 };
