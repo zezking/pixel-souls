@@ -1,8 +1,8 @@
-class Player extends Phaser.Physics.Arcade.Image {
+class Enemy extends Phaser.Physics.Arcade.Image {
   constructor(scene, x, y, key, frame) {
     super(scene, x, y, key, frame);
     this.scene = scene; // the scene this container will be added to
-    this.velocity = 5; // the velocity when moving our player
+    this.velocity = 1; // the velocity when moving our player
 
     // enable physics
     this.scene.physics.world.enable(this);
@@ -14,15 +14,16 @@ class Player extends Phaser.Physics.Arcade.Image {
     this.setCollideWorldBounds(true);
     // add the player to our existing scene
     this.scene.add.existing(this);
-    
+    this.setVelocityX(0);
+
 
   }
 
   update(cursors) {
     this.body.setVelocity(0);
 
-
-    const speed = 150;
+    
+    const speed = 0;
     let playerVelocity = new Phaser.Math.Vector2();
     if(cursors.left.isDown) {
       playerVelocity.x = -1;

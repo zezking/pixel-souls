@@ -3,18 +3,20 @@ class GameScene extends Phaser.Scene {
     super('Game');
   }
 
-  // init() {
-  //   // this.scene.launch('Ui');
-  //   // this.score = 0;
-  // }
+  init() {
+    this.scene.launch('Ui');
+    this.score = 0;
+  }
 
   create() {
     this.createMap();
     // this.createAudio();
     // this.createWalls();
     this.createPlayer();
-    // this.addCollisions();
+    this.createEnemy();
+    this.addCollisions();
     this.createInput();
+
   }
 
   update() {
@@ -26,7 +28,11 @@ class GameScene extends Phaser.Scene {
   // }
 
   createPlayer() {
-    this.player = new Player(this, 32, 50, 'player', 32);
+    this.player = new Player(this, 50, 50, 'player', 32);
+  }
+
+  createEnemy() {
+    this.enemy = new Enemy(this, 100, 100, 'skele', 32);
   }
 
   // createWalls() {
@@ -49,17 +55,33 @@ class GameScene extends Phaser.Scene {
 
   }
 
-  // addCollisions() {
-  //   // check for collisions between player and wall objects
-  //   this.physics.add.collider(this.player, this.wall);
-  //   // check for overlaps between player and chest game objects
-  //   this.physics.add.overlap(this.player, this.chests, this.collectChest, null, this);
-  // }
+  addCollisions() {
+    // check for collisions between player and wall objects
+    this.physics.add.collider(this.player, this.enemy, touchEnemy, null, this);
+    this.physics.add.collider(this.enemy);
+    // this.physics.add.overlap(this.player, this.enemy);
+
+    
+    
+    function touchEnemy(player, enemy) {
+      // enemy bounces off walls
+      enemy.body.bounce.x = 1;
+      enemy.body.bounce.y = 1;
+      //player velocity -> enemy collision -> enemy drag/friction
+      enemy.body.drag.x = 250;
+      enemy.body.drag.y = 250;
+      // can add other code - damage player, etc.
+      }
+
+    // // check for overlaps between player and chest game objects
+    // this.physics.add.overlap(this.player, this.chests, this.collectChest, null, this);
+  }
 
   createMap() {
     let map = this.make.tilemap({ key: 'map' });
     this.tiles = map.addTilesetImage('FULLMAP_bottom', 'bottom', 32, 32, 0, 0);
     this.bottomLayer = map.createStaticLayer('bottom', this.tiles, 0, 0);
+
 
     // character camera bounds
     this.physics.world.bounds.width = map.widthInPixels;
