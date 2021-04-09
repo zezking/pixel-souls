@@ -1,3 +1,5 @@
+
+
 class Player extends Phaser.Physics.Arcade.Image {
   constructor(scene, x, y, key, frame) {
     super(scene, x, y, key, frame);
@@ -18,18 +20,24 @@ class Player extends Phaser.Physics.Arcade.Image {
     this.scene.cameras.main.startFollow(this);
   }
 
+  create() {
+  }
   // preload(){
   //   // this.load.atlas('player', '/public/assets/character_sprites/ashen_one.png','/public/assets/character_sprites/ashen_one_atlas.json');
   //   // this.load.animation('ashen_anim','assets/character_sprites/ashen_one_anim.json')
     
   // }
   update(cursors) {
+
+ 
     this.body.setVelocity();
+
+    
     const speed = 150;
     let playerVelocity = new Phaser.Math.Vector2();
     if(cursors.left.isDown) {
       playerVelocity.x = -1;
-   
+
     } else if (cursors.right.isDown) {
       playerVelocity.x = 1;
     }

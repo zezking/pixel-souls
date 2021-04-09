@@ -1,3 +1,4 @@
+
 const config = {
   type: Phaser.AUTO,
   width: 1000,
@@ -9,15 +10,25 @@ const config = {
     // UiScene,
   ],
   // zoom: 3,
-  pixelArt: true,
+  // pixelArt: true,
   physics: {
-    default: "arcade",
-    arcade: {
-      gravity: { y: 0 },
-      debug: true, // set to true to view zones
+    default: "matter",
+    matter: {
+      debug: true,
+      gravity: {y: 0},
+
     },
   },
+  plugins: {
+    scene: [
+      {
+        plugin: PhaserMatterCollisionPlugin,
+        key: 'matterCollision',
+        mapping: 'matterCollision'
+      }
+    ]
+  }
 
 };
 
-const game = new Phaser.Game(config);
+// new Phaser.Game(config);
