@@ -15,7 +15,7 @@ class Player extends Phaser.Physics.Arcade.Image {
     // add the player to our existing scene
     this.scene.add.existing(this);
 
-    
+    this.scene.cameras.main.startFollow(this);
   }
 
   // preload(){
