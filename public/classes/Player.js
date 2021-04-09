@@ -9,7 +9,7 @@ class Player extends Phaser.Physics.Arcade.Image {
     // set immovable if another object collides with our player
     this.setImmovable(false);
     // scale our player
-    this.setScale(2);
+    this.setScale(1);
     // collide with world bounds
     this.setCollideWorldBounds(true);
     // add the player to our existing scene
@@ -19,16 +19,23 @@ class Player extends Phaser.Physics.Arcade.Image {
   update(cursors) {
     this.body.setVelocity(0);
 
-    if (cursors.left.isDown) {
-      this.body.setVelocityX(-this.velocity);
+    
+    const speed = 150;
+    let playerVelocity = new Phaser.Math.Vector2();
+    if(cursors.left.isDown) {
+      playerVelocity.x = -1;
     } else if (cursors.right.isDown) {
-      this.body.setVelocityX(this.velocity);
+      playerVelocity.x = 1;
     }
-
-    if (cursors.up.isDown) {
-      this.body.setVelocityY(-this.velocity);
+    if(cursors.up.isDown) {
+      playerVelocity.y = -1;
     } else if (cursors.down.isDown) {
-      this.body.setVelocityY(this.velocity);
+      playerVelocity.y = 1;
     }
+    playerVelocity.normalize();
+    playerVelocity.scale(speed);
+    this.setVelocity(playerVelocity.x, playerVelocity.y);
+    
+
   }
 }

@@ -1,6 +1,5 @@
 class GameScene extends Phaser.Scene {
   constructor() {
-
     super('Game');
   }
 
@@ -9,6 +8,10 @@ class GameScene extends Phaser.Scene {
   //   // this.score = 0;
   // }
 
+  preload(){
+    console.log("preload")
+
+  }
   create() {
     this.createMap();
     // this.createAudio();
@@ -16,10 +19,14 @@ class GameScene extends Phaser.Scene {
     this.createPlayer();
     // this.addCollisions();
     this.createInput();
+ 
   }
 
   update() {
+    
     this.player.update(this.cursors);
+  
+  
   }
 
   // createAudio() {
@@ -28,6 +35,7 @@ class GameScene extends Phaser.Scene {
 
   createPlayer() {
     this.player = new Player(this, 32, 50, 'player', 32);
+    
   }
 
   // createWalls() {
@@ -49,7 +57,7 @@ class GameScene extends Phaser.Scene {
   createMap() {
     
     this.map = this.make.tilemap({ key: 'map' });
-    this.tiles = this.map.addTilesetImage('FULLMAP_bottom', 'bottom', 10, 10, 0, 0);
+    this.tiles = this.map.addTilesetImage('FULLMAP_bottom', 'bottom', 32, 32, 0, 0);
     this.bottomLayer = this.map.createStaticLayer('bottom', this.tiles, 0, 0);
   }
 }
