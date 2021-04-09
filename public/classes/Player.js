@@ -25,12 +25,11 @@ class Player extends Phaser.Physics.Arcade.Image {
   // }
   update(cursors) {
     this.body.setVelocity();
-
-    
     const speed = 150;
     let playerVelocity = new Phaser.Math.Vector2();
     if(cursors.left.isDown) {
       playerVelocity.x = -1;
+   
     } else if (cursors.right.isDown) {
       playerVelocity.x = 1;
     }

@@ -17,8 +17,9 @@ class BootScene extends Phaser.Scene {
     //load tilemap
     this.loadTilemap();
 
-    
-   
+    // this.loadPlayersJsonFiles();
+
+  
   }
 
   loadImages() {
@@ -31,6 +32,12 @@ class BootScene extends Phaser.Scene {
 
   loadSpriteSheets() {
     this.load.spritesheet('player', 'public/assets/sprites/PLAYER.png', { frameWidth: 32, frameHeight: 50 });
+  }
+
+  loadPlayersJsonFiles(){
+    this.load.atlas('player2','public/assets/character_sprites/ashen_one.png','public/assets/character_sprites/ashen_one_atlas.json')
+    this.load.animation('player2','public/assets/character_sprites/ashen_one_anim.json')
+
   }
 
   // loadAudio() {

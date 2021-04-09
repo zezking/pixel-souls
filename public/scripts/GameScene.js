@@ -33,7 +33,13 @@ class GameScene extends Phaser.Scene {
 
   createPlayer() {
     this.player = new Player(this, 32, 50, 'player', 32);
-    
+    this.player = new Player(this, 32, 50, 'player2', 32);
+  
+  }
+
+  createPlayerAnimation(){
+
+
   }
 
   // createWalls() {
