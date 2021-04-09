@@ -18,13 +18,13 @@ class Player extends Phaser.Physics.Arcade.Image {
     
   }
 
-  preload(){
-    this.load.atlas('player', '/public/assets/character_sprites/ashen_one.png','/public/assets/character_sprites/ashen_one_atlas.json');
-    this.load.animation('ashen_anim','assets/character_sprites/ashen_one_anim.json')
+  // preload(){
+  //   // this.load.atlas('player', '/public/assets/character_sprites/ashen_one.png','/public/assets/character_sprites/ashen_one_atlas.json');
+  //   // this.load.animation('ashen_anim','assets/character_sprites/ashen_one_anim.json')
     
-  }
+  // }
   update(cursors) {
-    this.body.setVelocity(0);
+    this.body.setVelocity();
 
     
     const speed = 150;
