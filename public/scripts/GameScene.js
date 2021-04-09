@@ -18,7 +18,7 @@ class GameScene extends Phaser.Scene {
   }
 
   update() {
-    this.player.update(this.cursors);
+    // this.player.update(this.cursors);
   }
 
   // createAudio() {
@@ -49,12 +49,10 @@ class GameScene extends Phaser.Scene {
 
   }
 
-  // addCollisions() {
-  //   // check for collisions between player and wall objects
-  //   this.physics.add.collider(this.player, this.wall);
-  //   // check for overlaps between player and chest game objects
-  //   this.physics.add.overlap(this.player, this.chests, this.collectChest, null, this);
-  // }
+  addCollisions() {
+    let collisionLayer = this.matter.add.sprite (0, 0, 'sheet', 'FULLMAP_collision', {shape: shapes.FULLMAP_collision});
+    collisionLayer.setPosition (0 + FULLMAP_collision.centerOfMass.x, 0 + FULLMAP_collision.centerOfMass.y);
+  }
 
   createMap() {
     let map = this.make.tilemap({ key: 'map' });
@@ -62,8 +60,8 @@ class GameScene extends Phaser.Scene {
     this.bottomLayer = map.createStaticLayer('bottom', this.tiles, 0, 0);
 
     // character camera bounds
-    this.physics.world.bounds.width = map.widthInPixels;
-    this.physics.world.bounds.height = map.heightInPixels;
-    this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
+    // this.physics.world.bounds.width = map.widthInPixels;
+    // this.physics.world.bounds.height = map.heightInPixels;
+    // this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
   }
 }

@@ -5,13 +5,13 @@ class Player extends Phaser.Physics.Arcade.Image {
     this.velocity = 160; // the velocity when moving our player
 
     // enable physics
-    this.scene.physics.world.enable(this);
+    // this.scene.physics.world.enable(this);
     // set immovable if another object collides with our player
-    this.setImmovable(false);
+    // this.setImmovable(false);
     // scale our player
     this.setScale(1);
     // collide with world bounds
-    this.setCollideWorldBounds(true);
+    // this.setCollideWorldBounds(true);
     // add the player to our existing scene
     this.scene.add.existing(this);
   }
