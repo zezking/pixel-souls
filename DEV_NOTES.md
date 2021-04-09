@@ -36,4 +36,4 @@
 -A second map area/loading screen  
 -Boss battle  
 -Other consumables(bombs, potions, etc)  
--hidden King-Andy NPC  
+-hidden King-A*** NPC  
