@@ -1,7 +1,7 @@
 const config = {
   type: Phaser.AUTO,
-  width: 1800,
-  height: 900,
+  width: 1000,
+  height: 800,
   scene: [
     BootScene,
     TitleScene,
