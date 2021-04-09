@@ -1,12 +1,13 @@
 class BootScene extends Phaser.Scene {
 
   constructor() {
-    console.log("HERERE")
+
     super('Boot');
 
   }
 
   preload() {
+
     // load images
     this.loadImages();
     // load spritesheets
@@ -15,6 +16,9 @@ class BootScene extends Phaser.Scene {
     // this.loadAudio();
     //load tilemap
     this.loadTilemap();
+
+    
+   
   }
 
   loadImages() {
@@ -23,10 +27,15 @@ class BootScene extends Phaser.Scene {
     this.load.image('bottom', '/public/assets/map/FULLMAP_bottom.png');
     this.load.image('overlay', '/public//assets/map/FULLMAP_overlay.png');
     this.load.image('collision', '/public//assets/map/FULLMAP_collision.png');
+  
   }
 
   loadSpriteSheets() {
-    this.load.spritesheet('player', '/public/assets/sprites/PLAYER.png', { frameWidth: 32, frameHeight: 50 });
+    this.load.spritesheet('player', 'public/assets/sprites/PLAYER.png', { frameWidth: 32, frameHeight: 50 });
+  }
+
+  preload(){
+
   }
 
   // loadAudio() {

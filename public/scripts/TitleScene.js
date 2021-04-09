@@ -1,6 +1,6 @@
 class TitleScene extends Phaser.Scene {
   constructor() {
-    console.log("it's here")
+  
     super('Title');
   }
 

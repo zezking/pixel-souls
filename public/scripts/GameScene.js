@@ -8,15 +8,13 @@ class GameScene extends Phaser.Scene {
   //   // this.score = 0;
   // }
 
-  preload(){
-    console.log("preload")
-
-  }
+  
   create() {
     this.createMap();
     // this.createAudio();
     // this.createWalls();
     this.createPlayer();
+
     // this.addCollisions();
     this.createInput();
  

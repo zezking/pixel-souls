@@ -14,8 +14,15 @@ class Player extends Phaser.Physics.Arcade.Image {
     this.setCollideWorldBounds(true);
     // add the player to our existing scene
     this.scene.add.existing(this);
+
+    
   }
 
+  preload(){
+    this.load.atlas('player', '/public/assets/character_sprites/ashen_one.png','/public/assets/character_sprites/ashen_one_atlas.json');
+    this.load.animation('ashen_anim','assets/character_sprites/ashen_one_anim.json')
+    
+  }
   update(cursors) {
     this.body.setVelocity(0);
 
