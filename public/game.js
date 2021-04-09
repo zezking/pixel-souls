@@ -7,7 +7,7 @@ const config = {
     BootScene,
     TitleScene,
     GameScene,
-    // UiScene,
+    UiScene,
   ],
   // zoom: 3,
   // pixelArt: true,
@@ -31,4 +31,9 @@ const config = {
 
 };
 
+<<<<<<< HEAD
 // new Phaser.Game(config);
+=======
+
+const game = new Phaser.Game(config);
+>>>>>>> 8ab4c9713e3fe7d936cc359cb7a4f1f455d8d3fd

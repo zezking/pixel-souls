@@ -31,6 +31,7 @@ class BootScene extends Phaser.Scene {
   }
 
   loadSpriteSheets() {
+<<<<<<< HEAD
     // this.load.spritesheet('player', 'public/assets/sprites/PLAYER.png', { frameWidth: 32, frameHeight: 50 });
   }
 
@@ -38,6 +39,11 @@ class BootScene extends Phaser.Scene {
     this.load.atlas('player2','public/assets/character_sprites/ashen_one.png','public/assets/character_sprites/ashen_one_atlas.json')
     this.load.animation('player2_anim','public/assets/character_sprites/ashen_one_anim.json')
    
+=======
+    this.load.spritesheet('player', 'public/assets/sprites/PLAYER.png', { frameWidth: 32, frameHeight: 50 });
+
+    this.load.spritesheet('skele', 'public/assets/skele_sprites/skele_idle.png', { frameWidth: 32, frameHeight: 32 });
+>>>>>>> 8ab4c9713e3fe7d936cc359cb7a4f1f455d8d3fd
   }
 
   // loadAudio() {
