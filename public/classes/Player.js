@@ -17,7 +17,7 @@ class Player extends Phaser.Physics.Arcade.Image {
   }
 
   update(cursors) {
-    this.body.setVelocity(0);
+    this.body.setVelocity();
 
     
     const speed = 150;
