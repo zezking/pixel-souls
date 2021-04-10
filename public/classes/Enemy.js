@@ -1,4 +1,4 @@
-class Enemy extends Phaser.Physics.Arcade.Image {
+class Enemy extends Phaser.Physics.Matter.Sprite {
   constructor(scene, x, y, key, frame) {
     super(scene, x, y, key, frame);
     this.scene = scene; // the scene this container will be added to

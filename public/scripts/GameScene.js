@@ -13,7 +13,7 @@ class GameScene extends Phaser.Scene {
     // this.createAudio();
     // this.createWalls();
     this.createPlayer();
-    this.createEnemy();
+    // this.createEnemy();
     this.addCollisions();
     this.createInput();
 
@@ -63,8 +63,8 @@ class GameScene extends Phaser.Scene {
     collisionLayer.setPosition (0 + 785, 0 + 1325); //manual offset for center of mass. Will have to find a better way to calculate this.
     
     // check for collisions between player and wall objects
-    this.physics.add.collider(this.player, this.enemy, touchEnemy, null, this);
-    this.physics.add.collider(this.enemy);
+    // this.physics.add.collider(this.player, this.enemy, touchEnemy, null, this);
+    // this.physics.add.collider(this.enemy);
     // this.physics.add.overlap(this.player, this.enemy);
 
     function touchEnemy(player, enemy) {
