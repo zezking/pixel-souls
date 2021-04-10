@@ -217,16 +217,15 @@ class GameScene extends Phaser.Scene {
     });
   }
   createDialogs(npc) {
-    let dialogs = this.cache.json.get("dialogs");
-
     this.matterCollision.addOnCollideStart({
       objectA: this.player,
       objectB: npc,
       callback: (eventData) => {
         if (npc) {
-          if (dialogs[npc.texture.key]) console.log(dialogs[npc.texture.key]);
         }
       },
     });
   }
+
+  createDialogsBox() {}
 }
