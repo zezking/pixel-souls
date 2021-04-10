@@ -6,12 +6,24 @@ class Player extends Phaser.Physics.Matter.Sprite {
     
     // the scene this container will be added to
     const {Body, Bodies} = Phaser.Physics.Matter.Matter;
-    let playerCollider = Bodies.rectangle(this.x,this.y + 20,16, 16,{isSensor:false, lable:'playerCollider'});
-    let playerSensor = Bodies.circle(this.x,this.y,24, {isSensor:true, label: 'playerSensor'});
+
+    let playerCollider = Bodies.rectangle(this.x,this.y + 20,20, 20,{isSensor:false, lable:'playerCollider'});
+    let playerSensor = Bodies.circle(this.x,this.y,20, {isSensor:true, label: 'playerSensor'});
+
     const compoundBody = Body.create({
       parts:[playerCollider,playerSensor],
 
       frictionAir: 0.0,
+      plugin: {
+        attractors:[
+          function (bodyA, bodyB) {
+              return {
+                  x: (bodyA.position.x - bodyB.position.x) * 0.000020,
+                  y: (bodyA.position.y - bodyB.position.y) * 0.000020
+              };sd
+          }
+      ]
+      }
     });
     this.setExistingBody(compoundBody);
     // scale our player
