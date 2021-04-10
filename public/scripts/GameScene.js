@@ -23,7 +23,7 @@ class GameScene extends Phaser.Scene {
     this.createEnemy();
     this.addCollisions();
     this.createInput();
-
+    this.createNPC()
 
     this.createOverlay();  //MUST ALWAYS BE LAST ON THIS LIST!!
   }
