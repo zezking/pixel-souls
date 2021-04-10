@@ -45,7 +45,7 @@ class GameScene extends Phaser.Scene {
   }
   
   createEnemy() {
-    this.enemy = new Enemy({scene:this,x:860,y:1700,key:'skele_idle',frame:'skele_idle0'});
+    this.enemy = new Enemy({scene:this,x:860,y:1700,key:'skele_sprite',frame:'skele_idling0'});
 
   }
 

@@ -1,0 +1,68 @@
+{
+    "anims": [
+        {
+            "key": "skeleton_idle",
+            "type": "frames",
+            "repeat": -1,
+            "frameRate": 12,
+            "frames": [
+                {
+                    "key": "skeleton_sprite",
+                    "frame": "skele_idling0"
+                },
+                {
+                    "key": "skeleton_sprite",
+                    "frame": "skele_idling1"
+                },
+                {
+                    "key": "skeleton_sprite",
+                    "frame": "skele_idling2"
+                },
+                {
+                    "key": "skeleton_sprite",
+                    "frame": "skele_idling3"
+                },
+                {
+                    "key": "skeleton_sprite",
+                    "frame": "skele_idling4"
+                },
+                {
+                    "key": "skeleton_sprite",
+                    "frame": "skele_idling5"
+                }
+            ]
+        },
+        {
+            "key": "skeleton_walk",
+            "type": "frames",
+            "repeat": -1,
+            "frameRate": 12,
+            "frames": [
+                {
+                    "key": "skeleton_sprite",
+                    "frame": "skele_walking0"
+                },
+                {
+                    "key": "skeleton_sprite",
+                    "frame": "skele_walking1"
+                },
+                {
+                    "key": "skeleton_sprite",
+                    "frame": "skele_walking2"
+                },
+                {
+                    "key": "skeleton_sprite",
+                    "frame": "skele_walking3"
+                },
+                {
+                    "key": "skeleton_sprite",
+                    "frame": "skele_walking4"
+                },
+                {
+                    "key": "skeleton_sprite",
+                    "frame": "skele_walking5"
+                }
+            ]
+        }
+    ]
+}

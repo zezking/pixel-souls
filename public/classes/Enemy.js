@@ -13,7 +13,7 @@ class Enemy extends Phaser.Physics.Matter.Sprite {
     let enemySensor = Bodies.circle(this.x,this.y,80, {isSensor:true, label: 'enemySensor'});
     const compoundBody = Body.create({
       parts:[enemyCollider,enemySensor],
-      frictionAir: 0.35,
+      frictionAir: 0.25,
     });
     this.setExistingBody(compoundBody);
     // scale our player
@@ -38,8 +38,8 @@ class Enemy extends Phaser.Physics.Matter.Sprite {
 
 
   static preload(scene) {
-    scene.load.atlas('skele_idle','/public/assets/skele_sprites/skele_idle.png','/public/assets/skele_sprites/skele_idle_atlas.json')
-    scene.load.animation('skele_anim','/public/assets/skele_sprites/skele_idle_anim.json')
+    scene.load.atlas('skeleton_sprite','/public/assets/skele_sprites/skeleton_sprite.png','/public/assets/skele_sprites/skeleton_sprite_atlas.json')
+    scene.load.animation('skele_anim','/public/assets/skele_sprites/skeleton_sprite_anim.json')
   }
 
   get velocity() {
@@ -53,9 +53,9 @@ class Enemy extends Phaser.Physics.Matter.Sprite {
     // this.setFlipY(this.velocity.y < 0);
 
     if(Math.abs(this.velocity.x) > 0.1 || Math.abs(this.velocity.y) > 0.1) {
-      this.anims.play(`${this.name}_walk`,true);
+      this.anims.play(`skeleton_walk`,true);
     }else {
-      this.anims.play(`skele_idle`,true);
+      this.anims.play(`skeleton_idle`,true);
     }
   }
 }
