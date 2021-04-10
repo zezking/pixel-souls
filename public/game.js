@@ -1,12 +1,13 @@
 const config = {
   type: Phaser.AUTO,
-  width: 1000,
+  width: 800,
   height: 800,
   scene: [
     BootScene,
     TitleScene,
     GameScene,
     UiScene,
+    BattleScene
   ],
   // zoom: 3,
   pixelArt: true,
@@ -15,6 +16,9 @@ const config = {
     matter: {
       gravity: { y: 0 },
       debug: true, // set to true to view zones
+      plugins:{
+        attractors:true
+      }
     },
   },
   plugins: {
