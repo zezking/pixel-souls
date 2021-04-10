@@ -8,27 +8,27 @@
             "frames": [
                 {
                     "key": "skele_idle",
-                    "frame": "sprite_idle0"
+                    "frame": "skele_idle0"
                 },
                 {
                     "key": "skele_idle",
-                    "frame": "sprite_idle1"
+                    "frame": "skele_idle1"
                 },
                 {
                     "key": "skele_idle",
-                    "frame": "sprite_idle2"
+                    "frame": "skele_idle2"
                 },
                 {
                     "key": "skele_idle",
-                    "frame": "sprite_idle3"
+                    "frame": "skele_idle3"
                 },
                 {
                     "key": "skele_idle",
-                    "frame": "sprite_idle4"
+                    "frame": "skele_idle4"
                 },
                 {
                     "key": "skele_idle",
-                    "frame": "sprite_idle5"
+                    "frame": "skele_idle5"
                 }
             ]
         }

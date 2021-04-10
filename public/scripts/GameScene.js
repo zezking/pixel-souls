@@ -32,6 +32,7 @@ class GameScene extends Phaser.Scene {
   update() {
     this.player.update(this.inputKeys);
     this.enemy.update();
+
   }
 
   // createAudio() {
@@ -44,7 +45,8 @@ class GameScene extends Phaser.Scene {
   }
   
   createEnemy() {
-    this.enemy = new Enemy({scene:this,x:859.75,y:1560,key:'skeleton',frame:'skele_idle0'});
+    this.enemy = new Enemy({scene:this,x:860,y:1700,key:'skele_idle',frame:'skele_idle0'});
+
   }
 
   createNPC(){
