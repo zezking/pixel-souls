@@ -1,7 +1,7 @@
 {
     "anims": [
         {
-            "key": "skeleton_idle",
+            "key": "skele_idle",
             "type": "frames",
             "repeat": -1,
             "frameRate": 12,
