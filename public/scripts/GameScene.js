@@ -19,11 +19,11 @@ class GameScene extends Phaser.Scene {
   create() {
     this.createMap();
     // this.createAudio();
-    // this.createWalls();
     this.createPlayer();
     this.createEnemy();
     this.addCollisions();
     this.createInput();
+    this.createEntity();
     this.createNPC()
     // this.createBattle();
     
@@ -49,11 +49,11 @@ class GameScene extends Phaser.Scene {
   // }
 
   createPlayer() {
-    this.player = new Player({scene:this,x:466,y:1777,key:'ashen_one',frame:'player_0'});
+    this.player = new Player({scene:this,x:450,y:1100,key:'ashen_one',frame:'player_0'});
   }
 
   createEnemy() {
-    this.enemy = new Enemy({scene:this,x:860,y:1700,key:'skele_sprite',frame:'skele_idling0'});
+    this.enemy = new Enemy({scene:this,x:100,y:100,key:'skeleton',frame:'skele_idle'});
   }
 
   createNPC(){
@@ -66,20 +66,12 @@ class GameScene extends Phaser.Scene {
     this.npc = new NPC({scene:this,x:688,y:1082,key:'petrus'});
     this.npc = new NPC({scene:this,x:872,y:1545,key:'bigHatLogan'});
     this.npc = new NPC({scene:this,x:825.64,y:1640,key:'griggs'});
-
-    // this.boxGroup = this.physics.add.staticGroup()
   }
 
-
-  createEnemy() {
-    this.enemy = new Enemy({scene:this,x:100,y:100,key:'skeleton',frame:'skele_idle'});
+  createEntity() {
+    this.entity = new Entity({scene:this,x:735,y:1770,key:'well'});
+    this.entity = new Entity({scene:this,x:769,y:1303,key:'pillar01'}).setOrigin(0.5, 0.9);
   }
-
-
-  // createWalls() {
-  //   this.wall = this.physics.add.image(500, 100, 'button1');
-  //   this.wall.setImmovable();
-  // }
 
   createInput() {
     this.inputKeys = this.input.keyboard.addKeys({
