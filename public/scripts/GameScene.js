@@ -35,13 +35,13 @@ class GameScene extends Phaser.Scene {
     this.player.update(this.inputKeys);
     this.enemy.update();
     
+    //Sprite depth-sorting
     this.children.each(c => {
       const child = c;
-      if (child.type !== "TilemapLayer") {
+      if (child.depthSorting) {
         child.setDepth(child.y);
       }
     })
-
   }
 
   // createAudio() {

@@ -4,6 +4,7 @@ class Player extends Phaser.Physics.Matter.Sprite {
     super(scene.matter.world,x,y,key,frame);
     this.scene.add.existing(this); 
     
+    this.depthSorting = true;  //Allows this entity to be depth-sorted
     // the scene this container will be added to
     const {Body, Bodies} = Phaser.Physics.Matter.Matter;
 

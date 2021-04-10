@@ -5,7 +5,7 @@ class Enemy extends Phaser.Physics.Matter.Sprite {
     this.scene.add.existing(this); 
 
 
-    
+    this.depthSorting = true;  //Allows this entity to be depth-sorted
 
 
     const {Body, Bodies} = Phaser.Physics.Matter.Matter;
