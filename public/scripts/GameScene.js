@@ -24,7 +24,7 @@ class GameScene extends Phaser.Scene {
     this.createInput();
     this.createEntity();
     this.createNPC();
-    // this.createBattle();
+    //this.createBattle();
     this.createOverlay();
     this.OverlayLayer.setDepth(2239); //MUST ALWAYS BE LAST ON THIS LIST!!
   }
@@ -74,28 +74,43 @@ class GameScene extends Phaser.Scene {
   }
 
   createNPC() {
-    this.npc = new NPC({ scene: this, x: 330, y: 865, key: "bird" }).setOrigin(
+    this.bird = new NPC({ scene: this, x: 330, y: 865, key: "bird" }).setOrigin(
       0,
       0.7
     );
-    this.npc = new NPC({ scene: this, x: 766, y: 766, key: "reah" });
-    this.npc = new NPC({ scene: this, x: 400, y: 1440, key: "laurentius" });
-    this.npc = new NPC({ scene: this, x: 496, y: 1961, key: "fireKeeper" });
-    this.npc = new NPC({
+    this.reah = new NPC({ scene: this, x: 766, y: 766, key: "reah" });
+    this.laurentius = new NPC({
+      scene: this,
+      x: 400,
+      y: 1440,
+      key: "laurentius",
+    });
+    this.fireKeeper = new NPC({
+      scene: this,
+      x: 496,
+      y: 1961,
+      key: "fireKeeper",
+    });
+    this.crestfallenWarrior = new NPC({
       scene: this,
       x: 495,
       y: 1667,
       key: "crestfallenWarrior",
     });
-    this.npc = new NPC({
+    this.lautrec = new NPC({
       scene: this,
       x: 584,
       y: 2138,
       key: "lautrec",
     }).setOrigin(0.5, 0.3);
-    this.npc = new NPC({ scene: this, x: 688, y: 1082, key: "petrus" });
-    this.npc = new NPC({ scene: this, x: 872, y: 1545, key: "bigHatLogan" });
-    this.npc = new NPC({ scene: this, x: 825.64, y: 1640, key: "griggs" });
+    this.petrus = new NPC({ scene: this, x: 688, y: 1082, key: "petrus" });
+    this.bigHatLogan = new NPC({
+      scene: this,
+      x: 872,
+      y: 1545,
+      key: "bigHatLogan",
+    });
+    this.griggs = new NPC({ scene: this, x: 825.64, y: 1640, key: "griggs" });
 
     //here's a stupid step to get the bird on top of the wall
     this.children.each((c) => {
@@ -105,6 +120,21 @@ class GameScene extends Phaser.Scene {
         child.setDepth(2240);
       }
     });
+
+    let npcs = [
+      this.bird,
+      this.reah,
+      this.laurentius,
+      this.fireKeeper,
+      this.crestfallenWarrior,
+      this.lautrecm,
+      this.petrus,
+      this.bigHatLogan,
+      this.griggs,
+    ];
+    for (let npc of npcs) {
+      this.createDialogs(npc);
+    }
   }
 
   createEntity() {

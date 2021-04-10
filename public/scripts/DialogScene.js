@@ -21,6 +21,13 @@ class DialogScene extends Phaser.Scene {
           fontSize: "40px",
         }
       );
+      this.input.once(
+        "pointerdown",
+        function () {
+          this.scene.remove("Dialog");
+        },
+        this
+      );
     }
   }
 
