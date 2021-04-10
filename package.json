@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "matter-js": "^0.16.1",
     "phaser": "^3.54.0"
   },
   "devDependencies": {
