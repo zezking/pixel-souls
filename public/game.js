@@ -11,7 +11,7 @@ const config = {
   // zoom: 3,
   pixelArt: true,
   physics: {
-    default: "matter",
+    default:"matter",
     matter: {
       gravity: { y: 0 },
       debug: true, // set to true to view zones

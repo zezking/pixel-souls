@@ -22,7 +22,7 @@ class GameScene extends Phaser.Scene {
     // this.createEnemy();
     this.addCollisions();
     this.createInput();
-
+    this.createNPC()
   }
 
   update() {
@@ -34,7 +34,15 @@ class GameScene extends Phaser.Scene {
   // }
 
   createPlayer() {
-    this.player = new Player({scene:this,x:0,y:0,key:'ashen_one',frame:'player_0'});
+    this.player = new Player({scene:this,x:756,y:756,key:'ashen_one',frame:'player_0'});
+
+  }
+
+  createNPC(){
+    this.npc = new NPC({scene:this,x:317,y:898,key:'bird'});
+    this.npc = new NPC({scene:this,x:755.75,y:783,key:'reah'});
+    this.npc = new NPC({scene:this,x:388.75,y:1471.75,key:'laurentius'});
+    this.npc = new NPC({scene:this,x:448.03,y:11994.97,key:'firekeeper'});
   }
 
   createEnemy() {
@@ -92,7 +100,7 @@ class GameScene extends Phaser.Scene {
 
 
     // character camera bounds
-    // this.physics.world.bounds.width = map.widthInPixels;
+    // thi.physics.world.bounds.width = map.widthInPixels;s
     // this.physics.world.bounds.height = map.heightInPixels;
     // this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
   }
