@@ -23,7 +23,7 @@ class GameScene extends Phaser.Scene {
     this.createEnemy();
     this.addCollisions();
     this.createInput();
-
+    this.createOverlay();  //MUST ALWAYS BE LAST ON THIS LIST!!
   }
 
   update() {
@@ -89,14 +89,19 @@ class GameScene extends Phaser.Scene {
 
   createMap() {
     let map = this.make.tilemap({ key: 'map' });
-    this.tiles = map.addTilesetImage('FULLMAP_bottom', 'bottom', 32, 32, 0, 0);
-    this.bottomLayer = map.createStaticLayer('bottom', this.tiles, 0, 0);
-
+    this.tilesBottom = map.addTilesetImage('FULLMAP_bottom', 'bottom', 32, 32, 0, 0);
+    this.bottomLayer = map.createStaticLayer('bottom', this.tilesBottom, 0, 0);
 
     // character camera bounds
     this.matter.world.width = map.widthInPixels;
     this.matter.world.height = map.heightInPixels;
     this.matter.world.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
 
+  }
+
+  createOverlay() {
+    let map = this.make.tilemap({ key: 'map' });
+    this.tilesOverlay = map.addTilesetImage('FULLMAP_overlay', 'overlay', 32, 32, 0, 0);
+    this.OverlayLayer = map.createStaticLayer('overlay', this.tilesOverlay, 0, 0);
   }
 }
