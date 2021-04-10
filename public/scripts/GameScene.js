@@ -1,3 +1,4 @@
+let enemy_speed=20;
 class GameScene extends Phaser.Scene {
   constructor() {
     super('Game');
@@ -40,6 +41,7 @@ class GameScene extends Phaser.Scene {
         child.setDepth(child.y);
       }
     })
+
   }
 
   // createAudio() {
@@ -48,6 +50,10 @@ class GameScene extends Phaser.Scene {
 
   createPlayer() {
     this.player = new Player({scene:this,x:480.50,y:1774,key:'ashen_one',frame:'player_0'});
+  
+  createEnemy() {
+    this.enemy = new Enemy({scene:this,x:860,y:1700,key:'skele_sprite',frame:'skele_idling0'});
+
 
   }
 
@@ -65,9 +71,11 @@ class GameScene extends Phaser.Scene {
     // this.boxGroup = this.physics.add.staticGroup()
   }
 
+
   createEnemy() {
-    this.enemy = new Enemy({scene:this,x:100,y:100,key:'skeleton',frame:'skele_idle0'});
+    this.enemy = new Enemy({scene:this,x:100,y:100,key:'skeleton',frame:'skele_idle'});
   }
+
 
   // createWalls() {
   //   this.wall = this.physics.add.image(500, 100, 'button1');
@@ -75,7 +83,6 @@ class GameScene extends Phaser.Scene {
   // }
 
   createInput() {
-
     this.inputKeys = this.input.keyboard.addKeys({
       up: Phaser.Input.Keyboard.KeyCodes.W,
       down: Phaser.Input.Keyboard.KeyCodes.S,
@@ -124,6 +131,7 @@ class GameScene extends Phaser.Scene {
     this.matter.world.height = map.heightInPixels;
     this.matter.world.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
 
+
   }
 
   createOverlay() {
@@ -137,8 +145,8 @@ class GameScene extends Phaser.Scene {
     this.matterCollision.addOnCollideStart({
       objectA: this.player,
       objectB: this.enemy,
-      callback: eventData => this.scene.start('Battle')
+      callback: eventData => this.scene.start("Battle")
     });
-    
   }
+
 }
