@@ -66,19 +66,7 @@ class GameScene extends Phaser.Scene {
     });
   }
 
-  createNPC() {   
-    let npcs = [
-    this.bird,
-    this.reah,
-    this.laurentius,
-    this.fireKeeper,
-    this.crestfallenWarrior,
-    this.lautrecm,
-    this.petrus,
-    this.bigHatLogan,
-    this.griggs,
-  ];
-
+  createNPC() {
     this.bird = new NPC({ scene: this, x: 400, y: 898, key: "bird" });
     this.reah = new NPC({ scene: this, x: 755.75, y: 783, key: "reah" });
     this.laurentius = new NPC({
@@ -110,9 +98,20 @@ class GameScene extends Phaser.Scene {
     this.griggs = new NPC({ scene: this, x: 825.64, y: 1640, key: "griggs" });
     // this.boxGroup = this.physics.add.staticGroup()
 
- 
-    for(let npc of npcs){
-      this.createConversation(npc)
+    let npcs = [
+      this.bird,
+      this.reah,
+      this.laurentius,
+      this.fireKeeper,
+      this.crestfallenWarrior,
+      this.lautrecm,
+      this.petrus,
+      this.bigHatLogan,
+      this.griggs,
+    ];
+
+    for (let npc of npcs) {
+      this.createDialogs(npc);
     }
   }
 
@@ -217,13 +216,15 @@ class GameScene extends Phaser.Scene {
       callback: (eventData) => this.scene.start("Battle"),
     });
   }
-  createConversation(npc) {
+  createDialogs(npc) {
+    let dialogs = this.cache.json.get("dialogs");
+
     this.matterCollision.addOnCollideStart({
       objectA: this.player,
       objectB: npc,
       callback: (eventData) => {
-        if (npc){
-          console.log(npc)
+        if (npc) {
+          if (dialogs[npc.texture.key]) console.log(dialogs[npc.texture.key]);
         }
       },
     });
