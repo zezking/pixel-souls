@@ -44,7 +44,7 @@ class GameScene extends Phaser.Scene {
     this.npc = new NPC({scene:this,x:388.75,y:1471.75,key:'laurentius'});
     this.npc = new NPC({scene:this,x:496,y:1962.97,key:'fireKeeper'});
     this.npc = new NPC({scene:this,x:500,y:1665,key:'crestfallenWarrior'});
-    this.npc = new NPC({scene:this,x:570.99,y:2161,key:'lautrec'});
+    this.npc = new NPC({scene:this,x:581.99,y:2161,key:'lautrec'});
     this.npc = new NPC({scene:this,x:672,y:1102.50,key:'petrus'});
   }
 
