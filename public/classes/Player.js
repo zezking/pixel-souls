@@ -8,7 +8,7 @@ class Player extends Phaser.Physics.Matter.Sprite {
     // the scene this container will be added to
     const {Body, Bodies} = Phaser.Physics.Matter.Matter;
 
-    let playerCollider = Bodies.rectangle(this.x,this.y + 20,20, 20,{isSensor:false, lable:'playerCollider'});
+    let playerCollider = Bodies.rectangle(this.x,this.y + 20,20,20,{isSensor:false, lable:'playerCollider'});
     let playerSensor = Bodies.circle(this.x,this.y,20, {isSensor:true, label: 'playerSensor'});
 //You can also change the size of sensor to change the force of attraction. 
     const compoundBody = Body.create({

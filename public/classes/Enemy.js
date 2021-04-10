@@ -11,14 +11,13 @@ class Enemy extends Phaser.Physics.Matter.Sprite {
     const {Body, Bodies} = Phaser.Physics.Matter.Matter;
 
   
-     let enemyCollider = Bodies.rectangle(this.x,this.y,10,10,10,{isSensor:false, lable:'enemyCollider'});
+     let enemyCollider = Bodies.circle(this.x,this.y,10,{isSensor:false, lable:'enemyCollider'});
     let enemySensor = Bodies.circle(this.x,this.y,15, {isSensor:true, label: 'enemySensor'});
     const compoundBody = Body.create({
       parts:[enemyCollider,enemySensor],
       frictionAir: 0.2,
      
     });
-
     this.setExistingBody(compoundBody);
     // scale our player
     this.setScale(1.25);
@@ -44,6 +43,7 @@ class Enemy extends Phaser.Physics.Matter.Sprite {
   static preload(scene) {
     scene.load.atlas('skeleton_sprite','/public/assets/skele_sprites/skeleton_sprite.png','/public/assets/skele_sprites/skeleton_sprite_atlas.json')
     scene.load.animation('skele_anim','/public/assets/skele_sprites/skeleton_sprite_anim.json')
+    
   }
 
   get velocity() {
