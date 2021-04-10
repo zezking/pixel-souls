@@ -54,7 +54,7 @@ class Enemy extends Phaser.Physics.Matter.Sprite {
 
   update() {
 
-    this.setFlipX(this.velocity.x < 0);
+    this.setFlipX(this.velocity.x > 0);
     // this.setFlipY(this.velocity.y < 0);
 
     if(Math.abs(this.velocity.x) > 0.1 || Math.abs(this.velocity.y) > 0.1) {
