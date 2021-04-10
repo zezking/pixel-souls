@@ -5,9 +5,6 @@ class Enemy extends Phaser.Physics.Matter.Sprite {
     this.scene.add.existing(this); 
 
 
-    
-
-
     const {Body, Bodies} = Phaser.Physics.Matter.Matter;
 
   
@@ -54,8 +51,8 @@ class Enemy extends Phaser.Physics.Matter.Sprite {
 
   update() {
 
-    this.setFlipX(this.velocity.x < 0);
-    // this.setFlipY(this.velocity.y < 0);
+
+     this.setFlipY(this.velocity.y < 0)
 
     if(Math.abs(this.velocity.x) > 0.1 || Math.abs(this.velocity.y) > 0.1) {
       this.anims.play(`skeleton_walk`,true);
