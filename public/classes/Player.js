@@ -3,7 +3,7 @@ class Player extends Phaser.Physics.Matter.Sprite {
     let {scene,x,y,key,frame} = data;
     super(scene.matter.world,x,y,key,frame);
     this.scene.add.existing(this); 
-    
+
     this.depthSorting = true;  //Allows this entity to be depth-sorted
     // the scene this container will be added to
     const {Body, Bodies} = Phaser.Physics.Matter.Matter;
@@ -14,7 +14,7 @@ class Player extends Phaser.Physics.Matter.Sprite {
     const compoundBody = Body.create({
       parts:[playerCollider,playerSensor],
 
-      frictionAir: 0.0,
+      frictionAir: 0.35,
       plugin: {
         attractors:[
           function (bodyA, bodyB) {
@@ -57,6 +57,8 @@ class Player extends Phaser.Physics.Matter.Sprite {
     return this.body.velocity;
   }
 
+
+
   update(inputKeys) {
     // this.body.setVelocity()sa
     if (inputKeys.left.isDown) {
@@ -96,6 +98,8 @@ class Player extends Phaser.Physics.Matter.Sprite {
     } else if (inputKeys.shift.isDown & inputKeys.down.isDown) {
       playerVelocity.y = 1.5;
     }
+
+
     // // turn on to have normalized speed, but no more sprinting
     // playerVelocity.normalize();
     playerVelocity.scale(speed);
