@@ -8,9 +8,10 @@ class Player extends Phaser.Physics.Matter.Sprite {
     let playerSensor = Bodies.circle(this.x,this.y,24, {isSensor:true, label: 'playerSensor'});
     const compoundBody = Body.create({
       parts:[playerCollider,playerSensor],
-      frictionAir: 0.35,
+      frictionAir: 0.0,
     });
     this.setExistingBody(compoundBody);
+    this.setScale(1);
     this.setFixedRotation();
     // this.velocity = 5; // the velocity when moving our player
 
@@ -20,7 +21,6 @@ class Player extends Phaser.Physics.Matter.Sprite {
     // set immovable if another object collides with our player
     // this.setImmovable(false);
     // scale our player
-    this.setScale(1);
     // collide with world bounds
     // this.setCollideWorldBounds(true);
     // add the player to our existing scene
@@ -53,7 +53,7 @@ class Player extends Phaser.Physics.Matter.Sprite {
       this.anims.stop();
     }
     
-    const speed = 5;
+    const speed = 4;
     let playerVelocity = new Phaser.Math.Vector2();
     if(inputKeys.left.isDown) {
       playerVelocity.x = -1;
