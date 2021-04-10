@@ -24,15 +24,16 @@ class GameScene extends Phaser.Scene {
     this.addCollisions();
     this.createInput();
     this.createNPC()
-
-
+    this.createBattle();
     this.createOverlay();  //MUST ALWAYS BE LAST ON THIS LIST!!
+    
+
+  
   }
 
   update() {
     this.player.update(this.inputKeys);
     this.enemy.update();
-
   }
 
   // createAudio() {
@@ -40,7 +41,7 @@ class GameScene extends Phaser.Scene {
   // }
 
   createPlayer() {
-    this.player = new Player({scene:this,x:859.75,y:1556,key:'ashen_one',frame:'player_0'});
+    this.player = new Player({scene:this,x:300,y:100,key:'ashen_one',frame:'player_0'});
 
   }
   
@@ -50,6 +51,8 @@ class GameScene extends Phaser.Scene {
   }
 
   createNPC(){
+
+
     this.npc = new NPC({scene:this,x:400,y:898,key:'bird'});
     this.npc = new NPC({scene:this,x:755.75,y:783,key:'reah'});
     this.npc = new NPC({scene:this,x:388.75,y:1471.75,key:'laurentius'});
@@ -59,6 +62,8 @@ class GameScene extends Phaser.Scene {
     this.npc = new NPC({scene:this,x:672,y:1102.50,key:'petrus'});
     this.npc = new NPC({scene:this,x:865.75,y:1550,key:'bigHatLogan'});
     this.npc = new NPC({scene:this,x:825.64,y:1640,key:'griggs'});
+
+    
   }
 
 
@@ -124,5 +129,14 @@ class GameScene extends Phaser.Scene {
     this.tilesOverlay = map.addTilesetImage('FULLMAP_overlay', 'overlay', 32, 32, 0, 0);
     this.OverlayLayer = map.createStaticLayer('overlay', this.tilesOverlay, 0, 0);
 
+  }
+
+  createBattle(){
+    this.matterCollision.addOnCollideStart({
+      objectA: this.player,
+      objectB: this.enemy,
+      callback: eventData => this.scene.start('Battle')
+    });
+    
   }
 }
