@@ -4,23 +4,28 @@ class Player extends Phaser.Physics.Matter.Sprite {
     super(scene.matter.world,x,y,key,frame);
     this.scene.add.existing(this); // the scene this container will be added to
     const {Body, Bodies} = Phaser.Physics.Matter.Matter;
-    let playerCollider = Bodies.circle(this.x,this.y,12,{isSensor:false, lable:'playerCollider'});
+    let playerCollider = Bodies.rectangle(this.x,this.y + 20,20, 20,{isSensor:false, lable:'playerCollider'});
     let playerSensor = Bodies.circle(this.x,this.y,24, {isSensor:true, label: 'playerSensor'});
     const compoundBody = Body.create({
       parts:[playerCollider,playerSensor],
-      frictionAir: 0.35,
+
+      frictionAir: 0.0,
     });
     this.setExistingBody(compoundBody);
+    // scale our player
+    this.setScale(1);
+    // fixed rotation of character
     this.setFixedRotation();
     // this.velocity = 5; // the velocity when moving our player
-
-
+    
     // enable physics
     // this.scene.physics.world.enable(this);
     // set immovable if another object collides with our player
     // this.setImmovable(false);
+
     // scale our player
-    this.setScale(1);
+
+
     // collide with world bounds
     // this.setCollideWorldBounds(true);
     // add the player to our existing scene
@@ -38,7 +43,7 @@ class Player extends Phaser.Physics.Matter.Sprite {
   }
 
   update(inputKeys) {
-    // this.body.setVelocity();
+    // this.body.setVelocity()sa
     if (inputKeys.left.isDown) {
       this.anims.play("player_left",true);
       this.flipX = false;
@@ -53,7 +58,7 @@ class Player extends Phaser.Physics.Matter.Sprite {
       this.anims.stop();
     }
     
-    const speed = 5;
+    const speed = 4;
     let playerVelocity = new Phaser.Math.Vector2();
     if(inputKeys.left.isDown) {
       playerVelocity.x = -1;

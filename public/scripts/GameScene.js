@@ -11,6 +11,7 @@ class GameScene extends Phaser.Scene {
   preload() {
     // console.log("preload")
     Player.preload(this);
+    Enemy.preload(this)
   }
 
   
@@ -19,14 +20,17 @@ class GameScene extends Phaser.Scene {
     // this.createAudio();
     // this.createWalls();
     this.createPlayer();
-    // this.createEnemy();
+    this.createEnemy();
     this.addCollisions();
     this.createInput();
 
+
+    this.createOverlay();  //MUST ALWAYS BE LAST ON THIS LIST!!
   }
 
   update() {
     this.player.update(this.inputKeys);
+    this.enemy.update();
   }
 
   // createAudio() {
@@ -34,11 +38,24 @@ class GameScene extends Phaser.Scene {
   // }
 
   createPlayer() {
-    this.player = new Player({scene:this,x:0,y:0,key:'ashen_one',frame:'player_0'});
+    this.player = new Player({scene:this,x:859.75,y:1556,key:'ashen_one',frame:'player_0'});
+
+  }
+
+  createNPC(){
+    this.npc = new NPC({scene:this,x:400,y:898,key:'bird'});
+    this.npc = new NPC({scene:this,x:755.75,y:783,key:'reah'});
+    this.npc = new NPC({scene:this,x:388.75,y:1471.75,key:'laurentius'});
+    this.npc = new NPC({scene:this,x:496,y:1962.97,key:'fireKeeper'});
+    this.npc = new NPC({scene:this,x:500,y:1665,key:'crestfallenWarrior'});
+    this.npc = new NPC({scene:this,x:581.99,y:2161,key:'lautrec'});
+    this.npc = new NPC({scene:this,x:672,y:1102.50,key:'petrus'});
+    this.npc = new NPC({scene:this,x:865.75,y:1550,key:'bigHatLogan'});
+    this.npc = new NPC({scene:this,x:825.64,y:1640,key:'griggs'});
   }
 
   createEnemy() {
-    this.enemy = new Enemy(this, 100, 100, 'skele', 32);
+    this.enemy = new Enemy({scene:this,x:100,y:100,key:'skeleton',frame:'skele_idle0'});
   }
 
   // createWalls() {
@@ -55,7 +72,7 @@ class GameScene extends Phaser.Scene {
       right: Phaser.Input.Keyboard.KeyCodes.D,
     })
     let camera = this.cameras.main;
-    camera.zoom = 2;
+    camera.zoom = 3;
     camera.startFollow(this.player);
     camera.setLerp(0.1,0.1);
 
@@ -66,8 +83,8 @@ class GameScene extends Phaser.Scene {
     let shapes = this.cache.json.get("shapes");
 
     let collisionLayer = this.matter.add.sprite (0, 0, 'sheet', 'FULLMAP_collision', {shape: shapes.FULLMAP_collision});
-    collisionLayer.setPosition (0 + 785, 0 + 1325); //manual offset for center of mass. Will have to find a better way to calculate this.
-    
+    collisionLayer.setPosition (0 + 783, 0 + 1325); //manual offset for center of mass. Will have to find a better way to calculate this.
+    collisionLayer.visible = false;
     // check for collisions between player and wall objects
     // this.physics.add.collider(this.player, this.enemy, touchEnemy, null, this);
     // this.physics.add.collider(this.enemy);
@@ -87,13 +104,21 @@ class GameScene extends Phaser.Scene {
 
   createMap() {
     let map = this.make.tilemap({ key: 'map' });
-    this.tiles = map.addTilesetImage('FULLMAP_bottom', 'bottom', 32, 32, 0, 0);
-    this.bottomLayer = map.createStaticLayer('bottom', this.tiles, 0, 0);
-
+    this.tilesBottom = map.addTilesetImage('FULLMAP_bottom', 'bottom', 32, 32, 0, 0);
+    this.bottomLayer = map.createStaticLayer('bottom', this.tilesBottom, 0, 0);
 
     // character camera bounds
-    // this.physics.world.bounds.width = map.widthInPixels;
-    // this.physics.world.bounds.height = map.heightInPixels;
-    // this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
+
+    this.matter.world.width = map.widthInPixels;
+    this.matter.world.height = map.heightInPixels;
+    this.matter.world.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
+
+  }
+
+  createOverlay() {
+    let map = this.make.tilemap({ key: 'map' });
+    this.tilesOverlay = map.addTilesetImage('FULLMAP_overlay', 'overlay', 32, 32, 0, 0);
+    this.OverlayLayer = map.createStaticLayer('overlay', this.tilesOverlay, 0, 0);
+
   }
 }
