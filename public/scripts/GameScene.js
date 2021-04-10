@@ -92,8 +92,9 @@ class GameScene extends Phaser.Scene {
 
 
     // character camera bounds
-    // this.physics.world.bounds.width = map.widthInPixels;
-    // this.physics.world.bounds.height = map.heightInPixels;
-    // this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
+    this.matter.world.width = map.widthInPixels;
+    this.matter.world.height = map.heightInPixels;
+    this.matter.world.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
+
   }
 }
