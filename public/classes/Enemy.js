@@ -4,12 +4,14 @@ class Enemy extends Phaser.Physics.Matter.Sprite {
     super(scene.matter.world,x,y,key,frame);
     this.scene.add.existing(this); // the scene this container will be added to
     const {Body, Bodies} = Phaser.Physics.Matter.Matter;
-    let enemyCollider = Bodies.circle(this.x,this.y,12,{isSensor:false, lable:'enemyCollider'});
-    let enemySensor = Bodies.circle(this.x,this.y,24, {isSensor:true, label: 'enemySensor'});
+  
+     let enemyCollider = Bodies.circle(this.x,this.y,6,{isSensor:false, lable:'enemyCollider'});
+    let enemySensor = Bodies.circle(this.x,this.y,12, {isSensor:true, label: 'enemySensor'});
     const compoundBody = Body.create({
       parts:[enemyCollider,enemySensor],
       frictionAir: 0.35,
     });
+
     this.setExistingBody(compoundBody);
     // scale our player
     this.setScale(1);

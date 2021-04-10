@@ -7,6 +7,7 @@ const config = {
     TitleScene,
     GameScene,
     UiScene,
+    BattleScene
   ],
   // zoom: 3,
   pixelArt: true,
