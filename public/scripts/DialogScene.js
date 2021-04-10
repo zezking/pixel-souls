@@ -12,13 +12,13 @@ class DialogScene extends Phaser.Scene {
     if (dialogs[this.npcName]) {
       let dialogsArr = dialogs[this.npcName];
       this.add.text(
-        this.scale.width / 2,
+        this.scale.width / 2 - 200,
         this.scale.height / 2 + 200,
         dialogsArr[Math.floor(Math.random() * dialogsArr.length)],
         {
-          font: "48px Arial",
+          fontFamily: "HonokaMincho",
           fill: "#FFFFFF",
-          fontSize: "12px",
+          fontSize: "40px",
         }
       );
     }
