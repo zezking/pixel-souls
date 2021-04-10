@@ -10,7 +10,7 @@ class Player extends Phaser.Physics.Matter.Sprite {
 
     let playerCollider = Bodies.rectangle(this.x,this.y + 20,20, 20,{isSensor:false, lable:'playerCollider'});
     let playerSensor = Bodies.circle(this.x,this.y,20, {isSensor:true, label: 'playerSensor'});
-
+//You can also change the size of sensor to change the force of attraction. 
     const compoundBody = Body.create({
       parts:[playerCollider,playerSensor],
 
@@ -19,8 +19,8 @@ class Player extends Phaser.Physics.Matter.Sprite {
         attractors:[
           function (bodyA, bodyB) {
               return {
-                  x: (bodyA.position.x - bodyB.position.x) * 0.000020,
-                  y: (bodyA.position.y - bodyB.position.y) * 0.000020
+                  x: (bodyA.position.x - bodyB.position.x) * 0.000020, //You can change this value to adjust the force of X axis
+                  y: (bodyA.position.y - bodyB.position.y) * 0.000020  //You can change this value to adjust the force of Y axis
               };
           }
       ]
