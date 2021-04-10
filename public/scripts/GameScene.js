@@ -23,7 +23,7 @@ class GameScene extends Phaser.Scene {
     this.createEnemy();
     this.addCollisions();
     this.createInput();
-
+    this.createNPC()
 
     this.createOverlay();  //MUST ALWAYS BE LAST ON THIS LIST!!
   }
@@ -38,7 +38,7 @@ class GameScene extends Phaser.Scene {
   // }
 
   createPlayer() {
-    this.player = new Player({scene:this,x:859.75,y:1556,key:'ashen_one',frame:'player_0'});
+    this.player = new Player({scene:this,x:480.50,y:1774,key:'ashen_one',frame:'player_0'});
 
   }
 
