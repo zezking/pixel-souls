@@ -4,7 +4,7 @@ class Enemy extends Phaser.Physics.Matter.Sprite {
     super(scene.matter.world,x,y,key,frame);
     this.scene.add.existing(this); // the scene this container will be added to
     const {Body, Bodies} = Phaser.Physics.Matter.Matter;
-    let enemyCollider = Bodies.circle(this.x,this.y,12,{isSensor:false, lable:'enemyCollider'});
+    let enemyCollider = Bodies.circle(this.x,this.y,16,{isSensor:false, lable:'enemyCollider'});
     let enemySensor = Bodies.circle(this.x,this.y,24, {isSensor:true, label: 'enemySensor'});
     const compoundBody = Body.create({
       parts:[enemyCollider,enemySensor],
@@ -12,7 +12,7 @@ class Enemy extends Phaser.Physics.Matter.Sprite {
     });
     this.setExistingBody(compoundBody);
     // scale our player
-    this.setScale(1);
+    this.setScale(1.25);
     // fixed rotation of character
     this.setFixedRotation();
     // this.velocity = 5; // the velocity when moving our player
