@@ -4,10 +4,10 @@ class NPC extends Phaser.Physics.Matter.Sprite{
       super(scene.matter.world,x,y,key,frame);
       this.scene.add.existing(this); // the scene this container will be added to
       const {Body, Bodies} = Phaser.Physics.Matter.Matter;
-      let playerCollider = Bodies.circle(this.x,this.y,12,{isSensor:false, lable:'playerCollider'});
+      // let playerCollider = Bodies.circle(this.x,this.y,12,{isSensor:false, lable:'playerCollider'});
       let playerSensor = Bodies.circle(this.x,this.y,24, {isSensor:true, label: 'playerSensor'});
       const compoundBody = Body.create({
-        parts:[playerCollider,playerSensor],
+        parts:[playerSensor],
         frictiasdonAir: 0.35,
         isStatic:true
       });

@@ -26,15 +26,22 @@ class GameScene extends Phaser.Scene {
     this.createInput();
     this.createNPC()
     this.createBattle();
-    this.createOverlay();  //MUST ALWAYS BE LAST ON THIS LIST!!
     
-
-  
+    this.createOverlay();  
+    this.OverlayLayer.setDepth(2240); //MUST ALWAYS BE LAST ON THIS LIST!!
   }
-
+  
   update() {
     this.player.update(this.inputKeys);
     this.enemy.update();
+    
+    this.children.each(c => {
+      const child = c;
+      if (child.type !== "TilemapLayer") {
+        child.setDepth(child.y);
+      }
+    })
+
   }
 
   // createAudio() {
@@ -42,18 +49,15 @@ class GameScene extends Phaser.Scene {
   // }
 
   createPlayer() {
-    this.player = new Player({scene:this,x:788,y:788,key:'ashen_one',frame:'player_0'});
-
-  }
+    this.player = new Player({scene:this,x:480.50,y:1774,key:'ashen_one',frame:'player_0'});
   
   createEnemy() {
     this.enemy = new Enemy({scene:this,x:860,y:1700,key:'skele_sprite',frame:'skele_idling0'});
 
+
   }
 
   createNPC(){
-
-
     this.npc = new NPC({scene:this,x:400,y:898,key:'bird'});
     this.npc = new NPC({scene:this,x:755.75,y:783,key:'reah'});
     this.npc = new NPC({scene:this,x:388.75,y:1471.75,key:'laurentius'});
@@ -64,7 +68,7 @@ class GameScene extends Phaser.Scene {
     this.npc = new NPC({scene:this,x:865.75,y:1550,key:'bigHatLogan'});
     this.npc = new NPC({scene:this,x:825.64,y:1640,key:'griggs'});
 
-    
+    // this.boxGroup = this.physics.add.staticGroup()
   }
 
 
@@ -79,7 +83,6 @@ class GameScene extends Phaser.Scene {
   // }
 
   createInput() {
-
     this.inputKeys = this.input.keyboard.addKeys({
       up: Phaser.Input.Keyboard.KeyCodes.W,
       down: Phaser.Input.Keyboard.KeyCodes.S,
