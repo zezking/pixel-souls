@@ -8,6 +8,12 @@ class GameScene extends Phaser.Scene {
     this.score = 0;
   }
 
+  preload() {
+    // console.log("preload")
+    Player.preload(this);
+  }
+
+  
   create() {
     this.createMap();
     // this.createAudio();
@@ -28,7 +34,7 @@ class GameScene extends Phaser.Scene {
   // }
 
   createPlayer() {
-    this.player = new Player(this.matter.world);
+    this.player = new Player({scene:this,x:0,y:0,key:'ashen_one',frame:'player_0'});
   }
 
   createEnemy() {
@@ -86,8 +92,9 @@ class GameScene extends Phaser.Scene {
 
 
     // character camera bounds
-    // this.physics.world.bounds.width = map.widthInPixels;
-    // this.physics.world.bounds.height = map.heightInPixels;
-    // this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
+    this.matter.world.width = map.widthInPixels;
+    this.matter.world.height = map.heightInPixels;
+    this.matter.world.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
+
   }
 }
