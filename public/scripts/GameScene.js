@@ -3,18 +3,20 @@ class GameScene extends Phaser.Scene {
     super('Game');
   }
 
-  // init() {
-  //   // this.scene.launch('Ui');
-  //   // this.score = 0;
-  // }
+  init() {
+    this.scene.launch('Ui');
+    this.score = 0;
+  }
 
   create() {
     this.createMap();
     // this.createAudio();
     // this.createWalls();
     this.createPlayer();
+    this.createEnemy();
     this.addCollisions();
     this.createInput();
+
   }
 
   update() {
@@ -27,6 +29,10 @@ class GameScene extends Phaser.Scene {
 
   createPlayer() {
     this.player = new Player(this.matter.world);
+  }
+
+  createEnemy() {
+    this.enemy = new Enemy(this, 100, 100, 'skele', 32);
   }
 
   // createWalls() {
@@ -55,12 +61,29 @@ class GameScene extends Phaser.Scene {
 
     let collisionLayer = this.matter.add.sprite (0, 0, 'sheet', 'FULLMAP_collision', {shape: shapes.FULLMAP_collision});
     collisionLayer.setPosition (0 + 785, 0 + 1325); //manual offset for center of mass. Will have to find a better way to calculate this.
+    
+    // check for collisions between player and wall objects
+    this.physics.add.collider(this.player, this.enemy, touchEnemy, null, this);
+    this.physics.add.collider(this.enemy);
+    // this.physics.add.overlap(this.player, this.enemy);
+
+    function touchEnemy(player, enemy) {
+      // enemy bounces off walls
+      enemy.body.bounce.x = 1;
+      enemy.body.bounce.y = 1;
+      //player velocity -> enemy collision -> enemy drag/friction
+      enemy.body.drag.x = 250;
+      enemy.body.drag.y = 250;
+      // can add other code - damage player, etc.
+      }
+
   }
 
   createMap() {
     let map = this.make.tilemap({ key: 'map' });
     this.tiles = map.addTilesetImage('FULLMAP_bottom', 'bottom', 32, 32, 0, 0);
     this.bottomLayer = map.createStaticLayer('bottom', this.tiles, 0, 0);
+
 
     // character camera bounds
     // this.physics.world.bounds.width = map.widthInPixels;
