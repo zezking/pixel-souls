@@ -83,8 +83,8 @@ class GameScene extends Phaser.Scene {
     let shapes = this.cache.json.get("shapes");
 
     let collisionLayer = this.matter.add.sprite (0, 0, 'sheet', 'FULLMAP_collision', {shape: shapes.FULLMAP_collision});
-    collisionLayer.setPosition (0 + 785, 0 + 1325); //manual offset for center of mass. Will have to find a better way to calculate this.
-    
+    collisionLayer.setPosition (0 + 783, 0 + 1325); //manual offset for center of mass. Will have to find a better way to calculate this.
+    collisionLayer.visible = false;
     // check for collisions between player and wall objects
     // this.physics.add.collider(this.player, this.enemy, touchEnemy, null, this);
     // this.physics.add.collider(this.enemy);
