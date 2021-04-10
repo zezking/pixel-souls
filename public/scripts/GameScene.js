@@ -16,7 +16,7 @@ class GameScene extends Phaser.Scene {
   }
 
   create() {
-    // this.createMap();
+    this.createMap();
     // this.createAudio();
     // this.createWalls();
     this.createPlayer();
