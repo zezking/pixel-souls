@@ -23,6 +23,8 @@ class GameScene extends Phaser.Scene {
     this.createEnemy();
     this.addCollisions();
     this.createInput();
+
+
     this.createOverlay();  //MUST ALWAYS BE LAST ON THIS LIST!!
   }
 
@@ -36,7 +38,20 @@ class GameScene extends Phaser.Scene {
   // }
 
   createPlayer() {
-    this.player = new Player({scene:this,x:0,y:0,key:'ashen_one',frame:'player_0'});
+    this.player = new Player({scene:this,x:859.75,y:1556,key:'ashen_one',frame:'player_0'});
+
+  }
+
+  createNPC(){
+    this.npc = new NPC({scene:this,x:400,y:898,key:'bird'});
+    this.npc = new NPC({scene:this,x:755.75,y:783,key:'reah'});
+    this.npc = new NPC({scene:this,x:388.75,y:1471.75,key:'laurentius'});
+    this.npc = new NPC({scene:this,x:496,y:1962.97,key:'fireKeeper'});
+    this.npc = new NPC({scene:this,x:500,y:1665,key:'crestfallenWarrior'});
+    this.npc = new NPC({scene:this,x:581.99,y:2161,key:'lautrec'});
+    this.npc = new NPC({scene:this,x:672,y:1102.50,key:'petrus'});
+    this.npc = new NPC({scene:this,x:865.75,y:1550,key:'bigHatLogan'});
+    this.npc = new NPC({scene:this,x:825.64,y:1640,key:'griggs'});
   }
 
   createEnemy() {
@@ -93,6 +108,7 @@ class GameScene extends Phaser.Scene {
     this.bottomLayer = map.createStaticLayer('bottom', this.tilesBottom, 0, 0);
 
     // character camera bounds
+
     this.matter.world.width = map.widthInPixels;
     this.matter.world.height = map.heightInPixels;
     this.matter.world.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
@@ -103,5 +119,6 @@ class GameScene extends Phaser.Scene {
     let map = this.make.tilemap({ key: 'map' });
     this.tilesOverlay = map.addTilesetImage('FULLMAP_overlay', 'overlay', 32, 32, 0, 0);
     this.OverlayLayer = map.createStaticLayer('overlay', this.tilesOverlay, 0, 0);
+
   }
 }
