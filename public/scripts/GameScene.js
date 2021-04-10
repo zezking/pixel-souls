@@ -1,7 +1,7 @@
 let enemy_speed = 20;
 class GameScene extends Phaser.Scene {
   constructor() {
-    super("Game");
+    super({ key: "Game", active: true });
   }
 
   init() {
@@ -104,7 +104,7 @@ class GameScene extends Phaser.Scene {
       this.laurentius,
       this.fireKeeper,
       this.crestfallenWarrior,
-      this.lautrecm,
+      this.lautrec,
       this.petrus,
       this.bigHatLogan,
       this.griggs,
@@ -222,6 +222,7 @@ class GameScene extends Phaser.Scene {
       objectB: npc,
       callback: (eventData) => {
         if (npc) {
+          this.scene.add("Dialog", DialogScene, true, { npc });
         }
       },
     });
