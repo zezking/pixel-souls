@@ -34,15 +34,18 @@ class GameScene extends Phaser.Scene {
   // }
 
   createPlayer() {
-    this.player = new Player({scene:this,x:756,y:756,key:'ashen_one',frame:'player_0'});
+    this.player = new Player({scene:this,x:570.99,y:2161,key:'ashen_one',frame:'player_0'});
 
   }
 
   createNPC(){
-    this.npc = new NPC({scene:this,x:317,y:898,key:'bird'});
+    this.npc = new NPC({scene:this,x:400,y:898,key:'bird'});
     this.npc = new NPC({scene:this,x:755.75,y:783,key:'reah'});
     this.npc = new NPC({scene:this,x:388.75,y:1471.75,key:'laurentius'});
-    this.npc = new NPC({scene:this,x:448.03,y:11994.97,key:'firekeeper'});
+    this.npc = new NPC({scene:this,x:496,y:1962.97,key:'fireKeeper'});
+    this.npc = new NPC({scene:this,x:500,y:1665,key:'crestfallenWarrior'});
+    this.npc = new NPC({scene:this,x:570.99,y:2161,key:'lautrec'});
+    this.npc = new NPC({scene:this,x:672,y:1102.50,key:'petrus'});
   }
 
   createEnemy() {
