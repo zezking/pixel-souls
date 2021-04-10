@@ -13,12 +13,12 @@ class GameScene extends Phaser.Scene {
     // this.createAudio();
     // this.createWalls();
     this.createPlayer();
-    // this.addCollisions();
+    this.addCollisions();
     this.createInput();
   }
 
   update() {
-    // this.player.update(this.cursors);
+    this.player.update(this.inputKeys);
   }
 
   // createAudio() {
@@ -26,7 +26,7 @@ class GameScene extends Phaser.Scene {
   // }
 
   createPlayer() {
-    this.player = new Player(this, 32, 50, 'player', 32);
+    this.player = new Player(this.matter.world);
   }
 
   // createWalls() {
@@ -36,7 +36,7 @@ class GameScene extends Phaser.Scene {
 
   createInput() {
 
-    this.cursors = this.input.keyboard.addKeys({
+    this.inputKeys = this.input.keyboard.addKeys({
       up: Phaser.Input.Keyboard.KeyCodes.W,
       down: Phaser.Input.Keyboard.KeyCodes.S,
       left: Phaser.Input.Keyboard.KeyCodes.A,
@@ -50,8 +50,11 @@ class GameScene extends Phaser.Scene {
   }
 
   addCollisions() {
+    // grab the physics map from FULLMAP_collision.json
+    let shapes = this.cache.json.get("shapes");
+
     let collisionLayer = this.matter.add.sprite (0, 0, 'sheet', 'FULLMAP_collision', {shape: shapes.FULLMAP_collision});
-    collisionLayer.setPosition (0 + FULLMAP_collision.centerOfMass.x, 0 + FULLMAP_collision.centerOfMass.y);
+    collisionLayer.setPosition (0 + 785, 0 + 1325); //manual offset for center of mass. Will have to find a better way to calculate this.
   }
 
   createMap() {
