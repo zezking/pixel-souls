@@ -10,14 +10,15 @@ class DialogScene extends Phaser.Scene {
   create() {
     let dialogs = this.cache.json.get("dialogs");
     if (dialogs[this.npcName]) {
-      console.log(dialogs[this.npcName]);
+      let dialogsArr = dialogs[this.npcName];
       this.add.text(
         this.scale.width / 2,
-        this.scale.height / 2,
-        dialogs[this.npcName][0],
+        this.scale.height / 2 + 200,
+        dialogsArr[Math.floor(Math.random() * dialogsArr.length)],
         {
           font: "48px Arial",
           fill: "#FFFFFF",
+          fontSize: "12px",
         }
       );
     }
