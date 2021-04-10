@@ -11,6 +11,7 @@ class GameScene extends Phaser.Scene {
   preload() {
     // console.log("preload")
     Player.preload(this);
+    Enemy.preload(this)
   }
 
   
@@ -19,7 +20,7 @@ class GameScene extends Phaser.Scene {
     // this.createAudio();
     // this.createWalls();
     this.createPlayer();
-    // this.createEnemy();
+    this.createEnemy();
     this.addCollisions();
     this.createInput();
     this.createOverlay();  //MUST ALWAYS BE LAST ON THIS LIST!!
@@ -27,6 +28,7 @@ class GameScene extends Phaser.Scene {
 
   update() {
     this.player.update(this.inputKeys);
+    this.enemy.update();
   }
 
   // createAudio() {
@@ -38,7 +40,7 @@ class GameScene extends Phaser.Scene {
   }
 
   createEnemy() {
-    this.enemy = new Enemy(this, 100, 100, 'skele', 32);
+    this.enemy = new Enemy({scene:this,x:100,y:100,key:'skeleton',frame:'skele_idle0'});
   }
 
   // createWalls() {
@@ -55,7 +57,7 @@ class GameScene extends Phaser.Scene {
       right: Phaser.Input.Keyboard.KeyCodes.D,
     })
     let camera = this.cameras.main;
-    camera.zoom = 2;
+    camera.zoom = 3;
     camera.startFollow(this.player);
     camera.setLerp(0.1,0.1);
 
