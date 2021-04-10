@@ -25,18 +25,21 @@ class GameScene extends Phaser.Scene {
     this.createInput();
     this.createNPC()
     this.createBattle();
-    this.createOverlay();  //MUST ALWAYS BE LAST ON THIS LIST!!
     
-
-  
+    this.createOverlay();  
+    this.OverlayLayer.setDepth(2240); //MUST ALWAYS BE LAST ON THIS LIST!!
   }
-
+  
   update() {
     this.player.update(this.inputKeys);
     this.enemy.update();
-
-
-  
+    
+    this.children.each(c => {
+      const child = c;
+      if (child.type !== "TilemapLayer") {
+        child.setDepth(child.y);
+      }
+    })
   }
 
   // createAudio() {
@@ -49,8 +52,6 @@ class GameScene extends Phaser.Scene {
   }
 
   createNPC(){
-
-
     this.npc = new NPC({scene:this,x:400,y:898,key:'bird'});
     this.npc = new NPC({scene:this,x:755.75,y:783,key:'reah'});
     this.npc = new NPC({scene:this,x:388.75,y:1471.75,key:'laurentius'});
@@ -61,7 +62,7 @@ class GameScene extends Phaser.Scene {
     this.npc = new NPC({scene:this,x:865.75,y:1550,key:'bigHatLogan'});
     this.npc = new NPC({scene:this,x:825.64,y:1640,key:'griggs'});
 
-    
+    // this.boxGroup = this.physics.add.staticGroup()
   }
 
   createEnemy() {
