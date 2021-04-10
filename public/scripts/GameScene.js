@@ -50,11 +50,10 @@ class GameScene extends Phaser.Scene {
 
   createPlayer() {
     this.player = new Player({scene:this,x:480.50,y:1774,key:'ashen_one',frame:'player_0'});
-  
+  }
+
   createEnemy() {
     this.enemy = new Enemy({scene:this,x:860,y:1700,key:'skele_sprite',frame:'skele_idling0'});
-
-
   }
 
   createNPC(){
@@ -138,7 +137,6 @@ class GameScene extends Phaser.Scene {
     let map = this.make.tilemap({ key: 'map' });
     this.tilesOverlay = map.addTilesetImage('FULLMAP_overlay', 'overlay', 32, 32, 0, 0);
     this.OverlayLayer = map.createStaticLayer('overlay', this.tilesOverlay, 0, 0);
-
   }
 
   createBattle(){
