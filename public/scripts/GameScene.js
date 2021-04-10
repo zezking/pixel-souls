@@ -3,22 +3,30 @@ class GameScene extends Phaser.Scene {
     super('Game');
   }
 
-  // init() {
-  //   // this.scene.launch('Ui');
-  //   // this.score = 0;
-  // }
+  init() {
+    this.scene.launch('Ui');
+    this.score = 0;
+  }
 
+  preload() {
+    // console.log("preload")
+    Player.preload(this);
+  }
+
+  
   create() {
     this.createMap();
     // this.createAudio();
     // this.createWalls();
     this.createPlayer();
-    // this.addCollisions();
+    // this.createEnemy();
+    this.addCollisions();
     this.createInput();
+
   }
 
   update() {
-    this.player.update(this.cursors);
+    this.player.update(this.inputKeys);
   }
 
   // createAudio() {
@@ -26,7 +34,11 @@ class GameScene extends Phaser.Scene {
   // }
 
   createPlayer() {
-    this.player = new Player(this, 32, 50, 'player', 32);
+    this.player = new Player({scene:this,x:0,y:0,key:'ashen_one',frame:'player_0'});
+  }
+
+  createEnemy() {
+    this.enemy = new Enemy(this, 100, 100, 'skele', 32);
   }
 
   // createWalls() {
@@ -36,7 +48,7 @@ class GameScene extends Phaser.Scene {
 
   createInput() {
 
-    this.cursors = this.input.keyboard.addKeys({
+    this.inputKeys = this.input.keyboard.addKeys({
       up: Phaser.Input.Keyboard.KeyCodes.W,
       down: Phaser.Input.Keyboard.KeyCodes.S,
       left: Phaser.Input.Keyboard.KeyCodes.A,
@@ -49,21 +61,39 @@ class GameScene extends Phaser.Scene {
 
   }
 
-  // addCollisions() {
-  //   // check for collisions between player and wall objects
-  //   this.physics.add.collider(this.player, this.wall);
-  //   // check for overlaps between player and chest game objects
-  //   this.physics.add.overlap(this.player, this.chests, this.collectChest, null, this);
-  // }
+  addCollisions() {
+    // grab the physics map from FULLMAP_collision.json
+    let shapes = this.cache.json.get("shapes");
+
+    let collisionLayer = this.matter.add.sprite (0, 0, 'sheet', 'FULLMAP_collision', {shape: shapes.FULLMAP_collision});
+    collisionLayer.setPosition (0 + 785, 0 + 1325); //manual offset for center of mass. Will have to find a better way to calculate this.
+    
+    // check for collisions between player and wall objects
+    // this.physics.add.collider(this.player, this.enemy, touchEnemy, null, this);
+    // this.physics.add.collider(this.enemy);
+    // this.physics.add.overlap(this.player, this.enemy);
+
+    function touchEnemy(player, enemy) {
+      // enemy bounces off walls
+      enemy.body.bounce.x = 1;
+      enemy.body.bounce.y = 1;
+      //player velocity -> enemy collision -> enemy drag/friction
+      enemy.body.drag.x = 250;
+      enemy.body.drag.y = 250;
+      // can add other code - damage player, etc.
+      }
+
+  }
 
   createMap() {
     let map = this.make.tilemap({ key: 'map' });
     this.tiles = map.addTilesetImage('FULLMAP_bottom', 'bottom', 32, 32, 0, 0);
     this.bottomLayer = map.createStaticLayer('bottom', this.tiles, 0, 0);
 
+
     // character camera bounds
-    this.physics.world.bounds.width = map.widthInPixels;
-    this.physics.world.bounds.height = map.heightInPixels;
-    this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
+    // this.physics.world.bounds.width = map.widthInPixels;
+    // this.physics.world.bounds.height = map.heightInPixels;
+    // this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
   }
 }

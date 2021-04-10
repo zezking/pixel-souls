@@ -6,17 +6,25 @@ const config = {
     BootScene,
     TitleScene,
     GameScene,
-    // UiScene,
+    UiScene,
   ],
   // zoom: 3,
   pixelArt: true,
   physics: {
-    default: "arcade",
-    arcade: {
+    default: "matter",
+    matter: {
       gravity: { y: 0 },
       debug: true, // set to true to view zones
     },
   },
+  plugins: {
+    scene: [{
+      plugin: PhaserMatterCollisionPlugin,
+      key: "matterCollision",
+      mapping: "matterCollision",
+    }]
+  }
 };
+
 
 const game = new Phaser.Game(config);
