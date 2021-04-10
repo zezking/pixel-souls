@@ -23,6 +23,7 @@ class GameScene extends Phaser.Scene {
     this.createEnemy();
     this.addCollisions();
     this.createInput();
+    this.createNPC()
 
 
     this.createOverlay();  //MUST ALWAYS BE LAST ON THIS LIST!!
@@ -41,6 +42,10 @@ class GameScene extends Phaser.Scene {
     this.player = new Player({scene:this,x:859.75,y:1556,key:'ashen_one',frame:'player_0'});
 
   }
+  
+  createEnemy() {
+    this.enemy = new Enemy({scene:this,x:859.75,y:1560,key:'skeleton',frame:'skele_idle0'});
+  }
 
   createNPC(){
     this.npc = new NPC({scene:this,x:400,y:898,key:'bird'});
@@ -54,9 +59,6 @@ class GameScene extends Phaser.Scene {
     this.npc = new NPC({scene:this,x:825.64,y:1640,key:'griggs'});
   }
 
-  createEnemy() {
-    this.enemy = new Enemy({scene:this,x:100,y:100,key:'skeleton',frame:'skele_idle0'});
-  }
 
   // createWalls() {
   //   this.wall = this.physics.add.image(500, 100, 'button1');

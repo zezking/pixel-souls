@@ -4,7 +4,7 @@ class Player extends Phaser.Physics.Matter.Sprite {
     super(scene.matter.world,x,y,key,frame);
     this.scene.add.existing(this); // the scene this container will be added to
     const {Body, Bodies} = Phaser.Physics.Matter.Matter;
-    let playerCollider = Bodies.rectangle(this.x,this.y + 20,20, 20,{isSensor:false, lable:'playerCollider'});
+    let playerCollider = Bodies.rectangle(this.x,this.y + 20,16, 16,{isSensor:false, lable:'playerCollider'});
     let playerSensor = Bodies.circle(this.x,this.y,24, {isSensor:true, label: 'playerSensor'});
     const compoundBody = Body.create({
       parts:[playerCollider,playerSensor],
