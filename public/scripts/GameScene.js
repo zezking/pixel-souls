@@ -34,7 +34,9 @@ class GameScene extends Phaser.Scene {
   update() {
     this.player.update(this.inputKeys);
     this.enemy.update();
-    this.enemy2.update()
+    this.enemy2.update();
+    this.enemy3.update();
+    
     
     //Sprite depth-sorting
     this.children.each(c => {
@@ -56,6 +58,7 @@ class GameScene extends Phaser.Scene {
   createEnemy() {
     this.enemy = new Enemy({scene:this,x:580,y:2120,key:'skeleton_sprite',frame:'skele_idling0'});
     this.enemy2 = new Enemy({scene:this,x:580,y:2120,key:'skeleton_sprite',frame:'skele_idling0'});
+    this.enemy3 = new Enemy({scene:this,x:580,y:2120,key:'skeleton_sprite',frame:'skele_idling0'});
   }
 
   createNPC(){
