@@ -11,6 +11,7 @@ class GameScene extends Phaser.Scene {
   preload() {
     // console.log("preload")
     Player.preload(this);
+    Enemy.preload(this)
   }
 
   
@@ -19,14 +20,17 @@ class GameScene extends Phaser.Scene {
     // this.createAudio();
     // this.createWalls();
     this.createPlayer();
-    // this.createEnemy();
+    this.createEnemy();
     this.addCollisions();
     this.createInput();
-    this.createNPC()
+
+
+    this.createOverlay();  //MUST ALWAYS BE LAST ON THIS LIST!!
   }
 
   update() {
     this.player.update(this.inputKeys);
+    this.enemy.update();
   }
 
   // createAudio() {
@@ -51,7 +55,7 @@ class GameScene extends Phaser.Scene {
   }
 
   createEnemy() {
-    this.enemy = new Enemy(this, 100, 100, 'skele', 32);
+    this.enemy = new Enemy({scene:this,x:100,y:100,key:'skeleton',frame:'skele_idle0'});
   }
 
   // createWalls() {
@@ -68,7 +72,7 @@ class GameScene extends Phaser.Scene {
       right: Phaser.Input.Keyboard.KeyCodes.D,
     })
     let camera = this.cameras.main;
-    camera.zoom = 2;
+    camera.zoom = 3;
     camera.startFollow(this.player);
     camera.setLerp(0.1,0.1);
 
@@ -100,13 +104,21 @@ class GameScene extends Phaser.Scene {
 
   createMap() {
     let map = this.make.tilemap({ key: 'map' });
-    this.tiles = map.addTilesetImage('FULLMAP_bottom', 'bottom', 32, 32, 0, 0);
-    this.bottomLayer = map.createStaticLayer('bottom', this.tiles, 0, 0);
-
+    this.tilesBottom = map.addTilesetImage('FULLMAP_bottom', 'bottom', 32, 32, 0, 0);
+    this.bottomLayer = map.createStaticLayer('bottom', this.tilesBottom, 0, 0);
 
     // character camera bounds
-    // thi.physics.world.bounds.width = map.widthInPixels;s
-    // this.physics.world.bounds.height = map.heightInPixels;
-    // this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
+
+    this.matter.world.width = map.widthInPixels;
+    this.matter.world.height = map.heightInPixels;
+    this.matter.world.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
+
+  }
+
+  createOverlay() {
+    let map = this.make.tilemap({ key: 'map' });
+    this.tilesOverlay = map.addTilesetImage('FULLMAP_overlay', 'overlay', 32, 32, 0, 0);
+    this.OverlayLayer = map.createStaticLayer('overlay', this.tilesOverlay, 0, 0);
+
   }
 }
