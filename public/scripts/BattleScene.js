@@ -5,7 +5,6 @@ class BattleScene extends Phaser.Scene {
 
   prelaod() {}
   create() {
-    this.scene.add("");
     this.titleText = this.add.text(
       this.scale.width / 2,
       this.scale.height / 2,

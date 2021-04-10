@@ -65,6 +65,19 @@ class BootScene extends Phaser.Scene {
       frameWidth: 25,
       frameHeight: 35,
     });
+
+    this.load.spritesheet("well", "public/assets/entities/well.png", {
+      frameWidth: 88,
+      frameHeight: 56,
+    });
+    this.load.spritesheet("pillar01", "public/assets/entities/pillar01.png", {
+      frameWidth: 24,
+      frameHeight: 118,
+    });
+    this.load.spritesheet("pillar02", "public/assets/entities/pillar02.png", {
+      frameWidth: 24,
+      frameHeight: 148,
+    });
   }
 
   // loadAudio() {
@@ -74,6 +87,7 @@ class BootScene extends Phaser.Scene {
   loadTilemap() {
     //bottom/overlay map JSON file
     this.load.tilemapTiledJSON("map", "public/assets/map/Firelink_Shrine.json");
+
     //collision map JSON file
     this.load.json("shapes", "public/assets/map/FULLMAP_collision.json");
   }

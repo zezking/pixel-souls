@@ -18,25 +18,25 @@ class GameScene extends Phaser.Scene {
   create() {
     this.createMap();
     // this.createAudio();
-    // this.createWalls();
     this.createPlayer();
     this.createEnemy();
     this.addCollisions();
     this.createInput();
+    this.createEntity();
     this.createNPC();
     // this.createBattle();
-    // this.createConversation();
     this.createOverlay();
-    this.OverlayLayer.setDepth(2240); //MUST ALWAYS BE LAST ON THIS LIST!!
+    this.OverlayLayer.setDepth(2239); //MUST ALWAYS BE LAST ON THIS LIST!!
   }
 
   update() {
     this.player.update(this.inputKeys);
     this.enemy.update();
 
+    //Sprite depth-sorting
     this.children.each((c) => {
       const child = c;
-      if (child.type !== "TilemapLayer") {
+      if (child.depthSorting) {
         child.setDepth(child.y);
       }
     });
@@ -49,8 +49,8 @@ class GameScene extends Phaser.Scene {
   createPlayer() {
     this.player = new Player({
       scene: this,
-      x: 480.5,
-      y: 1774,
+      x: 580,
+      y: 2120,
       key: "ashen_one",
       frame: "player_0",
     });
@@ -59,76 +59,99 @@ class GameScene extends Phaser.Scene {
   createEnemy() {
     this.enemy = new Enemy({
       scene: this,
-      x: 860,
-      y: 1700,
-      key: "skele_sprite",
+      x: 100,
+      y: 100,
+      key: "skeleton_sprite",
+      frame: "skele_idling0",
+    });
+    this.enemy = new Enemy({
+      scene: this,
+      x: 700,
+      y: 1774,
+      key: "skeleton_sprite",
       frame: "skele_idling0",
     });
   }
 
   createNPC() {
-    this.bird = new NPC({ scene: this, x: 400, y: 898, key: "bird" });
-    this.reah = new NPC({ scene: this, x: 755.75, y: 783, key: "reah" });
-    this.laurentius = new NPC({
+    this.npc = new NPC({ scene: this, x: 330, y: 865, key: "bird" }).setOrigin(
+      0,
+      0.7
+    );
+    this.npc = new NPC({ scene: this, x: 766, y: 766, key: "reah" });
+    this.npc = new NPC({ scene: this, x: 400, y: 1440, key: "laurentius" });
+    this.npc = new NPC({ scene: this, x: 496, y: 1961, key: "fireKeeper" });
+    this.npc = new NPC({
       scene: this,
-      x: 388.75,
-      y: 1471.75,
-      key: "laurentius",
-    });
-    this.fireKeeper = new NPC({
-      scene: this,
-      x: 496,
-      y: 1962.97,
-      key: "fireKeeper",
-    });
-    this.crestfallenWarrior = new NPC({
-      scene: this,
-      x: 500,
-      y: 1665,
+      x: 495,
+      y: 1667,
       key: "crestfallenWarrior",
     });
-    this.lautrec = new NPC({ scene: this, x: 581.99, y: 2161, key: "lautrec" });
-    this.petrus = new NPC({ scene: this, x: 672, y: 1102.5, key: "petrus" });
-    this.bigHatLogan = new NPC({
+    this.npc = new NPC({
       scene: this,
-      x: 865.75,
-      y: 1550,
-      key: "bigHatLogan",
-    });
-    this.griggs = new NPC({ scene: this, x: 825.64, y: 1640, key: "griggs" });
-    // this.boxGroup = this.physics.add.staticGroup()
+      x: 584,
+      y: 2138,
+      key: "lautrec",
+    }).setOrigin(0.5, 0.3);
+    this.npc = new NPC({ scene: this, x: 688, y: 1082, key: "petrus" });
+    this.npc = new NPC({ scene: this, x: 872, y: 1545, key: "bigHatLogan" });
+    this.npc = new NPC({ scene: this, x: 825.64, y: 1640, key: "griggs" });
 
-    let npcs = [
-      this.bird,
-      this.reah,
-      this.laurentius,
-      this.fireKeeper,
-      this.crestfallenWarrior,
-      this.lautrec,
-      this.petrus,
-      this.bigHatLogan,
-      this.griggs,
-    ];
-
-    for (let npc of npcs) {
-      this.createDialogs(npc);
-    }
-  }
-
-  createEnemy() {
-    this.enemy = new Enemy({
-      scene: this,
-      x: 100,
-      y: 100,
-      key: "skeleton",
-      frame: "skele_idle",
+    //here's a stupid step to get the bird on top of the wall
+    this.children.each((c) => {
+      const child = c;
+      if (child.depthSorting && child.texture.key === "bird") {
+        child.depthSorting = false;
+        child.setDepth(2240);
+      }
     });
   }
 
-  // createWalls() {
-  //   this.wall = this.physics.add.image(500, 100, 'button1');
-  //   this.wall.setImmovable();
-  // }
+  createEntity() {
+    this.entity = new Entity({ scene: this, x: 735, y: 1770, key: "well" });
+    this.entity = new Entity({
+      scene: this,
+      x: 769,
+      y: 1303,
+      key: "pillar01",
+    }).setOrigin(0.5, 0.9);
+    this.entity = new Entity({
+      scene: this,
+      x: 404,
+      y: 1169,
+      key: "pillar02",
+    }).setOrigin(0.5, 0.9);
+    this.entity = new Entity({
+      scene: this,
+      x: 404,
+      y: 1010,
+      key: "pillar02",
+    }).setOrigin(0.5, 0.9);
+    this.entity = new Entity({
+      scene: this,
+      x: 404,
+      y: 850,
+      key: "pillar02",
+    }).setOrigin(0.5, 0.9);
+    this.entity = new Entity({
+      scene: this,
+      x: 556,
+      y: 1169,
+      key: "pillar02",
+    }).setOrigin(0.5, 0.9);
+    this.entity = new Entity({
+      scene: this,
+      x: 556,
+      y: 1010,
+      key: "pillar02",
+    }).setOrigin(0.5, 0.9);
+    this.entity = new Entity({
+      scene: this,
+      x: 556,
+      y: 850,
+      key: "pillar02",
+    }).setOrigin(0.5, 0.9);
+  }
 
   createInput() {
     this.inputKeys = this.input.keyboard.addKeys({
@@ -136,6 +159,7 @@ class GameScene extends Phaser.Scene {
       down: Phaser.Input.Keyboard.KeyCodes.S,
       left: Phaser.Input.Keyboard.KeyCodes.A,
       right: Phaser.Input.Keyboard.KeyCodes.D,
+      shift: Phaser.Input.Keyboard.KeyCodes.SHIFT,
     });
     let camera = this.cameras.main;
     camera.zoom = 3;
@@ -154,22 +178,23 @@ class GameScene extends Phaser.Scene {
       "FULLMAP_collision",
       { shape: shapes.FULLMAP_collision }
     );
-    collisionLayer.setPosition(0 + 783, 0 + 1325); //manual offset for center of mass. Will have to find a better way to calculate this.
+    collisionLayer.setPosition(0 + 736, 0 + 1211); //manual offset for center of mass. Will have to find a better way to calculate this.
     collisionLayer.visible = false;
     // check for collisions between player and wall objects
     // this.physics.add.collider(this.player, this.enemy, touchEnemy, null, this);
     // this.physics.add.collider(this.enemy);
     // this.physics.add.overlap(this.player, this.enemy);
 
-    function touchEnemy(player, enemy) {
-      // enemy bounces off walls
-      enemy.body.bounce.x = 1;
-      enemy.body.bounce.y = 1;
-      //player velocity -> enemy collision -> enemy drag/friction
-      enemy.body.drag.x = 250;
-      enemy.body.drag.y = 250;
-      // can add other code - damage player, etc.
-    }
+    // OLD arcade physics collision logic for enemy
+    // function touchEnemy(player, enemy) {
+    //   // enemy bounces off walls
+    //   enemy.body.bounce.x = 1;
+    //   enemy.body.bounce.y = 1;
+    //   //player velocity -> enemy collision -> enemy drag/friction
+    //   enemy.body.drag.x = 250;
+    //   enemy.body.drag.y = 250;
+    //   // can add other code - damage player, etc.
+    //   }
   }
 
   createMap() {

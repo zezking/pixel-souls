@@ -6,7 +6,9 @@ class Enemy extends Phaser.Physics.Matter.Sprite {
 
     const { Body, Bodies } = Phaser.Physics.Matter.Matter;
 
-    let enemyCollider = Bodies.circle(this.x, this.y, 6, {
+    this.depthSorting = true; //Allows this entity to be depth-sorted
+
+    let enemyCollider = Bodies.rectangle(this.x, this.y, 10, 10, 10, {
       isSensor: false,
       lable: "enemyCollider",
     });
@@ -16,7 +18,7 @@ class Enemy extends Phaser.Physics.Matter.Sprite {
     });
     const compoundBody = Body.create({
       parts: [enemyCollider, enemySensor],
-      frictionAir: 0.35,
+      frictionAir: 0.2,
     });
 
     this.setExistingBody(compoundBody);
@@ -55,6 +57,9 @@ class Enemy extends Phaser.Physics.Matter.Sprite {
 
   update() {
     this.setFlipX(this.velocity.x > 0);
+
+    this.setFlipX(this.velocity.x > 0);
+    // this.setFlipY(this.velocity.y < 0);
 
     if (Math.abs(this.velocity.x) > 0.1 || Math.abs(this.velocity.y) > 0.1) {
       this.anims.play(`skeleton_walk`, true);
