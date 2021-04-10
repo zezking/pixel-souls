@@ -39,6 +39,7 @@ class BootScene extends Phaser.Scene {
   loadTilemap() {
     //bottom/overlay map JSON file
     this.load.tilemapTiledJSON('map','public/assets/map/Firelink_Shrine.json');
+    
     //collision map JSON file
     this.load.json('shapes', 'public/assets/map/FULLMAP_collision.json');
   }

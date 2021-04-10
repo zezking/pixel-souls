@@ -21,7 +21,7 @@ class Player extends Phaser.Physics.Matter.Sprite {
               return {
                   x: (bodyA.position.x - bodyB.position.x) * 0.000020,
                   y: (bodyA.position.y - bodyB.position.y) * 0.000020
-              };sd
+              };
           }
       ]
       }
@@ -85,7 +85,19 @@ class Player extends Phaser.Physics.Matter.Sprite {
     } else if (inputKeys.down.isDown) {
       playerVelocity.y = 1;
     }
-    playerVelocity.normalize();
+    //sprinting speeds
+    if(inputKeys.shift.isDown & inputKeys.left.isDown) {
+      playerVelocity.x = -1.5
+    } else if (inputKeys.shift.isDown & inputKeys.right.isDown) {
+      playerVelocity.x = 1.5;
+    }    
+    if(inputKeys.shift.isDown & inputKeys.up.isDown) {
+      playerVelocity.y = -1.5
+    } else if (inputKeys.shift.isDown & inputKeys.down.isDown) {
+      playerVelocity.y = 1.5;
+    }
+    // // turn on to have normalized speed, but no more sprinting
+    // playerVelocity.normalize();
     playerVelocity.scale(speed);
     this.setVelocity(playerVelocity.x, playerVelocity.y);
     

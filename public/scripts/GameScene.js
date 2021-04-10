@@ -13,6 +13,7 @@ class GameScene extends Phaser.Scene {
     // console.log("preload")
     Player.preload(this);
     Enemy.preload(this)
+
   }
 
   
@@ -25,7 +26,7 @@ class GameScene extends Phaser.Scene {
     this.addCollisions();
     this.createInput();
     this.createNPC()
-    this.createBattle();
+    // this.createBattle();
     
     this.createOverlay();  
     this.OverlayLayer.setDepth(2240); //MUST ALWAYS BE LAST ON THIS LIST!!
@@ -34,6 +35,7 @@ class GameScene extends Phaser.Scene {
   update() {
     this.player.update(this.inputKeys);
     this.enemy.update();
+
     
     //Sprite depth-sorting
     this.children.each(c => {
@@ -53,7 +55,8 @@ class GameScene extends Phaser.Scene {
   }
 
   createEnemy() {
-    this.enemy = new Enemy({scene:this,x:860,y:1700,key:'skele_sprite',frame:'skele_idling0'});
+    this.enemy = new Enemy({scene:this,x:100,y:100,key:'skeleton_sprite',frame:'skele_idling0'});
+    this.enemy = new Enemy({scene:this,x:700,y:1774,key:'skeleton_sprite',frame:'skele_idling0'});
   }
 
   createNPC(){
@@ -70,10 +73,10 @@ class GameScene extends Phaser.Scene {
     // this.boxGroup = this.physics.add.staticGroup()
   }
 
-
-  createEnemy() {
-    this.enemy = new Enemy({scene:this,x:100,y:100,key:'skeleton',frame:'skele_idle'});
-  }
+  // extra???
+  // createEnemy() {
+  //   this.enemy = new Enemy({scene:this,x:100,y:100,key:'skeleton',frame:'skeleton_idle'});
+  // }
 
 
   // createWalls() {
@@ -87,6 +90,7 @@ class GameScene extends Phaser.Scene {
       down: Phaser.Input.Keyboard.KeyCodes.S,
       left: Phaser.Input.Keyboard.KeyCodes.A,
       right: Phaser.Input.Keyboard.KeyCodes.D,
+      shift: Phaser.Input.Keyboard.KeyCodes.SHIFT,
     })
     let camera = this.cameras.main;
     camera.zoom = 3;
@@ -101,21 +105,22 @@ class GameScene extends Phaser.Scene {
 
     let collisionLayer = this.matter.add.sprite (0, 0, 'sheet', 'FULLMAP_collision', {shape: shapes.FULLMAP_collision});
     collisionLayer.setPosition (0 + 783, 0 + 1325); //manual offset for center of mass. Will have to find a better way to calculate this.
-    collisionLayer.visible = false;
+    collisionLayer.visible = true;
     // check for collisions between player and wall objects
     // this.physics.add.collider(this.player, this.enemy, touchEnemy, null, this);
     // this.physics.add.collider(this.enemy);
     // this.physics.add.overlap(this.player, this.enemy);
 
-    function touchEnemy(player, enemy) {
-      // enemy bounces off walls
-      enemy.body.bounce.x = 1;
-      enemy.body.bounce.y = 1;
-      //player velocity -> enemy collision -> enemy drag/friction
-      enemy.body.drag.x = 250;
-      enemy.body.drag.y = 250;
-      // can add other code - damage player, etc.
-      }
+    // OLD arcade physics collision logic for enemy 
+    // function touchEnemy(player, enemy) {
+    //   // enemy bounces off walls
+    //   enemy.body.bounce.x = 1;
+    //   enemy.body.bounce.y = 1;
+    //   //player velocity -> enemy collision -> enemy drag/friction
+    //   enemy.body.drag.x = 250;
+    //   enemy.body.drag.y = 250;
+    //   // can add other code - damage player, etc.
+    //   }
 
   }
 
