@@ -25,7 +25,7 @@ class GameScene extends Phaser.Scene {
     this.addCollisions();
     this.createInput();
     this.createNPC()
-    this.createBattle();
+    // this.createBattle();
     
     this.createOverlay();  
     this.OverlayLayer.setDepth(2240); //MUST ALWAYS BE LAST ON THIS LIST!!
@@ -49,7 +49,7 @@ class GameScene extends Phaser.Scene {
   // }
 
   createPlayer() {
-    this.player = new Player({scene:this,x:480.50,y:1774,key:'ashen_one',frame:'player_0'});
+    this.player = new Player({scene:this,x:466,y:1777,key:'ashen_one',frame:'player_0'});
   }
 
   createEnemy() {
@@ -58,13 +58,13 @@ class GameScene extends Phaser.Scene {
 
   createNPC(){
     this.npc = new NPC({scene:this,x:400,y:898,key:'bird'});
-    this.npc = new NPC({scene:this,x:755.75,y:783,key:'reah'});
-    this.npc = new NPC({scene:this,x:388.75,y:1471.75,key:'laurentius'});
-    this.npc = new NPC({scene:this,x:496,y:1962.97,key:'fireKeeper'});
-    this.npc = new NPC({scene:this,x:500,y:1665,key:'crestfallenWarrior'});
-    this.npc = new NPC({scene:this,x:581.99,y:2161,key:'lautrec'});
-    this.npc = new NPC({scene:this,x:672,y:1102.50,key:'petrus'});
-    this.npc = new NPC({scene:this,x:865.75,y:1550,key:'bigHatLogan'});
+    this.npc = new NPC({scene:this,x:766,y:766,key:'reah'});
+    this.npc = new NPC({scene:this,x:400,y:1440,key:'laurentius'});
+    this.npc = new NPC({scene:this,x:496,y:1961,key:'fireKeeper'});
+    this.npc = new NPC({scene:this,x:495,y:1667,key:'crestfallenWarrior'});
+    this.npc = new NPC({scene:this,x:584,y:2145,key:'lautrec'});
+    this.npc = new NPC({scene:this,x:688,y:1082,key:'petrus'});
+    this.npc = new NPC({scene:this,x:872,y:1545,key:'bigHatLogan'});
     this.npc = new NPC({scene:this,x:825.64,y:1640,key:'griggs'});
 
     // this.boxGroup = this.physics.add.staticGroup()
@@ -100,7 +100,7 @@ class GameScene extends Phaser.Scene {
     let shapes = this.cache.json.get("shapes");
 
     let collisionLayer = this.matter.add.sprite (0, 0, 'sheet', 'FULLMAP_collision', {shape: shapes.FULLMAP_collision});
-    collisionLayer.setPosition (0 + 783, 0 + 1325); //manual offset for center of mass. Will have to find a better way to calculate this.
+    collisionLayer.setPosition (0 + 735, 0 + 1211); //manual offset for center of mass. Will have to find a better way to calculate this.
     collisionLayer.visible = false;
     // check for collisions between player and wall objects
     // this.physics.add.collider(this.player, this.enemy, touchEnemy, null, this);
