@@ -9,7 +9,7 @@ class Enemy extends Phaser.Physics.Matter.Sprite {
     this.depthSorting = true; //Allows this entity to be depth-sorted
 
 
-    let enemyCollider = Bodies.rectangle(this.x, this.y, 10, 10, 10, {
+    let enemyCollider = Bodies.circle(this.x, this.y, 10, {
       isSensor: false,
       lable: "enemyCollider",
     });
@@ -59,6 +59,10 @@ class Enemy extends Phaser.Physics.Matter.Sprite {
   }
 
   update() {
+
+    // const speed = 10;
+    let enemyVelocity = new Phaser.Math.Vector2();
+
     this.setFlipX(this.velocity.x > 0);
 
     this.setFlipX(this.velocity.x > 0);
@@ -69,5 +73,11 @@ class Enemy extends Phaser.Physics.Matter.Sprite {
     } else {
       this.anims.play(`skeleton_idle`, true);
     }
+
+
+    enemyVelocity.normalize();
+    // enemyVelocity.scale(speed);
+    // this.setVelocity(enemyVelocity.x, enemyVelocity.y);
+
   }
 }
