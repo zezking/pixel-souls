@@ -6,7 +6,7 @@ class Entity extends Phaser.Physics.Matter.Sprite{
     this.depthSorting = true;  //Allows this entity to be depth-sorted
     const {Body, Bodies} = Phaser.Physics.Matter.Matter;
     // let playerCollider = Bodies.circle(this.x,this.y,12,{isSensor:false, lable:'playerCollider'});
-    let playerSensor = Bodies.circle(this.x,this.y,24, {isSensor:true, label: 'playerSensor'});
+    let playerSensor = Bodies.circle(this.x,this.y,10, {isSensor:true, label: 'playerSensor'});
     const compoundBody = Body.create({
       parts:[playerSensor],
       frictiasdonAir: 0.35,
@@ -20,7 +20,6 @@ class Entity extends Phaser.Physics.Matter.Sprite{
 
   }
 
-  
 
 
 }

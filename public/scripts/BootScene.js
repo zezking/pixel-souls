@@ -15,7 +15,7 @@ class BootScene extends Phaser.Scene {
     //Map elements
     this.load.image("bottom", "public/assets/map/FULLMAP_bottom.png");
     this.load.image("overlay", "public/assets/map/FULLMAP_overlay.png");
-    
+
     //UI elements
     this.load.image("ui-heart-empty", "public/assets/ui/heart_empty.png");
     this.load.image("ui-heart-full", "public/assets/ui/heart_full.png");
@@ -24,7 +24,6 @@ class BootScene extends Phaser.Scene {
   }
 
   loadSpriteSheets() {
-
     this.load.atlas(
       "sheet",
       "public/assets/map/fullmap-collision-atlas.png",
@@ -43,26 +42,40 @@ class BootScene extends Phaser.Scene {
       frameWidth: 23,
       frameHeight: 39,
     });
-    this.load.spritesheet("laurentius", "public/assets/sprites/laurentius.png", { 
-      frameWidth: 26, 
-      frameHeight: 32 
-    });
-    this.load.spritesheet("bigHatLogan", "public/assets/sprites/bigHatLogan.png", { 
-      frameWidth: 40, 
-      frameHeight: 34 
-    });
-    this.load.spritesheet("fireKeeper", "public/assets/sprites/fireKeeper.png", { 
-      frameWidth: 96, 
-      frameHeight: 67 
-    });
+    this.load.spritesheet(
+      "laurentius",
+      "public/assets/sprites/laurentius.png",
+      {
+        frameWidth: 26,
+        frameHeight: 32,
+      }
+    );
+    this.load.spritesheet(
+      "bigHatLogan",
+      "public/assets/sprites/bigHatLogan.png",
+      {
+        frameWidth: 40,
+        frameHeight: 34,
+      }
+    );
+    this.load.spritesheet(
+      "fireKeeper",
+      "public/assets/sprites/fireKeeper.png",
+      {
+        frameWidth: 96,
+        frameHeight: 67,
+      }
+    );
     this.load.spritesheet("griggs", "public/assets/sprites/griggs.png", {
       frameWidth: 32,
       frameHeight: 54,
     });
-    this.load.spritesheet("crestfallenWarrior", "public/assets/sprites/crestfallenWarrior.png", { 
-      frameWidth: 70, 
-      frameHeight: 36 
-    });
+
+    // this.load.spritesheet("crestfallenWarrior", "public/assets/sprites/crestfallenWarrior.png", {
+    //   frameWidth: 70,
+    //   frameHeight: 36
+    // });
+
     this.load.spritesheet("lautrec", "public/assets/sprites/lautrec.png", {
       frameWidth: 25,
       frameHeight: 35,
@@ -80,7 +93,14 @@ class BootScene extends Phaser.Scene {
       frameWidth: 24,
       frameHeight: 148,
     });
-
+    this.load.spritesheet("soul", "public/assets/entities/soul.png", {
+      frameWidth: 32,
+      frameHeight: 32,
+    });
+    // this.load.spritesheet("bonfire", "public/assets/entities/bonfire_animation/bonfire.png", {
+    //   frameWidth: 90,
+    //   frameHeight: 60,
+    // });
   }
 
   loadAudio() {
@@ -101,6 +121,6 @@ class BootScene extends Phaser.Scene {
   }
 
   create() {
-    this.scene.start("Game");
+    this.scene.start("Title");
   }
 }

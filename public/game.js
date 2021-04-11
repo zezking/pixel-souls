@@ -3,7 +3,7 @@ const config = {
   width: 800,
   height: 800,
   scene: [BootScene, TitleScene, BattleScene, GameScene, UiScene],
-  // zoom: 3,
+  // zoom: 2,
   pixelArt: true,
   physics: {
     default: "matter",

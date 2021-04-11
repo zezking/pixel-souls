@@ -9,11 +9,11 @@ class Enemy extends Phaser.Physics.Matter.Sprite {
     this.depthSorting = true; //Allows this entity to be depth-sorted
 
 
-    let enemyCollider = Bodies.circle(this.x, this.y, 10, {
+    let enemyCollider = Bodies.circle(this.x,this.y + 12,12,{
       isSensor: false,
       lable: "enemyCollider",
     });
-    let enemySensor = Bodies.circle(this.x, this.y, 15, {
+    let enemySensor = Bodies.circle(this.x, this.y, 16, {
       isSensor: true,
       label: "enemySensor",
     });
