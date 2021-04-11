@@ -14,7 +14,7 @@ class Player extends Phaser.Physics.Matter.Sprite {
     const compoundBody = Body.create({
       parts:[playerCollider,playerSensor],
 
-      frictionAir: 0.35,
+      frictionAir: 0,
       plugin: {
         attractors:[
           function (bodyA, bodyB) {
@@ -31,22 +31,7 @@ class Player extends Phaser.Physics.Matter.Sprite {
     this.setScale(1);
     // fixed rotation of character
     this.setFixedRotation();
-    // this.velocity = 5; // the velocity when moving our player
-    
-    // enable physics
-    // this.scene.physics.world.enable(this);
-    // set immovable if another object collides with our player
-    // this.setImmovable(false);
-
-    // scale our player
-
-
-    // collide with world bounds
-    // this.setCollideWorldBounds(true);
-    // add the player to our existing scene
-    // this.scene.add.existing(this);
   }
-
 
   static preload(scene) {
     scene.load.atlas('ashen_one','/public/assets/character_sprites/ashen_one.png','/public/assets/character_sprites/ashen_one_atlas.json')
@@ -56,8 +41,6 @@ class Player extends Phaser.Physics.Matter.Sprite {
   get velocity() {
     return this.body.velocity;
   }
-
-
 
   update(inputKeys) {
     // this.body.setVelocity()sa
@@ -105,6 +88,5 @@ class Player extends Phaser.Physics.Matter.Sprite {
     playerVelocity.scale(speed);
     this.setVelocity(playerVelocity.x, playerVelocity.y);
     
-
   }
 }

@@ -13,10 +13,7 @@ class GameScene extends Phaser.Scene {
     // console.log("preload")
     Player.preload(this);
     Enemy.preload(this);
-
     Bonfire.preload(this);
-
-
   }
 
   create() {
@@ -27,7 +24,6 @@ class GameScene extends Phaser.Scene {
     this.addCollisions();
     this.createInput();
     this.createEntity();
-
     this.createNPC()
     this.createBonfire()
     // this.createBattle();
@@ -39,9 +35,9 @@ class GameScene extends Phaser.Scene {
   update() {
     this.player.update(this.inputKeys);
     this.enemy.update();
-
-    this.enemy2.update();
-    this.enemy3.update();
+    // this.enemy2.update();
+    // this.enemy3.update();
+    
     this.bonfire.update();
 
     //Sprite depth-sorting
@@ -70,17 +66,24 @@ class GameScene extends Phaser.Scene {
   createEnemy() {
 
     this.enemy = new Enemy({scene:this,x:580,y:2120,key:'skeleton_sprite',frame:'skele_idling0'});
-    this.enemy2 = new Enemy({scene:this,x:580,y:2120,key:'skeleton_sprite',frame:'skele_idling0'});
-    this.enemy3 = new Enemy({scene:this,x:580,y:2120,key:'skeleton_sprite',frame:'skele_idling0'});
+    // this.enemy2 = new Enemy({scene:this,x:580,y:2120,key:'skeleton_sprite',frame:'skele_idling0'});
+    // this.enemy3 = new Enemy({scene:this,x:580,y:2120,key:'skeleton_sprite',frame:'skele_idling0'});
 
   }
 
   createNPC() {
-    this.bird = new NPC({ scene: this, x: 330, y: 865, key: "bird" }).setOrigin(
-      0,
-      0.7
-    );
-    this.reah = new NPC({ scene: this, x: 766, y: 766, key: "reah" });
+    this.bird = new NPC({ 
+      scene: this, 
+      x: 330, 
+      y: 865, 
+      key: "bird" 
+    }).setOrigin(0, 0.7);
+    this.reah = new NPC({ 
+      scene: this, 
+      x: 766, 
+      y: 766, 
+      key: "reah" 
+    });
     this.laurentius = new NPC({
       scene: this,
       x: 400,
@@ -105,14 +108,24 @@ class GameScene extends Phaser.Scene {
       y: 2138,
       key: "lautrec",
     }).setOrigin(0.5, 0.3);
-    this.petrus = new NPC({ scene: this, x: 688, y: 1082, key: "petrus" });
+    this.petrus = new NPC({ 
+      scene: this, 
+      x: 688, 
+      y: 1082, 
+      key: "petrus" 
+    });
     this.bigHatLogan = new NPC({
       scene: this,
       x: 872,
       y: 1545,
       key: "bigHatLogan",
     });
-    this.griggs = new NPC({ scene: this, x: 825.64, y: 1640, key: "griggs" });
+    this.griggs = new NPC({ 
+      scene: this, 
+      x: 825.64, 
+      y: 1640, 
+      key: "griggs" 
+    });
 
     //here's a stupid step to get the bird on top of the wall
     this.children.each((c) => {
@@ -140,7 +153,12 @@ class GameScene extends Phaser.Scene {
   }
 
   createEntity() {
-    this.entity = new Entity({ scene: this, x: 735, y: 1770, key: "well" });
+    this.entity = new Entity({ 
+      scene: this, 
+      x: 735, 
+      y: 1770, 
+      key: "well" 
+    });
     this.entity = new Entity({
       scene: this,
       x: 769,
@@ -186,7 +204,13 @@ class GameScene extends Phaser.Scene {
   }
 
   createBonfire() {
-    this.bonfire = new Bonfire({scene:this,x:530,y:1765,key:'bonfire', frame: 'bonfire0'});
+    this.bonfire = new Bonfire({
+      scene:this,
+      x:530,
+      y:1765,
+      key:'bonfire', 
+      frame: 'bonfire0'
+    });
   }
 
  
@@ -218,21 +242,7 @@ class GameScene extends Phaser.Scene {
     );
     collisionLayer.setPosition(0 + 736, 0 + 1211); //manual offset for center of mass. Will have to find a better way to calculate this.
     collisionLayer.visible = false;
-    // check for collisions between player and wall objects
-    // this.physics.add.collider(this.player, this.enemy, touchEnemy, null, this);
-    // this.physics.add.collider(this.enemy);
-    // this.physics.add.overlap(this.player, this.enemy);
 
-    // OLD arcade physics collision logic for enemy
-    // function touchEnemy(player, enemy) {
-    //   // enemy bounces off walls
-    //   enemy.body.bounce.x = 1;
-    //   enemy.body.bounce.y = 1;
-    //   //player velocity -> enemy collision -> enemy drag/friction
-    //   enemy.body.drag.x = 250;
-    //   enemy.body.drag.y = 250;
-    //   // can add other code - damage player, etc.
-    //   }
   }
 
   createMap() {
@@ -279,6 +289,7 @@ class GameScene extends Phaser.Scene {
       callback: (eventData) => this.scene.start("Battle"),
     });
   }
+
   createDialogs(npc) {
     this.matterCollision.addOnCollideStart({
       objectA: this.player,
@@ -289,8 +300,6 @@ class GameScene extends Phaser.Scene {
           for (let key in this.scene.manager.keys) {
             sceneKeyArray.push(key);
           }
-          console.log(sceneKeyArray);
-
           if (!sceneKeyArray.includes("Dialog")) {
             this.scene.add("Dialog", DialogScene, true, { npc });
           }
