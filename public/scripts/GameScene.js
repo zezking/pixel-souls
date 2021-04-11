@@ -341,14 +341,16 @@ class GameScene extends Phaser.Scene {
     this.matterCollision.addOnCollideStart({
       objectA: this.player,
       objectB: npc,
-      callback: (eventData) => {
+      callback: () => {
         if (npc) {
           let sceneKeyArray = [];
           for (let key in this.scene.manager.keys) {
+            //push all the scenes keys as string to the array
             sceneKeyArray.push(key);
           }
           if (!sceneKeyArray.includes("Dialog")) {
-            this.scene.add("Dialog", DialogScene, true, { npc });
+            //if there is no dialog scene in the array
+            this.scene.add("Dialog", DialogScene, true, { npc }); //add Dialogue scene
           }
         }
       },
