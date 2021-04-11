@@ -34,4 +34,22 @@ class NPC extends Phaser.Physics.Matter.Sprite {
     // this.scene.add.existing(this);
 
   }
+
+  static preload(scene) {
+
+    scene.load.atlas(
+      "crestfallenWarrior",
+      "/public/assets/sprites/crestfallenWarrior/crestfallenwarrior.png",
+      "public/assets/sprites/crestfallenWarrior/crestfallenwarrior_atlas.json"
+    );
+    scene.load.animation(
+      "crestfallenwarrior_anim",
+      "/public/assets/sprites/crestfallenWarrior/crestfallenwarrior_anim.json"
+    );
+
+  }
+  
+  update() {
+    this.anims.play(`crestfallenWarrior_idle`, true);
+  }
 }

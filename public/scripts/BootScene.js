@@ -59,10 +59,12 @@ class BootScene extends Phaser.Scene {
       frameWidth: 32,
       frameHeight: 54,
     });
-    this.load.spritesheet("crestfallenWarrior", "public/assets/sprites/crestfallenWarrior.png", { 
-      frameWidth: 70, 
-      frameHeight: 36 
-    });
+    
+    // this.load.spritesheet("crestfallenWarrior", "public/assets/sprites/crestfallenWarrior.png", { 
+    //   frameWidth: 70, 
+    //   frameHeight: 36 
+    // });
+
     this.load.spritesheet("lautrec", "public/assets/sprites/lautrec.png", {
       frameWidth: 25,
       frameHeight: 35,

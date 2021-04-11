@@ -1,34 +1,34 @@
 {
     "anims": [
         {
-            "key": "crestfallenwarrior_idle",
+            "key": "crestfallenWarrior_idle",
             "type": "frames",
             "repeat": -1,
             "frameRate": 1,
             "frames": [
                 {
-                    "key": "crestfallenwarrior",
-                    "frame": "crestfallenwarrior0"
+                    "key": "crestfallenWarrior",
+                    "frame": "crestfallenWarrior0"
                 },
                 {
-                    "key": "crestfallenwarrior",
-                    "frame": "crestfallenwarrior1"
+                    "key": "crestfallenWarrior",
+                    "frame": "crestfallenWarrior1"
                 },
                 {
-                    "key": "crestfallenwarrior",
-                    "frame": "crestfallenwarrior2"
+                    "key": "crestfallenWarrior",
+                    "frame": "crestfallenWarrior2"
                 },
                 {
-                    "key": "crestfallenwarrior",
-                    "frame": "crestfallenwarrior3"
+                    "key": "crestfallenWarrior",
+                    "frame": "crestfallenWarrior3"
                 },
                 {
-                    "key": "crestfallenwarrior",
-                    "frame": "crestfallenwarrior4"
+                    "key": "crestfallenWarrior",
+                    "frame": "crestfallenWarrior4"
                 },
                 {
-                    "key": "crestfallenwarrior",
-                    "frame": "crestfallenwarrior5"
+                    "key": "crestfallenWarrior",
+                    "frame": "crestfallenWarrior5"
                 }
             ]
         }
