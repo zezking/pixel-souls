@@ -49,8 +49,8 @@ class GameScene extends Phaser.Scene {
   createPlayer() {
     this.player = new Player({
       scene: this,
-      x: 900,
-      y: 1650,
+      x: 584,
+      y: 2000,
       key: "ashen_one",
       frame: "player_0",
     });
@@ -127,7 +127,7 @@ class GameScene extends Phaser.Scene {
       this.laurentius,
       this.fireKeeper,
       this.crestfallenWarrior,
-      this.lautrecm,
+      this.lautrec,
       this.petrus,
       this.bigHatLogan,
       this.griggs,
