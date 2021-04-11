@@ -13,8 +13,8 @@ class GameScene extends Phaser.Scene {
     // console.log("preload")
     Player.preload(this);
     Enemy.preload(this);
-
     Bonfire.preload(this);
+    NPC.preload(this);
   }
 
   create() {
@@ -25,7 +25,7 @@ class GameScene extends Phaser.Scene {
     this.addCollisions();
     this.createInput();
     this.createEntity();
-
+    this.createItem();
     this.createNPC();
     this.createBonfire();
     // this.createBattle();
@@ -37,10 +37,12 @@ class GameScene extends Phaser.Scene {
   update() {
     this.player.update(this.inputKeys);
 
+    // enemies list
     this.enemy.update();
     this.enemy2.update();
     this.enemy3.update();
 
+    this.crestfallenWarrior.update();
     this.bonfire.update();
 
     //Sprite depth-sorting
@@ -59,8 +61,10 @@ class GameScene extends Phaser.Scene {
   createPlayer() {
     this.player = new Player({
       scene: this,
-      x: 800,
-      y: 1022,
+
+      x: 530,
+      y: 1700,
+
       key: "ashen_one",
       frame: "player_0",
     });
@@ -91,11 +95,18 @@ class GameScene extends Phaser.Scene {
   }
 
   createNPC() {
-    this.bird = new NPC({ scene: this, x: 330, y: 865, key: "bird" }).setOrigin(
-      0,
-      0.7
-    );
-    this.reah = new NPC({ scene: this, x: 766, y: 766, key: "reah" });
+    this.bird = new NPC({
+      scene: this,
+      x: 330,
+      y: 865,
+      key: "bird",
+    }).setOrigin(0, 0.7);
+    this.reah = new NPC({
+      scene: this,
+      x: 766,
+      y: 766,
+      key: "reah",
+    });
     this.laurentius = new NPC({
       scene: this,
       x: 400,
@@ -113,6 +124,7 @@ class GameScene extends Phaser.Scene {
       x: 495,
       y: 1667,
       key: "crestfallenWarrior",
+      frame: "crestfallenWarrior0",
     });
     this.lautrec = new NPC({
       scene: this,
@@ -120,14 +132,24 @@ class GameScene extends Phaser.Scene {
       y: 2138,
       key: "lautrec",
     }).setOrigin(0.5, 0.3);
-    this.petrus = new NPC({ scene: this, x: 688, y: 1082, key: "petrus" });
+    this.petrus = new NPC({
+      scene: this,
+      x: 688,
+      y: 1082,
+      key: "petrus",
+    });
     this.bigHatLogan = new NPC({
       scene: this,
       x: 872,
       y: 1545,
       key: "bigHatLogan",
     });
-    this.griggs = new NPC({ scene: this, x: 825.64, y: 1640, key: "griggs" });
+    this.griggs = new NPC({
+      scene: this,
+      x: 825.64,
+      y: 1640,
+      key: "griggs",
+    });
 
     //here's a stupid step to get the bird on top of the wall
     this.children.each((c) => {
@@ -155,7 +177,12 @@ class GameScene extends Phaser.Scene {
   }
 
   createEntity() {
-    this.entity = new Entity({ scene: this, x: 735, y: 1770, key: "well" });
+    this.entity = new Entity({
+      scene: this,
+      x: 735,
+      y: 1770,
+      key: "well",
+    });
     this.entity = new Entity({
       scene: this,
       x: 769,
@@ -200,11 +227,30 @@ class GameScene extends Phaser.Scene {
     }).setOrigin(0.5, 0.9);
   }
 
+  createItem() {
+    this.item = new Item({
+      scene: this,
+      x: 600,
+      y: 1670,
+      key: "soul",
+    });
+    this.item.makeActive();
+    // console.log(this.item)
+
+    this.matterCollision.addOnCollideStart({
+      objectA: this.player,
+      objectB: this.item,
+      callback: (eventData) => {
+        //events.emit, more logic in event listener
+      },
+    });
+  }
+
   createBonfire() {
     this.bonfire = new Bonfire({
       scene: this,
-      x: 530,
-      y: 1765,
+      x: 525,
+      y: 1760,
       key: "bonfire",
       frame: "bonfire0",
     });
@@ -219,8 +265,12 @@ class GameScene extends Phaser.Scene {
       shift: Phaser.Input.Keyboard.KeyCodes.SHIFT,
     });
     let camera = this.cameras.main;
-    camera.zoom = 2;
+
+    // Zoom in and out of Player
+    camera.zoom = 3;
+
     camera.startFollow(this.player);
+    // Camera to center leeway, the higher, the tighter
     camera.setLerp(0.1, 0.1);
   }
 
@@ -237,21 +287,6 @@ class GameScene extends Phaser.Scene {
     );
     collisionLayer.setPosition(0 + 736, 0 + 1211); //manual offset for center of mass. Will have to find a better way to calculate this.
     collisionLayer.visible = false;
-    // check for collisions between player and wall objects
-    // this.physics.add.collider(this.player, this.enemy, touchEnemy, null, this);
-    // this.physics.add.collider(this.enemy);
-    // this.physics.add.overlap(this.player, this.enemy);
-
-    // OLD arcade physics collision logic for enemy
-    // function touchEnemy(player, enemy) {
-    //   // enemy bounces off walls
-    //   enemy.body.bounce.x = 1;
-    //   enemy.body.bounce.y = 1;
-    //   //player velocity -> enemy collision -> enemy drag/friction
-    //   enemy.body.drag.x = 250;
-    //   enemy.body.drag.y = 250;
-    //   // can add other code - damage player, etc.
-    //   }
   }
 
   createMap() {
@@ -267,7 +302,7 @@ class GameScene extends Phaser.Scene {
     this.bottomLayer = map.createLayer("bottom", this.tilesBottom, 0, 0);
 
     // character camera bounds
-
+    // world bounded to map size
     this.matter.world.width = map.widthInPixels;
     this.matter.world.height = map.heightInPixels;
     this.matter.world.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
@@ -293,6 +328,7 @@ class GameScene extends Phaser.Scene {
       callback: (eventData) => this.scene.start("Battle"),
     });
   }
+
   createDialogs(npc) {
     this.matterCollision.addOnCollideStart({
       objectA: this.player,

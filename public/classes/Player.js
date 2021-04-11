@@ -53,19 +53,8 @@ class Player extends Phaser.Physics.Matter.Sprite {
     this.setScale(1);
     // fixed rotation of character
     this.setFixedRotation();
-    // this.velocity = 5; // the velocity when moving our player
 
-    // enable physics!
-    // this.scene.physics.world.enable(this);
-    // set immovable if another object collides with our player
-    // this.setImmovable(false);
-
-    // scale our player
-
-    // collide with world bounds
-    // this.setCollideWorldBounds(true);
-    // add the player to our existing scene
-    // this.scene.add.existing(this);
+    this.health = 5;
   }
 
   static preload(scene) {
