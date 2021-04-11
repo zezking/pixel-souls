@@ -15,7 +15,8 @@ class DialogScene extends Phaser.Scene {
       150
     );
     var graphics = this.add.graphics({
-      fillStyle: { color: "#FFFFFF", alpha: 0.3 }, //change this value to change opacity of textbox background
+      fillStyle: { color: "#FFFFFF", alpha: 0.5 }, 
+      //change this value to change opacity of textbox background
     });
 
     graphics.fillRectShape(rect);
@@ -35,9 +36,12 @@ class DialogScene extends Phaser.Scene {
         }
       );
 
+      
+
       this.input.keyboard.on("keydown-" + "E", () => {
         this.scene.remove("Dialog");
       });
+      
     }
   }
 
