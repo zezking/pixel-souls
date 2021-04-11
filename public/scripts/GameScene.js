@@ -30,6 +30,7 @@ class GameScene extends Phaser.Scene {
     this.createBonfire()
     // this.createBattle();
     this.createOverlay();
+    this.createEventsManager();
 
     this.OverlayLayer.setDepth(2239); //MUST ALWAYS BE LAST ON THIS LIST!!
   }
@@ -238,12 +239,13 @@ class GameScene extends Phaser.Scene {
     this.item.makeActive();
     // console.log(this.item)
 
+    //item collision detection
     this.matterCollision.addOnCollideStart({
       objectA: this.player,
       objectB: this.item,
       callback: (eventData) => {
         this.events.emit("pickupItem", this.item.id);
-        //more logic in event listener
+        console.log("inside pickup item collision")
       },
     });
   }
@@ -259,6 +261,7 @@ class GameScene extends Phaser.Scene {
       left: Phaser.Input.Keyboard.KeyCodes.A,
       right: Phaser.Input.Keyboard.KeyCodes.D,
       shift: Phaser.Input.Keyboard.KeyCodes.SHIFT,
+      interact: Phaser.Input.Keyboard.KeyCodes.E,
     });
     let camera = this.cameras.main;
     
@@ -283,8 +286,6 @@ class GameScene extends Phaser.Scene {
     );
     collisionLayer.setPosition(0 + 736, 0 + 1211); //manual offset for center of mass. Will have to find a better way to calculate this.
     collisionLayer.visible = false;
-
-    
 
   }
 
@@ -347,4 +348,9 @@ class GameScene extends Phaser.Scene {
   }
 
   createDialogsBox() {}
+
+  createEventsManager() {
+    this.eventsManager = new EventsManager(this, this.children);
+    this.eventsManager.setup();
+  }
 }
