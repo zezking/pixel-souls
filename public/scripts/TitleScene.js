@@ -8,7 +8,7 @@ class TitleScene extends Phaser.Scene {
     this.titleText = this.add.text(
       this.scale.width / 2,
       this.scale.height / 2,
-      "PIXEL SOULS",
+      "PLACE HOLDER",
       { fontFamily: "HonokaMincho", fontSize: "100px", fill: "#fff" }
     );
     this.titleText.setOrigin(0.5);
