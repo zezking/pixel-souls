@@ -9,21 +9,31 @@ class UiScene extends Phaser.Scene {
   }
 
   create() {
-    // this.setupUiElements();
+    this.setupUiElements();
     // this.setupEvents();
   }
 
   setupUiElements() {
-    // create the soul text game object
-    this.soulText = this.add.text(35, 8, '0 Souls', { fontSize: '16px', fill: '#fff' });
+    //Health hearts
+    const hearts = this.add.group({
+      classType: Phaser.GameObjects.Image
+    });
+    hearts.createMultiple({
+      key: "ui-heart-full",
+      setXY: { x: 20, y: 20, stepX: 40 },
+      quantity: 5
+    })
+    //Soul counter
+    this.soulCounter = this.add.image(725, 770, "soul-counter");
+    this.soulText = this.add.text(725, 762, '0', { fontSize: '16px', fill: '#fff' });
   //   // creaet coin icon
   //   this.coinIcon = this.add.image(15, 15, 'items', 3);
   }
 
   setupEvents() {
     // listen for the updateScore event from the game scene
-    // this.gameScene.events.on('updateScore', (score) => {
-    //   this.scoreText.setText(`Coins: ${score}`);
-    // });
+    this.gameScene.events.on('updateSouls', (score) => {
+      this.soulText.setText(`${score}`);
+    });
   }
 }

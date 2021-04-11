@@ -12,13 +12,18 @@ class BootScene extends Phaser.Scene {
   }
 
   loadImages() {
+    //Map elements
     this.load.image("bottom", "public/assets/map/FULLMAP_bottom.png");
     this.load.image("overlay", "public/assets/map/FULLMAP_overlay.png");
-    // this.load.image('collision', 'public/assets/map/FULLMAP_collision.png');
+    
+    //UI elements
+    this.load.image("ui-heart-empty", "public/assets/ui/heart_empty.png");
+    this.load.image("ui-heart-full", "public/assets/ui/heart_full.png");
+    this.load.image("soul-counter", "public/assets/ui/soul_counter.png");
+    this.load.image("logo", "public/assets/ui/logo.png");
   }
 
   loadSpriteSheets() {
-    // this.load.spritesheet('player', 'public/assets/sprites/PLAYER.png', { frameWidth: 32, frameHeight: 50 });
 
     this.load.atlas(
       "sheet",
@@ -78,9 +83,10 @@ class BootScene extends Phaser.Scene {
 
   }
 
-  // loadAudio() {
-
-  // }
+  loadAudio() {
+    this.load.audio("menu-music", "public/assets/audio/menu_theme.mp3");
+    this.load.audio("bg-music", "public/assets/audio/firelink_shrine.mp3");
+  }
 
   loadTilemap() {
     //bottom/overlay map JSON file
