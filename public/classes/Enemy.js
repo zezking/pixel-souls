@@ -8,6 +8,7 @@ class Enemy extends Phaser.Physics.Matter.Sprite {
 
     this.depthSorting = true; //Allows this entity to be depth-sorted
 
+
     let enemyCollider = Bodies.rectangle(this.x, this.y, 10, 10, 10, {
       isSensor: false,
       lable: "enemyCollider",
@@ -16,11 +17,11 @@ class Enemy extends Phaser.Physics.Matter.Sprite {
       isSensor: true,
       label: "enemySensor",
     });
+
     const compoundBody = Body.create({
       parts: [enemyCollider, enemySensor],
       frictionAir: 0.2,
     });
-
     this.setExistingBody(compoundBody);
     // scale our player
     this.setScale(1.25);
@@ -40,6 +41,7 @@ class Enemy extends Phaser.Physics.Matter.Sprite {
   }
 
   static preload(scene) {
+
     scene.load.atlas(
       "skeleton_sprite",
       "/public/assets/skele_sprites/skeleton_sprite.png",
@@ -49,6 +51,7 @@ class Enemy extends Phaser.Physics.Matter.Sprite {
       "skele_anim",
       "/public/assets/skele_sprites/skeleton_sprite_anim.json"
     );
+
   }
 
   get velocity() {

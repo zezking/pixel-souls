@@ -16,6 +16,7 @@ class NPC extends Phaser.Physics.Matter.Sprite {
       isStatic: true,
     });
 
+
     this.setExistingBody(compoundBody);
     this.setFixedRotation();
 
@@ -31,5 +32,6 @@ class NPC extends Phaser.Physics.Matter.Sprite {
     // this.setCollideWorldBounds(true);
     // add the player to our existing scene
     // this.scene.add.existing(this);
+
   }
 }

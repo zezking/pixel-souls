@@ -19,6 +19,7 @@ class BootScene extends Phaser.Scene {
 
   loadSpriteSheets() {
     // this.load.spritesheet('player', 'public/assets/sprites/PLAYER.png', { frameWidth: 32, frameHeight: 50 });
+
     this.load.atlas(
       "sheet",
       "public/assets/map/fullmap-collision-atlas.png",
@@ -78,6 +79,7 @@ class BootScene extends Phaser.Scene {
       frameWidth: 24,
       frameHeight: 148,
     });
+
   }
 
   // loadAudio() {
