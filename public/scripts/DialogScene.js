@@ -12,11 +12,10 @@ class DialogScene extends Phaser.Scene {
       this.scale.width / 2 - 250,
       this.scale.height / 2 + 150,
       500,
-      200
+      150
     );
     var graphics = this.add.graphics({
-      fillStyle: { color: "#FFFFFF" },
-      alpha: 0.5,
+      fillStyle: { color: "#FFFFFF", alpha: 0.3 },
     });
 
     graphics.fillRectShape(rect);
