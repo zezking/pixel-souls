@@ -13,6 +13,10 @@ class GameScene extends Phaser.Scene {
     // console.log("preload")
     Player.preload(this);
     Enemy.preload(this);
+
+    Bonfire.preload(this);
+
+
   }
 
   create() {
@@ -23,15 +27,22 @@ class GameScene extends Phaser.Scene {
     this.addCollisions();
     this.createInput();
     this.createEntity();
-    this.createNPC();
-    //this.createBattle();
-    this.createOverlay();
+
+    this.createNPC()
+    this.createBonfire()
+    // this.createBattle();
+    this.createOverlay();  
+
     this.OverlayLayer.setDepth(2239); //MUST ALWAYS BE LAST ON THIS LIST!!
   }
 
   update() {
     this.player.update(this.inputKeys);
     this.enemy.update();
+
+    this.enemy2.update();
+    this.enemy3.update();
+    this.bonfire.update();
 
     //Sprite depth-sorting
     this.children.each((c) => {
@@ -57,20 +68,11 @@ class GameScene extends Phaser.Scene {
   }
 
   createEnemy() {
-    this.enemy = new Enemy({
-      scene: this,
-      x: 100,
-      y: 100,
-      key: "skeleton_sprite",
-      frame: "skele_idling0",
-    });
-    this.enemy = new Enemy({
-      scene: this,
-      x: 700,
-      y: 1774,
-      key: "skeleton_sprite",
-      frame: "skele_idling0",
-    });
+
+    this.enemy = new Enemy({scene:this,x:580,y:2120,key:'skeleton_sprite',frame:'skele_idling0'});
+    this.enemy2 = new Enemy({scene:this,x:580,y:2120,key:'skeleton_sprite',frame:'skele_idling0'});
+    this.enemy3 = new Enemy({scene:this,x:580,y:2120,key:'skeleton_sprite',frame:'skele_idling0'});
+
   }
 
   createNPC() {
@@ -182,6 +184,12 @@ class GameScene extends Phaser.Scene {
       key: "pillar02",
     }).setOrigin(0.5, 0.9);
   }
+
+  createBonfire() {
+    this.bonfire = new Bonfire({scene:this,x:530,y:1765,key:'bonfire', frame: 'bonfire0'});
+  }
+
+ 
 
   createInput() {
     this.inputKeys = this.input.keyboard.addKeys({

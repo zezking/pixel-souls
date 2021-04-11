@@ -1,4 +1,4 @@
-class Entity extends Phaser.Physics.Matter.Sprite{
+class Bonfire extends Phaser.Physics.Matter.Sprite{
   constructor(data) {
     let {scene,x,y,key,frame} = data;
     super(scene.matter.world,x,y,key,frame);
@@ -20,7 +20,14 @@ class Entity extends Phaser.Physics.Matter.Sprite{
 
   }
 
+  static preload(scene) {
+    scene.load.atlas('bonfire','/public/assets/entities/bonfire_animation/bonfire.png','/public/assets/entities/bonfire_animation/bonfire_atlas.json')
+    scene.load.animation('bonfire_anim','/public/assets/entities/bonfire_animation/bonfire_anim.json')
+    
+  }
   
-
-
+  update() {
+    this.anims.play('bonfire_lit',true)
+  }
+  
 }
