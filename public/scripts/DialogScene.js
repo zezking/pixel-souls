@@ -18,7 +18,8 @@ class DialogScene extends Phaser.Scene {
         {
           fontFamily: "HonokaMincho",
           fill: "#FFFFFF",
-          fontSize: "40px",
+          fontSize: "18px",
+          wordWrap: { width: 400, useAdvancedWrap: true },
         }
       );
       this.input.once(

@@ -49,8 +49,8 @@ class GameScene extends Phaser.Scene {
   createPlayer() {
     this.player = new Player({
       scene: this,
-      x: 580,
-      y: 2120,
+      x: 900,
+      y: 1650,
       key: "ashen_one",
       frame: "player_0",
     });
@@ -277,7 +277,14 @@ class GameScene extends Phaser.Scene {
       objectB: npc,
       callback: (eventData) => {
         if (npc) {
-          this.scene.add("Dialog", DialogScene, true, { npc });
+          let sceneKeyArray = [];
+          console.log(this);
+          for (let key in this.scene.manager.keys) {
+          }
+          console.log(sceneKeyArray);
+          if (!sceneKeyArray.includes("Dialog")) {
+            this.scene.add("Dialog", DialogScene, true, { npc });
+          }
         }
       },
     });
