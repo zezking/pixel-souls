@@ -1,7 +1,7 @@
 let enemy_speed = 20;
 class GameScene extends Phaser.Scene {
   constructor() {
-    super({ key: "Game", active: true });
+    super("Game");
   }
 
   init() {
@@ -219,7 +219,7 @@ class GameScene extends Phaser.Scene {
       shift: Phaser.Input.Keyboard.KeyCodes.SHIFT,
     });
     let camera = this.cameras.main;
-    camera.zoom = 1;
+    camera.zoom = 2;
     camera.startFollow(this.player);
     camera.setLerp(0.1, 0.1);
   }

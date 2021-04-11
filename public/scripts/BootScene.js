@@ -79,7 +79,6 @@ class BootScene extends Phaser.Scene {
       frameWidth: 24,
       frameHeight: 148,
     });
-
   }
 
   // loadAudio() {
@@ -99,6 +98,6 @@ class BootScene extends Phaser.Scene {
   }
 
   create() {
-    this.scene.start("Game");
+    this.scene.start("Title");
   }
 }

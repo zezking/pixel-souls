@@ -3,13 +3,13 @@ const config = {
   width: 800,
   height: 800,
   scene: [BootScene, TitleScene, BattleScene, GameScene, UiScene],
-  // zoom: 3,
+  // zoom: 2,
   pixelArt: true,
   physics: {
     default: "matter",
     matter: {
       gravity: { y: 0 },
-      debug: true, // set to true to view zones
+      debug: false, // set to true to view zones
       plugins: {
         attractors: true,
       },
