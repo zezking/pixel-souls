@@ -14,6 +14,7 @@ class GameScene extends Phaser.Scene {
     Player.preload(this);
     Enemy.preload(this);
     Bonfire.preload(this);
+    NPC.preload(this);
   }
 
   create() {
@@ -40,6 +41,7 @@ class GameScene extends Phaser.Scene {
     this.enemy2.update();
     this.enemy3.update();
 
+    this.crestfallenWarrior.update();
     this.bonfire.update();
 
     //Sprite depth-sorting
@@ -120,7 +122,8 @@ class GameScene extends Phaser.Scene {
       scene: this,
       x: 495,
       y: 1667,
-      key: "crestfallenWarrior",
+      key: "crestfallenWarrior", 
+      frame: "crestfallenWarrior0",
     });
     this.lautrec = new NPC({
       scene: this,
