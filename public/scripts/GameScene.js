@@ -26,17 +26,20 @@ class GameScene extends Phaser.Scene {
     this.createEntity();
     this.createNPC()
     this.createBonfire()
+    this.createNPC();
+    this.createBonfire();
     // this.createBattle();
-    this.createOverlay();  
+    this.createOverlay();
 
     this.OverlayLayer.setDepth(2239); //MUST ALWAYS BE LAST ON THIS LIST!!
   }
 
   update() {
     this.player.update(this.inputKeys);
-    // this.enemy.update();
-    // this.enemy2.update();
-    // this.enemy3.update();
+
+    this.enemy.update();
+    this.enemy2.update();
+    this.enemy3.update();
 
     this.bonfire.update();
 
@@ -56,20 +59,36 @@ class GameScene extends Phaser.Scene {
   createPlayer() {
     this.player = new Player({
       scene: this,
-      x: 688,
+      x: 800,
       y: 1022,
       key: "ashen_one",
       frame: "player_0",
     });
   }
 
-  // createEnemy() {
-
-  //   this.enemy = new Enemy({scene:this,x:580,y:2120,key:'skeleton_sprite',frame:'skele_idling0'});
-  //   this.enemy2 = new Enemy({scene:this,x:580,y:2120,key:'skeleton_sprite',frame:'skele_idling0'});
-  //   this.enemy3 = new Enemy({scene:this,x:580,y:2120,key:'skeleton_sprite',frame:'skele_idling0'});
-
-  // }
+  createEnemy() {
+    this.enemy = new Enemy({
+      scene: this,
+      x: 688,
+      y: 1022,
+      key: "skeleton_sprite",
+      frame: "skele_idling0",
+    });
+    this.enemy2 = new Enemy({
+      scene: this,
+      x: 688,
+      y: 1022,
+      key: "skeleton_sprite",
+      frame: "skele_idling0",
+    });
+    this.enemy3 = new Enemy({
+      scene: this,
+      x: 688,
+      y: 1022,
+      key: "skeleton_sprite",
+      frame: "skele_idling0",
+    });
+  }
 
   createNPC() {
     this.bird = new NPC({ 
@@ -213,8 +232,6 @@ class GameScene extends Phaser.Scene {
     });
   }
 
- 
-
   createInput() {
     this.inputKeys = this.input.keyboard.addKeys({
       up: Phaser.Input.Keyboard.KeyCodes.W,
@@ -224,7 +241,7 @@ class GameScene extends Phaser.Scene {
       shift: Phaser.Input.Keyboard.KeyCodes.SHIFT,
     });
     let camera = this.cameras.main;
-    camera.zoom = 3;
+    camera.zoom = 1;
     camera.startFollow(this.player);
     camera.setLerp(0.1, 0.1);
   }
@@ -255,7 +272,7 @@ class GameScene extends Phaser.Scene {
       0,
       0
     );
-    this.bottomLayer = map.createStaticLayer("bottom", this.tilesBottom, 0, 0);
+    this.bottomLayer = map.createLayer("bottom", this.tilesBottom, 0, 0);
 
     // character camera bounds
 
@@ -274,12 +291,7 @@ class GameScene extends Phaser.Scene {
       0,
       0
     );
-    this.OverlayLayer = map.createStaticLayer(
-      "overlay",
-      this.tilesOverlay,
-      0,
-      0
-    );
+    this.OverlayLayer = map.createLayer("overlay", this.tilesOverlay, 0, 0);
   }
 
   createBattle() {
