@@ -252,7 +252,7 @@ class GameScene extends Phaser.Scene {
     this.bottomLayer = map.createStaticLayer("bottom", this.tilesBottom, 0, 0);
 
     // character camera bounds
-
+    // world bounded to map size
     this.matter.world.width = map.widthInPixels;
     this.matter.world.height = map.heightInPixels;
     this.matter.world.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
