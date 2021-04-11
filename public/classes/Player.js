@@ -31,6 +31,8 @@ class Player extends Phaser.Physics.Matter.Sprite {
     this.setScale(1);
     // fixed rotation of character
     this.setFixedRotation();
+
+    this.health = 5;
   }
 
   static preload(scene) {
