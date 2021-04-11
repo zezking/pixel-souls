@@ -53,7 +53,6 @@ class TitleScene extends Phaser.Scene {
     //   );
   }
   update() {
-    // this.add.tween(this.startText).to({ alpha: 1 }, 2000, "Linear", true);
     if (titleStrokeThickness > -1) {
       this.titleText
         .setStroke("#ffffff", titleStrokeThickness--)
@@ -65,8 +64,10 @@ class TitleScene extends Phaser.Scene {
   }
 }
 
-class LogoScene extends Phaser.Scene {
-  constructor() {
-    super("Logo");
-  }
-}
+// class LogoScene extends Phaser.Scene {
+//   constructor() {
+//     super("Logo");
+//   }
+
+//   create() {}
+// }
