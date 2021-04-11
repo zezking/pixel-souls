@@ -62,8 +62,8 @@ class GameScene extends Phaser.Scene {
   createPlayer() {
     this.player = new Player({
       scene: this,
-      x: 688,
-      y: 1022,
+      x: 530,
+      y: 1700,
       key: "ashen_one",
       frame: "player_0",
     });
@@ -188,7 +188,7 @@ class GameScene extends Phaser.Scene {
   }
 
   createBonfire() {
-    this.bonfire = new Bonfire({scene:this,x:530,y:1765,key:'bonfire', frame: 'bonfire0'});
+    this.bonfire = new Bonfire({scene:this,x:525,y:1760,key:'bonfire', frame: 'bonfire0'});
   }
 
  
