@@ -233,6 +233,7 @@ class GameScene extends Phaser.Scene {
       x: 600,
       y: 1670,
       key: "soul",
+      id: 1,
     })
     this.item.makeActive();
     // console.log(this.item)
@@ -241,7 +242,8 @@ class GameScene extends Phaser.Scene {
       objectA: this.player,
       objectB: this.item,
       callback: (eventData) => {
-        //events.emit, more logic in event listener
+        this.events.emit("pickupItem", this.item.id);
+        //more logic in event listener
       },
     });
   }
