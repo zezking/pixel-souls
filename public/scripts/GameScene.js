@@ -28,7 +28,7 @@ class GameScene extends Phaser.Scene {
     this.createItem();
     this.createNPC();
     this.createBonfire();
-    // this.createBattle();
+    this.createBattle();
     this.createOverlay();
 
     this.OverlayLayer.setDepth(2239); //MUST ALWAYS BE LAST ON THIS LIST!!
@@ -272,6 +272,10 @@ class GameScene extends Phaser.Scene {
     camera.startFollow(this.player);
     // Camera to center leeway, the higher, the tighter
     camera.setLerp(0.1, 0.1);
+
+    // spawn flash
+    camera.flash(1000);
+    camera.fadeIn(1000);
   }
 
   addCollisions() {
@@ -322,10 +326,14 @@ class GameScene extends Phaser.Scene {
   }
 
   createBattle() {
+
     this.matterCollision.addOnCollideStart({
       objectA: this.player,
       objectB: this.enemy,
-      callback: (eventData) => this.scene.start("Battle"),
+      
+      callback: (eventData) => 
+      
+      this.scene.start("Battle"),
     });
   }
 
