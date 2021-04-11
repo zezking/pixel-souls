@@ -35,6 +35,7 @@ class GameScene extends Phaser.Scene {
   update() {
     this.player.update(this.inputKeys);
 
+    // enemies list
     this.enemy.update();
     this.enemy2.update();
     this.enemy3.update();
@@ -57,8 +58,10 @@ class GameScene extends Phaser.Scene {
   createPlayer() {
     this.player = new Player({
       scene: this,
-      x: 800,
-      y: 1022,
+
+      x: 530,
+      y: 1700,
+
       key: "ashen_one",
       frame: "player_0",
     });
@@ -221,13 +224,7 @@ class GameScene extends Phaser.Scene {
   }
 
   createBonfire() {
-    this.bonfire = new Bonfire({
-      scene: this,
-      x: 530,
-      y: 1765,
-      key: "bonfire", 
-      frame: "bonfire0"
-    });
+    this.bonfire = new Bonfire({scene:this,x:525,y:1760,key:'bonfire', frame: 'bonfire0'});
   }
 
   createInput() {
@@ -239,8 +236,12 @@ class GameScene extends Phaser.Scene {
       shift: Phaser.Input.Keyboard.KeyCodes.SHIFT,
     });
     let camera = this.cameras.main;
-    camera.zoom = 2;
+    
+    // Zoom in and out of Player
+    camera.zoom = 3;
+
     camera.startFollow(this.player);
+    // Camera to center leeway, the higher, the tighter
     camera.setLerp(0.1, 0.1);
   }
 
@@ -256,7 +257,9 @@ class GameScene extends Phaser.Scene {
       { shape: shapes.FULLMAP_collision }
     );
     collisionLayer.setPosition(0 + 736, 0 + 1211); //manual offset for center of mass. Will have to find a better way to calculate this.
+
     collisionLayer.visible = false;
+
 
   }
 
@@ -273,7 +276,7 @@ class GameScene extends Phaser.Scene {
     this.bottomLayer = map.createLayer("bottom", this.tilesBottom, 0, 0);
 
     // character camera bounds
-
+    // world bounded to map size
     this.matter.world.width = map.widthInPixels;
     this.matter.world.height = map.heightInPixels;
     this.matter.world.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
