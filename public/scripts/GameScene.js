@@ -38,10 +38,11 @@ class GameScene extends Phaser.Scene {
 
   update() {
     this.player.update(this.inputKeys);
-    this.enemy.update();
 
+    this.enemy.update();
     this.enemy2.update();
     this.enemy3.update();
+
     this.bonfire.update();
 
     //Sprite depth-sorting
@@ -69,9 +70,9 @@ class GameScene extends Phaser.Scene {
 
   createEnemy() {
 
-    this.enemy = new Enemy({scene:this,x:580,y:2120,key:'skeleton_sprite',frame:'skele_idling0'});
-    this.enemy2 = new Enemy({scene:this,x:580,y:2120,key:'skeleton_sprite',frame:'skele_idling0'});
-    this.enemy3 = new Enemy({scene:this,x:580,y:2120,key:'skeleton_sprite',frame:'skele_idling0'});
+    this.enemy = new Enemy({scene:this,x:688,y:1022,key:'skeleton_sprite',frame:'skele_idling0'});
+    this.enemy2 = new Enemy({scene:this,x:688,y:1022,key:'skeleton_sprite',frame:'skele_idling0'});
+    this.enemy3 = new Enemy({scene:this,x:688,y:1022,key:'skeleton_sprite',frame:'skele_idling0'});
 
   }
 
@@ -200,7 +201,7 @@ class GameScene extends Phaser.Scene {
       shift: Phaser.Input.Keyboard.KeyCodes.SHIFT,
     });
     let camera = this.cameras.main;
-    camera.zoom = 3;
+    camera.zoom = 1;
     camera.startFollow(this.player);
     camera.setLerp(0.1, 0.1);
   }

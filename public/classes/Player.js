@@ -10,21 +10,39 @@ class Player extends Phaser.Physics.Matter.Sprite {
 
     let playerCollider = Bodies.rectangle(this.x,this.y + 20,20,20,{isSensor:false, lable:'playerCollider'});
     let playerSensor = Bodies.circle(this.x,this.y,20, {isSensor:true, label: 'playerSensor'});
+
+
 //You can also change the size of sensor to change the force of attraction. 
     const compoundBody = Body.create({
       parts:[playerCollider,playerSensor],
 
       frictionAir: 0.35,
+
+      
       plugin: {
+        shape: {
+          type: 'circle',
+          radius: 10
+      },
         attractors:[
           function (bodyA, bodyB) {
+              
+            if((bodyA.position.x - bodyB.position.x && bodyA.position.y - bodyB.position.y) < 100) {
               return {
-                  x: (bodyA.position.x - bodyB.position.x) * 0.000020, //You can change this value to adjust the force of X axis
-                  y: (bodyA.position.y - bodyB.position.y) * 0.000020  //You can change this value to adjust the force of Y axis
-              };
+                    x: (bodyA.position.x - bodyB.position.x) * 0.000030, //You can change this value to adjust the force of X axis
+                    y: (bodyA.position.y - bodyB.position.y) * 0.000030  //You can change this value to adjust the force of Y axis
+                }
+              } else {
+                return {
+                  x: (bodyA.position.x - bodyB.position.x) * 0.000000, //You can change this value to adjust the force of X axis
+                  y: (bodyA.position.y - bodyB.position.y) * 0.000000  //You can change this value to adjust the force of Y axis
+              }
+              }
+            
           }
       ]
       }
+
     });
     this.setExistingBody(compoundBody);
     // scale our player
@@ -75,7 +93,7 @@ class Player extends Phaser.Physics.Matter.Sprite {
       this.anims.stop();
     }
     
-    const speed = 2.5;
+    const speed = 4;
     let playerVelocity = new Phaser.Math.Vector2();
     if(inputKeys.left.isDown) {
       playerVelocity.x = -1;
