@@ -26,8 +26,6 @@ class GameScene extends Phaser.Scene {
     this.createEntity();
     this.createNPC()
     this.createBonfire()
-    this.createNPC();
-    this.createBonfire();
     // this.createBattle();
     this.createOverlay();
 
