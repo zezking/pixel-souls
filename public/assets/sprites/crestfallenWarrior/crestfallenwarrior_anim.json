@@ -1,0 +1,36 @@
+{
+    "anims": [
+        {
+            "key": "crestfallenwarrior_idle",
+            "type": "frames",
+            "repeat": -1,
+            "frameRate": 1,
+            "frames": [
+                {
+                    "key": "crestfallenwarrior",
+                    "frame": "crestfallenwarrior0"
+                },
+                {
+                    "key": "crestfallenwarrior",
+                    "frame": "crestfallenwarrior1"
+                },
+                {
+                    "key": "crestfallenwarrior",
+                    "frame": "crestfallenwarrior2"
+                },
+                {
+                    "key": "crestfallenwarrior",
+                    "frame": "crestfallenwarrior3"
+                },
+                {
+                    "key": "crestfallenwarrior",
+                    "frame": "crestfallenwarrior4"
+                },
+                {
+                    "key": "crestfallenwarrior",
+                    "frame": "crestfallenwarrior5"
+                }
+            ]
+        }
+    ]
+}

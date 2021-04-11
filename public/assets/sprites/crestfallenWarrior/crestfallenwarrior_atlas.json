@@ -1,0 +1,86 @@
+{
+    "frames": [
+        {
+            "filename": "crestfallenwarrior0",
+            "frame": {
+                "w": 70,
+                "h": 36,
+                "x": 0,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "crestfallenwarrior1",
+            "frame": {
+                "w": 70,
+                "h": 36,
+                "x": 0,
+                "y": 36
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "crestfallenwarrior2",
+            "frame": {
+                "w": 70,
+                "h": 36,
+                "x": 70,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "crestfallenwarrior3",
+            "frame": {
+                "w": 70,
+                "h": 36,
+                "x": 70,
+                "y": 36
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "crestfallenwarrior4",
+            "frame": {
+                "w": 70,
+                "h": 36,
+                "x": 0,
+                "y": 72
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "crestfallenwarrior5",
+            "frame": {
+                "w": 70,
+                "h": 36,
+                "x": 70,
+                "y": 72
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        }
+    ],
+    "meta": {
+        "description": "Atlas generado con Atlas Packer Gamma V2",
+        "web": "https://gammafp.github.io/atlas-packer-phaser/"
+    }
+}
