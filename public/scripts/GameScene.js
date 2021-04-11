@@ -1,7 +1,7 @@
 let enemy_speed = 20;
 class GameScene extends Phaser.Scene {
   constructor() {
-    super({ key: "Game", active: true });
+    super("Game");
   }
 
   init() {
@@ -26,9 +26,9 @@ class GameScene extends Phaser.Scene {
     this.createInput();
     this.createEntity();
     this.createItem();
-    this.createNPC()
-    this.createBonfire()
-    // this.createBattle();
+    this.createNPC();
+    this.createBonfire();
+    this.createBattle();
     this.createOverlay();
     this.createEventsManager();
 
@@ -96,17 +96,17 @@ class GameScene extends Phaser.Scene {
   }
 
   createNPC() {
-    this.bird = new NPC({ 
-      scene: this, 
-      x: 330, 
-      y: 865, 
-      key: "bird" 
+    this.bird = new NPC({
+      scene: this,
+      x: 330,
+      y: 865,
+      key: "bird",
     }).setOrigin(0, 0.7);
-    this.reah = new NPC({ 
-      scene: this, 
-      x: 766, 
-      y: 766, 
-      key: "reah" 
+    this.reah = new NPC({
+      scene: this,
+      x: 766,
+      y: 766,
+      key: "reah",
     });
     this.laurentius = new NPC({
       scene: this,
@@ -124,7 +124,7 @@ class GameScene extends Phaser.Scene {
       scene: this,
       x: 495,
       y: 1667,
-      key: "crestfallenWarrior", 
+      key: "crestfallenWarrior",
       frame: "crestfallenWarrior0",
     });
     this.lautrec = new NPC({
@@ -133,11 +133,11 @@ class GameScene extends Phaser.Scene {
       y: 2138,
       key: "lautrec",
     }).setOrigin(0.5, 0.3);
-    this.petrus = new NPC({ 
-      scene: this, 
-      x: 688, 
-      y: 1082, 
-      key: "petrus" 
+    this.petrus = new NPC({
+      scene: this,
+      x: 688,
+      y: 1082,
+      key: "petrus",
     });
     this.bigHatLogan = new NPC({
       scene: this,
@@ -145,11 +145,11 @@ class GameScene extends Phaser.Scene {
       y: 1545,
       key: "bigHatLogan",
     });
-    this.griggs = new NPC({ 
-      scene: this, 
-      x: 825.64, 
-      y: 1640, 
-      key: "griggs" 
+    this.griggs = new NPC({
+      scene: this,
+      x: 825.64,
+      y: 1640,
+      key: "griggs",
     });
 
     //here's a stupid step to get the bird on top of the wall
@@ -178,11 +178,11 @@ class GameScene extends Phaser.Scene {
   }
 
   createEntity() {
-    this.entity = new Entity({ 
-      scene: this, 
-      x: 735, 
-      y: 1770, 
-      key: "well" 
+    this.entity = new Entity({
+      scene: this,
+      x: 735,
+      y: 1770,
+      key: "well",
     });
     this.entity = new Entity({
       scene: this,
@@ -235,7 +235,7 @@ class GameScene extends Phaser.Scene {
       y: 1670,
       key: "soul",
       id: 1,
-    })
+    });
     this.item.makeActive();
     // console.log(this.item)
 
@@ -251,7 +251,13 @@ class GameScene extends Phaser.Scene {
   }
 
   createBonfire() {
-    this.bonfire = new Bonfire({scene:this,x:525,y:1760,key:'bonfire', frame: 'bonfire0'});
+    this.bonfire = new Bonfire({
+      scene: this,
+      x: 525,
+      y: 1760,
+      key: "bonfire",
+      frame: "bonfire0",
+    });
   }
 
   createInput() {
@@ -264,13 +270,17 @@ class GameScene extends Phaser.Scene {
       interact: Phaser.Input.Keyboard.KeyCodes.E,
     });
     let camera = this.cameras.main;
-    
+
     // Zoom in and out of Player
     camera.zoom = 3;
 
     camera.startFollow(this.player);
     // Camera to center leeway, the higher, the tighter
     camera.setLerp(0.1, 0.1);
+
+    // spawn flash
+    camera.flash(1000);
+    camera.fadeIn(1000);
   }
 
   addCollisions() {
@@ -286,7 +296,6 @@ class GameScene extends Phaser.Scene {
     );
     collisionLayer.setPosition(0 + 736, 0 + 1211); //manual offset for center of mass. Will have to find a better way to calculate this.
     collisionLayer.visible = false;
-
   }
 
   createMap() {
@@ -322,10 +331,14 @@ class GameScene extends Phaser.Scene {
   }
 
   createBattle() {
+
     this.matterCollision.addOnCollideStart({
       objectA: this.player,
       objectB: this.enemy,
-      callback: (eventData) => this.scene.start("Battle"),
+      
+      callback: (eventData) => 
+      
+      this.scene.start("Battle"),
     });
   }
 
@@ -333,14 +346,16 @@ class GameScene extends Phaser.Scene {
     this.matterCollision.addOnCollideStart({
       objectA: this.player,
       objectB: npc,
-      callback: (eventData) => {
+      callback: () => {
         if (npc) {
           let sceneKeyArray = [];
           for (let key in this.scene.manager.keys) {
+            //push all the scenes keys as string to the array
             sceneKeyArray.push(key);
           }
           if (!sceneKeyArray.includes("Dialog")) {
-            this.scene.add("Dialog", DialogScene, true, { npc });
+            //if there is no dialog scene in the array
+            this.scene.add("Dialog", DialogScene, true, { npc }); //add Dialogue scene
           }
         }
       },

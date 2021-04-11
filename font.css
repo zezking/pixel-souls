@@ -1,4 +1,17 @@
 @font-face {
   font-family: "HonokaMincho";
   src: url("/public/assets/font/font_1_honokamin.ttf") format("truetype");
+  font-weight: 400;
+  font-weight: normal;
+}
+@font-face {
+  font-family: "titleFont";
+  src: url("/public/assets/font/titleFont.ttf") format("truetype");
+  font-weight: 400;
+  font-weight: normal;
+}
+
+body {
+  font-family: "HonokaMincho";
+  font-family: "titleFont";
 }
