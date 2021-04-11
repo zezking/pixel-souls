@@ -84,6 +84,7 @@ class GameScene extends Phaser.Scene {
 
   createEntity() {
     this.entity = new Entity({scene:this,x:735,y:1770,key:'well'});
+    this.entity = new Entity({scene:this,x:530,y:1765,key:'bonfire'});
     this.entity = new Entity({scene:this,x:769,y:1303,key:'pillar01'}).setOrigin(0.5, 0.9);
     this.entity = new Entity({scene:this,x:404,y:1169,key:'pillar02'}).setOrigin(0.5, 0.9);
     this.entity = new Entity({scene:this,x:404,y:1010,key:'pillar02'}).setOrigin(0.5, 0.9);
@@ -91,7 +92,11 @@ class GameScene extends Phaser.Scene {
     this.entity = new Entity({scene:this,x:556,y:1169,key:'pillar02'}).setOrigin(0.5, 0.9);
     this.entity = new Entity({scene:this,x:556,y:1010,key:'pillar02'}).setOrigin(0.5, 0.9);
     this.entity = new Entity({scene:this,x:556,y:850,key:'pillar02'}).setOrigin(0.5, 0.9);
+
   }
+
+
+ 
 
   createInput() {
     this.inputKeys = this.input.keyboard.addKeys({
@@ -102,7 +107,7 @@ class GameScene extends Phaser.Scene {
       shift: Phaser.Input.Keyboard.KeyCodes.SHIFT,
     })
     let camera = this.cameras.main;
-    camera.zoom = 3;
+    camera.zoom = 1;
     camera.startFollow(this.player);
     camera.setLerp(0.1,0.1);
 

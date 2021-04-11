@@ -30,7 +30,7 @@ class BootScene extends Phaser.Scene {
     this.load.spritesheet('griggs', 'public/assets/sprites/griggs.png',{ frameWidth: 32, frameHeight: 54 });
     this.load.spritesheet('crestfallenWarrior', 'public/assets/sprites/crestfallenWarrior.png',{ frameWidth: 70, frameHeight: 36 });
     this.load.spritesheet('lautrec', 'public/assets/sprites/lautrec.png',{ frameWidth: 25, frameHeight: 35 });
-
+    this.load.spritesheet('bonfire', 'public/assets/entities/bonfire.png',{ frameWidth: 88, frameHeight: 88 });
     this.load.spritesheet('well', 'public/assets/entities/well.png',{ frameWidth: 88, frameHeight: 56 });
     this.load.spritesheet('pillar01', 'public/assets/entities/pillar01.png',{ frameWidth: 24, frameHeight: 118 });
     this.load.spritesheet('pillar02', 'public/assets/entities/pillar02.png',{ frameWidth: 24, frameHeight: 148 });
