@@ -16,18 +16,34 @@ class Player extends Phaser.Physics.Matter.Sprite {
       isSensor: true,
       label: "playerSensor",
     });
+
     //You can also change the size of sensor to change the force of attraction.
     const compoundBody = Body.create({
       parts: [playerCollider, playerSensor],
 
       frictionAir: 0.35,
+
       plugin: {
+        shape: {
+          type: "circle",
+          radius: 10,
+        },
         attractors: [
           function (bodyA, bodyB) {
-            return {
-              x: (bodyA.position.x - bodyB.position.x) * 0.00002, //You can change this value to adjust the force of X axis
-              y: (bodyA.position.y - bodyB.position.y) * 0.00002, //You can change this value to adjust the force of Y axis
-            };
+            if (
+              (bodyA.position.x - bodyB.position.x &&
+                bodyA.position.y - bodyB.position.y) < 100
+            ) {
+              return {
+                x: (bodyA.position.x - bodyB.position.x) * 0.00003, //You can change this value to adjust the force of X axis
+                y: (bodyA.position.y - bodyB.position.y) * 0.00003, //You can change this value to adjust the force of Y axis
+              };
+            } else {
+              return {
+                x: (bodyA.position.x - bodyB.position.x) * 0.0, //You can change this value to adjust the force of X axis
+                y: (bodyA.position.y - bodyB.position.y) * 0.0, //You can change this value to adjust the force of Y axis
+              };
+            }
           },
         ],
       },
@@ -84,7 +100,7 @@ class Player extends Phaser.Physics.Matter.Sprite {
       this.anims.stop();
     }
 
-    const speed = 2.5;
+    const speed = 4;
     let playerVelocity = new Phaser.Math.Vector2();
     if (inputKeys.left.isDown) {
       playerVelocity.x = -1;
