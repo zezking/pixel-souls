@@ -12,7 +12,8 @@ class GameScene extends Phaser.Scene {
   preload() {
     // console.log("preload")
     Player.preload(this);
-    Enemy.preload(this)
+    Enemy.preload(this);
+    Bonfire.preload(this);
 
   }
 
@@ -26,6 +27,7 @@ class GameScene extends Phaser.Scene {
     this.createInput();
     this.createEntity();
     this.createNPC()
+    this.createBonfire()
     // this.createBattle();
     this.createOverlay();  
     this.OverlayLayer.setDepth(2239); //MUST ALWAYS BE LAST ON THIS LIST!!
@@ -36,7 +38,7 @@ class GameScene extends Phaser.Scene {
     this.enemy.update();
     this.enemy2.update();
     this.enemy3.update();
-    
+    this.bonfire.update();
     
     //Sprite depth-sorting
     this.children.each(c => {
@@ -92,6 +94,12 @@ class GameScene extends Phaser.Scene {
     this.entity = new Entity({scene:this,x:556,y:1010,key:'pillar02'}).setOrigin(0.5, 0.9);
     this.entity = new Entity({scene:this,x:556,y:850,key:'pillar02'}).setOrigin(0.5, 0.9);
   }
+
+  createBonfire() {
+    this.bonfire = new Bonfire({scene:this,x:530,y:1765,key:'bonfire', frame: 'bonfire0'});
+  }
+
+ 
 
   createInput() {
     this.inputKeys = this.input.keyboard.addKeys({

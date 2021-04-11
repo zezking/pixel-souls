@@ -18,9 +18,12 @@ class BootScene extends Phaser.Scene {
   }
 
   loadSpriteSheets() {
-    this.load.spritesheet('player', 'public/assets/sprites/PLAYER.png', { frameWidth: 32, frameHeight: 50 });
+    // this.load.spritesheet('player', 'public/assets/sprites/PLAYER.png', { frameWidth: 32, frameHeight: 50 });
+    
     this.load.atlas('sheet', 'public/assets/map/fullmap-collision-atlas.png', 'public/assets/map/fullmap-collision-atlas_atlas.json');
-    this.load.spritesheet('enemy', 'public/assets/skele_sprites/skeleton_sprite.png', { frameWidth: 32, frameHeight: 32 });
+
+    // this.load.spritesheet('enemy', 'public/assets/skele_sprites/skeleton_sprite.png', { frameWidth: 32, frameHeight: 32 });
+
     this.load.spritesheet('bird', 'public/assets/sprites/bird.png',{ frameWidth: 128, frameHeight: 109 });
     this.load.spritesheet('petrus', 'public/assets/sprites/petrus.png',{ frameWidth: 34, frameHeight: 52 });
     this.load.spritesheet('reah', 'public/assets/sprites/reah.png',{ frameWidth: 23, frameHeight: 39 });
@@ -31,6 +34,8 @@ class BootScene extends Phaser.Scene {
     this.load.spritesheet('crestfallenWarrior', 'public/assets/sprites/crestfallenWarrior.png',{ frameWidth: 70, frameHeight: 36 });
     this.load.spritesheet('lautrec', 'public/assets/sprites/lautrec.png',{ frameWidth: 25, frameHeight: 35 });
 
+    // this.load.spritesheet('bonfire', 'public/assets/entities/bonfire.png',{ frameWidth: 88, frameHeight: 88 });
+    
     this.load.spritesheet('well', 'public/assets/entities/well.png',{ frameWidth: 88, frameHeight: 56 });
     this.load.spritesheet('pillar01', 'public/assets/entities/pillar01.png',{ frameWidth: 24, frameHeight: 118 });
     this.load.spritesheet('pillar02', 'public/assets/entities/pillar02.png',{ frameWidth: 24, frameHeight: 148 });

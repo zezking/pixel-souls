@@ -13,8 +13,6 @@ class NPC extends Phaser.Physics.Matter.Sprite{
         isStatic:true
       });
 
-
-
       this.setExistingBody(compoundBody);
       this.setFixedRotation();
 
@@ -35,6 +33,7 @@ class NPC extends Phaser.Physics.Matter.Sprite{
     }
   
   
+    
 
   
   }
