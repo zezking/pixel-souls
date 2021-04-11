@@ -35,6 +35,13 @@ class DialogScene extends Phaser.Scene {
         }
       );
 
+      this.dialogsTimer = this.time.addEvent({
+        delay: 5000,
+        callback: () => {
+          this.scene.remove("Dialog");
+        },
+      });
+
       this.input.keyboard.on("keydown-" + "E", () => {
         this.scene.remove("Dialog");
       });

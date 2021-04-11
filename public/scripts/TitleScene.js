@@ -1,3 +1,5 @@
+let titleStrokeThickness = 40;
+let titleFontSize = 200;
 class TitleScene extends Phaser.Scene {
   constructor() {
     super("Title");
@@ -5,33 +7,41 @@ class TitleScene extends Phaser.Scene {
 
   create() {
     // create title text
-    this.titleText = this.add.text(
-      this.scale.width / 2,
-      this.scale.height / 2,
-      "PIXEL SOULS",
-      { fontFamily: "HonokaMincho", fontSize: "100px", fill: "#fff" }
-    );
-    this.titleText.setOrigin(0.5);
-    // this.titleText.alpha = 0;
-    // this.add
-    //   .tween(this.titleText)
-    //   .to({ alpha: 1 }, 2000, Phaser.Easing.Linear.None, true, 0, 1000, true);
-    // create the Play game button
 
-    const startText = this.add
+    // this.logo=this.add.image()
+    this.titleText = this.add
+      .text(this.scale.width / 2, this.scale.height / 2, "Pixel Souls", {
+        fontFamily: "titleFont",
+        fontSize: 150,
+        fill: "#ffffff",
+      })
+      .setStroke("#fff", titleStrokeThickness)
+      .setFontSize(200);
+
+    this.titleText.setOrigin(0.5);
+    this.startText = this.add
       .text(250, this.scale.height / 2 + 200, "Press any key to start", {
-        fontFamily: "HonokaMincho",
+        fontFamily: "titleFont",
         fontSize: "30px",
-        fill: "#fff",
+        fill: "#ffffff",
       })
       .setAlpha(0);
-
     this.tweens.add({
-      targets: startText,
-      alpha: { value: 2, duration: 1000, ease: "Power1" },
+      targets: this.startText,
+      alpha: { value: 1, duration: 1100, ease: "Linear" },
       yoyo: true,
       loop: -1,
     });
+
+    this.tweens.add({
+      targets: this.titleText.style,
+      strokeThickness: { value: 1, duration: 1100, ease: "Linear" },
+    });
+
+    this.input.keyboard.on("keydown", () => {
+      this.scene.start("Game");
+    });
+
     //   this.startGameButton = new UiButton(
     //     this,
     //     this.scale.width / 2,
@@ -43,10 +53,21 @@ class TitleScene extends Phaser.Scene {
     //   );
   }
   update() {
-    this.add.tween(this.startText).to({ alpha: 1 }, 2000, "Linear", true);
-    this.add.tween(this.startText).to({ alpha: 0 }, 2000, "Linear", true);
+    if (titleStrokeThickness > -1) {
+      this.titleText
+        .setStroke("#ffffff", titleStrokeThickness--)
+        .setFontSize(titleFontSize--);
+    }
   }
   startScene(targetScene) {
-    this.scene.start(targetScene);
+    // this.scene.start(targetScene);
   }
 }
+
+// class LogoScene extends Phaser.Scene {
+//   constructor() {
+//     super("Logo");
+//   }
+
+//   create() {}
+// }
