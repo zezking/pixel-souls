@@ -49,8 +49,8 @@ class GameScene extends Phaser.Scene {
   createPlayer() {
     this.player = new Player({
       scene: this,
-      x: 584,
-      y: 2000,
+      x: 400,
+      y: 1390,
       key: "ashen_one",
       frame: "player_0",
     });
