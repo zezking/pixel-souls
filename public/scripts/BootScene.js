@@ -80,6 +80,11 @@ class BootScene extends Phaser.Scene {
       frameHeight: 148,
     });
 
+    // this.load.spritesheet("bonfire", "public/assets/entities/bonfire_animation/bonfire.png", {
+    //   frameWidth: 90,
+    //   frameHeight: 60,
+    // });
+
   }
 
   // loadAudio() {
