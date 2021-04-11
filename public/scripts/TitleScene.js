@@ -9,7 +9,7 @@ class TitleScene extends Phaser.Scene {
       this.scale.width / 2,
       this.scale.height / 2,
       "PLACE HOLDER",
-      { fontFamily: "HonokaMincho", fontSize: "100px", fill: "#fff" }
+      { fontFamily: "titleFont", fontSize: "100px", fill: "#fff" }
     );
     this.titleText.setOrigin(0.5);
     // this.titleText.alpha = 0;
@@ -28,7 +28,7 @@ class TitleScene extends Phaser.Scene {
 
     this.tweens.add({
       targets: startText,
-      alpha: { value: 2, duration: 1000, ease: "Power1" },
+      alpha: { value: 2, duration: 1100, ease: "Power1" },
       yoyo: true,
       loop: -1,
     });
@@ -43,10 +43,10 @@ class TitleScene extends Phaser.Scene {
     //   );
   }
   update() {
-    this.add.tween(this.startText).to({ alpha: 1 }, 2000, "Linear", true);
-    this.add.tween(this.startText).to({ alpha: 0 }, 2000, "Linear", true);
+    // this.add.tween(this.startText).to({ alpha: 1 }, 2000, "Linear", true);
+    // this.add.tween(this.startText).to({ alpha: 0 }, 2000, "Linear", true);
   }
   startScene(targetScene) {
-    this.scene.start(targetScene);
+    // this.scene.start(targetScene);
   }
 }

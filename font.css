@@ -2,6 +2,10 @@
   font-family: "HonokaMincho";
   src: url("/public/assets/font/font_1_honokamin.ttf") format("truetype");
 }
+@font-face {
+  font-family: "titleFont";
+  src: url("/public/assets/font/titleFont.ttf") format("truetype");
+}
 
 body {
   font-family: "HonokaMincho";
