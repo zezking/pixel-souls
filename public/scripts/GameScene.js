@@ -24,6 +24,7 @@ class GameScene extends Phaser.Scene {
     this.addCollisions();
     this.createInput();
     this.createEntity();
+    this.createItem();
     this.createNPC()
     this.createBonfire()
     // this.createBattle();
@@ -223,6 +224,25 @@ class GameScene extends Phaser.Scene {
     }).setOrigin(0.5, 0.9);
   }
 
+  createItem() {
+    this.item = new Item({
+      scene: this,
+      x: 600,
+      y: 1670,
+      key: "soul",
+    })
+    this.item.makeActive();
+    // console.log(this.item)
+
+    this.matterCollision.addOnCollideStart({
+      objectA: this.player,
+      objectB: this.item,
+      callback: (eventData) => {
+        //events.emit, more logic in event listener
+      },
+    });
+  }
+
   createBonfire() {
     this.bonfire = new Bonfire({scene:this,x:525,y:1760,key:'bonfire', frame: 'bonfire0'});
   }
@@ -257,9 +277,9 @@ class GameScene extends Phaser.Scene {
       { shape: shapes.FULLMAP_collision }
     );
     collisionLayer.setPosition(0 + 736, 0 + 1211); //manual offset for center of mass. Will have to find a better way to calculate this.
-
     collisionLayer.visible = false;
 
+    
 
   }
 
