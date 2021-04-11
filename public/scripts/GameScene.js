@@ -20,7 +20,7 @@ class GameScene extends Phaser.Scene {
     this.createMap();
     // this.createAudio();
     this.createPlayer();
-    // this.createEnemy();
+    this.createEnemy();
     this.addCollisions();
     this.createInput();
     this.createEntity();
@@ -224,11 +224,11 @@ class GameScene extends Phaser.Scene {
 
   createBonfire() {
     this.bonfire = new Bonfire({
-      scene:this,
-      x:530,
-      y:1765,
-      key:'bonfire', 
-      frame: 'bonfire0'
+      scene: this,
+      x: 530,
+      y: 1765,
+      key: "bonfire", 
+      frame: "bonfire0"
     });
   }
 
@@ -241,7 +241,7 @@ class GameScene extends Phaser.Scene {
       shift: Phaser.Input.Keyboard.KeyCodes.SHIFT,
     });
     let camera = this.cameras.main;
-    camera.zoom = 1;
+    camera.zoom = 2;
     camera.startFollow(this.player);
     camera.setLerp(0.1, 0.1);
   }
