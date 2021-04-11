@@ -12,13 +12,18 @@ class BootScene extends Phaser.Scene {
   }
 
   loadImages() {
+    //Map elements
     this.load.image("bottom", "public/assets/map/FULLMAP_bottom.png");
     this.load.image("overlay", "public/assets/map/FULLMAP_overlay.png");
-    // this.load.image('collision', 'public/assets/map/FULLMAP_collision.png');
+    
+    //UI elements
+    this.load.image("ui-heart-empty", "public/assets/ui/heart_empty.png");
+    this.load.image("ui-heart-full", "public/assets/ui/heart_full.png");
+    this.load.image("soul-counter", "public/assets/ui/soul_counter.png");
+    this.load.image("logo", "public/assets/ui/logo.png");
   }
 
   loadSpriteSheets() {
-    // this.load.spritesheet('player', 'public/assets/sprites/PLAYER.png', { frameWidth: 32, frameHeight: 50 });
 
     this.load.atlas(
       "sheet",
@@ -38,30 +43,26 @@ class BootScene extends Phaser.Scene {
       frameWidth: 23,
       frameHeight: 39,
     });
-    this.load.spritesheet(
-      "laurentius",
-      "public/assets/sprites/laurentius.png",
-      { frameWidth: 26, frameHeight: 32 }
-    );
-    this.load.spritesheet(
-      "bigHatLogan",
-      "public/assets/sprites/bigHatLogan.png",
-      { frameWidth: 40, frameHeight: 34 }
-    );
-    this.load.spritesheet(
-      "fireKeeper",
-      "public/assets/sprites/fireKeeper.png",
-      { frameWidth: 96, frameHeight: 67 }
-    );
+    this.load.spritesheet("laurentius", "public/assets/sprites/laurentius.png", { 
+      frameWidth: 26, 
+      frameHeight: 32 
+    });
+    this.load.spritesheet("bigHatLogan", "public/assets/sprites/bigHatLogan.png", { 
+      frameWidth: 40, 
+      frameHeight: 34 
+    });
+    this.load.spritesheet("fireKeeper", "public/assets/sprites/fireKeeper.png", { 
+      frameWidth: 96, 
+      frameHeight: 67 
+    });
     this.load.spritesheet("griggs", "public/assets/sprites/griggs.png", {
       frameWidth: 32,
       frameHeight: 54,
     });
-    this.load.spritesheet(
-      "crestfallenWarrior",
-      "public/assets/sprites/crestfallenWarrior.png",
-      { frameWidth: 70, frameHeight: 36 }
-    );
+    this.load.spritesheet("crestfallenWarrior", "public/assets/sprites/crestfallenWarrior.png", { 
+      frameWidth: 70, 
+      frameHeight: 36 
+    });
     this.load.spritesheet("lautrec", "public/assets/sprites/lautrec.png", {
       frameWidth: 25,
       frameHeight: 35,
@@ -82,9 +83,10 @@ class BootScene extends Phaser.Scene {
 
   }
 
-  // loadAudio() {
-
-  // }
+  loadAudio() {
+    this.load.audio("menu-music", "public/assets/audio/menu_theme.mp3");
+    this.load.audio("bg-music", "public/assets/audio/firelink_shrine.mp3");
+  }
 
   loadTilemap() {
     //bottom/overlay map JSON file

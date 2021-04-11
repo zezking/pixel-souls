@@ -9,21 +9,45 @@ class UiScene extends Phaser.Scene {
   }
 
   create() {
-    // this.setupUiElements();
+    this.setupUiElements();
     // this.setupEvents();
   }
 
   setupUiElements() {
-    // create the score text game object
-  //   this.scoreText = this.add.text(35, 8, 'Coins: 0', { fontSize: '16px', fill: '#fff' });
-  //   // creaet coin icon
-  //   this.coinIcon = this.add.image(15, 15, 'items', 3);
+    //Health Hearts
+    this.hearts = this.add.group({
+      classType: Phaser.GameObjects.Image
+    });
+    this.hearts.createMultiple({
+      key: "ui-heart-full",
+      setXY: { x: 20, y: 20, stepX: 40 },
+      quantity: 5
+    });
+
+    //Soul Counter
+    this.soulCounter = this.add.image(725, 770, "soul-counter");
+    this.soulText = this.add.text(0, 0, '0', { fontSize: '16px', fill: '#fff' });
+    Phaser.Display.Align.In.Center(this.soulText, this.soulCounter);
+
+    // Estus Count
+    // --goes here--
   }
 
   setupEvents() {
-    // listen for the updateScore event from the game scene
-    // this.gameScene.events.on('updateScore', (score) => {
-    //   this.scoreText.setText(`Coins: ${score}`);
-    // });
+    // listen for the updateSouls event from the game scene
+    this.gameScene.events.on('updateSouls', (score) => {
+      this.soulText.setText(`${score}`);
+    });
+    // get healthCount from player
+    this.gameScene.events.on('health', (count) => {
+      this.hearts.children.each((gameObj, index) => {
+        const heart = gameObj;
+        if (index < health) {
+          heart.setTexture("ui-heart-full")
+        } else {
+          heart.setTexture("ui-heart-empty")
+        };
+      })
+    })
   }
 }
