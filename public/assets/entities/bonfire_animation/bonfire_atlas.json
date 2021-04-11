@@ -38,6 +38,84 @@
                 "x": 0.5,
                 "y": 0.5
             }
+        },
+        {
+            "filename": "bonfire3",
+            "frame": {
+                "w": 32,
+                "h": 39,
+                "x": 32,
+                "y": 39
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "bonfire4",
+            "frame": {
+                "w": 32,
+                "h": 39,
+                "x": 64,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "bonfire5",
+            "frame": {
+                "w": 32,
+                "h": 39,
+                "x": 64,
+                "y": 39
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "bonfire6",
+            "frame": {
+                "w": 32,
+                "h": 39,
+                "x": 0,
+                "y": 78
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "bonfire7",
+            "frame": {
+                "w": 32,
+                "h": 39,
+                "x": 32,
+                "y": 78
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "bonfire8",
+            "frame": {
+                "w": 32,
+                "h": 39,
+                "x": 64,
+                "y": 78
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
         }
     ],
     "meta": {

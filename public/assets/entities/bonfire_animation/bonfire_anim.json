@@ -17,6 +17,30 @@
                 {
                     "key": "bonfire",
                     "frame": "bonfire2"
+                },
+                {
+                    "key": "bonfire",
+                    "frame": "bonfire3"
+                },
+                {
+                    "key": "bonfire",
+                    "frame": "bonfire4"
+                },
+                {
+                    "key": "bonfire",
+                    "frame": "bonfire5"
+                },
+                {
+                    "key": "bonfire",
+                    "frame": "bonfire6"
+                },
+                {
+                    "key": "bonfire",
+                    "frame": "bonfire7"
+                },
+                {
+                    "key": "bonfire",
+                    "frame": "bonfire8"
                 }
             ]
         }

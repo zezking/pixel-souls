@@ -39,6 +39,7 @@ class GameScene extends Phaser.Scene {
   update() {
     this.player.update(this.inputKeys);
 
+    // enemies list
     this.enemy.update();
     this.enemy2.update();
     this.enemy3.update();
@@ -204,6 +205,7 @@ class GameScene extends Phaser.Scene {
     // Zoom in and out of Player
     camera.zoom = 3;
     camera.startFollow(this.player);
+    // Camera to center leeway, the higher, the tighter
     camera.setLerp(0.1, 0.1);
   }
 
@@ -219,7 +221,7 @@ class GameScene extends Phaser.Scene {
       { shape: shapes.FULLMAP_collision }
     );
     collisionLayer.setPosition(0 + 736, 0 + 1211); //manual offset for center of mass. Will have to find a better way to calculate this.
-    collisionLayer.visible = false;
+    collisionLayer.visible = true;
     // check for collisions between player and wall objects
     // this.physics.add.collider(this.player, this.enemy, touchEnemy, null, this);
     // this.physics.add.collider(this.enemy);
