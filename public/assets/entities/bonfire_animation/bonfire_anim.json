@@ -4,7 +4,7 @@
             "key": "bonfire_lit",
             "type": "frames",
             "repeat": -1,
-            "frameRate": 12,
+            "frameRate": 9,
             "frames": [
                 {
                     "key": "bonfire",
