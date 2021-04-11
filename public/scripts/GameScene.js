@@ -280,8 +280,9 @@ class GameScene extends Phaser.Scene {
           let sceneKeyArray = [];
           console.log(this);
           for (let key in this.scene.manager.keys) {
+            sceneKeyArray.push(key);
           }
-          console.log(sceneKeyArray);
+
           if (!sceneKeyArray.includes("Dialog")) {
             this.scene.add("Dialog", DialogScene, true, { npc });
           }
