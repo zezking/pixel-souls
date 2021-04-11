@@ -55,6 +55,7 @@ class Player extends Phaser.Physics.Matter.Sprite {
     this.setFixedRotation();
 
     this.health = 5;
+    this.souls = 0;
   }
 
   static preload(scene) {
@@ -67,6 +68,11 @@ class Player extends Phaser.Physics.Matter.Sprite {
       "ashen_anim",
       "/public/assets/character_sprites/ashen_one_anim.json"
     );
+  }
+
+  updateSouls(souls) {
+    this.souls += souls;
+    console.log("inside updateSouls()")
   }
 
   get velocity() {
