@@ -201,7 +201,8 @@ class GameScene extends Phaser.Scene {
       shift: Phaser.Input.Keyboard.KeyCodes.SHIFT,
     });
     let camera = this.cameras.main;
-    camera.zoom = 1;
+    // Zoom in and out of Player
+    camera.zoom = 3;
     camera.startFollow(this.player);
     camera.setLerp(0.1, 0.1);
   }
