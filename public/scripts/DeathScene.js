@@ -59,7 +59,7 @@ class DeathScene extends Phaser.Scene {
     loop: -1,
   });
   
-    // time to end and return to Title
+    // Old time delay
     // this.dialogsTimer = this.time.addEvent({
     //   delay: 5000,
     //   callback: () => {
@@ -68,8 +68,7 @@ class DeathScene extends Phaser.Scene {
     //   },
     // });
 
-    // Title frozen if Pressing directly to title, and too soon
-
+    // Button to go directly to title
     this.input.keyboard.on("keydown-" + "E", () => {
       this.scene.sleep("Ui");
       this.scene.start("Title");

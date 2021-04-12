@@ -25,10 +25,10 @@ class Player extends Phaser.Physics.Matter.Sprite {
       frictionAir: 0.35,
 
       plugin: {
-        shape: {
-          type: "circle",
-          radius: 10,
-        },
+        // shape: {
+        //   type: "circle",
+        //   radius: 10,
+        // },
         attractors: [
           function (bodyA, bodyB) {
             if (
