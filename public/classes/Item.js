@@ -8,9 +8,9 @@ class Item extends Phaser.Physics.Matter.Sprite{
     this.id = id;
     const {Body, Bodies} = Phaser.Physics.Matter.Matter;
 
-    let playerSensor = Bodies.circle(this.x,this.y,1, {isSensor:true, label: 'playerSensor'});
+    let itemSensor = Bodies.circle(this.x,this.y,1, {isSensor:true, label: 'itemSensor'});
     const compoundBody = Body.create({
-      parts:[playerSensor],
+      parts:[itemSensor],
       frictionAir: 0.35,
       isStatic:true
     });
@@ -25,7 +25,7 @@ class Item extends Phaser.Physics.Matter.Sprite{
   makeActive() {
     this.setActive(true);
     this.setVisible(true);
-    this.playerSensor = {isSensor: true};
+    this.itemSensor = {isSensor: true};
   }
 
   makeInactive(itemID) {

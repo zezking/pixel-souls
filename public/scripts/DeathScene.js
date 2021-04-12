@@ -36,7 +36,7 @@ class DeathScene extends Phaser.Scene {
         duration: 2000,
         ease: "Linear",
       },
-      completeDelay: 5000, //it will only fire after animation is completed AND after this number of seconds
+      completeDelay: 4000, //it will only fire after animation is completed AND after this number of seconds
       onComplete: () => {
         //This is a callback function that will only fire after the animation is completed
 
@@ -45,6 +45,20 @@ class DeathScene extends Phaser.Scene {
       },
     });
 
+    this.startText = this.add
+    .text(250, this.scale.height / 2 + 200, "Press E to restart", {
+      fontFamily: "titleFont",
+      fontSize: "30px",
+      fill: "#ffffff",
+    })
+    .setAlpha(0);
+  this.tweens.add({
+    targets: this.startText,
+    alpha: { value: 1, duration: 1100, ease: "Linear" },
+    yoyo: true,
+    loop: -1,
+  });
+  
     // time to end and return to Title
     // this.dialogsTimer = this.time.addEvent({
     //   delay: 5000,
@@ -55,6 +69,7 @@ class DeathScene extends Phaser.Scene {
     // });
 
     // Title frozen if Pressing directly to title, and too soon
+
     this.input.keyboard.on("keydown", () => {
       this.UiScene.scene.restart();
       this.scene.sleep("Ui");
@@ -64,6 +79,7 @@ class DeathScene extends Phaser.Scene {
   }
 
   update() {
+    console.log("Deathhh");
     if (this.deathFontSize < 120) {
       this.deathText.setFontSize(this.deathFontSize++);
     }
