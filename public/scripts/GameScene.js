@@ -19,7 +19,6 @@ class GameScene extends Phaser.Scene {
 
   create() {
     this.createMap();
-
     // this.createAudio();
     this.createPlayer();
     this.createEnemy();
@@ -279,8 +278,7 @@ class GameScene extends Phaser.Scene {
     // Camera to center leeway, the higher, the tighter
     camera.setLerp(0.1, 0.1);
 
-    // spawn flash
- 
+    // //spawn flash
     // camera.flash(1000);
     camera.fadeIn(1000);
   }

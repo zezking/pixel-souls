@@ -59,6 +59,8 @@ class Player extends Phaser.Physics.Matter.Sprite {
     this.souls = 0;
   }
 
+
+
   static preload(scene) {
     scene.load.atlas(
       "ashen_one",
@@ -81,7 +83,9 @@ class Player extends Phaser.Physics.Matter.Sprite {
   }
 
   update(inputKeys) {
-    // this.body.setVelocity()sa
+
+    console.log("player here")
+    // this.body.setVelocity()
     if (inputKeys.left.isDown) {
       this.anims.play("player_left", true);
       this.flipX = false;
@@ -126,5 +130,6 @@ class Player extends Phaser.Physics.Matter.Sprite {
 
     playerVelocity.scale(speed);
     this.setVelocity(playerVelocity.x, playerVelocity.y);
+    
   }
 }
