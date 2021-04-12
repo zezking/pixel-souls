@@ -5,7 +5,7 @@ class GameScene extends Phaser.Scene {
   }
 
   init() {
-    this.scene.launch("Ui");
+    this.scene.add("Ui", UiScene, true);
     this.score = 0;
   }
 
@@ -19,6 +19,7 @@ class GameScene extends Phaser.Scene {
 
   create() {
     this.createMap();
+
     // this.createAudio();
     this.createPlayer();
     this.createEnemy();
@@ -245,7 +246,7 @@ class GameScene extends Phaser.Scene {
       objectB: this.item,
       callback: (eventData) => {
         this.events.emit("pickupItem", this.item.id);
-        console.log("inside pickup item collision")
+        console.log("inside pickup item collision");
       },
     });
   }
@@ -331,14 +332,10 @@ class GameScene extends Phaser.Scene {
   }
 
   createBattle() {
-
     this.matterCollision.addOnCollideStart({
       objectA: this.player,
       objectB: this.enemy,
-      
-      callback: (eventData) => 
-      
-      this.scene.start("Battle"),
+      callback: (eventData) => this.scene.start("Battle"),
     });
   }
 

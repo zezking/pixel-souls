@@ -1,5 +1,3 @@
-let titleStrokeThickness = 40;
-let titleFontSize = 200;
 class TitleScene extends Phaser.Scene {
   constructor() {
     super("Title");
@@ -9,14 +7,16 @@ class TitleScene extends Phaser.Scene {
     // create title text
 
     // this.logo=this.add.image()
+
+    this.titleStrokeThickness = 40;
+    this.titleFontSize = 200;
     this.titleText = this.add
       .text(this.scale.width / 2, this.scale.height / 2, "Pixel Souls", {
         fontFamily: "titleFont",
-        fontSize: 150,
         fill: "#ffffff",
       })
-      .setStroke("#fff", titleStrokeThickness)
-      .setFontSize(200);
+      .setStroke("#fff", this.titleStrokeThickness)
+      .setFontSize(this.titleFontSize);
 
     this.titleText.setOrigin(0.5);
     this.startText = this.add
@@ -43,10 +43,11 @@ class TitleScene extends Phaser.Scene {
     });
   }
   update() {
-    if (titleStrokeThickness > -1) {
+    console.log("it's here");
+    if (this.titleStrokeThickness > -1) {
       this.titleText
-        .setStroke("#ffffff", titleStrokeThickness--)
-        .setFontSize(titleFontSize--);
+        .setStroke("#ffffff", this.titleStrokeThickness--)
+        .setFontSize(this.titleFontSize--);
     }
   }
   startScene(targetScene) {
