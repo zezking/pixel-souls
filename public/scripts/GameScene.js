@@ -29,6 +29,8 @@ class GameScene extends Phaser.Scene {
     this.createItem();
     this.createNPC();
     this.createBonfire();
+    // Near Bonfire for light up on player?
+    // this.createNearBonfire();
     this.createDeath();
     this.createOverlay();
     this.createEventsManager();
@@ -355,6 +357,16 @@ class GameScene extends Phaser.Scene {
             this.scene.add("Dialog", DialogScene, true, { npc }); //add Dialogue scene
           }
         }
+      },
+    });
+  }
+
+  createNearBonfire() {
+    this.matterCollision.addOnCollideStart({
+      objectA: this.player,
+      objectB: this.bonfire,
+      callback: (eventData) => {
+        this.events.emit("characterLit");
       },
     });
   }
