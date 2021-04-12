@@ -10,7 +10,6 @@ class GameScene extends Phaser.Scene {
   }
 
   preload() {
-    // console.log("preload")ds
     Player.preload(this);
     Enemy.preload(this);
     Bonfire.preload(this);
@@ -33,7 +32,7 @@ class GameScene extends Phaser.Scene {
     // this.createNearBonfire();
     this.createDeath();
     this.createOverlay();
-    this.createEventsManager();
+    this.setupEventListener();
 
     this.OverlayLayer.setDepth(2239); //MUST ALWAYS BE LAST ON THIS LIST!!
   }
@@ -79,6 +78,7 @@ class GameScene extends Phaser.Scene {
       y: 1022,
       key: "skeleton_sprite",
       frame: "skele_idling0",
+      id: 1,
     });
     this.enemy2 = new Enemy({
       scene: this,
@@ -86,6 +86,7 @@ class GameScene extends Phaser.Scene {
       y: 1022,
       key: "skeleton_sprite",
       frame: "skele_idling0",
+      id: 2,
     });
     this.enemy3 = new Enemy({
       scene: this,
@@ -93,6 +94,7 @@ class GameScene extends Phaser.Scene {
       y: 1022,
       key: "skeleton_sprite",
       frame: "skele_idling0",
+      id: 3,
     });
   }
 
@@ -240,12 +242,12 @@ class GameScene extends Phaser.Scene {
     this.item.depthSorting = false;
     this.item.setDepth(1771);
 
-    console.log("how many items??? ", this.item);
     //item collision detection
     this.matterCollision.addOnCollideStart({
       objectA: this.player,
       objectB: this.item,
       callback: (eventData) => {
+        console.log("pickup item collision event!")
         this.events.emit("pickupItem", this.item.id);
       },
     });
@@ -373,8 +375,24 @@ class GameScene extends Phaser.Scene {
 
   createDialogsBox() {}
 
-  createEventsManager() {
-    this.eventsManager = new EventsManager(this, this.children);
-    this.eventsManager.setup();
+
+  setupEventListener() {
+    this.events.on("pickupItem", (itemID) => {
+      //update Soul Counter
+      let prevSouls = this.player.souls;
+      this.player.updateSouls(300);  //currently all soulItems give a hard-coded 300 souls.
+      console.log("pickup? ", this.player);
+      this.events.emit("updateSouls", prevSouls, this.player.souls);
+      //remove item
+      this.item.makeInactive(itemID);
+    })
+
+    this.events.on("deathClear", () => {
+      this.player.souls = 0;
+      this.player.health = 5;
+    })
+
+    console.log(this);
+
   }
 }
