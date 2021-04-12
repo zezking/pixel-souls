@@ -12,6 +12,7 @@ class BootScene extends Phaser.Scene {
     this.loadFont();
   }
 
+
   loadImages() {
     //Map elements
     this.load.image("bottom", "public/assets/map/FULLMAP_bottom.png");
