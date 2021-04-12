@@ -54,7 +54,7 @@ class Player extends Phaser.Physics.Matter.Sprite {
     this.setScale(1);
     // fixed rotation of character
     this.setFixedRotation();
-
+    this.bringToTI;
     this.health = 5;
     this.souls = 0;
   }
@@ -75,7 +75,6 @@ class Player extends Phaser.Physics.Matter.Sprite {
 
   updateSouls(souls) {
     this.souls += souls;
-    console.log("inside updateSouls()")
   }
 
   get velocity() {
@@ -117,6 +116,7 @@ class Player extends Phaser.Physics.Matter.Sprite {
 
 
     //sprinting speeds
+    playerVelocity.normalize();
     if (inputKeys.shift.isDown & inputKeys.left.isDown) {
       playerVelocity.x = -1.5;
     } else if (inputKeys.shift.isDown & inputKeys.right.isDown) {

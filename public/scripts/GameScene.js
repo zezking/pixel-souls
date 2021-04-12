@@ -6,11 +6,11 @@ class GameScene extends Phaser.Scene {
 
   init() {
     this.scene.launch("Ui");
-    this.score = 0;
+    this.events.emit("deathClear");
   }
 
   preload() {
-    // console.log("preload")
+    // console.log("preload")ds
     Player.preload(this);
     Enemy.preload(this);
     Bonfire.preload(this);
@@ -21,6 +21,7 @@ class GameScene extends Phaser.Scene {
     this.createMap();
     // this.createAudio();
     this.createPlayer();
+    console.log(this.player);
     this.createEnemy();
     this.addCollisions();
     this.createInput();
@@ -47,12 +48,6 @@ class GameScene extends Phaser.Scene {
     this.bonfire.update();
 
     //Sprite depth-sorting
-    this.children.each((c) => {
-      const child = c;
-      if (child.depthSorting) {
-        child.setDepth(child.y);
-      }
-    });
   }
 
   // createAudio() {
@@ -65,7 +60,6 @@ class GameScene extends Phaser.Scene {
       x: 530,
       y: 1700,
       key: "ashen_one",
-      frame: "player_0",
     });
   }
 
@@ -237,13 +231,13 @@ class GameScene extends Phaser.Scene {
     this.item.depthSorting = false;
     this.item.setDepth(1771);
 
+    console.log("how many items??? ", this.item);
     //item collision detection
     this.matterCollision.addOnCollideStart({
       objectA: this.player,
       objectB: this.item,
       callback: (eventData) => {
         this.events.emit("pickupItem", this.item.id);
-        console.log("inside pickup item collision");
       },
     });
   }
@@ -294,7 +288,7 @@ class GameScene extends Phaser.Scene {
       "FULLMAP_collision",
       { shape: shapes.FULLMAP_collision }
     );
-    collisionLayer.setPosition(0 + 736, 0 + 1211); //manual offset for center of mass. Will have to find a better way to calculate this.
+    collisionLayer.setPosition(0 + 684, 0 + 1136); //manual offset for center of mass. Will have to find a better way to calculate this.
     collisionLayer.visible = false;
   }
 
