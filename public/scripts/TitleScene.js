@@ -62,7 +62,7 @@ class LogoScene extends Phaser.Scene {
   create() {
     this.logo = this.add.image(380, 400, "logo");
     this.productionText = this.add
-      .text(210, 470, "two and a half asian presents", {
+      .text(210, 470, "two and a half asians presents", {
         fontFamily: "titleFont",
         fontSize: "26px",
         fill: "#ffffff",

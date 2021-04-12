@@ -30,7 +30,7 @@ class GameScene extends Phaser.Scene {
     this.createBonfire();
     this.createDeath();
     this.createOverlay();
-    this.createEventsManager();
+    this.setupEventListener();
 
     this.OverlayLayer.setDepth(2239); //MUST ALWAYS BE LAST ON THIS LIST!!
   }
@@ -244,6 +244,7 @@ class GameScene extends Phaser.Scene {
       objectA: this.player,
       objectB: this.item,
       callback: (eventData) => {
+        console.log("pickup item collision event!")
         this.events.emit("pickupItem", this.item.id);
       },
     });
@@ -335,7 +336,7 @@ class GameScene extends Phaser.Scene {
     this.matterCollision.addOnCollideStart({
       objectA: this.player,
       objectB: this.enemy,
-      callback: (eventData) => this.scene.start("Combat"),
+      callback: (eventData) => this.scene.start("Death"),
     });
   }
 
@@ -361,8 +362,22 @@ class GameScene extends Phaser.Scene {
 
   createDialogsBox() {}
 
-  createEventsManager() {
-    this.eventsManager = new EventsManager(this, this.children);
-    this.eventsManager.setup();
+  setupEventListener() {
+    this.events.on("pickupItem", (itemID) => {
+      //update Soul Counter
+      let prevSouls = this.player.souls;
+      this.player.updateSouls(300);  //currently all soulItems give a hard-coded 300 souls.
+      console.log("pickup? ", this.player);
+      this.events.emit("updateSouls", prevSouls, this.player.souls);
+      //remove item
+      this.item.makeInactive(itemID);
+    })
+
+    this.events.on("deathClear", () => {
+      this.player.souls = 0;
+      this.player.health = 5;
+    })
+
+    console.log(this);
   }
 }
