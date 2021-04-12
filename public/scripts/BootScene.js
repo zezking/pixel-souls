@@ -4,7 +4,6 @@ class BootScene extends Phaser.Scene {
   }
 
   preload() {
-
     this.loadImages();
     this.loadSpriteSheets();
     // this.loadAudio();
@@ -27,7 +26,7 @@ class BootScene extends Phaser.Scene {
 
   loadSpriteSheets() {
     // this.load.spritesheet('ashen_one', 'public/assets/character_sprites/ashen_one.png', { frameWidth: 32, frameHeight: 50 });
-    
+
     this.load.atlas(
       "sheet",
       "public/assets/map/fullmap-collision-atlas.png",
@@ -135,9 +134,13 @@ class BootScene extends Phaser.Scene {
       fontFamily: "HonokaMincho",
       fill: "#ffffff",
     });
+    this.add.text(-100, -100, "preload-font", {
+      fontFamily: "titleFont",
+      fill: "#ffffff",
+    });
   }
 
   create() {
-    this.scene.start("Game");
+    this.scene.launch("Title");
   }
 }

@@ -25,10 +25,6 @@ class Player extends Phaser.Physics.Matter.Sprite {
       frictionAir: 0.35,
 
       plugin: {
-        shape: {
-          type: "circle",
-          radius: 10,
-        },
         attractors: [
           function (bodyA, bodyB) {
             if (
@@ -79,7 +75,6 @@ class Player extends Phaser.Physics.Matter.Sprite {
   }
 
   update(inputKeys) {
-    console.log("player here");
     // this.body.setVelocity()
     if (inputKeys.left.isDown) {
       this.anims.play("player_left", true);

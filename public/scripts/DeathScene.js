@@ -6,6 +6,7 @@ class DeathScene extends Phaser.Scene {
   preload() {}
 
   create() {
+    let ee = scene.events;
     this.UIScene = this.scene.get("Ui");
     this.deathStrokeThickness = 50;
     this.deathFontSize = 40;
@@ -43,6 +44,8 @@ class DeathScene extends Phaser.Scene {
         this.scene.stop("Ui");
         this.scene.stop("Game");
         this.scene.start("Title");
+        console.log(ee);
+        ee.removeAllListeners();
       },
     });
 
@@ -71,10 +74,11 @@ class DeathScene extends Phaser.Scene {
 
     // Title frozen if Pressing directly to title, and too soon
 
-    this.input.keyboard.on("keydown", () => {
-      this.scene.stop("Ui");
-      this.scene.stop("Game");
+    this.input.keyboard.on("keydown-E", () => {
+      // this.UiScene.scene.restart();
+      this.scene.sleep("Ui");
       this.scene.start("Title");
+      ee.removeAllListeners();
     });
   }
 
