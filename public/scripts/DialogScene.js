@@ -21,7 +21,7 @@ class DialogScene extends Phaser.Scene {
 
     graphics.fillRectShape(rect);
 
-    this.DialogText = this.add.text({ fontFamoly: "HonokaMincho" });
+    this.DialogText = this.add.text({ fontFamily: "HonokaMincho" });
     let dialogs = this.cache.json.get("dialogs");
 
     if (dialogs[this.npcName]) {
@@ -48,7 +48,7 @@ class DialogScene extends Phaser.Scene {
         },
       });
 
-      this.input.keyboard.on("keydown-E", () => {
+      this.input.keyboard.on("keydown-" + "E", () => {
         this.scene.remove("Dialog");
       });
     }

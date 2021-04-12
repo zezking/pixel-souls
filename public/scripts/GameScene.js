@@ -48,6 +48,12 @@ class GameScene extends Phaser.Scene {
     this.bonfire.update();
 
     //Sprite depth-sorting
+    this.children.each((c) => {
+      const child = c;
+      if (child.depthSorting) {
+        child.setDepth(child.y);
+      }
+    });
   }
 
   // createAudio() {
@@ -60,6 +66,7 @@ class GameScene extends Phaser.Scene {
       x: 530,
       y: 1700,
       key: "ashen_one",
+      frame: "player_0",
     });
   }
 

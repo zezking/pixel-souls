@@ -54,7 +54,6 @@ class Player extends Phaser.Physics.Matter.Sprite {
     this.setScale(1);
     // fixed rotation of character
     this.setFixedRotation();
-    this.bringToTI;
     this.health = 5;
     this.souls = 0;
   }
@@ -72,6 +71,7 @@ class Player extends Phaser.Physics.Matter.Sprite {
       "/public/assets/character_sprites/ashen_one_anim.json"
     );
   }
+
 
   updateSouls(souls) {
     this.souls += souls;
