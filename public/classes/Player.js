@@ -72,7 +72,6 @@ class Player extends Phaser.Physics.Matter.Sprite {
 
   updateSouls(souls) {
     this.souls += souls;
-    console.log("inside updateSouls()")
   }
 
   get velocity() {

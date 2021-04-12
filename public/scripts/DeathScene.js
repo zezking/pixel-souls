@@ -4,6 +4,7 @@ class DeathScene extends Phaser.Scene {
     super("Death");
   }
   
+  
   prelaod() {}
   
   create() {
@@ -58,6 +59,7 @@ class DeathScene extends Phaser.Scene {
       this.scene.sleep("Ui");
       this.scene.start("Title");
     });
+
   }
 
   update() {
@@ -65,4 +67,5 @@ class DeathScene extends Phaser.Scene {
       this.deathText.setFontSize(this.deathFontSize++);
     }
   }
+
 }
