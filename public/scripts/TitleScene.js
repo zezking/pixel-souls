@@ -34,7 +34,7 @@ class TitleScene extends Phaser.Scene {
       strokeThickness: { value: 1, duration: 1100, ease: "Linear" },
     });
 
-    this.input.keyboard.on("keydown-E", () => {
+    this.input.keyboard.on("keydown", () => {
       this.scene.start("Game");
     });
   }
