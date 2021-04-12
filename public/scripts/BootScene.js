@@ -133,6 +133,6 @@ class BootScene extends Phaser.Scene {
   }
 
   create() {
-    this.scene.launch("Game");
+    this.scene.start("Game");
   }
 }
