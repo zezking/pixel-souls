@@ -40,7 +40,7 @@ class BattleScene extends Phaser.Scene {
       onComplete: () => {
         //This is a callback function that will only fire after the animation is completed
         this.scene.remove("Ui");
-        this.scene.start("Boot");
+        this.scene.start("Title");
       },
     });
 
@@ -56,7 +56,7 @@ class BattleScene extends Phaser.Scene {
     // Title frozen if Pressing directly to title, and too soon
     this.input.keyboard.on("keydown", () => {
       this.scene.remove("Ui");
-      this.scene.start("Boot");
+      this.scene.start("Title");
     });
   }
 
