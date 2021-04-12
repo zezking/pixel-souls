@@ -21,7 +21,6 @@ class DialogScene extends Phaser.Scene {
 
     graphics.fillRectShape(rect);
 
-    this.DialogText = this.add.text({ fontFamily: "HonokaMincho" });
     let dialogs = this.cache.json.get("dialogs");
 
     if (dialogs[this.npcName]) {
@@ -39,12 +38,10 @@ class DialogScene extends Phaser.Scene {
         )
         .setFontFamily("HonokaMincho");
 
-
       this.dialogsTimer = this.time.addEvent({
         delay: 2500,
         callback: () => {
           this.scene.remove("Dialog");
-          
         },
       });
 

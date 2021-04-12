@@ -6,6 +6,7 @@ class DeathScene extends Phaser.Scene {
   preload() {}
 
   create() {
+    // let ee = this.scene.events;
     this.UIScene = this.scene.get("Ui");
     this.deathStrokeThickness = 50;
     this.deathFontSize = 40;
@@ -40,26 +41,30 @@ class DeathScene extends Phaser.Scene {
       onComplete: () => {
         //This is a callback function that will only fire after the animation is completed
 
-        this.scene.sleep("Ui");
+        this.scene.stop("Ui");
+        this.scene.stop("Game");
         this.scene.start("Title");
+        // console.log(ee);
+        // ee.removeAllListeners();
       },
     });
 
     this.startText = this.add
-    .text(250, this.scale.height / 2 + 200, "Press E to restart", {
-      fontFamily: "titleFont",
-      fontSize: "30px",
-      fill: "#ffffff",
-    })
-    .setAlpha(0);
-  this.tweens.add({
-    targets: this.startText,
-    alpha: { value: 1, duration: 1100, ease: "Linear" },
-    yoyo: true,
-    loop: -1,
-  });
-  
-    // Old time delay
+      .text(this.scale.width / 2 , this.scale.height / 2 + 200, "Press E to restart", {
+        fontFamily: "titleFont",
+        fontSize: "30px",
+        fill: "#ffffff",
+      })
+      .setAlpha(0);
+    this.tweens.add({
+      targets: this.startText,
+      alpha: { value: 1, duration: 1100, ease: "Linear" },
+      yoyo: true,
+      loop: -1,
+    });
+    this.startText.setOrigin(0.5);
+
+    // time to end and return to Title
     // this.dialogsTimer = this.time.addEvent({
     //   delay: 5000,
     //   callback: () => {
@@ -68,12 +73,14 @@ class DeathScene extends Phaser.Scene {
     //   },
     // });
 
-    // Button to go directly to title
-    this.input.keyboard.on("keydown-" + "E", () => {
+    // Title frozen if Pressing directly to title, and too soon
+
+    this.input.keyboard.on("keydown-E", () => {
+      // this.UiScene.scene.restart();
       this.scene.sleep("Ui");
       this.scene.start("Title");
+      // ee.removeAllListeners();
     });
-
   }
 
   update() {
@@ -82,5 +89,4 @@ class DeathScene extends Phaser.Scene {
       this.deathText.setFontSize(this.deathFontSize++);
     }
   }
-
 }

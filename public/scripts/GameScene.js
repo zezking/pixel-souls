@@ -2,6 +2,7 @@ let enemy_speed = 20;
 class GameScene extends Phaser.Scene {
   constructor() {
     super("Game");
+    this.eventsManager = new EventsManager(this, this.children);
   }
 
   init() {
@@ -21,7 +22,6 @@ class GameScene extends Phaser.Scene {
     this.createMap();
     // this.createAudio();
     this.createPlayer();
-    console.log(this.player);
     this.createEnemy();
     this.addCollisions();
     this.createInput();
@@ -37,7 +37,7 @@ class GameScene extends Phaser.Scene {
   }
 
   update() {
-    this.player.update(this.inputKeys);
+    this.player.update();
 
     // enemies list
     this.enemy.update();
@@ -66,7 +66,7 @@ class GameScene extends Phaser.Scene {
       x: 530,
       y: 1700,
       key: "ashen_one",
-      frame: "player_0",
+      frame: "player_0"
     });
   }
 
@@ -261,8 +261,8 @@ class GameScene extends Phaser.Scene {
 
   createInput() {
     // capture so that spacebar doesn't scroll downwards in window
-    this.input.keyboard.addCapture('SPACE')
-    this.inputKeys = this.input.keyboard.addKeys({
+    this.input.keyboard.addCapture("SPACE");
+    this.player.inputKeys = this.input.keyboard.addKeys({
       up: Phaser.Input.Keyboard.KeyCodes.W,
       down: Phaser.Input.Keyboard.KeyCodes.S,
       left: Phaser.Input.Keyboard.KeyCodes.A,
@@ -362,7 +362,6 @@ class GameScene extends Phaser.Scene {
   createDialogsBox() {}
 
   createEventsManager() {
-    this.eventsManager = new EventsManager(this, this.children);
     this.eventsManager.setup();
   }
 }
