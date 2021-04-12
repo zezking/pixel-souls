@@ -32,11 +32,11 @@ class BattleScene extends Phaser.Scene {
         start: 1,
         from: 1,
         to: 0,
-        delay: 1000,
-        duration: 1000,
+        delay: 2000,
+        duration: 2000,
         ease: "Linear",
       },
-      completeDelay: 1000, //it will only fire after animation is completed AND after this number of seconds
+      completeDelay: 5000, //it will only fire after animation is completed AND after this number of seconds
       onComplete: () => {
         //This is a callback function that will only fire after the animation is completed
         this.scene.remove("Ui");
@@ -54,9 +54,10 @@ class BattleScene extends Phaser.Scene {
     // });
 
     // Title frozen if Pressing directly to title, and too soon
-    // this.input.keyboard.on("keydown", () => {
-    //   this.scene.start("Game");
-    // });
+    this.input.keyboard.on("keydown", () => {
+      this.scene.remove("Ui");
+      this.scene.start("Boot");
+    });
   }
 
   update() {
