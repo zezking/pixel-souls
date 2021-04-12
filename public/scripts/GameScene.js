@@ -20,14 +20,8 @@ class GameScene extends Phaser.Scene {
 
   create() {
     this.createMap();
-<<<<<<< HEAD
-
-    console.log(this.scene);
-=======
->>>>>>> b8551a16028f498b4b1b738c8ee0a59d44a942db
     // this.createAudio();
     this.createPlayer();
-    console.log(this.player);
     this.createEnemy();
     this.addCollisions();
     this.createInput();
@@ -260,7 +254,7 @@ class GameScene extends Phaser.Scene {
 
   createInput() {
     // capture so that spacebar doesn't scroll downwards in window
-    this.input.keyboard.addCapture('SPACE')
+    this.input.keyboard.addCapture("SPACE");
     this.inputKeys = this.input.keyboard.addKeys({
       up: Phaser.Input.Keyboard.KeyCodes.W,
       down: Phaser.Input.Keyboard.KeyCodes.S,

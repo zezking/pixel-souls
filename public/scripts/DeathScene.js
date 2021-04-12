@@ -47,19 +47,19 @@ class DeathScene extends Phaser.Scene {
     });
 
     this.startText = this.add
-    .text(250, this.scale.height / 2 + 200, "Press E to restart", {
-      fontFamily: "titleFont",
-      fontSize: "30px",
-      fill: "#ffffff",
-    })
-    .setAlpha(0);
-  this.tweens.add({
-    targets: this.startText,
-    alpha: { value: 1, duration: 1100, ease: "Linear" },
-    yoyo: true,
-    loop: -1,
-  });
-  
+      .text(250, this.scale.height / 2 + 200, "Press E to restart", {
+        fontFamily: "titleFont",
+        fontSize: "30px",
+        fill: "#ffffff",
+      })
+      .setAlpha(0);
+    this.tweens.add({
+      targets: this.startText,
+      alpha: { value: 1, duration: 1100, ease: "Linear" },
+      yoyo: true,
+      loop: -1,
+    });
+
     // time to end and return to Title
     // this.dialogsTimer = this.time.addEvent({
     //   delay: 5000,
@@ -72,12 +72,10 @@ class DeathScene extends Phaser.Scene {
     // Title frozen if Pressing directly to title, and too soon
 
     this.input.keyboard.on("keydown", () => {
-      console.log(this.scene);
       this.scene.stop("Ui");
       this.scene.stop("Game");
       this.scene.start("Title");
     });
-
   }
 
   update() {
@@ -86,5 +84,4 @@ class DeathScene extends Phaser.Scene {
       this.deathText.setFontSize(this.deathFontSize++);
     }
   }
-
 }

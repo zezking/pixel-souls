@@ -4,7 +4,7 @@ class Player extends Phaser.Physics.Matter.Sprite {
     super(scene.matter.world, x, y, key, frame);
     this.scene.add.existing(this);
 
-    this.depthSorting = true; 
+    this.depthSorting = true;
     //Allows this entity to be depth-sorted
     // the scene this container will be added to
     const { Body, Bodies } = Phaser.Physics.Matter.Matter;
@@ -54,12 +54,9 @@ class Player extends Phaser.Physics.Matter.Sprite {
     this.setScale(1);
     // fixed rotation of character
     this.setFixedRotation();
-    this.bringToTI;
     this.health = 5;
     this.souls = 0;
   }
-
-
 
   static preload(scene) {
     scene.load.atlas(
@@ -82,8 +79,7 @@ class Player extends Phaser.Physics.Matter.Sprite {
   }
 
   update(inputKeys) {
-
-    console.log("player here")
+    console.log("player here");
     // this.body.setVelocity()
     if (inputKeys.left.isDown) {
       this.anims.play("player_left", true);
@@ -114,7 +110,6 @@ class Player extends Phaser.Physics.Matter.Sprite {
     // // normalized speed, HAS to be above sprinting
     playerVelocity.normalize();
 
-
     //sprinting speeds
     playerVelocity.normalize();
     if (inputKeys.shift.isDown & inputKeys.left.isDown) {
@@ -130,6 +125,5 @@ class Player extends Phaser.Physics.Matter.Sprite {
 
     playerVelocity.scale(speed);
     this.setVelocity(playerVelocity.x, playerVelocity.y);
-    
   }
 }
