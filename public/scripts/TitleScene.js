@@ -41,16 +41,6 @@ class TitleScene extends Phaser.Scene {
     this.input.keyboard.on("keydown", () => {
       this.scene.start("Game");
     });
-
-    //   this.startGameButton = new UiButton(
-    //     this,
-    //     this.scale.width / 2,
-    //     this.scale.height * 0.65,
-    //     "button1",
-    //     "button2",
-    //     "Start",
-    //     this.startScene.bind(this, "Game")
-    //   );
   }
   update() {
     if (titleStrokeThickness > -1) {
@@ -64,10 +54,46 @@ class TitleScene extends Phaser.Scene {
   }
 }
 
-// class LogoScene extends Phaser.Scene {
-//   constructor() {
-//     super("Logo");
-//   }
+class LogoScene extends Phaser.Scene {
+  constructor() {
+    super("Logo");
+  }
 
-//   create() {}
-// }
+  create() {
+    this.logo = this.add.image(380, 400, "logo");
+    this.productionText = this.add
+      .text(210, 470, "two and a half asian presents", {
+        fontFamily: "titleFont",
+        fontSize: "26px",
+        fill: "#ffffff",
+      })
+      .setAlpha(0);
+    this.tweens.add({
+      targets: this.productionText,
+      alpha: {
+        start: 1,
+        from: 1,
+        to: 0,
+        delay: 3000,
+        duration: 3000,
+        ease: "Linear",
+      },
+      onComplete: () => {
+        this.scene.launch("Title");
+      },
+    });
+
+    this.callbacks = { onComplete: true };
+    this.tweens.add({
+      targets: this.logo,
+      alpha: {
+        start: 1,
+        from: 1,
+        to: 0,
+        delay: 3000,
+        duration: 3000,
+        ease: "Linear",
+      },
+    });
+  }
+}
