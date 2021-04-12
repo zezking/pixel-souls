@@ -71,7 +71,7 @@ class DeathScene extends Phaser.Scene {
     // Title frozen if Pressing directly to title, and too soon
 
     this.input.keyboard.on("keydown", () => {
-      this.UiScene.scene.restart();
+      // this.UiScene.scene.restart();
       this.scene.sleep("Ui");
       this.scene.start("Title");
     });

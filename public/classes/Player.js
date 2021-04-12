@@ -54,7 +54,7 @@ class Player extends Phaser.Physics.Matter.Sprite {
     this.setScale(1);
     // fixed rotation of character
     this.setFixedRotation();
-    this.bringToTI;
+
     this.health = 5;
     this.souls = 0;
   }
@@ -83,7 +83,6 @@ class Player extends Phaser.Physics.Matter.Sprite {
 
   update(inputKeys) {
 
-    console.log("player here")
     // this.body.setVelocity()
     if (inputKeys.left.isDown) {
       this.anims.play("player_left", true);
