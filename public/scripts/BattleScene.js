@@ -1,14 +1,14 @@
-let deathStrokeThickness = 50;
-let deathFontSize = 40;
 
 class BattleScene extends Phaser.Scene {
   constructor() {
     super("Battle");
   }
-
+  
   prelaod() {}
-
+  
   create() {
+    this.deathStrokeThickness = 50;
+    this.deathFontSize = 40;
     let camera = this.cameras.main;
     // Transition fade effect
     camera.fade(1000);
@@ -23,7 +23,7 @@ class BattleScene extends Phaser.Scene {
         fontFamily: "titleFont",
         fill: "#ff0000",
       })
-      .setFontSize(deathFontSize);
+      .setFontSize(this.deathFontSize);
     this.deathText.setOrigin(0.5);
 
     this.tweens.add({
@@ -59,8 +59,8 @@ class BattleScene extends Phaser.Scene {
   }
 
   update() {
-    if (deathFontSize < 120) {
-      this.deathText.setFontSize(deathFontSize++);
+    if (this.deathFontSize < 120) {
+      this.deathText.setFontSize(this.deathFontSize++);
     }
   }
 }
