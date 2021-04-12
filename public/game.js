@@ -2,7 +2,7 @@ const config = {
   type: Phaser.AUTO,
   width: 800,
   height: 800,
-  scene: [BootScene, TitleScene, GameScene, UiScene, LogoScene, BattleScene],
+  scene: [BootScene, TitleScene, GameScene, UiScene, LogoScene, DeathScene],
   // zoom: 2,
   pixelArt: true,
   physics: {
