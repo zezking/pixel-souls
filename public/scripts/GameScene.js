@@ -232,13 +232,13 @@ class GameScene extends Phaser.Scene {
   createItem() {
     this.item = new Item({
       scene: this,
-      x: 600,
-      y: 1670,
+      x: 700,
+      y: 1740,
       key: "soul",
       id: 1,
     });
-    this.item.makeActive();
-    // console.log(this.item)
+    this.item.depthSorting = false;
+    this.item.setDepth(1771);
 
     //item collision detection
     this.matterCollision.addOnCollideStart({

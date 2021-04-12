@@ -35,9 +35,8 @@ class UiScene extends Phaser.Scene {
 
   setupEvents() {
     // listen for the updateSouls event from the game scene
-    this.gameScene.events.on('updateSouls', (score) => {
-      console.log("inside soulCounter", score)
-      this.soulText.setText(`${score}`);
+    this.gameScene.events.on('updateSouls', (prevSouls, newSouls) => {
+      this.soulText.setText(`${newSouls}`);
     });
     // listen for healthCount event?
     // this.gameScene.events.on('updateHealth', (count) => {
