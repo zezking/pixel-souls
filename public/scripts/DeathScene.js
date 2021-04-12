@@ -36,7 +36,7 @@ class DeathScene extends Phaser.Scene {
         duration: 2000,
         ease: "Linear",
       },
-      completeDelay: 5000, //it will only fire after animation is completed AND after this number of seconds
+      completeDelay: 4000, //it will only fire after animation is completed AND after this number of seconds
       onComplete: () => {
         //This is a callback function that will only fire after the animation is completed
         this.scene.sleep("Ui");
@@ -61,6 +61,7 @@ class DeathScene extends Phaser.Scene {
   }
 
   update() {
+    console.log("Deathhh");
     if (this.deathFontSize < 120) {
       this.deathText.setFontSize(this.deathFontSize++);
     }

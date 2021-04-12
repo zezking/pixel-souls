@@ -63,10 +63,8 @@ class GameScene extends Phaser.Scene {
   createPlayer() {
     this.player = new Player({
       scene: this,
-
       x: 530,
       y: 1700,
-
       key: "ashen_one",
       frame: "player_0",
     });
@@ -262,6 +260,8 @@ class GameScene extends Phaser.Scene {
   }
 
   createInput() {
+    // capture so that spacebar doesn't scroll downwards in window
+    this.input.keyboard.addCapture('SPACE')
     this.inputKeys = this.input.keyboard.addKeys({
       up: Phaser.Input.Keyboard.KeyCodes.W,
       down: Phaser.Input.Keyboard.KeyCodes.S,
