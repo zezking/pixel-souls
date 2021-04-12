@@ -237,7 +237,6 @@ class GameScene extends Phaser.Scene {
       id: 1,
     });
     this.item.makeActive();
-    // console.log(this.item)
 
     //item collision detection
     this.matterCollision.addOnCollideStart({
