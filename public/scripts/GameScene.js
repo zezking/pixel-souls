@@ -5,7 +5,7 @@ class GameScene extends Phaser.Scene {
   }
 
   init() {
-    this.scene.add("Ui", UiScene, true);
+    this.scene.launch("Ui");
     this.score = 0;
   }
 
