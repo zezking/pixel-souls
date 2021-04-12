@@ -2,6 +2,7 @@ let enemy_speed = 20;
 class GameScene extends Phaser.Scene {
   constructor() {
     super("Game");
+    this.eventsManager = new EventsManager(this, this.children);
   }
 
   init() {
@@ -20,6 +21,7 @@ class GameScene extends Phaser.Scene {
   create() {
     this.createMap();
 
+    console.log(this.scene);
     // this.createAudio();
     this.createPlayer();
     console.log(this.player);
@@ -356,7 +358,6 @@ class GameScene extends Phaser.Scene {
   createDialogsBox() {}
 
   createEventsManager() {
-    this.eventsManager = new EventsManager(this, this.children);
     this.eventsManager.setup();
   }
 }

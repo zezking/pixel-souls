@@ -40,7 +40,8 @@ class DeathScene extends Phaser.Scene {
       onComplete: () => {
         //This is a callback function that will only fire after the animation is completed
 
-        this.scene.sleep("Ui");
+        this.scene.stop("Ui");
+        this.scene.stop("Game");
         this.scene.start("Title");
       },
     });
@@ -56,7 +57,9 @@ class DeathScene extends Phaser.Scene {
 
     // Title frozen if Pressing directly to title, and too soon
     this.input.keyboard.on("keydown", () => {
-      this.scene.sleep("Ui");
+      console.log(this.scene);
+      this.scene.stop("Ui");
+      this.scene.stop("Game");
       this.scene.start("Title");
     });
   }

@@ -4,10 +4,6 @@ class TitleScene extends Phaser.Scene {
   }
 
   create() {
-    // create title text
-
-    // this.logo=this.add.image()
-
     this.titleStrokeThickness = 40;
     this.titleFontSize = 200;
     this.titleText = this.add
