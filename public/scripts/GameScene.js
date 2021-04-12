@@ -30,6 +30,7 @@ class GameScene extends Phaser.Scene {
     this.createBonfire();
     this.createBattle();
     this.createOverlay();
+    this.createEventsManager();
 
     this.OverlayLayer.setDepth(2239); //MUST ALWAYS BE LAST ON THIS LIST!!
   }
@@ -233,15 +234,18 @@ class GameScene extends Phaser.Scene {
       x: 600,
       y: 1670,
       key: "soul",
+      id: 1,
     });
     this.item.makeActive();
     // console.log(this.item)
 
+    //item collision detection
     this.matterCollision.addOnCollideStart({
       objectA: this.player,
       objectB: this.item,
       callback: (eventData) => {
-        //events.emit, more logic in event listener
+        this.events.emit("pickupItem", this.item.id);
+        console.log("inside pickup item collision")
       },
     });
   }
@@ -263,6 +267,7 @@ class GameScene extends Phaser.Scene {
       left: Phaser.Input.Keyboard.KeyCodes.A,
       right: Phaser.Input.Keyboard.KeyCodes.D,
       shift: Phaser.Input.Keyboard.KeyCodes.SHIFT,
+      interact: Phaser.Input.Keyboard.KeyCodes.E,
     });
     let camera = this.cameras.main;
 
@@ -275,7 +280,7 @@ class GameScene extends Phaser.Scene {
 
     // spawn flash
     camera.flash(1000);
-    camera.fadeIn(1000);
+    camera.fadeIn(500);
   }
 
   addCollisions() {
@@ -358,4 +363,9 @@ class GameScene extends Phaser.Scene {
   }
 
   createDialogsBox() {}
+
+  createEventsManager() {
+    this.eventsManager = new EventsManager(this, this.children);
+    this.eventsManager.setup();
+  }
 }
