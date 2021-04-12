@@ -43,7 +43,6 @@ class TitleScene extends Phaser.Scene {
     });
   }
   update() {
-    console.log("it's here");
     if (this.titleStrokeThickness > -1) {
       this.titleText
         .setStroke("#ffffff", this.titleStrokeThickness--)

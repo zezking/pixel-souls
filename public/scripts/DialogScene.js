@@ -15,26 +15,29 @@ class DialogScene extends Phaser.Scene {
       150
     );
     var graphics = this.add.graphics({
-      fillStyle: { color: "#FFFFFF", alpha: 0.5 }, 
+      fillStyle: { color: "#FFFFFF", alpha: 0.5 },
       //change this value to change opacity of textbox background
     });
 
     graphics.fillRectShape(rect);
 
+    this.DialogText = this.add.text({ fontFamoly: "HonokaMincho" });
     let dialogs = this.cache.json.get("dialogs");
+
     if (dialogs[this.npcName]) {
       let dialogsArr = dialogs[this.npcName];
-      this.add.text(
-        this.scale.width / 2 - 200, // x position of text
-        this.scale.height / 2 + 200, // y position of text
-        dialogsArr[Math.floor(Math.random() * dialogsArr.length)], //this will generate a random conversation with NPC
-        {
-          fontFamily: "HonokaMincho",
-          fill: "#FFFFFF",
-          fontSize: "18px",
-          wordWrap: { width: 400, useAdvancedWrap: true }, //change here to make dialogues text wrap
-        }
-      );
+      this.add
+        .text(
+          this.scale.width / 2 - 200, // x position of text
+          this.scale.height / 2 + 200, // y position of text
+          dialogsArr[Math.floor(Math.random() * dialogsArr.length)], //this will generate a random conversation with NPC
+          {
+            fill: "#FFFFFF",
+            fontSize: "18px",
+            wordWrap: { width: 400, useAdvancedWrap: true }, //change here to make dialogues text wrap
+          }
+        )
+        .setFontFamily("HonokaMincho");
 
       this.dialogsTimer = this.time.addEvent({
         delay: 2500,
@@ -43,15 +46,13 @@ class DialogScene extends Phaser.Scene {
         },
       });
 
-      this.input.keyboard.on("keydown-" + "E", () => {
+      this.input.keyboard.on("keydown-E", () => {
         this.scene.remove("Dialog");
       });
-      
-
     }
   }
 
-  update() {}
+  randomDialog() {}
 
-  updateText() {}
+  update() {}
 }

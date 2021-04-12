@@ -9,6 +9,7 @@ class BootScene extends Phaser.Scene {
     // this.loadAudio();
     this.loadConversations();
     this.loadTilemap();
+    this.loadFont();
   }
 
   loadImages() {
@@ -30,7 +31,11 @@ class BootScene extends Phaser.Scene {
       "public/assets/map/fullmap-collision-atlas_atlas.json"
     );
     // this.load.spritesheet('skele', 'public/assets/skele_sprites/skele_idle.png', { frameWidth: 32, frameHeight: 32 });
-    // this.load.spritesheet('ashen_one', 'public/assets/character_sprites/ashen_one.png', { frameWidth: 32, frameHeight: 50 });
+    // this.load.spritesheet(
+    //   "ashen_one",
+    //   "public/assets/character_sprites/ashen_one.png",
+    //   { frameWidth: 32, frameHeight: 50 }
+    // );
     this.load.spritesheet("bird", "public/assets/sprites/bird.png", {
       frameWidth: 128,
       frameHeight: 109,
@@ -119,6 +124,12 @@ class BootScene extends Phaser.Scene {
 
   loadConversations() {
     this.load.json("dialogs", "public/assets/sprites/dialogs.json");
+  }
+  loadFont() {
+    this.add.text(0, 0, "preload-font", {
+      fontFamily: "HonokaMincho",
+      fill: "#ffffff",
+    });
   }
 
   create() {
