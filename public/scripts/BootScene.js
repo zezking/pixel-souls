@@ -126,7 +126,7 @@ class BootScene extends Phaser.Scene {
     this.load.json("dialogs", "public/assets/sprites/dialogs.json");
   }
   loadFont() {
-    this.add.text(0, 0, "preload-font", {
+    this.add.text(-100, -100, "preload-font", {
       fontFamily: "HonokaMincho",
       fill: "#ffffff",
     });

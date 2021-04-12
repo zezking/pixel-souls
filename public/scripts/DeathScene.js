@@ -6,6 +6,7 @@ class DeathScene extends Phaser.Scene {
   prelaod() {}
 
   create() {
+    this.UIScene = this.scene.get("Ui");
     this.deathStrokeThickness = 50;
     this.deathFontSize = 40;
     let camera = this.cameras.main;
@@ -15,7 +16,7 @@ class DeathScene extends Phaser.Scene {
     camera.flash(1000);
 
     // create title text
-    console.log(this.scene);
+
     // this.logo=this.add.image()
     this.deathText = this.add
       .text(this.scale.width / 2, this.scale.height / 2, "YOU DIED", {
@@ -55,6 +56,7 @@ class DeathScene extends Phaser.Scene {
 
     // Title frozen if Pressing directly to title, and too soon
     this.input.keyboard.on("keydown", () => {
+      this.UiScene.scene.restart();
       this.scene.sleep("Ui");
       this.scene.start("Title");
     });
