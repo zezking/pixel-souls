@@ -1,9 +1,9 @@
 class Enemy extends Phaser.Physics.Matter.Sprite {
   constructor(data) {
-    let { scene, x, y, key, frame } = data;
+    let { scene, x, y, key, frame, id } = data;
     super(scene.matter.world, x, y, key, frame);
     this.scene.add.existing(this);
-
+    this.id = id;
     const { Body, Bodies } = Phaser.Physics.Matter.Matter;
 
     this.depthSorting = true; //Allows this entity to be depth-sorted
@@ -23,21 +23,11 @@ class Enemy extends Phaser.Physics.Matter.Sprite {
       frictionAir: 0.2,
     });
     this.setExistingBody(compoundBody);
-    // scale our player
+    // scale the character
     this.setScale(1.25);
     // fixed rotation of character
     this.setFixedRotation();
-    // this.velocity = 5; // the velocity when moving our player
 
-    // enable physics
-    // this.scene.physics.world.enable(this);
-    // set immovable if another object collides with our player
-    // this.setImmovable(false);
-
-    // collide with world bounds
-    // this.setCollideWorldBounds(true);
-    // add the player to our existing scene
-    // this.scene.add.existing(this);
   }
 
   static preload(scene) {
@@ -79,5 +69,13 @@ class Enemy extends Phaser.Physics.Matter.Sprite {
     // enemyVelocity.scale(speed);
     // this.setVelocity(enemyVelocity.x, enemyVelocity.y);
 
+  }
+
+  enemyKilled(enemyID) {
+    if (this.id === enemyID) {
+      this.setActive(false);
+      this.setVisible(false);
+      this.body.destroy();
+    }
   }
 }
