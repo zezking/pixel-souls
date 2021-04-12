@@ -10,7 +10,7 @@ class GameScene extends Phaser.Scene {
   }
 
   preload() {
-    // console.log("preload")
+    // console.log("preload")ds
     Player.preload(this);
     Enemy.preload(this);
     Bonfire.preload(this);
@@ -22,6 +22,7 @@ class GameScene extends Phaser.Scene {
 
     // this.createAudio();
     this.createPlayer();
+    console.log(this.player);
     this.createEnemy();
     this.addCollisions();
     this.createInput();
@@ -48,12 +49,6 @@ class GameScene extends Phaser.Scene {
     this.bonfire.update();
 
     //Sprite depth-sorting
-    this.children.each((c) => {
-      const child = c;
-      if (child.depthSorting) {
-        child.setDepth(child.y);
-      }
-    });
   }
 
   // createAudio() {
@@ -68,7 +63,6 @@ class GameScene extends Phaser.Scene {
       y: 1700,
 
       key: "ashen_one",
-      frame: "player_0",
     });
   }
 

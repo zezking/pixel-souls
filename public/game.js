@@ -9,7 +9,7 @@ const config = {
     default: "matter",
     matter: {
       gravity: { y: 0 },
-      debug: false, // set to true to view zones
+      debug: true, // set to true to view zones
       plugins: {
         attractors: true,
       },

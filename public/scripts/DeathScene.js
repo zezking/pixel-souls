@@ -1,11 +1,10 @@
-
 class DeathScene extends Phaser.Scene {
   constructor() {
     super("Death");
   }
-  
+
   prelaod() {}
-  
+
   create() {
     this.deathStrokeThickness = 50;
     this.deathFontSize = 40;
@@ -16,7 +15,7 @@ class DeathScene extends Phaser.Scene {
     camera.flash(1000);
 
     // create title text
-
+    console.log(this.scene);
     // this.logo=this.add.image()
     this.deathText = this.add
       .text(this.scale.width / 2, this.scale.height / 2, "YOU DIED", {
