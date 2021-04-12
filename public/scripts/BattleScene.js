@@ -38,23 +38,24 @@ class BattleScene extends Phaser.Scene {
   
     this.tweens.add({
       targets: this.deathText.style,
-      strokeThickness: { value: 1, duration: 2000, ease: "Linear"},
+      strokeThickness: { value: 1, duration: 1000, ease: "Linear"},
 
     });
   
     
     // time to end and return to Title
     this.dialogsTimer = this.time.addEvent({
-      delay: 6000,
+      delay: 5000,
       callback: () => {
         this.scene.remove("Battle");
         this.scene.start("Title");
       },
     });
     
-    this.input.keyboard.on("keydown", () => {
-      this.scene.start("Title");
-    });
+    // // Title frozen if Pressing directly to title
+    // this.input.keyboard.on("keydown", () => {
+    //   this.scene.start("Title");
+    // });
   
   }
     
@@ -72,8 +73,8 @@ class BattleScene extends Phaser.Scene {
   }
 
   
-  startScene(targetScene) {
-    this.scene.start(targetScene);
-  }
+  // startScene(targetScene) {
+  //   this.scene.start(targetScene);
+  // }
 
 }
