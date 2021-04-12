@@ -7,7 +7,9 @@ class BattleScene extends Phaser.Scene {
     
   }
   
-  prelaod() {}
+  prelaod() {
+
+  }
   
   
   create() {
@@ -15,7 +17,7 @@ class BattleScene extends Phaser.Scene {
     // Transition fade effect
     camera.fade(1000);
     camera.fadeIn(1000);
-    camera.flash(2000);
+    camera.flash(1000);
     
     
 
@@ -31,23 +33,20 @@ class BattleScene extends Phaser.Scene {
         fontSize: 20,
         fill: "#ff0000",
       })
-      .setStroke("#ff0000", deathStrokeThickness)
-      // .setFontSize(20)
+      .setAlpha(1);
     this.deathText.setOrigin(0.5);
 
   
     this.tweens.add({
-      targets: this.deathText.style,
-      strokeThickness: { value: 1, duration: 1000, ease: "Linear"},
-
+      targets: this.deathText,
+      alpha: { value: 0, duration: 5000, ease: "Linear" },
     });
   
-    
     // time to end and return to Title
     this.dialogsTimer = this.time.addEvent({
       delay: 5000,
       callback: () => {
-        this.scene.remove("Battle");
+        // this.scene.remove("Battle");
         this.scene.start("Title");
       },
     });
@@ -73,8 +72,8 @@ class BattleScene extends Phaser.Scene {
   }
 
   
-  // startScene(targetScene) {
-  //   this.scene.start(targetScene);
-  // }
+  startScene(targetScene) {
+    this.scene.start(targetScene);
+  }
 
 }
