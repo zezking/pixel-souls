@@ -45,7 +45,7 @@ class DialogScene extends Phaser.Scene {
         },
       });
 
-      this.input.keyboard.on("keydown-E", () => {
+      this.input.keyboard.on("keydown-" + "E", () => {
         this.scene.remove("Dialog");
       });
     }

@@ -2,7 +2,6 @@ let enemy_speed = 20;
 class GameScene extends Phaser.Scene {
   constructor() {
     super("Game");
-    this.eventsManager = new EventsManager(this, this.children);
   }
 
   init() {
@@ -21,6 +20,7 @@ class GameScene extends Phaser.Scene {
     this.createMap();
     // this.createAudio();
     this.createPlayer();
+    console.log(this.player);
     this.createEnemy();
     this.addCollisions();
     this.createInput();
@@ -28,6 +28,8 @@ class GameScene extends Phaser.Scene {
     this.createItem();
     this.createNPC();
     this.createBonfire();
+    // Near Bonfire for light up on player?
+    // this.createNearBonfire();
     this.createDeath();
     this.createOverlay();
     this.setupEventListener();
@@ -63,9 +65,9 @@ class GameScene extends Phaser.Scene {
     this.player = new Player({
       scene: this,
       x: 530,
-      y: 1700,
+      y: 1740,
       key: "ashen_one",
-      frame: "player_0"
+      frame: "player_0",
     });
   }
 
@@ -263,7 +265,7 @@ class GameScene extends Phaser.Scene {
 
   createInput() {
     // capture so that spacebar doesn't scroll downwards in window
-    this.input.keyboard.addCapture("SPACE");
+    this.input.keyboard.addCapture('SPACE')
     this.player.inputKeys = this.input.keyboard.addKeys({
       up: Phaser.Input.Keyboard.KeyCodes.W,
       down: Phaser.Input.Keyboard.KeyCodes.S,
@@ -337,7 +339,7 @@ class GameScene extends Phaser.Scene {
     this.matterCollision.addOnCollideStart({
       objectA: this.player,
       objectB: this.enemy,
-      callback: (eventData) => this.scene.start("Death"),
+      callback: () => this.scene.start("Death"),
     });
   }
 
@@ -361,7 +363,18 @@ class GameScene extends Phaser.Scene {
     });
   }
 
+  createNearBonfire() {
+    this.matterCollision.addOnCollideStart({
+      objectA: this.player,
+      objectB: this.bonfire,
+      callback: (eventData) => {
+        this.events.emit("characterLit");
+      },
+    });
+  }
+
   createDialogsBox() {}
+
 
   setupEventListener() {
     this.events.on("pickupItem", (itemID) => {
