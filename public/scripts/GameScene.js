@@ -280,7 +280,7 @@ class GameScene extends Phaser.Scene {
 
     // spawn flash
     camera.flash(1000);
-    camera.fadeIn(1000);
+    camera.fadeIn(500);
   }
 
   addCollisions() {
