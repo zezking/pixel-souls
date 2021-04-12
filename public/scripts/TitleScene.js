@@ -1,5 +1,3 @@
-let titleStrokeThickness = 40;
-let titleFontSize = 200;
 class TitleScene extends Phaser.Scene {
   constructor() {
     super("Title");
@@ -9,14 +7,16 @@ class TitleScene extends Phaser.Scene {
     // create title text
 
     // this.logo=this.add.image()
+
+    this.titleStrokeThickness = 40;
+    this.titleFontSize = 200;
     this.titleText = this.add
       .text(this.scale.width / 2, this.scale.height / 2, "Pixel Souls", {
         fontFamily: "titleFont",
-        fontSize: 150,
         fill: "#ffffff",
       })
-      .setStroke("#fff", titleStrokeThickness)
-      .setFontSize(200);
+      .setStroke("#fff", this.titleStrokeThickness)
+      .setFontSize(this.titleFontSize);
 
     this.titleText.setOrigin(0.5);
     this.startText = this.add
@@ -41,22 +41,13 @@ class TitleScene extends Phaser.Scene {
     this.input.keyboard.on("keydown", () => {
       this.scene.start("Game");
     });
-
-    //   this.startGameButton = new UiButton(
-    //     this,
-    //     this.scale.width / 2,
-    //     this.scale.height * 0.65,
-    //     "button1",
-    //     "button2",
-    //     "Start",
-    //     this.startScene.bind(this, "Game")
-    //   );
   }
   update() {
-    if (titleStrokeThickness > -1) {
+    console.log("it's here");
+    if (this.titleStrokeThickness > -1) {
       this.titleText
-        .setStroke("#ffffff", titleStrokeThickness--)
-        .setFontSize(titleFontSize--);
+        .setStroke("#ffffff", this.titleStrokeThickness--)
+        .setFontSize(this.titleFontSize--);
     }
   }
   startScene(targetScene) {
@@ -64,10 +55,46 @@ class TitleScene extends Phaser.Scene {
   }
 }
 
-// class LogoScene extends Phaser.Scene {
-//   constructor() {
-//     super("Logo");
-//   }
+class LogoScene extends Phaser.Scene {
+  constructor() {
+    super("Logo");
+  }
 
-//   create() {}
-// }
+  create() {
+    this.logo = this.add.image(380, 400, "logo");
+    this.productionText = this.add
+      .text(210, 470, "two and a half asian presents", {
+        fontFamily: "titleFont",
+        fontSize: "26px",
+        fill: "#ffffff",
+      })
+      .setAlpha(0);
+    this.tweens.add({
+      targets: this.productionText,
+      alpha: {
+        start: 1,
+        from: 1,
+        to: 0,
+        delay: 3000,
+        duration: 3000,
+        ease: "Linear",
+      },
+      onComplete: () => {
+        this.scene.launch("Title");
+      },
+    });
+
+    this.callbacks = { onComplete: true };
+    this.tweens.add({
+      targets: this.logo,
+      alpha: {
+        start: 1,
+        from: 1,
+        to: 0,
+        delay: 3000,
+        duration: 3000,
+        ease: "Linear",
+      },
+    });
+  }
+}
