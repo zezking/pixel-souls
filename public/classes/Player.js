@@ -74,17 +74,17 @@ class Player extends Phaser.Physics.Matter.Sprite {
     return this.body.velocity;
   }
 
-  update(inputKeys) {
+  update() {
     // this.body.setVelocity()
-    if (inputKeys.left.isDown) {
+    if (this.inputKeys.left.isDown) {
       this.anims.play("player_left", true);
       this.flipX = false;
-    } else if (inputKeys.right.isDown) {
+    } else if (this.inputKeys.right.isDown) {
       this.anims.play("player_right", true);
       this.flipX = false;
-    } else if (inputKeys.up.isDown) {
+    } else if (this.inputKeys.up.isDown) {
       this.anims.play("player_up", true);
-    } else if (inputKeys.down.isDown) {
+    } else if (this.inputKeys.down.isDown) {
       this.anims.play("player_down", true);
     } else {
       this.anims.stop();
@@ -92,14 +92,14 @@ class Player extends Phaser.Physics.Matter.Sprite {
 
     const speed = 4;
     let playerVelocity = new Phaser.Math.Vector2();
-    if (inputKeys.left.isDown) {
+    if (this.inputKeys.left.isDown) {
       playerVelocity.x = -1;
-    } else if (inputKeys.right.isDown) {
+    } else if (this.inputKeys.right.isDown) {
       playerVelocity.x = 1;
     }
-    if (inputKeys.up.isDown) {
+    if (this.inputKeys.up.isDown) {
       playerVelocity.y = -1;
-    } else if (inputKeys.down.isDown) {
+    } else if (this.inputKeys.down.isDown) {
       playerVelocity.y = 1;
     }
     // // normalized speed, HAS to be above sprinting
@@ -107,14 +107,14 @@ class Player extends Phaser.Physics.Matter.Sprite {
 
     //sprinting speeds
     playerVelocity.normalize();
-    if (inputKeys.shift.isDown & inputKeys.left.isDown) {
+    if (this.inputKeys.shift.isDown & this.inputKeys.left.isDown) {
       playerVelocity.x = -1.5;
-    } else if (inputKeys.shift.isDown & inputKeys.right.isDown) {
+    } else if (this.inputKeys.shift.isDown & this.inputKeys.right.isDown) {
       playerVelocity.x = 1.5;
     }
-    if (inputKeys.shift.isDown & inputKeys.up.isDown) {
+    if (this.inputKeys.shift.isDown & this.inputKeys.up.isDown) {
       playerVelocity.y = -1.5;
-    } else if (inputKeys.shift.isDown & inputKeys.down.isDown) {
+    } else if (this.inputKeys.shift.isDown & this.inputKeys.down.isDown) {
       playerVelocity.y = 1.5;
     }
 
