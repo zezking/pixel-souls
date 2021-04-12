@@ -16,6 +16,16 @@ class CombatScene extends Phaser.Scene {
     this.magic.setInteractive();
     this.shield = this.add.image(600, 600, "shield");
     this.shield.setInteractive();
+
+    this.sword.on('pointerdown', () => {
+      console.log("Sword!");
+    });
+    this.magic.on('pointerdown', () => {
+      console.log("Magic!");
+    });
+    this.shield.on('pointerdown', () => {
+      console.log("shield!");
+    });
   }
 
 

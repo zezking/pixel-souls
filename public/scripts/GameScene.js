@@ -75,6 +75,7 @@ class GameScene extends Phaser.Scene {
       y: 1022,
       key: "skeleton_sprite",
       frame: "skele_idling0",
+      id: 1,
     });
     this.enemy2 = new Enemy({
       scene: this,
@@ -82,6 +83,7 @@ class GameScene extends Phaser.Scene {
       y: 1022,
       key: "skeleton_sprite",
       frame: "skele_idling0",
+      id: 2,
     });
     this.enemy3 = new Enemy({
       scene: this,
@@ -89,6 +91,7 @@ class GameScene extends Phaser.Scene {
       y: 1022,
       key: "skeleton_sprite",
       frame: "skele_idling0",
+      id: 3,
     });
   }
 
@@ -236,7 +239,6 @@ class GameScene extends Phaser.Scene {
     this.item.depthSorting = false;
     this.item.setDepth(1771);
 
-    console.log("how many items??? ", this.item);
     //item collision detection
     this.matterCollision.addOnCollideStart({
       objectA: this.player,
