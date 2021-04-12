@@ -10,7 +10,6 @@ class GameScene extends Phaser.Scene {
   }
 
   preload() {
-    // console.log("preload")ds
     Player.preload(this);
     Enemy.preload(this);
     Bonfire.preload(this);
@@ -334,7 +333,7 @@ class GameScene extends Phaser.Scene {
     this.matterCollision.addOnCollideStart({
       objectA: this.player,
       objectB: this.enemy,
-      callback: (eventData) => this.scene.start("Death"),
+      callback: (eventData) => this.scene.start("Combat"),
     });
   }
 

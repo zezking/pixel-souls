@@ -17,11 +17,8 @@ class EventsManager {
     })
 
     this.scene.events.on("deathClear", () => {
-      console.log("before? ", this.scene.player);
       this.scene.player.souls = 0;
       this.scene.player.health = 5;
-      console.log("After? ", this.scene.player);
-
 
     })
   }
