@@ -32,14 +32,15 @@ class DeathScene extends Phaser.Scene {
         start: 1,
         from: 1,
         to: 0,
-        delay: 1000,
-        duration: 1000,
+        delay: 2000,
+        duration: 2000,
         ease: "Linear",
       },
-      completeDelay: 1000,
+      completeDelay: 5000, //it will only fire after animation is completed AND after this number of seconds
       onComplete: () => {
-        this.scene.remove('Ui'); // disable all active events
-        this.scene.start("Boot");
+        //This is a callback function that will only fire after the animation is completed
+        this.scene.sleep("Ui");
+        this.scene.start("Title");
       },
     });
 
@@ -52,10 +53,11 @@ class DeathScene extends Phaser.Scene {
     //   },
     // });
 
-    // // Title frozen if Pressing directly to title, and too soon
-    // this.input.keyboard.on("keydown", () => {
-    //   this.scene.start("Title");
-    // });
+    // Title frozen if Pressing directly to title, and too soon
+    this.input.keyboard.on("keydown", () => {
+      this.scene.sleep("Ui");
+      this.scene.start("Title");
+    });
   }
 
   update() {

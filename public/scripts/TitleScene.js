@@ -80,7 +80,7 @@ class LogoScene extends Phaser.Scene {
         ease: "Linear",
       },
       onComplete: () => {
-        this.scene.launch("Title");
+        this.scene.start("Title");
       },
     });
 
