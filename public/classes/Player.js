@@ -53,7 +53,7 @@ class Player extends Phaser.Physics.Matter.Sprite {
     this.setScale(1);
     // fixed rotation of character
     this.setFixedRotation();
-
+    this.bringToTI;
     this.health = 5;
     this.souls = 0;
   }
@@ -107,6 +107,7 @@ class Player extends Phaser.Physics.Matter.Sprite {
       playerVelocity.y = 1;
     }
     //sprinting speeds
+    playerVelocity.normalize();
     if (inputKeys.shift.isDown & inputKeys.left.isDown) {
       playerVelocity.x = -1.5;
     } else if (inputKeys.shift.isDown & inputKeys.right.isDown) {
@@ -118,8 +119,6 @@ class Player extends Phaser.Physics.Matter.Sprite {
       playerVelocity.y = 1.5;
     }
 
-    // // turn on to have normalized speed, but no more sprinting
-    // playerVelocity.normalize();
     playerVelocity.scale(speed);
     this.setVelocity(playerVelocity.x, playerVelocity.y);
   }

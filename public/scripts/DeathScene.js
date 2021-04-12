@@ -1,13 +1,12 @@
-
 class DeathScene extends Phaser.Scene {
   constructor() {
     super("Death");
   }
-  
-  
-  prelaod() {}
-  
+
+  preload() {}
+
   create() {
+    this.UIScene = this.scene.get("Ui");
     this.deathStrokeThickness = 50;
     this.deathFontSize = 40;
     let camera = this.cameras.main;
@@ -40,6 +39,7 @@ class DeathScene extends Phaser.Scene {
       completeDelay: 5000, //it will only fire after animation is completed AND after this number of seconds
       onComplete: () => {
         //This is a callback function that will only fire after the animation is completed
+
         this.scene.sleep("Ui");
         this.scene.start("Title");
       },
@@ -56,6 +56,7 @@ class DeathScene extends Phaser.Scene {
 
     // Title frozen if Pressing directly to title, and too soon
     this.input.keyboard.on("keydown", () => {
+      this.UiScene.scene.restart();
       this.scene.sleep("Ui");
       this.scene.start("Title");
     });
