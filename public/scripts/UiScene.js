@@ -10,7 +10,7 @@ class UiScene extends Phaser.Scene {
 
   create() {
     this.setupUiElements();
-    // this.setupEvents();
+    this.setupEvents();
   }
 
   setupUiElements() {
@@ -35,19 +35,19 @@ class UiScene extends Phaser.Scene {
 
   setupEvents() {
     // listen for the updateSouls event from the game scene
-    this.gameScene.events.on('updateSouls', (score) => {
-      this.soulText.setText(`${score}`);
+    this.gameScene.events.on('updateSouls', (prevSouls, newSouls) => {
+      this.soulText.setText(`${newSouls}`);
     });
-    // get healthCount from player
-    this.gameScene.events.on('health', (count) => {
-      this.hearts.children.each((gameObj, index) => {
-        const heart = gameObj;
-        if (index < health) {
-          heart.setTexture("ui-heart-full")
-        } else {
-          heart.setTexture("ui-heart-empty")
-        };
-      })
-    })
+    // listen for healthCount event?
+    // this.gameScene.events.on('updateHealth', (count) => {
+    //   this.hearts.children.each((gameObj, index) => {
+    //     const heart = gameObj;
+    //     if (index < health) {
+    //       heart.setTexture("ui-heart-full")
+    //     } else {
+    //       heart.setTexture("ui-heart-empty")
+    //     };
+    //   })
+    // })
   }
 }
