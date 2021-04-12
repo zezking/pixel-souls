@@ -5,13 +5,13 @@ class NPC extends Phaser.Physics.Matter.Sprite {
     this.scene.add.existing(this); // the scene this container will be added to
     this.depthSorting = true; //Allows this entity to be depth-sorted
     const { Body, Bodies } = Phaser.Physics.Matter.Matter;
-    // let playerCollider = Bodies.circle(this.x,this.y,12,{isSensor:false, lable:'playerCollider'});
-    let playerSensor = Bodies.circle(this.x, this.y, 24, {
+    // let NPCCollider = Bodies.circle(this.x,this.y,12,{isSensor:false, lable:'NPCCollider'});
+    let NPCSensor = Bodies.circle(this.x, this.y, 24, {
       isSensor: true,
-      label: "playerSensor",
+      label: "NPCSensor",
     });
     const compoundBody = Body.create({
-      parts: [playerSensor],
+      parts: [NPCSensor],
       frictiasdonAir: 0.35,
       isStatic: true,
     });
@@ -20,17 +20,17 @@ class NPC extends Phaser.Physics.Matter.Sprite {
     this.setExistingBody(compoundBody);
     this.setFixedRotation();
 
-    // this.velocity = 5; // the velocity when moving our player
+    // this.velocity = 5; // the velocity when moving our NPC
 
     // enable physics
     // this.scene.physics.world.enable(this);
-    // set immovable if another object collides with our player
+    // set immovable if another object collides with our NPC
     // this.setImmovable(false);
-    // scale our player
+    // scale our NPC
     this.setScale(1);
     // collide with world bounds
     // this.setCollideWorldBounds(true);
-    // add the player to our existing scene
+    // add the NPC to our existing scene
     // this.scene.add.existing(this);
 
   }

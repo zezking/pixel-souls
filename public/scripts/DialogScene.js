@@ -36,10 +36,12 @@ class DialogScene extends Phaser.Scene {
         }
       );
 
+
       this.dialogsTimer = this.time.addEvent({
         delay: 2500,
         callback: () => {
           this.scene.remove("Dialog");
+          
         },
       });
 
