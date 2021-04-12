@@ -32,7 +32,7 @@ class BattleScene extends Phaser.Scene {
         fill: "#ff0000",
       })
       .setStroke("#ff0000", deathStrokeThickness)
-      .setFontSize(20)
+      // .setFontSize(20)
     this.deathText.setOrigin(0.5);
 
   
@@ -43,17 +43,17 @@ class BattleScene extends Phaser.Scene {
     });
   
     
-    
-    // this.dialogsTimer = this.time.addEvent({
-    //   delay: 4000,
-    //   callback: () => {
-    //     this.scene.remove("Battle");
-    //     // this.scene.start("Game");
-    //   },
-    // });
+    // time to end and return to Title
+    this.dialogsTimer = this.time.addEvent({
+      delay: 6000,
+      callback: () => {
+        this.scene.remove("Battle");
+        this.scene.start("Title");
+      },
+    });
     
     this.input.keyboard.on("keydown", () => {
-      this.scene.start("Game");
+      this.scene.start("Title");
     });
   
   }
@@ -61,17 +61,15 @@ class BattleScene extends Phaser.Scene {
   
   
   update() {
-    if (deathStrokeThickness < 100) {
+    if (deathStrokeThickness < 100 ) {
       this.deathText
         .setFontSize(deathFontSize++);
     }
 
-  //   if (titleText.fontSize < 250)
-	// {
-	// 	titleText.fontSize += 1;
-	// }
-  }
 
+
+  // console.log(this)
+  }
 
   
   startScene(targetScene) {
