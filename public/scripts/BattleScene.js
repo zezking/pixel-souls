@@ -39,6 +39,7 @@ class BattleScene extends Phaser.Scene {
       completeDelay: 5000, //it will only fire after animation is completed AND after this number of seconds
       onComplete: () => {
         //This is a callback function that will only fire after the animation is completed
+
         this.scene.sleep("Ui");
         this.scene.start("Title");
       },
