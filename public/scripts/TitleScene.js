@@ -4,10 +4,6 @@ class TitleScene extends Phaser.Scene {
   }
 
   create() {
-    // create title text
-
-    // this.logo=this.add.image()
-
     this.titleStrokeThickness = 40;
     this.titleFontSize = 200;
     this.titleText = this.add
@@ -38,7 +34,7 @@ class TitleScene extends Phaser.Scene {
       strokeThickness: { value: 1, duration: 1100, ease: "Linear" },
     });
 
-    this.input.keyboard.on("keydown", () => {
+    this.input.keyboard.on("keydown-E", () => {
       this.scene.start("Game");
     });
   }
