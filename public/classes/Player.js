@@ -4,7 +4,8 @@ class Player extends Phaser.Physics.Matter.Sprite {
     super(scene.matter.world, x, y, key, frame);
     this.scene.add.existing(this);
 
-    this.depthSorting = true; //Allows this entity to be depth-sorted
+    this.depthSorting = true; 
+    //Allows this entity to be depth-sorted
     // the scene this container will be added to
     const { Body, Bodies } = Phaser.Physics.Matter.Matter;
 
@@ -58,6 +59,8 @@ class Player extends Phaser.Physics.Matter.Sprite {
     this.souls = 0;
   }
 
+
+
   static preload(scene) {
     scene.load.atlas(
       "ashen_one",
@@ -72,7 +75,6 @@ class Player extends Phaser.Physics.Matter.Sprite {
 
   updateSouls(souls) {
     this.souls += souls;
-    console.log("inside updateSouls()");
   }
 
   get velocity() {
@@ -80,7 +82,9 @@ class Player extends Phaser.Physics.Matter.Sprite {
   }
 
   update(inputKeys) {
-    // this.body.setVelocity()sa
+
+    console.log("player here")
+    // this.body.setVelocity()
     if (inputKeys.left.isDown) {
       this.anims.play("player_left", true);
       this.flipX = false;
@@ -107,7 +111,12 @@ class Player extends Phaser.Physics.Matter.Sprite {
     } else if (inputKeys.down.isDown) {
       playerVelocity.y = 1;
     }
+    // // normalized speed, HAS to be above sprinting
+    playerVelocity.normalize();
+
+
     //sprinting speeds
+    playerVelocity.normalize();
     if (inputKeys.shift.isDown & inputKeys.left.isDown) {
       playerVelocity.x = -1.5;
     } else if (inputKeys.shift.isDown & inputKeys.right.isDown) {
@@ -119,9 +128,8 @@ class Player extends Phaser.Physics.Matter.Sprite {
       playerVelocity.y = 1.5;
     }
 
-    // // turn on to have normalized speed, but no more sprinting
-    // playerVelocity.normalize();
     playerVelocity.scale(speed);
     this.setVelocity(playerVelocity.x, playerVelocity.y);
+    
   }
 }

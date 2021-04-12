@@ -7,7 +7,7 @@ class GameScene extends Phaser.Scene {
 
   init() {
     this.scene.launch("Ui");
-    this.score = 0;
+    this.events.emit("deathClear");
   }
 
   preload() {
@@ -20,8 +20,11 @@ class GameScene extends Phaser.Scene {
 
   create() {
     this.createMap();
+<<<<<<< HEAD
 
     console.log(this.scene);
+=======
+>>>>>>> b8551a16028f498b4b1b738c8ee0a59d44a942db
     // this.createAudio();
     this.createPlayer();
     console.log(this.player);
@@ -60,10 +63,8 @@ class GameScene extends Phaser.Scene {
   createPlayer() {
     this.player = new Player({
       scene: this,
-
       x: 530,
       y: 1700,
-
       key: "ashen_one",
     });
   }
@@ -236,13 +237,13 @@ class GameScene extends Phaser.Scene {
     this.item.depthSorting = false;
     this.item.setDepth(1771);
 
+    console.log("how many items??? ", this.item);
     //item collision detection
     this.matterCollision.addOnCollideStart({
       objectA: this.player,
       objectB: this.item,
       callback: (eventData) => {
         this.events.emit("pickupItem", this.item.id);
-        console.log("inside pickup item collision");
       },
     });
   }
@@ -258,6 +259,8 @@ class GameScene extends Phaser.Scene {
   }
 
   createInput() {
+    // capture so that spacebar doesn't scroll downwards in window
+    this.input.keyboard.addCapture('SPACE')
     this.inputKeys = this.input.keyboard.addKeys({
       up: Phaser.Input.Keyboard.KeyCodes.W,
       down: Phaser.Input.Keyboard.KeyCodes.S,
@@ -275,9 +278,9 @@ class GameScene extends Phaser.Scene {
     // Camera to center leeway, the higher, the tighter
     camera.setLerp(0.1, 0.1);
 
-    // spawn flash
-    camera.flash(1000);
-    camera.fadeIn(500);
+    // //spawn flash
+    // camera.flash(1000);
+    camera.fadeIn(1000);
   }
 
   addCollisions() {
@@ -291,7 +294,7 @@ class GameScene extends Phaser.Scene {
       "FULLMAP_collision",
       { shape: shapes.FULLMAP_collision }
     );
-    collisionLayer.setPosition(0 + 736, 0 + 1211); //manual offset for center of mass. Will have to find a better way to calculate this.
+    collisionLayer.setPosition(0 + 684, 0 + 1136); //manual offset for center of mass. Will have to find a better way to calculate this.
     collisionLayer.visible = false;
   }
 
