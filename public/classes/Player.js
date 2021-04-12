@@ -108,6 +108,10 @@ class Player extends Phaser.Physics.Matter.Sprite {
     } else if (inputKeys.down.isDown) {
       playerVelocity.y = 1;
     }
+    // // normalized speed, HAS to be above sprinting
+    playerVelocity.normalize();
+
+
     //sprinting speeds
     if (inputKeys.shift.isDown & inputKeys.left.isDown) {
       playerVelocity.x = -1.5;
@@ -120,8 +124,6 @@ class Player extends Phaser.Physics.Matter.Sprite {
       playerVelocity.y = 1.5;
     }
 
-    // // turn on to have normalized speed, but no more sprinting
-    // playerVelocity.normalize();
     playerVelocity.scale(speed);
     this.setVelocity(playerVelocity.x, playerVelocity.y);
   }
