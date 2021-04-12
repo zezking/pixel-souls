@@ -6,7 +6,7 @@ class DeathScene extends Phaser.Scene {
   preload() {}
 
   create() {
-    let ee = scene.events;
+    // let ee = this.scene.events;
     this.UIScene = this.scene.get("Ui");
     this.deathStrokeThickness = 50;
     this.deathFontSize = 40;
@@ -44,13 +44,13 @@ class DeathScene extends Phaser.Scene {
         this.scene.stop("Ui");
         this.scene.stop("Game");
         this.scene.start("Title");
-        console.log(ee);
-        ee.removeAllListeners();
+        // console.log(ee);
+        // ee.removeAllListeners();
       },
     });
 
     this.startText = this.add
-      .text(250, this.scale.height / 2 + 200, "Press E to restart", {
+      .text(this.scale.width / 2 , this.scale.height / 2 + 200, "Press E to restart", {
         fontFamily: "titleFont",
         fontSize: "30px",
         fill: "#ffffff",
@@ -62,6 +62,7 @@ class DeathScene extends Phaser.Scene {
       yoyo: true,
       loop: -1,
     });
+    this.startText.setOrigin(0.5);
 
     // time to end and return to Title
     // this.dialogsTimer = this.time.addEvent({
@@ -78,7 +79,7 @@ class DeathScene extends Phaser.Scene {
       // this.UiScene.scene.restart();
       this.scene.sleep("Ui");
       this.scene.start("Title");
-      ee.removeAllListeners();
+      // ee.removeAllListeners();
     });
   }
 
