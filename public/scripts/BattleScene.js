@@ -52,10 +52,10 @@ class BattleScene extends Phaser.Scene {
       },
     });
     
-    // // Title frozen if Pressing directly to title
-    // this.input.keyboard.on("keydown", () => {
-    //   this.scene.start("Title");
-    // });
+    // Title frozen if Pressing directly to title, and too soon
+    this.input.keyboard.on("keydown", () => {
+      this.scene.start("Game");
+    });
   
   }
     
