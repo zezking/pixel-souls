@@ -29,7 +29,7 @@ class GameScene extends Phaser.Scene {
     this.createItem();
     this.createNPC();
     this.createBonfire();
-    this.createBattle();
+    this.createDeath();
     this.createOverlay();
     this.createEventsManager();
 
@@ -331,11 +331,11 @@ class GameScene extends Phaser.Scene {
     this.OverlayLayer = map.createLayer("overlay", this.tilesOverlay, 0, 0);
   }
 
-  createBattle() {
+  createDeath() {
     this.matterCollision.addOnCollideStart({
       objectA: this.player,
       objectB: this.enemy,
-      callback: (eventData) => this.scene.start("Battle"),
+      callback: (eventData) => this.scene.start("Death"),
     });
   }
 

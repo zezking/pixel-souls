@@ -1,7 +1,7 @@
 
-class BattleScene extends Phaser.Scene {
+class DeathScene extends Phaser.Scene {
   constructor() {
-    super("Battle");
+    super("Death");
   }
   
   prelaod() {}
@@ -38,7 +38,7 @@ class BattleScene extends Phaser.Scene {
       },
       completeDelay: 1000,
       onComplete: () => {
-        this.scene.remove("Ui");
+        this.scene.remove('Ui'); // disable all active events
         this.scene.start("Boot");
       },
     });
@@ -47,14 +47,14 @@ class BattleScene extends Phaser.Scene {
     // this.dialogsTimer = this.time.addEvent({
     //   delay: 5000,
     //   callback: () => {
-    //     // this.scene.remove("Battle");
+    //     // this.scene.remove("Death");
     //     this.scene.start("Title");
     //   },
     // });
 
-    // Title frozen if Pressing directly to title, and too soon
+    // // Title frozen if Pressing directly to title, and too soon
     // this.input.keyboard.on("keydown", () => {
-    //   this.scene.start("Game");
+    //   this.scene.start("Title");
     // });
   }
 
