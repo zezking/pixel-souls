@@ -356,7 +356,7 @@ class GameScene extends Phaser.Scene {
       objectB: [this.enemy, this.enemy2, this.enemy3],
       callback: () => {
         this.events.off("pickupItem");
-        this.scene.start("Death");
+        this.scene.start("Preloader");
       },
     });
   }
