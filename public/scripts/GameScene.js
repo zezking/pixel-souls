@@ -49,9 +49,9 @@ class GameScene extends Phaser.Scene {
     this.player.update();
 
     // enemies list
-    this.enemy.update();
-    this.enemy2.update();
-    this.enemy3.update();
+    this.enemies.forEach((enemy) => {
+      enemy.update();
+    })
 
     this.crestfallenWarrior.update();
     this.bonfire.update();
@@ -104,6 +104,7 @@ class GameScene extends Phaser.Scene {
       frame: "skele_idling0",
       id: 3,
     });
+    this.enemies = [this.enemy, this.enemy2, this.enemy3];
   }
 
   createNPC() {
@@ -355,7 +356,7 @@ class GameScene extends Phaser.Scene {
   createCombat() {
     this.matterCollision.addOnCollideStart({
       objectA: this.player,
-      objectB: [this.enemy, this.enemy2, this.enemy3],
+      objectB: this.enemies,
       callback: (eventData) => {
         // this.scene.start("Preloader");
         console.log("Event Data inside createCombat: ", eventData);
@@ -418,8 +419,10 @@ class GameScene extends Phaser.Scene {
 
     this.events.on("enemyDeath", (enemy) => {
       console.log("Inside enemyDeath? Enemy: ", enemy);
+      this.enemies = this.enemies.filter(e => e.id !== enemy.id);
+      console.log("this.enemies: ", this.enemies);
       enemy.enemyKilled();
-      this.events.off("enemyDeath");
+      // this.events.off("enemyDeath");
     })
 
     this.events.once("deathClear", () => {
