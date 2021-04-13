@@ -71,11 +71,9 @@ class Enemy extends Phaser.Physics.Matter.Sprite {
 
   }
 
-  enemyKilled(enemyID) {
-    if (this.id === enemyID) {
-      this.setActive(false);
-      this.setVisible(false);
-      this.body.destroy();
-    }
+  enemyKilled() {
+    this.setActive(false);
+    this.setVisible(false);
+    this.destroy();
   }
 }
