@@ -58,7 +58,20 @@ class TitleScene extends Phaser.Scene {
       yoyo: true,
       loop: -1,
     });
+    //press anykey to start game
+    this.pressToStartGame();
+    // this.menuBGM.play();
+  }
+  update() {
+    if (this.titleStrokeThickness > -1) {
+      this.titleText
+        .setStroke("#ffffff", this.titleStrokeThickness--)
+        .setFontSize(this.titleFontSize--)
+        .setDepth(0);
+    }
+  }
 
+  pressToStartGame() {
     this.tweens.add({
       targets: this.titleText.style,
       strokeThickness: { value: 1, duration: 1100, ease: "Linear" },
@@ -69,16 +82,6 @@ class TitleScene extends Phaser.Scene {
       // this.startMenuSound.play();
       this.scene.start("Game");
     });
-
-    // this.menuBGM.play();
-  }
-  update() {
-    if (this.titleStrokeThickness > -1) {
-      this.titleText
-        .setStroke("#ffffff", this.titleStrokeThickness--)
-        .setFontSize(this.titleFontSize--)
-        .setDepth(0);
-    }
   }
 }
 

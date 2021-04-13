@@ -1,11 +1,8 @@
 class CombatScene extends Phaser.Scene {
-
-
   constructor(data) {
     super("Combat");
     this.playerHealth = data;
-    this.enemyHealth = 1; 
-
+    this.enemyHealth = 1;
   }
   create() {
     this.setupCombatUi();
@@ -19,41 +16,27 @@ class CombatScene extends Phaser.Scene {
     this.magic.setInteractive();
     this.shield = this.add.image(600, 600, "shield");
     this.shield.setInteractive();
-    
-    //Graphics?
-    this.graphics = this.add.graphics();
-    this.graphics.lineStyle(1, 0xffffff);
-    this.graphics.fillStyle(0x031f4c, 1);
-    this.graphics.strokeRect(2, 150, 90, 100);
-    this.graphics.fillRect(2, 150, 90, 100);
-    this.graphics.strokeRect(95, 150, 90, 100);
-    this.graphics.fillRect(95, 150, 90, 100);
-    this.graphics.strokeRect(188, 150, 130, 100);
-    this.graphics.fillRect(188, 150, 130, 100);
 
-
-    
- 
     const aiResult = () => {
       let aiLogic = Math.random();
-      if (aiLogic < .34) {
+      if (aiLogic < 0.34) {
         return "sword";
-      } else if (aiLogic <= .67) {
+      } else if (aiLogic <= 0.67) {
         return "magic";
       } else {
         return "shield";
       }
     };
 
-    this.sword.on('pointerdown', () => {
+    this.sword.on("pointerdown", () => {
       this.result = this.checkWinner("sword", aiResult());
       this.events.emit("results", this.result);
     });
-    this.magic.on('pointerdown', () => {
+    this.magic.on("pointerdown", () => {
       this.result = this.checkWinner("magic", aiResult());
       this.events.emit("results", this.result);
     });
-    this.shield.on('pointerdown', () => {
+    this.shield.on("pointerdown", () => {
       this.result = this.checkWinner("shield", aiResult());
       this.events.emit("results", this.result);
     });
@@ -63,32 +46,32 @@ class CombatScene extends Phaser.Scene {
   checkWinner(playerChoice, aiChoice) {
     if (playerChoice === aiChoice) {
       return ["draw"];
-    };
+    }
 
     if (playerChoice === "sword") {
       if (aiChoice === "magic") {
         return ["player", "magic"];
       } else {
         return ["enemy", "magic"];
-      };
-    };
+      }
+    }
 
     if (playerChoice === "magic") {
       if (aiChoice === "shield") {
         return ["player", "shield"];
       } else {
         return ["enemy", "shield"];
-      };
-    };
+      }
+    }
     if (playerChoice === "shield") {
       if (aiChoice === "sword") {
         return ["player", "sword"];
       } else {
         return ["enemy", "sword"];
-      };
-    };
+      }
+    }
   }
-  
+
   resultListener() {
     this.events.on("results", () => {
       let winner = this.result[0];
@@ -105,11 +88,10 @@ class CombatScene extends Phaser.Scene {
           console.log("Enemy chose: ", enemyChoice);
           break;
       }
-    })
+    });
   }
 
   // update() {
 
   // }
-
 }
