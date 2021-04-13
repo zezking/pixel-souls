@@ -1,4 +1,5 @@
 let enemy_speed = 20;
+let timedEvent;
 class GameScene extends Phaser.Scene {
   constructor() {
     super("Game");
@@ -30,6 +31,10 @@ class GameScene extends Phaser.Scene {
     // Near Bonfire for light up on player?
     this.createNearBonfire();
     this.createDeath();
+
+    this.createDelay();
+    this.onEvent();
+
     this.createOverlay();
     this.setupEventListener();
 
@@ -380,11 +385,19 @@ class GameScene extends Phaser.Scene {
       objectB: this.bonfire,
       callback: () => {
         this.events.emit("characterLit");
+        
       },
-    });
+    })
   }
 
-  createDialogsBox() {}
+  createDelay() {
+    timedEvent = this.time.delayedCall(600, this.onEvent, [], this)
+  }
+
+  onEvent() {
+      this.events.emit("characterNotLit");
+  }
+
 
 
   setupEventListener() {
@@ -406,15 +419,10 @@ class GameScene extends Phaser.Scene {
     this.events.once("characterLit", () => {
       this.player.atBonfire = true
     })
-    this.events.once("characterLit", () => {
-      Phaser.TimerEvent = function(delay) {
 
-        this.delay = 500
-        this.player.atBonfire = false
-      }
+    this.events.once("characterNotLit", () => {
+      this.player.atBonfire = false
     })
-    
-
 
     console.log(this);
 
