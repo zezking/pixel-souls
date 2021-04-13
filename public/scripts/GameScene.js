@@ -28,7 +28,7 @@ class GameScene extends Phaser.Scene {
     this.createNPC();
     this.createBonfire();
     // Near Bonfire for light up on player?
-    // this.createNearBonfire();
+    this.createNearBonfire();
     this.createDeath();
     this.createOverlay();
     this.setupEventListener();
@@ -66,7 +66,7 @@ class GameScene extends Phaser.Scene {
       x: 530,
       y: 1740,
       key: "ashen_one",
-      frame: "player_0",
+      frame: "player_00",
     });
   }
 
@@ -293,6 +293,7 @@ class GameScene extends Phaser.Scene {
     // //spawn flash
     // camera.flash(1000);
     camera.fadeIn(1000);
+    // fixes invis Player
     this.player.update(this.player.anims.play("player_down", true));
   }
 
@@ -377,7 +378,7 @@ class GameScene extends Phaser.Scene {
     this.matterCollision.addOnCollideStart({
       objectA: this.player,
       objectB: this.bonfire,
-      callback: (eventData) => {
+      callback: () => {
         this.events.emit("characterLit");
       },
     });
@@ -401,6 +402,19 @@ class GameScene extends Phaser.Scene {
       this.player.souls = 0;
       this.player.health = 5;
     })
+
+    this.events.once("characterLit", () => {
+      this.player.atBonfire = true
+    })
+    this.events.once("characterLit", () => {
+      Phaser.TimerEvent = function(delay) {
+
+        this.delay = 500
+        this.player.atBonfire = false
+      }
+    })
+    
+
 
     console.log(this);
 
