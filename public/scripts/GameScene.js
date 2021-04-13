@@ -254,7 +254,7 @@ class GameScene extends Phaser.Scene {
       objectA: this.player,
       objectB: [this.item, this.item2],
       callback: (eventData) => {
-        console.log("event data? ", eventData)
+        console.log("event data on collision: ", eventData)
         this.events.emit("pickupItem", eventData.gameObjectB);
       },
     });
@@ -348,6 +348,7 @@ class GameScene extends Phaser.Scene {
       objectA: this.player,
       objectB: [this.enemy, this.enemy2, this.enemy3],
       callback: () => {
+        this.events.off("pickupItem");
         this.scene.start("Death")
       },
     });
@@ -391,18 +392,20 @@ class GameScene extends Phaser.Scene {
       //update Soul Counter
       let prevSouls = this.player.souls;
       this.player.updateSouls(300);  //currently all soulItems give a hard-coded 300 souls.
-      console.log("pickup? ", this.player);
+      console.log("pickup! Here's our scene data: ", this);
       this.events.emit("updateSouls", prevSouls, this.player.souls);
       //remove item
       item.makeInactive();
     })
 
-    this.events.once("deathClear", () => {
+    this.events.on("deathClear", () => {
       this.player.souls = 0;
       this.player.health = 5;
+      this.events.off("deathClear");
+
     })
 
-    console.log(this);
+
 
   }
 }
