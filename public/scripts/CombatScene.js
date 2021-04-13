@@ -1,6 +1,6 @@
 class CombatScene extends Phaser.Scene {
 
-  constructor() {
+  constructor(data) {
     super("Combat");
     // let { playerHealth } = data;
     this.enemyHealth = 1; 
@@ -17,18 +17,59 @@ class CombatScene extends Phaser.Scene {
     this.shield = this.add.image(600, 600, "shield");
     this.shield.setInteractive();
 
+    
+ 
+    const aiResult = () => {
+      let aiLogic = Math.random();
+      if (aiLogic < .34) {
+        return "sword";
+      } else if (aiLogic <= .67) {
+        return "magic";
+      } else {
+        return "shield";
+      }
+    };
+
     this.sword.on('pointerdown', () => {
-      console.log("Sword!");
+      this.checkWinner("sword", aiResult());
     });
     this.magic.on('pointerdown', () => {
-      console.log("Magic!");
+      this.checkWinner("magic", aiResult());
     });
     this.shield.on('pointerdown', () => {
-      console.log("shield!");
+      this.checkWinner("shield", aiResult());
     });
   }
 
-  
+  //Sword > Magic > Shield > Sword...  :)
+  checkWinner(playerChoice, aiChoice) {
+    if (playerChoice === aiChoice) {
+      return "draw";
+    };
+
+    if (playerChoice === "sword") {
+      if (aiChoice === "magic") {
+        return "player";
+      } else {
+        return "enemy";
+      };
+    };
+
+    if (playerChoice === "magic") {
+      if (aiChoice === "shield") {
+        return "player";
+      } else {
+        return "enemy";
+      };
+    };
+    if (playerChoice === "shield") {
+      if (aiChoice === "sword") {
+        return "player";
+      } else {
+        return "enemy";
+      };
+    };
+  }
   
 
   update() {

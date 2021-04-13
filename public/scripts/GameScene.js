@@ -300,7 +300,7 @@ class GameScene extends Phaser.Scene {
     // camera.flash(1000);
     camera.fadeIn(1000);
 
-    this.player.update(this.player.anims.play("player_down"));
+    // this.player.update(this.player.anims.play("player_down"));
   }
 
   addCollisions() {
@@ -356,7 +356,7 @@ class GameScene extends Phaser.Scene {
       objectB: [this.enemy, this.enemy2, this.enemy3],
       callback: () => {
         this.events.off("pickupItem");
-        this.scene.start("Death")
+        this.scene.start("Combat")
       },
     });
   }
