@@ -400,6 +400,7 @@ class GameScene extends Phaser.Scene {
     this.events.once("deathClear", () => {
       this.player.souls = 0;
       this.player.health = 5;
+      this.events.off("deathClear");
     });
 
     console.log(this);
