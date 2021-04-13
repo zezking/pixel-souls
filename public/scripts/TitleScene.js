@@ -125,5 +125,10 @@ class LogoScene extends Phaser.Scene {
         ease: "Linear",
       },
     });
+
+    // here to skip to title faster
+    this.input.keyboard.on("keydown", () => {
+      this.scene.start("Title");
+    });
   }
 }

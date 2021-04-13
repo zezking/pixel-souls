@@ -360,6 +360,7 @@ class GameScene extends Phaser.Scene {
       objectB: [this.enemy, this.enemy2, this.enemy3],
       callback: () => {
         // this.events.off("pickupItem"); //move this to death?
+        // this.scene.start("Preloader");
         this.scene.sleep();
         this.scene.launch("Combat", this.player.health);
 
