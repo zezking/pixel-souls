@@ -40,7 +40,7 @@ class GameScene extends Phaser.Scene {
     this.setupEventListener();
 
     //Background Music
-    // this.bgm();
+    this.bgm();
 
     this.OverlayLayer.setDepth(2239); //MUST ALWAYS BE LAST ON THIS LIST!!
   }
