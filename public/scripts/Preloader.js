@@ -1,4 +1,4 @@
-var Preloader = new Phaser.Class({
+let Preloader = new Phaser.Class({
 
   Extends: Phaser.Scene,
 
@@ -8,24 +8,25 @@ var Preloader = new Phaser.Class({
   {
       Phaser.Scene.call(this, { key: 'Preloader' });
 
-      this.crow;
+      this.loadingScreen;
   },
 
   preload: function ()
   {
-      this.load.image('crow', 'public/assets/sprites/bird.png');
+      this.load.image('loadingScreen', 'public/assets/entities/maxresdefault.jpg');
   },
 
   create: function ()
   {
-      this.crow = this.add.image(0, 0, 'crow').setOrigin(0);
+      this.cameras.main.fadeIn(1000, 0, 0, 0)
+      this.loadingScreen = this.add.image(this.game.config.width/2, this.game.config.height/2, 'loadingScreen').setScale(0.5);
 
-      this.input.once('pointerdown', function () {
+      this.input.keyboard.on('keydown', function () {
 
           this.scene.transition({
               target: 'Death',
               duration: 2000,
-              moveBelow: true,
+              moveBelow: false,
               onUpdate: this.transitionOut,
               data: { x: 400, y: 300 }
           });
@@ -35,7 +36,7 @@ var Preloader = new Phaser.Class({
 
   transitionOut: function (progress)
   {
-      this.crow.y = (600 * progress);
+      this.loadingScreen.y = (600 * progress);
   }
 
 });
