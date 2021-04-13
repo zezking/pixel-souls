@@ -7,7 +7,6 @@ class GameScene extends Phaser.Scene {
 
   init() {
     this.scene.launch("Ui");
-    this.events.emit("deathClear");
   }
 
   preload() {
@@ -264,7 +263,6 @@ class GameScene extends Phaser.Scene {
       objectA: this.player,
       objectB: [this.item, this.item2],
       callback: (eventData) => {
-        console.log("event data on collision: ", eventData);
         this.events.emit("pickupItem", eventData.gameObjectB);
       },
     });
@@ -358,11 +356,11 @@ class GameScene extends Phaser.Scene {
     this.matterCollision.addOnCollideStart({
       objectA: this.player,
       objectB: [this.enemy, this.enemy2, this.enemy3],
-      callback: () => {
-        // this.events.off("pickupItem"); //move this to death?
+      callback: (eventData) => {
+        // this.scene.start("Preloader");
+        console.log("Event Data inside createCombat: ", eventData);
         this.scene.sleep();
-        this.scene.launch("Combat", this.player.health);
-
+        this.scene.launch("Combat", { health: this.player.health, enemy: eventData.gameObjectB.id });
       },
     });
   }
@@ -403,6 +401,7 @@ class GameScene extends Phaser.Scene {
   }
   onEvent() {
     this.events.emit("characterNotLit");
+    this.events.emit("deathClear");
   }
 
   setupEventListener() {
@@ -410,11 +409,24 @@ class GameScene extends Phaser.Scene {
       //update Soul Counter
       let prevSouls = this.player.souls;
       this.player.updateSouls(300); //currently all soulItems give a hard-coded 300 souls.
-      console.log("pickup? ", this.player);
+      console.log("picked up item!");
       this.events.emit("updateSouls", prevSouls, this.player.souls);
       //remove item
       item.makeInactive();
     });
+
+    this.events.on("enemyDeath", (enemyid) => {
+      console.log("Inside enemyDeath?");
+      this.children.each((c) => {
+        const child = c;
+        if (child.texture.key === "skeleton_sprite" && child.id === enemyid) {
+          console.log("child?: ", child);
+          child.enemyKilled();
+        }
+      });
+      enemy.enemyKilled();
+      this.events.off("enemyDeath");
+    })
 
     this.events.once("deathClear", () => {
       this.player.souls = 0;
@@ -438,7 +450,6 @@ class GameScene extends Phaser.Scene {
   }
 
   createAreaText() {
-    console.log("its here");
     this.areaText = this.add
       .text(this.scale.width / 2, this.scale.height / 2, "Firelink Shrine", {
         fontFamily: "titleFont",

@@ -1,9 +1,19 @@
 class CombatScene extends Phaser.Scene {
-  constructor(data) {
+  constructor() {
     super("Combat");
-    this.playerHealth = data;
     this.enemyHealth = 1;
   }
+
+  /** Big problem. Can't update the enemy that's on GameScene, because its asleep. Enemy initiates combat with player immediately after combat ends, Event listened to destroy enemy is not being read by GameScene from this scene. brain turning to mush. it time to sleep and try again tomorrow. */
+
+  init(data) {
+    let { health, enemy } = data;
+    this.playerHealth = health;
+    this.enemyid = enemy;
+    console.log("Carried-over data?: ", this.playerHealth, this.enemyid);
+    console.log("THIS: ", this);
+  }
+
   create() {
     this.setupCombatUi();
     this.resultListener();
@@ -45,7 +55,7 @@ class CombatScene extends Phaser.Scene {
   //Sword > Magic > Shield > Sword...  :)
   checkWinner(playerChoice, aiChoice) {
     if (playerChoice === aiChoice) {
-      return ["draw"];
+      return ["draw", "same"];
     }
 
     if (playerChoice === "sword") {
@@ -79,16 +89,41 @@ class CombatScene extends Phaser.Scene {
 
       switch (winner) {
         case "draw":
-          console.log("Enemy chose: ", enemyChoice);
+          console.log("winner: ", winner, "Enemy chose: ", enemyChoice);
+          this.playerHealth -= 1;
+          this.enemyHealth -= 1;
+          this.healthChecker();
           break;
         case "enemy":
-          console.log("Enemy chose: ", enemyChoice);
+          console.log("winner: ", winner, "Enemy chose: ", enemyChoice);
+          this.playerHealth -= 1;
+          this.healthChecker();
           break;
         case "player":
-          console.log("Enemy chose: ", enemyChoice);
+          console.log("winner: ", winner, "Enemy chose: ", enemyChoice);
+          this.enemyHealth -= 1;
+          this.healthChecker();
           break;
       }
     });
+  }
+
+  healthChecker() {
+    console.log("new player health: ", this.playerHealth);
+
+    if (this.playerHealth <= 0) {
+      this.events.off("pointerdown");
+      this.events.off("results");
+      this.events.off("pickupItem");
+      this.scene.stop("Game");
+      this.scene.start("Death");
+    }
+    if (this.enemyHealth <= 0) {
+      this.events.off("results");
+      this.events.emit("enemyDeath", this.enemyid);
+      this.scene.wake("Game");
+      this.scene.stop("Combat");
+    }
   }
 
   // update() {
