@@ -4,6 +4,14 @@ class TitleScene extends Phaser.Scene {
   }
 
   create() {
+    //change the volume between 0 and 1
+    this.menuBGM = this.sound.add("menu-music", {
+      volume: 0.04,
+    });
+    //change the startMenue sond between 0 and 1
+    this.startMenuSound = this.sound.add("start-menu", {
+      volume: 0.04,
+    });
     this.logoDetail = this.make
       .image({
         x: 413,
@@ -57,8 +65,12 @@ class TitleScene extends Phaser.Scene {
     });
 
     this.input.keyboard.on("keydown", () => {
+      // this.menuBGM.stop();
+      // this.startMenuSound.play();
       this.scene.start("Game");
     });
+
+    // this.menuBGM.play();
   }
   update() {
     if (this.titleStrokeThickness > -1) {
@@ -67,9 +79,6 @@ class TitleScene extends Phaser.Scene {
         .setFontSize(this.titleFontSize--)
         .setDepth(0);
     }
-  }
-  startScene(targetScene) {
-    // this.scene.start(targetScene);
   }
 }
 

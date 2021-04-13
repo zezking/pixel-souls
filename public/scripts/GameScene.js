@@ -18,6 +18,7 @@ class GameScene extends Phaser.Scene {
   }
 
   create() {
+    this.createAreaText();
     this.createMap();
     // this.createAudio();
     this.createPlayer();
@@ -38,6 +39,9 @@ class GameScene extends Phaser.Scene {
 
     this.createOverlay();
     this.setupEventListener();
+
+    //fx
+    // this.bgm();
 
     this.OverlayLayer.setDepth(2239); //MUST ALWAYS BE LAST ON THIS LIST!!
   }
@@ -424,7 +428,28 @@ class GameScene extends Phaser.Scene {
     this.events.once("characterNotLit", () => {
       this.player.atBonfire = false;
     });
+  }
 
-    console.log(this);
+  bgm() {
+    let bgm = this.sound.add("bg-music", { loop: true, volume: 0.02 });
+    bgm.play();
+  }
+
+  createAreaText() {
+    console.log("its here");
+    this.areaText = this.add
+      .text(this.scale.width / 2, this.scale.height / 2, "Firelink Shrine", {
+        fontFamily: "titleFont",
+        fill: "#ffffff",
+        fontSize: "120px",
+      })
+      .setAlpha(1);
+
+    this.tweens.add({
+      targets: this.areaText,
+      alpha: { start: 1, from: 1, to: 0, duration: 2000, ease: "Linear" },
+      yoyo: true,
+      loop: -1,
+    });
   }
 }

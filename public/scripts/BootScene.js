@@ -6,7 +6,7 @@ class BootScene extends Phaser.Scene {
   preload() {
     this.loadImages();
     this.loadSpriteSheets();
-    // this.loadAudio();
+    this.loadAudio();
     this.loadConversations();
     this.loadTilemap();
     this.loadFont();
@@ -122,6 +122,7 @@ class BootScene extends Phaser.Scene {
   loadAudio() {
     this.load.audio("menu-music", "public/assets/audio/menu_theme.mp3");
     this.load.audio("bg-music", "public/assets/audio/firelink_shrine.mp3");
+    this.load.audio("start-menu", "public/assets/audio/start_menu.mp3");
   }
 
   loadTilemap() {
