@@ -1,9 +1,9 @@
 {
     "frames": [
         {
-            "filename": "player_00",
+            "filename": "player_0",
             "frame": {
-                "w": 32,
+                "w": 31,
                 "h": 50,
                 "x": 0,
                 "y": 0
@@ -14,11 +14,11 @@
             }
         },
         {
-            "filename": "player_01",
+            "filename": "player_1",
             "frame": {
-                "w": 32,
+                "w": 31,
                 "h": 50,
-                "x": 32,
+                "x": 31,
                 "y": 0
             },
             "anchor": {
@@ -27,9 +27,9 @@
             }
         },
         {
-            "filename": "player_02",
+            "filename": "player_2",
             "frame": {
-                "w": 32,
+                "w": 31,
                 "h": 50,
                 "x": 0,
                 "y": 50
@@ -40,11 +40,11 @@
             }
         },
         {
-            "filename": "player_03",
+            "filename": "player_3",
             "frame": {
-                "w": 32,
+                "w": 31,
                 "h": 50,
-                "x": 32,
+                "x": 31,
                 "y": 50
             },
             "anchor": {
@@ -53,11 +53,11 @@
             }
         },
         {
-            "filename": "player_04",
+            "filename": "player_4",
             "frame": {
-                "w": 32,
+                "w": 31,
                 "h": 50,
-                "x": 64,
+                "x": 62,
                 "y": 0
             },
             "anchor": {
@@ -66,11 +66,11 @@
             }
         },
         {
-            "filename": "player_05",
+            "filename": "player_5",
             "frame": {
-                "w": 32,
+                "w": 31,
                 "h": 50,
-                "x": 64,
+                "x": 62,
                 "y": 50
             },
             "anchor": {
@@ -79,9 +79,35 @@
             }
         },
         {
-            "filename": "player_06",
+            "filename": "player_6",
             "frame": {
-                "w": 32,
+                "w": 31,
+                "h": 50,
+                "x": 93,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "player_7",
+            "frame": {
+                "w": 31,
+                "h": 50,
+                "x": 93,
+                "y": 50
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "player_8",
+            "frame": {
+                "w": 31,
                 "h": 50,
                 "x": 0,
                 "y": 100
@@ -92,38 +118,12 @@
             }
         },
         {
-            "filename": "player_07",
+            "filename": "player_9",
             "frame": {
-                "w": 32,
+                "w": 31,
                 "h": 50,
-                "x": 32,
+                "x": 31,
                 "y": 100
-            },
-            "anchor": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        },
-        {
-            "filename": "player_08",
-            "frame": {
-                "w": 32,
-                "h": 50,
-                "x": 64,
-                "y": 100
-            },
-            "anchor": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        },
-        {
-            "filename": "player_09",
-            "frame": {
-                "w": 32,
-                "h": 50,
-                "x": 0,
-                "y": 150
             },
             "anchor": {
                 "x": 0.5,
@@ -133,10 +133,10 @@
         {
             "filename": "player_10",
             "frame": {
-                "w": 32,
+                "w": 31,
                 "h": 50,
-                "x": 32,
-                "y": 150
+                "x": 62,
+                "y": 100
             },
             "anchor": {
                 "x": 0.5,
@@ -146,75 +146,10 @@
         {
             "filename": "player_11",
             "frame": {
-                "w": 32,
+                "w": 31,
                 "h": 50,
-                "x": 64,
-                "y": 150
-            },
-            "anchor": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        },
-        {
-            "filename": "player_12",
-            "frame": {
-                "w": 32,
-                "h": 50,
-                "x": 0,
-                "y": 200
-            },
-            "anchor": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        },
-        {
-            "filename": "player_13",
-            "frame": {
-                "w": 32,
-                "h": 50,
-                "x": 32,
-                "y": 200
-            },
-            "anchor": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        },
-        {
-            "filename": "player_14",
-            "frame": {
-                "w": 32,
-                "h": 50,
-                "x": 64,
-                "y": 200
-            },
-            "anchor": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        },
-        {
-            "filename": "player_15",
-            "frame": {
-                "w": 32,
-                "h": 50,
-                "x": 0,
-                "y": 250
-            },
-            "anchor": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        },
-        {
-            "filename": "player_16",
-            "frame": {
-                "w": 32,
-                "h": 50,
-                "x": 32,
-                "y": 250
+                "x": 93,
+                "y": 100
             },
             "anchor": {
                 "x": 0.5,
