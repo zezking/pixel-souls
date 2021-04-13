@@ -32,6 +32,7 @@ class GameScene extends Phaser.Scene {
     this.createNearBonfire();
     this.createDeath();
 
+    // Spawn Effect 
     this.createDelay();
     this.onEvent();
 
@@ -390,10 +391,10 @@ class GameScene extends Phaser.Scene {
     })
   }
 
+  //Delay and activation for
   createDelay() {
     timedEvent = this.time.delayedCall(600, this.onEvent, [], this)
   }
-
   onEvent() {
       this.events.emit("characterNotLit");
   }
@@ -416,10 +417,11 @@ class GameScene extends Phaser.Scene {
       this.player.health = 5;
     })
 
+    // to start Light Effect
     this.events.once("characterLit", () => {
       this.player.atBonfire = true
     })
-
+    // to stop Light Effect
     this.events.once("characterNotLit", () => {
       this.player.atBonfire = false
     })
