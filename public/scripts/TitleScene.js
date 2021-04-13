@@ -4,14 +4,16 @@ class TitleScene extends Phaser.Scene {
   }
 
   create() {
-    //change the volume between 0 and 1
-    this.menuBGM = this.sound.add("menu-music", {
-      volume: 0.04,
-    });
-    //change the startMenue sond between 0 and 1
-    this.startMenuSound = this.sound.add("start-menu", {
-      volume: 0.04,
-    });
+    this.titleScreenSFX();
+    this.logoDetailEffect();
+    this.titleTextEffect();
+    this.startTextEffects();
+    this.pressToStartGame();
+    //This is the menue background music
+    this.menuBGM.play();
+  }
+
+  logoDetailEffect() {
     this.logoDetail = this.make
       .image({
         x: 413,
@@ -24,6 +26,9 @@ class TitleScene extends Phaser.Scene {
         add: true,
       })
       .setDepth(2);
+  }
+
+  titleTextEffect() {
     this.titleStrokeThickness = 40;
     this.titleFontSize = 150;
     this.titleText = this.add
@@ -44,7 +49,24 @@ class TitleScene extends Phaser.Scene {
         ease: "Linear",
       },
     });
+
+    this.tweens.add({
+      targets: this.titleText.style,
+      strokeThickness: { value: 1, duration: 1100, ease: "Linear" },
+    });
+
     this.titleText.setOrigin(0.5);
+  }
+
+  pressToStartGame() {
+    this.input.keyboard.on("keydown", () => {
+      this.menuBGM.stop();
+      this.startMenuSound.play();
+      this.scene.start("Game");
+    });
+  }
+
+  startTextEffects() {
     this.startText = this.add
       .text(250, this.scale.height / 2 + 200, "Press any key to start", {
         fontFamily: "titleFont",
@@ -58,20 +80,18 @@ class TitleScene extends Phaser.Scene {
       yoyo: true,
       loop: -1,
     });
-
-    this.tweens.add({
-      targets: this.titleText.style,
-      strokeThickness: { value: 1, duration: 1100, ease: "Linear" },
-    });
-
-    this.input.keyboard.on("keydown", () => {
-      // this.menuBGM.stop();
-      // this.startMenuSound.play();
-      this.scene.start("Game");
-    });
-
-    // this.menuBGM.play();
   }
+
+  titleScreenSFX() {
+    this.menuBGM = this.sound.add("menu-music", {
+      volume: 0.04,
+    });
+    //change the startMenue sond between 0 and 1
+    this.startMenuSound = this.sound.add("start-menu", {
+      volume: 0.04,
+    });
+  }
+
   update() {
     if (this.titleStrokeThickness > -1) {
       this.titleText
@@ -81,15 +101,33 @@ class TitleScene extends Phaser.Scene {
     }
   }
 }
-
+//This is the class for logo scene
 class LogoScene extends Phaser.Scene {
   constructor() {
     super("Logo");
   }
 
   create() {
-    this.logo = this.add.image(380, 400, "logo");
+    this.logoEffects();
+    this.productionTextEffects();
+  }
 
+  logoEffects() {
+    this.logo = this.add.image(380, 400, "logo");
+    this.tweens.add({
+      targets: this.logo,
+      alpha: {
+        start: 1,
+        from: 1,
+        to: 0,
+        delay: 3000,
+        duration: 3000,
+        ease: "Linear",
+      },
+    });
+  }
+
+  productionTextEffects() {
     this.productionText = this.add
       .text(210, 470, "two and a half asians presents", {
         fontFamily: "titleFont",
@@ -111,24 +149,6 @@ class LogoScene extends Phaser.Scene {
       onComplete: () => {
         this.scene.start("Title");
       },
-    });
-
-    this.callbacks = { onComplete: true };
-    this.tweens.add({
-      targets: this.logo,
-      alpha: {
-        start: 1,
-        from: 1,
-        to: 0,
-        delay: 3000,
-        duration: 3000,
-        ease: "Linear",
-      },
-    });
-
-    // here to skip to title faster
-    this.input.keyboard.on("keydown", () => {
-      this.scene.start("Title");
     });
   }
 }
