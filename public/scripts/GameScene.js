@@ -32,7 +32,7 @@ class GameScene extends Phaser.Scene {
     this.createNearBonfire();
     this.createDeath();
 
-    // Spawn Effect 
+    // Spawn Effect
     this.createDelay();
     this.onEvent();
 
@@ -260,7 +260,7 @@ class GameScene extends Phaser.Scene {
       objectA: this.player,
       objectB: [this.item, this.item2],
       callback: (eventData) => {
-        console.log("event data on collision: ", eventData)
+        console.log("event data on collision: ", eventData);
         this.events.emit("pickupItem", eventData.gameObjectB);
       },
     });
@@ -278,7 +278,7 @@ class GameScene extends Phaser.Scene {
 
   createInput() {
     // capture so that spacebar doesn't scroll downwards in window
-    this.input.keyboard.addCapture('SPACE')
+    this.input.keyboard.addCapture("SPACE");
     this.player.inputKeys = this.input.keyboard.addKeys({
       up: Phaser.Input.Keyboard.KeyCodes.W,
       down: Phaser.Input.Keyboard.KeyCodes.S,
@@ -356,7 +356,7 @@ class GameScene extends Phaser.Scene {
       objectB: [this.enemy, this.enemy2, this.enemy3],
       callback: () => {
         this.events.off("pickupItem");
-        this.scene.start("Death")
+        this.scene.start("Death");
       },
     });
   }
@@ -387,51 +387,44 @@ class GameScene extends Phaser.Scene {
       objectB: this.bonfire,
       callback: () => {
         this.events.emit("characterLit");
-        
       },
-    })
+    });
   }
 
   //Delay and activation for
   createDelay() {
-    timedEvent = this.time.delayedCall(600, this.onEvent, [], this)
+    timedEvent = this.time.delayedCall(600, this.onEvent, [], this);
   }
   onEvent() {
-      this.events.emit("characterNotLit");
+    this.events.emit("characterNotLit");
   }
-
-
 
   setupEventListener() {
     this.events.on("pickupItem", (item) => {
       //update Soul Counter
       let prevSouls = this.player.souls;
-      this.player.updateSouls(300);  //currently all soulItems give a hard-coded 300 souls.
-      console.log("pickup! Here's our scene data: ", this);
+      this.player.updateSouls(300); //currently all soulItems give a hard-coded 300 souls.
+      console.log("pickup? ", this.player);
       this.events.emit("updateSouls", prevSouls, this.player.souls);
       //remove item
       item.makeInactive();
-    })
+    });
 
-    this.events.on("deathClear", () => {
+    this.events.once("deathClear", () => {
       this.player.souls = 0;
       this.player.health = 5;
       this.events.off("deathClear");
-
-    })
-
+    });
 
     // to start Light Effect
     this.events.once("characterLit", () => {
-      this.player.atBonfire = true
-    })
+      this.player.atBonfire = true;
+    });
     // to stop Light Effect
     this.events.once("characterNotLit", () => {
-      this.player.atBonfire = false
-    })
+      this.player.atBonfire = false;
+    });
 
     console.log(this);
-
-
   }
 }
