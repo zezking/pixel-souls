@@ -359,8 +359,9 @@ class GameScene extends Phaser.Scene {
       callback: (eventData) => {
         // this.scene.start("Preloader");
         console.log("Event Data inside createCombat: ", eventData);
+        this.events.emit("enemyDeath", eventData.gameObjectB);
         this.scene.sleep();
-        this.scene.launch("Combat", { health: this.player.health, enemy: eventData.gameObjectB.id });
+        this.scene.launch("Combat", { health: this.player.health });
       },
     });
   }
@@ -415,15 +416,8 @@ class GameScene extends Phaser.Scene {
       item.makeInactive();
     });
 
-    this.events.on("enemyDeath", (enemyid) => {
-      console.log("Inside enemyDeath?");
-      this.children.each((c) => {
-        const child = c;
-        if (child.texture.key === "skeleton_sprite" && child.id === enemyid) {
-          console.log("child?: ", child);
-          child.enemyKilled();
-        }
-      });
+    this.events.on("enemyDeath", (enemy) => {
+      console.log("Inside enemyDeath? Enemy: ", enemy);
       enemy.enemyKilled();
       this.events.off("enemyDeath");
     })
