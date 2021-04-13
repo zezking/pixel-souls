@@ -5,7 +5,7 @@ class GameScene extends Phaser.Scene {
     super("Game");
   }
 
-  init() {
+  init(data) {
     this.scene.launch("Ui");
   }
 
@@ -39,8 +39,9 @@ class GameScene extends Phaser.Scene {
     this.createOverlay();
     this.setupEventListener();
 
+    this.freeEnemy();
     //Background Music
-    // this.bgm();
+    //this.playBGM();
 
     this.OverlayLayer.setDepth(2239); //MUST ALWAYS BE LAST ON THIS LIST!!
   }
@@ -358,9 +359,13 @@ class GameScene extends Phaser.Scene {
       objectB: [this.enemy, this.enemy2, this.enemy3],
       callback: (eventData) => {
         // this.scene.start("Preloader");
-        console.log("Event Data inside createCombat: ", eventData);
+        console.log("Event Data inside createCombat: ", eventData.gameObjectB);
         this.scene.sleep();
-        this.scene.launch("Combat", { health: this.player.health, enemy: eventData.gameObjectB.id });
+        this.scene.launch("Combat", {
+          health: this.player.health,
+          enemy: eventData.gameObjectB.id,
+          allEnemyObj: eventData,
+        });
       },
     });
   }
@@ -426,7 +431,7 @@ class GameScene extends Phaser.Scene {
       });
       enemy.enemyKilled();
       this.events.off("enemyDeath");
-    })
+    });
 
     this.events.once("deathClear", () => {
       this.player.souls = 0;
@@ -444,7 +449,7 @@ class GameScene extends Phaser.Scene {
     });
   }
 
-  bgm() {
+  playBGM() {
     let bgm = this.sound.add("bg-music", { loop: true, volume: 0.02 });
     bgm.play();
   }
@@ -463,6 +468,26 @@ class GameScene extends Phaser.Scene {
       alpha: { start: 1, from: 1, to: 0, duration: 2000, ease: "Linear" },
       yoyo: true,
       loop: -1,
+    });
+  }
+
+  freeEnemy() {
+    this.events.on("wake", function (sys, data) {
+      console.log(data);
+      let { gameStatus, enemy } = data;
+
+      console.log(this);
+      console.log(enemy);
+      console.log(sys);
+      if (gameStatus) {
+        this.enemyTimer = sys.time.addEvent({
+          delay: 3000,
+          callback: () => {
+            enemy.setStatic(false);
+          },
+          callbackScope: sys,
+        });
+      }
     });
   }
 }
