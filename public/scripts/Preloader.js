@@ -23,6 +23,8 @@ let Preloader = new Phaser.Class({
       this.loadingScreen = this.add.image(this.game.config.width/2, this.game.config.height/2, 'loadingScreen').setScale(0.5);
       this.arrow = this.add.sprite(170, 520, 'fireStill').setOrigin(0.5);
 
+
+      // transition method with screen wipe down y axis, currently turned of with ZERO duration
       this.input.keyboard.on('keydown', function () {
 
           this.scene.transition({
@@ -36,6 +38,7 @@ let Preloader = new Phaser.Class({
       }, this);
 
 
+      // other method of transitioning out
       // this.input.keyboard.on('keydown', function (event) {
     
       //     this.scene.transition({
@@ -46,11 +49,13 @@ let Preloader = new Phaser.Class({
       // }, this);
   },
 
+  
   transitionOut: function (progress)
   {
       this.loadingScreen.y = (600 * progress);
   },
 
+  // spinning motion
   update: function (time, delta)
   {
       this.arrow.rotation += 0.01;
