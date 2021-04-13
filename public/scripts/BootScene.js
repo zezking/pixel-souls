@@ -9,7 +9,9 @@ class BootScene extends Phaser.Scene {
     // this.loadAudio();
     this.loadConversations();
     this.loadTilemap();
+    this.loadFont();
   }
+
 
   loadImages() {
     //Map elements
@@ -21,16 +23,29 @@ class BootScene extends Phaser.Scene {
     this.load.image("ui-heart-full", "public/assets/ui/heart_full.png");
     this.load.image("soul-counter", "public/assets/ui/soul_counter.png");
     this.load.image("logo", "public/assets/ui/logo.png");
+
+    //Battle UI elements
+    this.load.image("sword", "public/assets/ui/battle/sword.png");
+    this.load.image("magic", "public/assets/ui/battle/magic.png");
+    this.load.image("shield", "public/assets/ui/battle/shield.png");
   }
 
   loadSpriteSheets() {
+    // this.load.spritesheet('ashen_one', 'public/assets/character_sprites/ashen_one.png', { frameWidth: 32, frameHeight: 50 });
+
     this.load.atlas(
       "sheet",
       "public/assets/map/fullmap-collision-atlas.png",
       "public/assets/map/fullmap-collision-atlas_atlas.json"
     );
     // this.load.spritesheet('skele', 'public/assets/skele_sprites/skele_idle.png', { frameWidth: 32, frameHeight: 32 });
-    // this.load.spritesheet('ashen_one', 'public/assets/character_sprites/ashen_one.png', { frameWidth: 32, frameHeight: 50 });
+
+    // this.load.spritesheet(
+    //   "ashen_one",
+    //   "public/assets/character_sprites/ashen_one.png",
+    //   { frameWidth: 32, frameHeight: 50 }
+    // );
+
     this.load.spritesheet("bird", "public/assets/sprites/bird.png", {
       frameWidth: 128,
       frameHeight: 109,
@@ -120,8 +135,18 @@ class BootScene extends Phaser.Scene {
   loadConversations() {
     this.load.json("dialogs", "public/assets/sprites/dialogs.json");
   }
+  loadFont() {
+    this.add.text(-100, -100, "preload-font", {
+      fontFamily: "HonokaMincho",
+      fill: "#ffffff",
+    });
+    this.add.text(-100, -100, "preload-font", {
+      fontFamily: "titleFont",
+      fill: "#ffffff",
+    });
+  }
 
   create() {
-    this.scene.start("Game");
+    this.scene.launch("Title");
   }
 }

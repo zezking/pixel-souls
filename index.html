@@ -8,11 +8,23 @@
       content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=0"
     />
     <link rel="stylesheet" href="font.css" />
+    <link
+      rel="preload"
+      as="font"
+      href="public/assets/font/font_1_honokamin.ttf"
+      type="font/ttf"
+    />
+    <link
+      rel="preload"
+      as="font"
+      href="public/assets/font/titleFont.ttf"
+      type="font/ttf"
+    />
   </head>
   <body>
     <div id="phaser-game"></div>
-    <script src="public/lib/phaser.min.js" charset="utf-8"></script>
-    <script src="public/lib/phaser-matter-collision-plugin.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/phaser@3.54.0/dist/phaser.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/phaser-matter-collision-plugin"></script>
     <script src="public/classes/Enemy.js" charset="utf-8"></script>
     <script src="public/classes/Player.js" charset="utf-8"></script>
     <script src="public/classes/NPC.js" charset="utf-8"></script>
@@ -21,10 +33,11 @@
     <script src="public/classes/UiButton.js" charset="utf-8"></script>
     <script src="public/classes/Bonfire.js" charset="utf-8"></script>
     <script src="public/scripts/BootScene.js" charset="utf-8"></script>
+    <script src="public/scripts/GameScene.js" charset="utf-8"></script>
     <script src="public/scripts/TitleScene.js" charset="utf-8"></script>
     <script src="public/scripts/DialogScene.js" charset="utf-8"></script>
-    <script src="public/scripts/BattleScene.js" charset="utf-8"></script>
-    <script src="public/scripts/GameScene.js" charset="utf-8"></script>
+    <script src="public/scripts/DeathScene.js" charset="utf-8"></script>
+    <script src="public/scripts/CombatScene.js" charset="utf-8"></script>
     <script src="public/scripts/UiScene.js" charset="utf-8"></script>
     <script src="public/scripts/EventsManager.js" charset="utf-8"></script>
     <script src="public/game.js" charset="utf-8"></script>

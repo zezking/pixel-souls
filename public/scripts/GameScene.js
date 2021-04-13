@@ -5,21 +5,19 @@ class GameScene extends Phaser.Scene {
   }
 
   init() {
-    this.scene.add("Ui", UiScene, true);
-    this.score = 0;
+    this.scene.launch("Ui");
+    this.events.emit("deathClear");
   }
 
   preload() {
-    // console.log("preload")
-    Player.preload(this);
     Enemy.preload(this);
     Bonfire.preload(this);
     NPC.preload(this);
+    Player.preload(this);
   }
 
   create() {
     this.createMap();
-
     // this.createAudio();
     this.createPlayer();
     this.createEnemy();
@@ -29,15 +27,17 @@ class GameScene extends Phaser.Scene {
     this.createItem();
     this.createNPC();
     this.createBonfire();
-    this.createBattle();
+    // Near Bonfire for light up on player?
+    // this.createNearBonfire();
+    this.createDeath();
     this.createOverlay();
-    this.createEventsManager();
+    this.setupEventListener();
 
     this.OverlayLayer.setDepth(2239); //MUST ALWAYS BE LAST ON THIS LIST!!
   }
 
   update() {
-    this.player.update(this.inputKeys);
+    this.player.update();
 
     // enemies list
     this.enemy.update();
@@ -63,10 +63,8 @@ class GameScene extends Phaser.Scene {
   createPlayer() {
     this.player = new Player({
       scene: this,
-
       x: 530,
-      y: 1700,
-
+      y: 1740,
       key: "ashen_one",
       frame: "player_0",
     });
@@ -75,10 +73,11 @@ class GameScene extends Phaser.Scene {
   createEnemy() {
     this.enemy = new Enemy({
       scene: this,
-      x: 688,
+      x: 288,
       y: 1022,
       key: "skeleton_sprite",
       frame: "skele_idling0",
+      id: 1,
     });
     this.enemy2 = new Enemy({
       scene: this,
@@ -86,6 +85,7 @@ class GameScene extends Phaser.Scene {
       y: 1022,
       key: "skeleton_sprite",
       frame: "skele_idling0",
+      id: 2,
     });
     this.enemy3 = new Enemy({
       scene: this,
@@ -93,6 +93,7 @@ class GameScene extends Phaser.Scene {
       y: 1022,
       key: "skeleton_sprite",
       frame: "skele_idling0",
+      id: 3,
     });
   }
 
@@ -237,16 +238,24 @@ class GameScene extends Phaser.Scene {
       key: "soul",
       id: 1,
     });
+    this.item2 = new Item({
+      scene: this,
+      x: 750,
+      y: 1740,
+      key: "soul",
+      id: 2,
+    });
+
     this.item.depthSorting = false;
     this.item.setDepth(1771);
 
     //item collision detection
     this.matterCollision.addOnCollideStart({
       objectA: this.player,
-      objectB: this.item,
+      objectB: [this.item, this.item2],
       callback: (eventData) => {
-        this.events.emit("pickupItem", this.item.id);
-        console.log("inside pickup item collision");
+        console.log("event data? ", eventData)
+        this.events.emit("pickupItem", eventData.gameObjectB);
       },
     });
   }
@@ -262,7 +271,9 @@ class GameScene extends Phaser.Scene {
   }
 
   createInput() {
-    this.inputKeys = this.input.keyboard.addKeys({
+    // capture so that spacebar doesn't scroll downwards in window
+    this.input.keyboard.addCapture('SPACE')
+    this.player.inputKeys = this.input.keyboard.addKeys({
       up: Phaser.Input.Keyboard.KeyCodes.W,
       down: Phaser.Input.Keyboard.KeyCodes.S,
       left: Phaser.Input.Keyboard.KeyCodes.A,
@@ -279,9 +290,10 @@ class GameScene extends Phaser.Scene {
     // Camera to center leeway, the higher, the tighter
     camera.setLerp(0.1, 0.1);
 
-    // spawn flash
-    camera.flash(1000);
-    camera.fadeIn(500);
+    // //spawn flash
+    // camera.flash(1000);
+    camera.fadeIn(1000);
+    this.player.update(this.player.anims.play("player_down"));
   }
 
   addCollisions() {
@@ -295,7 +307,7 @@ class GameScene extends Phaser.Scene {
       "FULLMAP_collision",
       { shape: shapes.FULLMAP_collision }
     );
-    collisionLayer.setPosition(0 + 736, 0 + 1211); //manual offset for center of mass. Will have to find a better way to calculate this.
+    collisionLayer.setPosition(0 + 684, 0 + 1136); //manual offset for center of mass. Will have to find a better way to calculate this.
     collisionLayer.visible = false;
   }
 
@@ -331,11 +343,13 @@ class GameScene extends Phaser.Scene {
     this.OverlayLayer = map.createLayer("overlay", this.tilesOverlay, 0, 0);
   }
 
-  createBattle() {
+  createDeath() {
     this.matterCollision.addOnCollideStart({
       objectA: this.player,
-      objectB: this.enemy,
-      callback: (eventData) => this.scene.start("Battle"),
+      objectB: [this.enemy, this.enemy2, this.enemy3],
+      callback: () => {
+        this.scene.start("Death")
+      },
     });
   }
 
@@ -359,10 +373,36 @@ class GameScene extends Phaser.Scene {
     });
   }
 
+  createNearBonfire() {
+    this.matterCollision.addOnCollideStart({
+      objectA: this.player,
+      objectB: this.bonfire,
+      callback: (eventData) => {
+        this.events.emit("characterLit");
+      },
+    });
+  }
+
   createDialogsBox() {}
 
-  createEventsManager() {
-    this.eventsManager = new EventsManager(this, this.children);
-    this.eventsManager.setup();
+
+  setupEventListener() {
+    this.events.on("pickupItem", (item) => {
+      //update Soul Counter
+      let prevSouls = this.player.souls;
+      this.player.updateSouls(300);  //currently all soulItems give a hard-coded 300 souls.
+      console.log("pickup? ", this.player);
+      this.events.emit("updateSouls", prevSouls, this.player.souls);
+      //remove item
+      item.makeInactive();
+    })
+
+    this.events.once("deathClear", () => {
+      this.player.souls = 0;
+      this.player.health = 5;
+    })
+
+    console.log(this);
+
   }
 }

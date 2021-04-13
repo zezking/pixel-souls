@@ -4,10 +4,6 @@ class TitleScene extends Phaser.Scene {
   }
 
   create() {
-    // create title text
-
-    // this.logo=this.add.image()
-
     this.titleStrokeThickness = 40;
     this.titleFontSize = 200;
     this.titleText = this.add
@@ -43,7 +39,6 @@ class TitleScene extends Phaser.Scene {
     });
   }
   update() {
-    console.log("it's here");
     if (this.titleStrokeThickness > -1) {
       this.titleText
         .setStroke("#ffffff", this.titleStrokeThickness--)
@@ -63,7 +58,7 @@ class LogoScene extends Phaser.Scene {
   create() {
     this.logo = this.add.image(380, 400, "logo");
     this.productionText = this.add
-      .text(210, 470, "two and a half asian presents", {
+      .text(210, 470, "two and a half asians presents", {
         fontFamily: "titleFont",
         fontSize: "26px",
         fill: "#ffffff",
@@ -80,7 +75,7 @@ class LogoScene extends Phaser.Scene {
         ease: "Linear",
       },
       onComplete: () => {
-        this.scene.launch("Title");
+        this.scene.start("Title");
       },
     });
 
