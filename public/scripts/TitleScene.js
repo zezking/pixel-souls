@@ -4,6 +4,7 @@ class TitleScene extends Phaser.Scene {
   }
 
   create() {
+    this.logoDetail = this.add.image(380, 400, "logoDetail").setDepth(2);
     this.titleStrokeThickness = 40;
     this.titleFontSize = 150;
     this.titleText = this.add
@@ -13,7 +14,17 @@ class TitleScene extends Phaser.Scene {
       })
       .setStroke("#fff", this.titleStrokeThickness)
       .setFontSize(this.titleFontSize);
-
+    this.tweens.add({
+      targets: this.logoDetail,
+      alpha: {
+        start: 0,
+        from: 0,
+        to: 1,
+        delay: 1000,
+        duration: 1000,
+        ease: "Linear",
+      },
+    });
     this.titleText.setOrigin(0.5);
     this.startText = this.add
       .text(250, this.scale.height / 2 + 200, "Press any key to start", {
@@ -42,7 +53,8 @@ class TitleScene extends Phaser.Scene {
     if (this.titleStrokeThickness > -1) {
       this.titleText
         .setStroke("#ffffff", this.titleStrokeThickness--)
-        .setFontSize(this.titleFontSize--);
+        .setFontSize(this.titleFontSize--)
+        .setDepth(0);
     }
   }
   startScene(targetScene) {
@@ -57,6 +69,7 @@ class LogoScene extends Phaser.Scene {
 
   create() {
     this.logo = this.add.image(380, 400, "logo");
+
     this.productionText = this.add
       .text(210, 470, "two and a half asians presents", {
         fontFamily: "titleFont",
@@ -64,6 +77,7 @@ class LogoScene extends Phaser.Scene {
         fill: "#ffffff",
       })
       .setAlpha(0);
+
     this.tweens.add({
       targets: this.productionText,
       alpha: {

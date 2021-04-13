@@ -1,4 +1,5 @@
 let enemy_speed = 20;
+let timedEvent;
 class GameScene extends Phaser.Scene {
   constructor() {
     super("Game");
@@ -28,8 +29,13 @@ class GameScene extends Phaser.Scene {
     this.createNPC();
     this.createBonfire();
     // Near Bonfire for light up on player?
-    // this.createNearBonfire();
+    this.createNearBonfire();
     this.createDeath();
+
+    // Spawn Effect
+    this.createDelay();
+    this.onEvent();
+
     this.createOverlay();
     this.setupEventListener();
 
@@ -66,7 +72,7 @@ class GameScene extends Phaser.Scene {
       x: 530,
       y: 1740,
       key: "ashen_one",
-      frame: "player_0",
+      frame: "player_00",
     });
   }
 
@@ -293,6 +299,7 @@ class GameScene extends Phaser.Scene {
     // //spawn flash
     // camera.flash(1000);
     camera.fadeIn(1000);
+
     this.player.update(this.player.anims.play("player_down"));
   }
 
@@ -378,13 +385,19 @@ class GameScene extends Phaser.Scene {
     this.matterCollision.addOnCollideStart({
       objectA: this.player,
       objectB: this.bonfire,
-      callback: (eventData) => {
+      callback: () => {
         this.events.emit("characterLit");
       },
     });
   }
 
-  createDialogsBox() {}
+  //Delay and activation for
+  createDelay() {
+    timedEvent = this.time.delayedCall(600, this.onEvent, [], this);
+  }
+  onEvent() {
+    this.events.emit("characterNotLit");
+  }
 
   setupEventListener() {
     this.events.on("pickupItem", (item) => {
@@ -401,6 +414,15 @@ class GameScene extends Phaser.Scene {
       this.player.souls = 0;
       this.player.health = 5;
       this.events.off("deathClear");
+    });
+
+    // to start Light Effect
+    this.events.once("characterLit", () => {
+      this.player.atBonfire = true;
+    });
+    // to stop Light Effect
+    this.events.once("characterNotLit", () => {
+      this.player.atBonfire = false;
     });
 
     console.log(this);

@@ -12,7 +12,6 @@ class BootScene extends Phaser.Scene {
     this.loadFont();
   }
 
-
   loadImages() {
     //Map elements
     this.load.image("bottom", "public/assets/map/FULLMAP_bottom.png");
@@ -23,6 +22,7 @@ class BootScene extends Phaser.Scene {
     this.load.image("ui-heart-full", "public/assets/ui/heart_full.png");
     this.load.image("soul-counter", "public/assets/ui/soul_counter.png");
     this.load.image("logo", "public/assets/ui/logo.png");
+    this.load.image("logoDetail", "public/assets/ui/LogoDetail.png");
 
     //Battle UI elements
     this.load.image("sword", "public/assets/ui/battle/sword.png");
@@ -147,6 +147,6 @@ class BootScene extends Phaser.Scene {
   }
 
   create() {
-    this.scene.launch("Title");
+    this.scene.launch("Logo");
   }
 }
