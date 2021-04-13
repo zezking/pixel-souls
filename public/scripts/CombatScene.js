@@ -31,13 +31,16 @@ class CombatScene extends Phaser.Scene {
     };
 
     this.sword.on('pointerdown', () => {
-      this.checkWinner("sword", aiResult());
+      let result = this.checkWinner("sword", aiResult());
+      console.log(result);
     });
     this.magic.on('pointerdown', () => {
-      this.checkWinner("magic", aiResult());
+      let result = this.checkWinner("magic", aiResult());
+      console.log(result);
     });
     this.shield.on('pointerdown', () => {
-      this.checkWinner("shield", aiResult());
+      let result = this.checkWinner("shield", aiResult());
+      console.log(result);
     });
   }
 
@@ -49,24 +52,24 @@ class CombatScene extends Phaser.Scene {
 
     if (playerChoice === "sword") {
       if (aiChoice === "magic") {
-        return "player";
+        return ["player", "magic"];
       } else {
-        return "enemy";
+        return ["enemy", "magic"];
       };
     };
 
     if (playerChoice === "magic") {
       if (aiChoice === "shield") {
-        return "player";
+        return ["player", "shield"];
       } else {
-        return "enemy";
+        return ["enemy", "shield"];
       };
     };
     if (playerChoice === "shield") {
       if (aiChoice === "sword") {
-        return "player";
+        return ["player", "sword"];
       } else {
-        return "enemy";
+        return ["enemy", "sword"];
       };
     };
   }
