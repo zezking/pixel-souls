@@ -7,11 +7,10 @@ class CombatScene extends Phaser.Scene {
   /** Big problem. Can't update the enemy that's on GameScene, because its asleep. Enemy initiates combat with player immediately after combat ends, Event listened to destroy enemy is not being read by GameScene from this scene. brain turning to mush. it time to sleep and try again tomorrow. */
 
   init(data) {
-    let { health, enemy } = data;
+    let { health } = data;
     this.playerHealth = health;
-    this.enemyid = enemy;
-    console.log("Carried-over data?: ", this.playerHealth, this.enemyid);
-    console.log("THIS: ", this);
+    console.log("(inside combat)Carried-over data?: ", this.playerHealth);
+    console.log("(inside combat)THIS: ", this);
   }
 
   create() {
@@ -120,7 +119,6 @@ class CombatScene extends Phaser.Scene {
     }
     if (this.enemyHealth <= 0) {
       this.events.off("results");
-      this.events.emit("enemyDeath", this.enemyid);
       this.scene.wake("Game");
       this.scene.stop("Combat");
     }
