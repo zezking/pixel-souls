@@ -6,12 +6,11 @@ class BootScene extends Phaser.Scene {
   preload() {
     this.loadImages();
     this.loadSpriteSheets();
-    // this.loadAudio();
+    this.loadAudio();
     this.loadConversations();
     this.loadTilemap();
     this.loadFont();
   }
-
 
   loadImages() {
     //Map elements
@@ -23,6 +22,7 @@ class BootScene extends Phaser.Scene {
     this.load.image("ui-heart-full", "public/assets/ui/heart_full.png");
     this.load.image("soul-counter", "public/assets/ui/soul_counter.png");
     this.load.image("logo", "public/assets/ui/logo.png");
+    this.load.image("logoDetail", "public/assets/ui/LogoDetail.png");
 
     //Battle UI elements
     this.load.image("sword", "public/assets/ui/battle/sword.png");
@@ -122,6 +122,7 @@ class BootScene extends Phaser.Scene {
   loadAudio() {
     this.load.audio("menu-music", "public/assets/audio/menu_theme.mp3");
     this.load.audio("bg-music", "public/assets/audio/firelink_shrine.mp3");
+    this.load.audio("start-menu", "public/assets/audio/start_menu.mp3");
   }
 
   loadTilemap() {
@@ -147,6 +148,6 @@ class BootScene extends Phaser.Scene {
   }
 
   create() {
-    this.scene.launch("Title");
+    this.scene.launch("Logo");
   }
 }

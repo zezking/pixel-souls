@@ -50,11 +50,16 @@ class DeathScene extends Phaser.Scene {
     });
 
     this.startText = this.add
-      .text(this.scale.width / 2 , this.scale.height / 2 + 200, "Press E to restart", {
-        fontFamily: "titleFont",
-        fontSize: "30px",
-        fill: "#ffffff",
-      })
+      .text(
+        this.scale.width / 2,
+        this.scale.height / 2 + 200,
+        "Press E to restart",
+        {
+          fontFamily: "titleFont",
+          fontSize: "30px",
+          fill: "#ffffff",
+        }
+      )
       .setAlpha(0);
     this.tweens.add({
       targets: this.startText,
@@ -79,12 +84,12 @@ class DeathScene extends Phaser.Scene {
       // this.UiScene.scene.restart();
       this.scene.sleep("Ui");
       this.scene.start("Title");
+
       // ee.removeAllListeners();
     });
   }
 
   update() {
-    console.log("Deathhh");
     if (this.deathFontSize < 120) {
       this.deathText.setFontSize(this.deathFontSize++);
     }
