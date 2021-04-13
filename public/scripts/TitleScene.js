@@ -4,11 +4,22 @@ class TitleScene extends Phaser.Scene {
   }
 
   create() {
-    this.logoDetail = this.add.image(380, 400, "logoDetail").setDepth(2);
+    this.logoDetail = this.make
+      .image({
+        x: 413,
+        y: 398,
+        key: "logoDetail",
+        scale: {
+          x: 1.1,
+          y: 1.1,
+        },
+        add: true,
+      })
+      .setDepth(2);
     this.titleStrokeThickness = 40;
     this.titleFontSize = 150;
     this.titleText = this.add
-      .text(this.scale.width / 2, this.scale.height / 2, "PIXEL SOULS", {
+      .text(this.scale.width / 2, this.scale.height / 2, "PIXEL  SOULS", {
         fontFamily: "titleFont",
         fill: "#ffffff",
       })
