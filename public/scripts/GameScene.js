@@ -18,6 +18,7 @@ class GameScene extends Phaser.Scene {
   }
 
   create() {
+    this.createAreaText();
     this.createMap();
     // this.createAudio();
     this.createPlayer();
@@ -30,7 +31,7 @@ class GameScene extends Phaser.Scene {
     this.createBonfire();
     // Near Bonfire for light up on player?
     this.createNearBonfire();
-    this.createDeath();
+    this.createCombat();
 
     // Spawn Effect
     this.createDelay();
@@ -38,6 +39,9 @@ class GameScene extends Phaser.Scene {
 
     this.createOverlay();
     this.setupEventListener();
+
+    //Background Music
+    // this.bgm();
 
     this.OverlayLayer.setDepth(2239); //MUST ALWAYS BE LAST ON THIS LIST!!
   }
@@ -300,7 +304,7 @@ class GameScene extends Phaser.Scene {
     // camera.flash(1000);
     camera.fadeIn(1000);
 
-    this.player.update(this.player.anims.play("player_down"));
+    // this.player.update(this.player.anims.play("player_down"));
   }
 
   addCollisions() {
@@ -350,13 +354,16 @@ class GameScene extends Phaser.Scene {
     this.OverlayLayer = map.createLayer("overlay", this.tilesOverlay, 0, 0);
   }
 
-  createDeath() {
+  createCombat() {
     this.matterCollision.addOnCollideStart({
       objectA: this.player,
       objectB: [this.enemy, this.enemy2, this.enemy3],
       callback: () => {
-        this.events.off("pickupItem");
-        this.scene.start("Preloader");
+        // this.events.off("pickupItem"); //move this to death?
+        // this.scene.start("Preloader");
+        this.scene.sleep();
+        this.scene.launch("Combat", this.player.health);
+
       },
     });
   }
@@ -424,7 +431,28 @@ class GameScene extends Phaser.Scene {
     this.events.once("characterNotLit", () => {
       this.player.atBonfire = false;
     });
+  }
 
-    console.log(this);
+  bgm() {
+    let bgm = this.sound.add("bg-music", { loop: true, volume: 0.02 });
+    bgm.play();
+  }
+
+  createAreaText() {
+    console.log("its here");
+    this.areaText = this.add
+      .text(this.scale.width / 2, this.scale.height / 2, "Firelink Shrine", {
+        fontFamily: "titleFont",
+        fill: "#ffffff",
+        fontSize: "120px",
+      })
+      .setAlpha(1);
+
+    this.tweens.add({
+      targets: this.areaText,
+      alpha: { start: 1, from: 1, to: 0, duration: 2000, ease: "Linear" },
+      yoyo: true,
+      loop: -1,
+    });
   }
 }
