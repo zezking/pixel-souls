@@ -5,9 +5,9 @@ class TitleScene extends Phaser.Scene {
 
   create() {
     this.titleStrokeThickness = 40;
-    this.titleFontSize = 200;
+    this.titleFontSize = 150;
     this.titleText = this.add
-      .text(this.scale.width / 2, this.scale.height / 2, "Pixel Souls", {
+      .text(this.scale.width / 2, this.scale.height / 2, "PIXEL SOULS", {
         fontFamily: "titleFont",
         fill: "#ffffff",
       })
