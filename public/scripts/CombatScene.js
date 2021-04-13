@@ -2,11 +2,12 @@ class CombatScene extends Phaser.Scene {
 
   constructor(data) {
     super("Combat");
-    // let { playerHealth } = data;
+    this.playerHealth = data;
     this.enemyHealth = 1; 
   }
   create() {
     this.setupCombatUi();
+    this.resultListener();
   }
 
   setupCombatUi() {
@@ -31,23 +32,23 @@ class CombatScene extends Phaser.Scene {
     };
 
     this.sword.on('pointerdown', () => {
-      let result = this.checkWinner("sword", aiResult());
-      console.log(result);
+      this.result = this.checkWinner("sword", aiResult());
+      this.events.emit("results", this.result);
     });
     this.magic.on('pointerdown', () => {
-      let result = this.checkWinner("magic", aiResult());
-      console.log(result);
+      this.result = this.checkWinner("magic", aiResult());
+      this.events.emit("results", this.result);
     });
     this.shield.on('pointerdown', () => {
-      let result = this.checkWinner("shield", aiResult());
-      console.log(result);
+      this.result = this.checkWinner("shield", aiResult());
+      this.events.emit("results", this.result);
     });
   }
 
   //Sword > Magic > Shield > Sword...  :)
   checkWinner(playerChoice, aiChoice) {
     if (playerChoice === aiChoice) {
-      return "draw";
+      return ["draw"];
     };
 
     if (playerChoice === "sword") {
@@ -74,9 +75,27 @@ class CombatScene extends Phaser.Scene {
     };
   }
   
+  resultListener() {
+    this.events.on("results", () => {
+      let winner = this.result[0];
+      let enemyChoice = this.result[1];
 
-  update() {
-
+      switch (winner) {
+        case "draw":
+          console.log("Enemy chose: ", enemyChoice);
+          break;
+        case "enemy":
+          console.log("Enemy chose: ", enemyChoice);
+          break;
+        case "player":
+          console.log("Enemy chose: ", enemyChoice);
+          break;
+      }
+    })
   }
+
+  // update() {
+
+  // }
 
 }

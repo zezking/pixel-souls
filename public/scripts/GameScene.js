@@ -30,7 +30,7 @@ class GameScene extends Phaser.Scene {
     this.createBonfire();
     // Near Bonfire for light up on player?
     this.createNearBonfire();
-    this.createDeath();
+    this.createCombat();
 
     // Spawn Effect 
     this.createDelay();
@@ -350,13 +350,14 @@ class GameScene extends Phaser.Scene {
     this.OverlayLayer = map.createLayer("overlay", this.tilesOverlay, 0, 0);
   }
 
-  createDeath() {
+  createCombat() {
     this.matterCollision.addOnCollideStart({
       objectA: this.player,
       objectB: [this.enemy, this.enemy2, this.enemy3],
       callback: () => {
-        this.events.off("pickupItem");
-        this.scene.start("Combat")
+        // this.events.off("pickupItem"); //move this to death?
+        this.scene.sleep();
+        this.scene.launch("Combat", this.player.health);
       },
     });
   }
