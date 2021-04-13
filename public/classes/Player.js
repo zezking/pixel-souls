@@ -52,6 +52,7 @@ class Player extends Phaser.Physics.Matter.Sprite {
     this.setFixedRotation();
     this.health = 5;
     this.souls = 0;
+    this.atBonfire = false
   }
 
   static preload(scene) {
@@ -76,6 +77,10 @@ class Player extends Phaser.Physics.Matter.Sprite {
   }
 
   update() {
+
+    // if(!this.atBonfire){
+    //   this.anims.play("player_spawn")
+    // }
     // this.body.setVelocity()
     if (this.inputKeys.left.isDown) {
       this.anims.play("player_left", true);
@@ -87,6 +92,8 @@ class Player extends Phaser.Physics.Matter.Sprite {
       this.anims.play("player_up", true);
     } else if (this.inputKeys.down.isDown) {
       this.anims.play("player_down", true);
+    } else if(this.atBonfire){
+      this.anims.play("player_spawn", true)
     } else {
       this.anims.stop();
     }

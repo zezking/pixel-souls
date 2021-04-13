@@ -1,6 +1,34 @@
 {
     "anims": [
         {
+            "key": "player_spawn",
+            "type": "frames",
+            "repeat": -1,
+            "frameRate": 8,
+            "frames": [
+                {
+                    "key": "ashen_one",
+                    "frame": "player_12"
+                },
+                {
+                    "key": "ashen_one",
+                    "frame": "player_13"
+                },
+                {
+                    "key": "ashen_one",
+                    "frame": "player_14"
+                },
+                {
+                    "key": "ashen_one",
+                    "frame": "player_15"
+                },
+                {
+                    "key": "ashen_one",
+                    "frame": "player_16"
+                }
+            ]
+        },
+        {
             "key": "player_right",
             "type": "frames",
             "repeat": -1,
@@ -8,15 +36,19 @@
             "frames": [
                 {
                     "key": "ashen_one",
-                    "frame": "player_6"
+                    "frame": "player_07"
                 },
                 {
                     "key": "ashen_one",
-                    "frame": "player_7"
+                    "frame": "player_06"
                 },
                 {
                     "key": "ashen_one",
-                    "frame": "player_8"
+                    "frame": "player_07"
+                },
+                {
+                    "key": "ashen_one",
+                    "frame": "player_08"
                 }
             ]
         },
@@ -28,35 +60,19 @@
             "frames": [
                 {
                     "key": "ashen_one",
-                    "frame": "player_3"
+                    "frame": "player_04"
                 },
                 {
                     "key": "ashen_one",
-                    "frame": "player_4"
+                    "frame": "player_03"
                 },
                 {
                     "key": "ashen_one",
-                    "frame": "player_5"
-                }
-            ]
-        },
-        {
-            "key": "player_down",
-            "type": "frames",
-            "repeat": -1,
-            "frameRate": 12,
-            "frames": [
-                {
-                    "key": "ashen_one",
-                    "frame": "player_0"
+                    "frame": "player_04"
                 },
                 {
                     "key": "ashen_one",
-                    "frame": "player_1"
-                },
-                {
-                    "key": "ashen_one",
-                    "frame": "player_2"
+                    "frame": "player_05"
                 }
             ]
         },
@@ -68,7 +84,11 @@
             "frames": [
                 {
                     "key": "ashen_one",
-                    "frame": "player_9"
+                    "frame": "player_10"
+                },
+                {
+                    "key": "ashen_one",
+                    "frame": "player_09"
                 },
                 {
                     "key": "ashen_one",
@@ -77,6 +97,30 @@
                 {
                     "key": "ashen_one",
                     "frame": "player_11"
+                }
+            ]
+        },
+        {
+            "key": "player_down",
+            "type": "frames",
+            "repeat": -1,
+            "frameRate": 12,
+            "frames": [
+                {
+                    "key": "ashen_one",
+                    "frame": "player_01"
+                },
+                {
+                    "key": "ashen_one",
+                    "frame": "player_00"
+                },
+                {
+                    "key": "ashen_one",
+                    "frame": "player_01"
+                },
+                {
+                    "key": "ashen_one",
+                    "frame": "player_02"
                 }
             ]
         }
