@@ -19,6 +19,7 @@ class GameScene extends Phaser.Scene {
     Enemy.preload(this);
     Bonfire.preload(this);
     NPC.preload(this);
+    Item.preload(this);
     Player.preload(this);
   }
 
@@ -63,6 +64,11 @@ class GameScene extends Phaser.Scene {
 
     this.crestfallenWarrior.update();
     this.bonfire.update();
+
+    //items list
+    this.items.forEach((item) => {
+      item.update();
+    });
 
     //Sprite depth-sorting
     this.children.each((c) => {
@@ -258,6 +264,7 @@ class GameScene extends Phaser.Scene {
       x: 700,
       y: 1740,
       key: "soul",
+      frame: "soul_0",
       id: 1,
     });
     this.item2 = new Item({
@@ -265,8 +272,10 @@ class GameScene extends Phaser.Scene {
       x: 750,
       y: 1740,
       key: "soul",
+      frame: "soul_0",
       id: 2,
     });
+    this.items = [this.item, this.item2];
 
     this.item.depthSorting = false;
     this.item.setDepth(1771);
@@ -431,13 +440,14 @@ class GameScene extends Phaser.Scene {
 
   setupEventListener() {
     this.events.on("pickupItem", (item) => {
+      this.items = this.items.filter((e) => e.id !== item.id);
+      item.makeInactive();
       //update Soul Counter
       let prevSouls = this.player.souls;
       this.player.updateSouls(300); //currently all soulItems give a hard-coded 300 souls.
       console.log("picked up item!");
       this.events.emit("updateSouls", prevSouls, this.player.souls);
       //remove item
-      item.makeInactive();
     });
 
     this.events.on("enemyDeath", (enemy) => {

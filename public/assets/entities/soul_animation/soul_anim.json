@@ -1,0 +1,44 @@
+{
+    "anims": [
+        {
+            "key": "soul_idle",
+            "type": "frames",
+            "repeat": -1,
+            "frameRate": 8,
+            "frames": [
+                {
+                    "key": "soul",
+                    "frame": "soul_0"
+                },
+                {
+                    "key": "soul",
+                    "frame": "soul_1"
+                },
+                {
+                    "key": "soul",
+                    "frame": "soul_2"
+                },
+                {
+                    "key": "soul",
+                    "frame": "soul_3"
+                },
+                {
+                    "key": "soul",
+                    "frame": "soul_4"
+                },
+                {
+                    "key": "soul",
+                    "frame": "soul_5"
+                },
+                {
+                    "key": "soul",
+                    "frame": "soul_6"
+                },
+                {
+                    "key": "soul",
+                    "frame": "soul_7"
+                }
+            ]
+        }
+    ]
+}
