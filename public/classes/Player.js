@@ -28,8 +28,8 @@ class Player extends Phaser.Physics.Matter.Sprite {
         attractors: [
           function (bodyA, bodyB) {
             if (
-              bodyA.position.x - bodyB.position.x < 125 &&
-              bodyA.position.y - bodyB.position.y < 125
+              bodyA.position.x - bodyB.position.x < 125 && bodyB.position.x - bodyA.position.x < 125 &&
+              bodyA.position.y - bodyB.position.y < 125 && bodyB.position.y - bodyA.position.y < 125
             ) {
               return {
                 x: (bodyA.position.x - bodyB.position.x) * 0.000045, //You can change this value to adjust the force of X axis
