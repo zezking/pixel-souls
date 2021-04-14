@@ -133,6 +133,7 @@ class CombatScene extends Phaser.Scene {
     if (this.playerHealth <= 0) {
       this.events.off("pointerdown");
       this.events.off("results");
+      this.battleBGM.stop();
       this.scene.start("Death");
 
 
@@ -140,8 +141,9 @@ class CombatScene extends Phaser.Scene {
     } else if (this.playerHealth <= 0 && this.enemyHealth <= 0){
       this.events.off("pointerdown");
       this.events.off("results");
-      this.scene.start("Death");
       this.mainBGM.stop();
+      this.battleBGM.stop();
+      this.scene.start("Death");
 
     } else if (this.enemyHealth <= 0) {
       console.log(this.mainBGM);
