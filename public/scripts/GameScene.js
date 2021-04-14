@@ -360,6 +360,7 @@ class GameScene extends Phaser.Scene {
       objectB: this.enemies,
       callback: (eventData) => {
         console.log("Event Data inside createCombat: ", eventData);
+
         this.events.emit("enemyDeath", eventData.gameObjectB);
         this.enemies.forEach((enemy) => {
           console.log(enemy);
@@ -373,6 +374,7 @@ class GameScene extends Phaser.Scene {
           enemyGroup: this.enemies,
         });
       },
+      callbackScope: this,
     });
   }
 
