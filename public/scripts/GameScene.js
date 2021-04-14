@@ -39,9 +39,9 @@ class GameScene extends Phaser.Scene {
     this.createOverlay();
     this.setupEventListener();
 
-    this.freeEnemy();
+    this.freeEnemy(this.enemies);
     //Background Music
-    //this.playBGM();
+    this.playBGM();
 
     this.OverlayLayer.setDepth(2239); //MUST ALWAYS BE LAST ON THIS LIST!!
   }
@@ -50,9 +50,9 @@ class GameScene extends Phaser.Scene {
     this.player.update();
 
     // enemies list
-    this.enemy.update();
-    this.enemy2.update();
-    this.enemy3.update();
+    this.enemies.forEach((enemy) => {
+      enemy.update();
+    });
 
     this.crestfallenWarrior.update();
     this.bonfire.update();
@@ -105,6 +105,7 @@ class GameScene extends Phaser.Scene {
       frame: "skele_idling0",
       id: 3,
     });
+    this.enemies = [this.enemy, this.enemy2, this.enemy3];
   }
 
   createNPC() {
@@ -356,15 +357,19 @@ class GameScene extends Phaser.Scene {
   createCombat() {
     this.matterCollision.addOnCollideStart({
       objectA: this.player,
-      objectB: [this.enemy, this.enemy2, this.enemy3],
+      objectB: this.enemies,
       callback: (eventData) => {
         // this.scene.start("Preloader");
-        console.log("Event Data inside createCombat: ", eventData.gameObjectB);
+        console.log("Event Data inside createCombat: ", eventData);
+        this.events.emit("enemyDeath", eventData.gameObjectB);
+        this.enemies.forEach((enemy) => {
+          console.log(enemy);
+          enemy.setStatic(true);
+        });
         this.scene.sleep();
         this.scene.launch("Combat", {
           health: this.player.health,
-          enemy: eventData.gameObjectB.id,
-          allEnemyObj: eventData,
+          enemyGroup: this.enemies,
         });
       },
     });
@@ -420,17 +425,12 @@ class GameScene extends Phaser.Scene {
       item.makeInactive();
     });
 
-    this.events.on("enemyDeath", (enemyid) => {
-      console.log("Inside enemyDeath?");
-      this.children.each((c) => {
-        const child = c;
-        if (child.texture.key === "skeleton_sprite" && child.id === enemyid) {
-          console.log("child?: ", child);
-          child.enemyKilled();
-        }
-      });
+    this.events.on("enemyDeath", (enemy) => {
+      console.log("Inside enemyDeath? Enemy: ", enemy);
+      this.enemies = this.enemies.filter((e) => e.id !== enemy.id);
+      console.log("this.enemies: ", this.enemies);
       enemy.enemyKilled();
-      this.events.off("enemyDeath");
+      // this.events.off("enemyDeath");
     });
 
     this.events.once("deathClear", () => {
@@ -471,23 +471,26 @@ class GameScene extends Phaser.Scene {
     });
   }
 
-  freeEnemy() {
-    this.events.on("wake", function (sys, data) {
-      console.log(data);
-      let { gameStatus, enemy } = data;
-
-      console.log(this);
-      console.log(enemy);
-      console.log(sys);
-      if (gameStatus) {
-        this.enemyTimer = sys.time.addEvent({
-          delay: 3000,
-          callback: () => {
-            enemy.setStatic(false);
-          },
-          callbackScope: sys,
-        });
-      }
-    });
+  freeEnemy(enemyGroup) {
+    console.log(enemyGroup);
+    if (enemyGroup) {
+      this.events.on("wake", function (sys, data) {
+        console.log(data);
+        let { gameStatus } = data;
+        if (gameStatus) {
+          this.enemyTimer = sys.time.addEvent({
+            delay: 3000,
+            callback: () => {
+              enemyGroup.forEach((enemy) => {
+                if (enemy.active) {
+                  enemy.setStatic(false);
+                }
+              });
+            },
+            callbackScope: sys,
+          });
+        }
+      });
+    }
   }
 }
