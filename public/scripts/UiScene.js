@@ -13,6 +13,7 @@ class UiScene extends Phaser.Scene {
   create() {
     this.setupUiElements();
     this.setupEvents();
+    this.createSoulSuckSFX();
   }
 
   setupUiElements() {
@@ -42,7 +43,17 @@ class UiScene extends Phaser.Scene {
   setupEvents() {
     // listen for the updateSouls event from the game scene
     this.gameScene.events.on("updateSouls", (prevSouls, newSouls) => {
-      this.soulText.setText(`${newSouls}`);
+      this.soulSuck.play();
+      let counter = prevSouls;
+      let timer = 0;
+      for (let i = counter; i < newSouls; i++) {
+        setTimeout(() => {
+          console.log("dfdfd");
+          console.log(this.soulText);
+          console.log(counter);
+          this.soulText.setText(`${i + 1}`);
+        }, (timer += 5));
+      }
     });
     // listen for healthCount event?
     this.combatScene.events.on("updateHealth", (health) => {
@@ -62,7 +73,10 @@ class UiScene extends Phaser.Scene {
     this.events.emit("healthUpdated", health);
   }
 
-  createAnimatingScore;
-
+  createSoulSuckSFX() {
+    this.soulSuck = this.sound.add("soul-suck", {
+      volume: 0.04,
+    });
+  }
   update() {}
 }
