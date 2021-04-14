@@ -312,7 +312,7 @@ class GameScene extends Phaser.Scene {
     let camera = this.cameras.main;
 
     // Zoom in and out of Player
-    camera.zoom = 1;
+    camera.zoom = 2;
 
     camera.startFollow(this.player);
     // Camera to center leeway, the higher, the tighter
@@ -422,7 +422,6 @@ class GameScene extends Phaser.Scene {
       objectB: this.bonfire,
       callback: () => {
         this.events.emit("characterLit");
-
       },
     });
   }
@@ -434,7 +433,6 @@ class GameScene extends Phaser.Scene {
   onEvent() {
     this.events.emit("characterNotLit");
     this.events.emit("deathClear");
-
   }
 
   setupEventListener() {
@@ -469,7 +467,6 @@ class GameScene extends Phaser.Scene {
       this.player.atBonfire = false;
     });
 
-
     this.uiScene.events.on("healthUpdated", (health) => {
       this.player.health = health;
     });
@@ -478,11 +475,11 @@ class GameScene extends Phaser.Scene {
   createAreaText() {
     this.areaText = this.add
 
-    // had to hardcode position of text, couldn't get it to follow player camera, might need to look into it
+      // had to hardcode position of text, couldn't get it to follow player camera, might need to look into it
       .text(550, 1700, "Firelink Shrine", {
         fontFamily: "titleFont",
         fill: "#ffffff",
-        fontSize: "56px",
+        fontSize: "30px",
       })
       .setOrigin(0.5)
       .setAlpha(0);
