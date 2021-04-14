@@ -114,13 +114,18 @@ class CombatScene extends Phaser.Scene {
       this.events.off("pointerdown");
       this.events.off("results");
       this.events.off("pickupItem");
+      //this.currentEnemy.setStatic(true);
+
       this.scene.stop("Game");
       this.scene.start("Death");
     }
+
     if (this.enemyHealth <= 0) {
+      console.log("inside enemy health <0", this);
       this.events.off("results");
-      this.scene.wake("Game");
-      this.scene.stop("Combat");
+      this.events.emit("enemyDeath", this.enemyid);
+      this.scene.sleep("Combat");
+      this.scene.wake("Game", { gameStatus: true }); //pass a game status to the Game Scene
     }
   }
 

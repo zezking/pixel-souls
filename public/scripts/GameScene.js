@@ -5,7 +5,7 @@ class GameScene extends Phaser.Scene {
     super("Game");
   }
 
-  init() {
+  init(data) {
     this.scene.launch("Ui");
   }
 
@@ -39,8 +39,9 @@ class GameScene extends Phaser.Scene {
     this.createOverlay();
     this.setupEventListener();
 
+    this.freeEnemy(this.enemies);
     //Background Music
-    this.bgm();
+    this.playBGM();
 
     this.OverlayLayer.setDepth(2239); //MUST ALWAYS BE LAST ON THIS LIST!!
   }
@@ -51,7 +52,7 @@ class GameScene extends Phaser.Scene {
     // enemies list
     this.enemies.forEach((enemy) => {
       enemy.update();
-    })
+    });
 
     this.crestfallenWarrior.update();
     this.bonfire.update();
@@ -360,8 +361,15 @@ class GameScene extends Phaser.Scene {
       callback: (eventData) => {
         console.log("Event Data inside createCombat: ", eventData);
         this.events.emit("enemyDeath", eventData.gameObjectB);
+        this.enemies.forEach((enemy) => {
+          console.log(enemy);
+          enemy.setStatic(true);
+        });
         this.scene.sleep();
-        this.scene.launch("Combat", { health: this.player.health });
+        this.scene.launch("Combat", {
+          health: this.player.health,
+          enemyGroup: this.enemies,
+        });
       },
     });
   }
@@ -418,11 +426,11 @@ class GameScene extends Phaser.Scene {
 
     this.events.on("enemyDeath", (enemy) => {
       console.log("Inside enemyDeath? Enemy: ", enemy);
-      this.enemies = this.enemies.filter(e => e.id !== enemy.id);
+      this.enemies = this.enemies.filter((e) => e.id !== enemy.id);
       console.log("this.enemies: ", this.enemies);
       enemy.enemyKilled();
       // this.events.off("enemyDeath");
-    })
+    });
 
     this.events.once("deathClear", () => {
       this.player.souls = 0;
@@ -440,7 +448,7 @@ class GameScene extends Phaser.Scene {
     });
   }
 
-  bgm() {
+  playBGM() {
     let bgm = this.sound.add("bg-music", { loop: true, volume: 0.02 });
     bgm.play();
   }
@@ -460,5 +468,26 @@ class GameScene extends Phaser.Scene {
       yoyo: true,
       loop: -1,
     });
+  }
+
+  freeEnemy(enemyGroup) {
+    if (enemyGroup) {
+      this.events.on("wake", function (sys, data) {
+        let { gameStatus } = data;
+        if (gameStatus) {
+          this.enemyTimer = sys.time.addEvent({
+            delay: 1000,
+            callback: () => {
+              enemyGroup.forEach((enemy) => {
+                if (enemy.active) {
+                  enemy.setStatic(false); //set it's static to false if enemy is still active (not killed)
+                }
+              });
+            },
+            callbackScope: sys,
+          });
+        }
+      });
+    }
   }
 }
