@@ -472,18 +472,16 @@ class GameScene extends Phaser.Scene {
   }
 
   freeEnemy(enemyGroup) {
-    console.log(enemyGroup);
     if (enemyGroup) {
       this.events.on("wake", function (sys, data) {
-        console.log(data);
         let { gameStatus } = data;
         if (gameStatus) {
           this.enemyTimer = sys.time.addEvent({
-            delay: 3000,
+            delay: 1000,
             callback: () => {
               enemyGroup.forEach((enemy) => {
                 if (enemy.active) {
-                  enemy.setStatic(false);
+                  enemy.setStatic(false); //set it's static to false if enemy is still active (not killed)
                 }
               });
             },
