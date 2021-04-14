@@ -23,9 +23,6 @@ class GameScene extends Phaser.Scene {
   }
 
   create() {
-    this.mainBGM = this.sound.add("bg-music", {
-      volume: 0.04,
-    });
     this.createMap();
     this.createPlayer();
     this.createEnemy();
@@ -52,8 +49,7 @@ class GameScene extends Phaser.Scene {
     this.freeEnemy(this.enemies);
     //Background Music
     this.createMusic();
-    this.mainBGM.play();
-    console.log(this);
+
     this.OverlayLayer.setDepth(2239); //MUST ALWAYS BE LAST ON THIS LIST!!
   }
 
@@ -76,7 +72,7 @@ class GameScene extends Phaser.Scene {
       }
     });
   }
-//--------------SPAWN ENTITIES IN GAME------------------
+  //--------------SPAWN ENTITIES IN GAME------------------
   createPlayer() {
     this.player = new Player({
       scene: this,
@@ -294,8 +290,8 @@ class GameScene extends Phaser.Scene {
       frame: "bonfire0",
     });
   }
-//--------------------------------
-//--------------------------------
+  //--------------------------------
+  //--------------------------------
 
   createInput() {
     // capture so that spacebar doesn't scroll downwards in window
@@ -472,12 +468,11 @@ class GameScene extends Phaser.Scene {
 
   createAreaText() {
     this.areaText = this.add
-    // had to hardcode position of text, couldn't get it to follow player camera, might need to look into it
+      // had to hardcode position of text, couldn't get it to follow player camera, might need to look into it
       .text(525, 1700, "Firelink Shrine", {
         fontFamily: "titleFont",
         fill: "#ffffff",
         fontSize: "30px",
-
       })
       .setOrigin(0.5)
       .setAlpha(0);
@@ -512,5 +507,15 @@ class GameScene extends Phaser.Scene {
     }
   }
 
-  createMusic() {}
+  createMusic() {
+    this.newAreaSFX = this.sound.add("new-area", {
+      volume: 0.04,
+    });
+    this.mainBGM = this.sound.add("bg-music", {
+      volume: 0.04,
+      loop: true,
+    });
+    this.mainBGM.play();
+    this.newAreaSFX.play();
+  }
 }

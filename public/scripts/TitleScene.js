@@ -89,11 +89,11 @@ class TitleScene extends Phaser.Scene {
 
   titleScreenSFX() {
     this.menuBGM = this.sound.add("menu-music", {
-      volume: 0.04,
+      volume: 0.07,
     });
     //change the startMenue sond between 0 and 1
     this.startMenuSound = this.sound.add("start-menu", {
-      volume: 0.04,
+      volume: 0.06,
     });
   }
 
