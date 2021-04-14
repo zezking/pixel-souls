@@ -13,6 +13,7 @@ class UiScene extends Phaser.Scene {
   create() {
     this.setupUiElements();
     this.setupEvents();
+    this.createSoulSuckSFX();
   }
 
   setupUiElements() {
@@ -32,6 +33,7 @@ class UiScene extends Phaser.Scene {
       fontSize: "16px",
       fill: "#fff",
     });
+
     Phaser.Display.Align.In.Center(this.soulText, this.soulCounter);
 
     // Estus Count
@@ -41,23 +43,40 @@ class UiScene extends Phaser.Scene {
   setupEvents() {
     // listen for the updateSouls event from the game scene
     this.gameScene.events.on("updateSouls", (prevSouls, newSouls) => {
-      this.soulText.setText(`${newSouls}`);
+      this.soulSuck.play();
+      let counter = prevSouls;
+      let timer = 0;
+      for (let i = counter; i < newSouls; i++) {
+        setTimeout(() => {
+          console.log("dfdfd");
+          console.log(this.soulText);
+          console.log(counter);
+          this.soulText.setText(`${i + 1}`);
+        }, (timer += 5));
+      }
     });
     // listen for healthCount event?
-    this.combatScene.events.on('updateHealth', (health) => {
+    this.combatScene.events.on("updateHealth", (health) => {
       this.hearts.children.each((gameObj, index) => {
         const heart = gameObj;
         if (index < health) {
-          heart.setTexture("ui-heart-full")
+          heart.setTexture("ui-heart-full");
         } else {
-          heart.setTexture("ui-heart-empty")
-        };
-      })
+          heart.setTexture("ui-heart-empty");
+        }
+      });
       this.healthUpdater(health);
-    })
+    });
   }
 
   healthUpdater(health) {
     this.events.emit("healthUpdated", health);
   }
+
+  createSoulSuckSFX() {
+    this.soulSuck = this.sound.add("soul-suck", {
+      volume: 0.04,
+    });
+  }
+  update() {}
 }
