@@ -43,7 +43,7 @@ class UiScene extends Phaser.Scene {
   setupEvents() {
     // listen for the updateSouls event from the game scene
     this.gameScene.events.on("updateSouls", (prevSouls, newSouls) => {
-      this.soulSuck.play();
+      this.soulGet.play();
       let counter = prevSouls;
       let timer = 0;
       for (let i = counter; i < newSouls; i++) {
@@ -74,7 +74,7 @@ class UiScene extends Phaser.Scene {
   }
 
   createSoulSuckSFX() {
-    this.soulSuck = this.sound.add("soul-suck", {
+    this.soulGet = this.sound.add("soul-get", {
       volume: 0.04,
     });
   }
