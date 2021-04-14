@@ -43,7 +43,6 @@ class LoadingScene extends Phaser.Scene {
       completeDelay: 3000,
       onComplete: () => {
         this.scene.remove("Loading");
-        this.cameras.main.fadeOut(1000);
       },
     });
   }

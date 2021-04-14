@@ -28,7 +28,6 @@ class BootScene extends Phaser.Scene {
     this.load.image("sword", "public/assets/ui/battle/sword.png");
     this.load.image("magic", "public/assets/ui/battle/magic.png");
     this.load.image("shield", "public/assets/ui/battle/shield.png");
-    this.load.image("skeleton_battle", "public/assets/skele_sprites/skeleton_battle.png");
     this.load.image("PLAYERBACK", "public/assets/sprites/PLAYERBACK.png");
     this.load.image("ui_background", "public/assets/ui/ui_background.png");
   }
@@ -55,20 +54,32 @@ class BootScene extends Phaser.Scene {
       frameHeight: 39,
     });
 
-    this.load.spritesheet("laurentius", "public/assets/sprites/laurentius.png", {
-      frameWidth: 26,
-      frameHeight: 32,
-    });
+    this.load.spritesheet(
+      "laurentius",
+      "public/assets/sprites/laurentius.png",
+      {
+        frameWidth: 26,
+        frameHeight: 32,
+      }
+    );
 
-    this.load.spritesheet("bigHatLogan", "public/assets/sprites/bigHatLogan.png", {
-      frameWidth: 40,
-      frameHeight: 34,
-    });
+    this.load.spritesheet(
+      "bigHatLogan",
+      "public/assets/sprites/bigHatLogan.png",
+      {
+        frameWidth: 40,
+        frameHeight: 34,
+      }
+    );
 
-    this.load.spritesheet("fireKeeper", "public/assets/sprites/fireKeeper.png", {
+    this.load.spritesheet(
+      "fireKeeper",
+      "public/assets/sprites/fireKeeper.png",
+      {
         frameWidth: 96,
         frameHeight: 67,
-    });
+      }
+    );
 
     this.load.spritesheet("griggs", "public/assets/sprites/griggs.png", {
       frameWidth: 32,
@@ -107,6 +118,9 @@ class BootScene extends Phaser.Scene {
     this.load.audio("start-menu", "public/assets/audio/start_menu.mp3");
     this.load.audio("died-audio", "public/assets/audio/You_Died.mp3");
     this.load.audio("battle-audio", "public/assets/audio/battle_music.mp3");
+    this.load.audio("new-area", "public/assets/audio/new_area.mp3");
+    this.load.audio("soul-get", "public/assets/audio/soul-get.wav.mp3");
+
   }
 
   loadTilemap() {
