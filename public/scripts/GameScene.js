@@ -7,7 +7,9 @@ class GameScene extends Phaser.Scene {
 
   init() {
     this.scene.launch("Ui");
-    this.uiScene = this.scene.get("Ui") //reference to UI for event listening
+    //references to other scenes for event listening
+    this.uiScene = this.scene.get("Ui");
+    this.combatScene = this.scene.get("Combat");
   }
 
   preload() {
