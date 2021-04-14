@@ -470,8 +470,7 @@ class GameScene extends Phaser.Scene {
   freeEnemy(enemyGroup) {
     if (enemyGroup) {
       this.events.on("wake", function (sys, data) {
-        let { gameOver, mainBGM } = data;
-        mainBGM.play();
+        let { gameOver } = data;
         if (gameOver) {
           this.enemyTimer = sys.time.addEvent({
             delay: 1000,
