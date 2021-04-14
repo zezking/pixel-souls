@@ -19,9 +19,6 @@ class CombatScene extends Phaser.Scene {
     this.createCombatPlayer();
     this.drawCombatUIBackground();
     this.createCombatSkeleton();
-    this.mainBGM = this.sound.add("bg-music", {
-      volume: 0.04,
-    });
   }
 
   setupCombatUi() {
