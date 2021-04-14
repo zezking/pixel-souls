@@ -312,7 +312,8 @@ class GameScene extends Phaser.Scene {
     let camera = this.cameras.main;
 
     // Zoom in and out of Player
-    camera.zoom = 2;
+
+    camera.zoom = 3;
 
     camera.startFollow(this.player);
     // Camera to center leeway, the higher, the tighter
@@ -385,7 +386,7 @@ class GameScene extends Phaser.Scene {
           enemy.setStatic(true);
         });
         this.scene.sleep();
-        this.mainBGM.stop();
+        this.mainBGM.pause();
         this.scene.add("Loading", LoadingScene, true);
         this.scene.launch("Combat", {
           health: this.player.health,
@@ -474,12 +475,12 @@ class GameScene extends Phaser.Scene {
 
   createAreaText() {
     this.areaText = this.add
-
-      // had to hardcode position of text, couldn't get it to follow player camera, might need to look into it
-      .text(550, 1700, "Firelink Shrine", {
+    // had to hardcode position of text, couldn't get it to follow player camera, might need to look into it
+      .text(525, 1700, "Firelink Shrine", {
         fontFamily: "titleFont",
         fill: "#ffffff",
         fontSize: "30px",
+
       })
       .setOrigin(0.5)
       .setAlpha(0);

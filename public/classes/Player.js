@@ -127,4 +127,13 @@ class Player extends Phaser.Physics.Matter.Sprite {
     playerVelocity.scale(speed);
     this.setVelocity(playerVelocity.x, playerVelocity.y);
   }
+
+
+  
+  playerKilled() {
+    this.setActive(false);
+    this.setVisible(false);
+
+    this.destroy();
+  }
 }

@@ -77,6 +77,16 @@ class DeathScene extends Phaser.Scene {
       // this.scene.stop("Game");
       this.scene.start("Title");
     });
+
+
+    this.deathAudio();
+    this.deathBGM.play()
+  }
+
+  deathAudio() {
+    this.deathBGM = this.sound.add("died-audio", {
+      volume: 0.05,
+    });
   }
 
   update() {
