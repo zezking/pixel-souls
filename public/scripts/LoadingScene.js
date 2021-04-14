@@ -6,7 +6,7 @@ class LoadingScene extends Phaser.Scene {
   init() {}
 
   create() {
-    this.cameras.main.shake(300);
+    this.cameras.main.flash(300).shake(300);
     this.scene.bringToTop();
     this.createBonFire();
     this.createLoadingText();
