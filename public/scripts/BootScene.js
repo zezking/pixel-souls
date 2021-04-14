@@ -28,6 +28,12 @@ class BootScene extends Phaser.Scene {
     this.load.image("sword", "public/assets/ui/battle/sword.png");
     this.load.image("magic", "public/assets/ui/battle/magic.png");
     this.load.image("shield", "public/assets/ui/battle/shield.png");
+    this.load.image(
+      "skeleton_battle",
+      "public/assets/skele_sprites/skeleton_battle.png"
+    );
+    this.load.image("PLAYERBACK", "public/assets/sprites/PLAYERBACK.png");
+    this.load.image("ui_background", "public/assets/ui/ui_background.png");
     // this.load.image("bonfire", "public/assets/ui/battle/shield.png");
   }
 
