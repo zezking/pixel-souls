@@ -4,13 +4,12 @@ class CombatScene extends Phaser.Scene {
     this.enemyHealth = 1;
   }
 
-  /** Big problem. Can't update the enemy that's on GameScene, because its asleep. Enemy initiates combat with player immediately after combat ends, Event listened to destroy enemy is not being read by GameScene from this scene. brain turning to mush. it time to sleep and try again tomorrow. */
+
 
   init(data) {
     let { health } = data;
     this.playerHealth = health;
-    console.log("(inside combat)Carried-over data?: ", this.playerHealth);
-    console.log("(inside combat)THIS: ", this);
+    console.log("(inside combat)Health from player: ", this.playerHealth);
   }
 
   create() {
@@ -111,22 +110,23 @@ class CombatScene extends Phaser.Scene {
     console.log("new player health: ", this.playerHealth);
 
     if (this.playerHealth <= 0) {
-      this.events.off("pointerdown");
-      this.events.off("results");
-      this.events.off("pickupItem");
-      //this.currentEnemy.setStatic(true);
 
-      this.scene.stop("Game");
+      this.events.removeAllListeners();
+      // this.events.off("pointerdown");
+      // this.events.off("results");
+      // this.events.off("pickupItem");
+      // this.scene.stop("Game");
       this.scene.start("Death");
     }
 
     if (this.enemyHealth <= 0) {
-      console.log("inside enemy health <0", this);
+      this.events.emit("updateHealth", this.playerHealth);
       this.events.off("results");
-      this.events.emit("enemyDeath", this.enemyid);
       this.scene.sleep("Combat");
-      this.scene.wake("Game", { gameOver: true }); //pass a game status to the Game Scene
+//       this.scene.wake("Game", { gameOver: true }); //pass a game status to the Game Scene
     }
+    
+    this.events.emit("updateHealth", this.playerHealth);
   }
 
   // update() {
