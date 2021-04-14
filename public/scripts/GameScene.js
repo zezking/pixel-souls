@@ -297,7 +297,7 @@ class GameScene extends Phaser.Scene {
     let camera = this.cameras.main;
 
     // Zoom in and out of Player
-    camera.zoom = 3;
+    camera.zoom = 1;
 
     camera.startFollow(this.player);
     // Camera to center leeway, the higher, the tighter
