@@ -125,7 +125,7 @@ class CombatScene extends Phaser.Scene {
       this.events.off("results");
       this.events.emit("enemyDeath", this.enemyid);
       this.scene.sleep("Combat");
-      this.scene.wake("Game", { gameOver: true }); //pass a game status to the Game Scene
+      this.scene.wake("Game", { gameOver: true, mainBGM: this.mainBGM }); //pass a game status to the Game Scene
     }
   }
 

@@ -366,7 +366,7 @@ class GameScene extends Phaser.Scene {
           enemy.setStatic(true);
         });
         this.scene.sleep();
-        bgm.stop();
+        this.mainBGM.stop();
         this.scene.add("Loading", LoadingScene, true);
         this.scene.launch("Combat", {
           health: this.player.health,
@@ -470,7 +470,8 @@ class GameScene extends Phaser.Scene {
   freeEnemy(enemyGroup) {
     if (enemyGroup) {
       this.events.on("wake", function (sys, data) {
-        let { gameOver } = data;
+        let { gameOver, mainBGM } = data;
+        mainBGM.play();
         if (gameOver) {
           this.enemyTimer = sys.time.addEvent({
             delay: 1000,
