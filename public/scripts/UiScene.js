@@ -48,9 +48,6 @@ class UiScene extends Phaser.Scene {
       let timer = 0;
       for (let i = counter; i < newSouls; i++) {
         setTimeout(() => {
-          console.log("dfdfd");
-          console.log(this.soulText);
-          console.log(counter);
           this.soulText.setText(`${i + 1}`);
         }, (timer += 5));
       }
