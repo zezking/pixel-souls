@@ -74,7 +74,6 @@ class Enemy extends Phaser.Physics.Matter.Sprite {
     this.enemyTimer = this.time.addEvent({
       delay: 3000,
       callback: () => {
-        console.log("here", this);
         this.setStatic(false);
       },
     });

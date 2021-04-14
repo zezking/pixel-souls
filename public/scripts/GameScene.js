@@ -362,11 +362,8 @@ class GameScene extends Phaser.Scene {
       objectA: this.player,
       objectB: this.enemies,
       callback: (eventData) => {
-        console.log("Event Data inside createCombat: ", eventData);
-
         this.events.emit("enemyDeath", eventData.gameObjectB);
         this.enemies.forEach((enemy) => {
-          console.log(enemy);
           enemy.setStatic(true);
         });
         this.scene.sleep();

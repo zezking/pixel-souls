@@ -80,7 +80,6 @@ class DeathScene extends Phaser.Scene {
   }
 
   update() {
-    console.log("Deathhh");
     if (this.deathFontSize < 120) {
       this.deathText.setFontSize(this.deathFontSize++);
     }
