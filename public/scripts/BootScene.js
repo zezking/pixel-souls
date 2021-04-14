@@ -38,20 +38,11 @@ class BootScene extends Phaser.Scene {
   }
 
   loadSpriteSheets() {
-    // this.load.spritesheet('ashen_one', 'public/assets/character_sprites/ashen_one.png', { frameWidth: 32, frameHeight: 50 });
-
     this.load.atlas(
       "sheet",
       "public/assets/map/fullmap-collision-atlas.png",
       "public/assets/map/fullmap-collision-atlas_atlas.json"
     );
-    // this.load.spritesheet('skele', 'public/assets/skele_sprites/skele_idle.png', { frameWidth: 32, frameHeight: 32 });
-
-    // this.load.spritesheet(
-    //   "ashen_one",
-    //   "public/assets/character_sprites/ashen_one.png",
-    //   { frameWidth: 32, frameHeight: 50 }
-    // );
 
     this.load.spritesheet("bird", "public/assets/sprites/bird.png", {
       frameWidth: 128,
@@ -73,6 +64,7 @@ class BootScene extends Phaser.Scene {
         frameHeight: 32,
       }
     );
+
     this.load.spritesheet(
       "bigHatLogan",
       "public/assets/sprites/bigHatLogan.png",
@@ -81,6 +73,7 @@ class BootScene extends Phaser.Scene {
         frameHeight: 34,
       }
     );
+
     this.load.spritesheet(
       "fireKeeper",
       "public/assets/sprites/fireKeeper.png",
@@ -89,15 +82,11 @@ class BootScene extends Phaser.Scene {
         frameHeight: 67,
       }
     );
+
     this.load.spritesheet("griggs", "public/assets/sprites/griggs.png", {
       frameWidth: 32,
       frameHeight: 54,
     });
-
-    // this.load.spritesheet("crestfallenWarrior", "public/assets/sprites/crestfallenWarrior.png", {
-    //   frameWidth: 70,
-    //   frameHeight: 36
-    // });
 
     this.load.spritesheet("lautrec", "public/assets/sprites/lautrec.png", {
       frameWidth: 25,
@@ -120,16 +109,13 @@ class BootScene extends Phaser.Scene {
       frameWidth: 32,
       frameHeight: 32,
     });
-    // this.load.spritesheet("bonfire", "public/assets/entities/bonfire_animation/bonfire.png", {
-    //   frameWidth: 90,
-    //   frameHeight: 60,
-    // });
   }
 
   loadAudio() {
     this.load.audio("menu-music", "public/assets/audio/menu_theme.mp3");
     this.load.audio("bg-music", "public/assets/audio/firelink_shrine.mp3");
     this.load.audio("start-menu", "public/assets/audio/start_menu.mp3");
+    this.load.audio("died-audio", "public/assets/audio/You_Died.mp3");
   }
 
   loadTilemap() {
@@ -155,6 +141,6 @@ class BootScene extends Phaser.Scene {
   }
 
   create() {
-    this.scene.launch("Game");
+    this.scene.launch("Title");
   }
 }

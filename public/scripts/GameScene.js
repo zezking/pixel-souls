@@ -8,9 +8,11 @@ class GameScene extends Phaser.Scene {
 
   init(data) {
     this.scene.launch("Ui");
+    this.scene.moveAbove("Title");
     //references to other scenes for event listening
     this.uiScene = this.scene.get("Ui");
     this.combatScene = this.scene.get("Combat");
+    console.log("game: ", this);
   }
 
   preload() {
@@ -25,7 +27,6 @@ class GameScene extends Phaser.Scene {
       volume: 0.04,
     });
     this.createMap();
-    // this.createAudio();
     this.createPlayer();
     this.createEnemy();
 
@@ -75,11 +76,7 @@ class GameScene extends Phaser.Scene {
       }
     });
   }
-
-  // createAudio() {
-
-  // }
-
+//--------------SPAWN ENTITIES IN GAME------------------
   createPlayer() {
     this.player = new Player({
       scene: this,
@@ -297,6 +294,8 @@ class GameScene extends Phaser.Scene {
       frame: "bonfire0",
     });
   }
+//--------------------------------
+//--------------------------------
 
   createInput() {
     // capture so that spacebar doesn't scroll downwards in window
@@ -312,7 +311,8 @@ class GameScene extends Phaser.Scene {
     let camera = this.cameras.main;
 
     // Zoom in and out of Player
-    camera.zoom = 2;
+
+    camera.zoom = 3;
 
     camera.startFollow(this.player);
     // Camera to center leeway, the higher, the tighter
@@ -377,16 +377,14 @@ class GameScene extends Phaser.Scene {
       objectA: this.player,
       objectB: this.enemies,
       callback: (eventData) => {
-        console.log("Event Data inside createCombat: ", eventData);
-
         this.events.emit("enemyDeath", eventData.gameObjectB);
         this.enemies.forEach((enemy) => {
-          console.log(enemy);
           enemy.setStatic(true);
         });
         this.scene.sleep();
-        this.mainBGM.stop();
+        this.mainBGM.pause();
         this.scene.add("Loading", LoadingScene, true);
+
         this.scene.launch("Combat", {
           health: this.player.health,
           enemyGroup: this.enemies,
@@ -474,12 +472,12 @@ class GameScene extends Phaser.Scene {
 
   createAreaText() {
     this.areaText = this.add
-
-      // had to hardcode position of text, couldn't get it to follow player camera, might need to look into it
-      .text(550, 1700, "Firelink Shrine", {
+    // had to hardcode position of text, couldn't get it to follow player camera, might need to look into it
+      .text(525, 1700, "Firelink Shrine", {
         fontFamily: "titleFont",
         fill: "#ffffff",
         fontSize: "30px",
+
       })
       .setOrigin(0.5)
       .setAlpha(0);

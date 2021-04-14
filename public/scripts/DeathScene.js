@@ -42,10 +42,7 @@ class DeathScene extends Phaser.Scene {
         //This is a callback function that will only fire after the animation is completed
 
         this.scene.stop("Ui");
-        // this.scene.stop("Game");
         this.scene.start("Title");
-        // console.log(ee);
-        // ee.removeAllListeners();
       },
     });
 
@@ -72,15 +69,22 @@ class DeathScene extends Phaser.Scene {
     // Title frozen if Pressing directly to title, and too soon
 
     this.input.keyboard.on("keydown-E", () => {
-      // this.UiScene.scene.restart();
       this.scene.stop("Ui");
-      // this.scene.stop("Game");
       this.scene.start("Title");
+    });
+
+
+    this.deathAudio();
+    this.deathBGM.play()
+  }
+
+  deathAudio() {
+    this.deathBGM = this.sound.add("died-audio", {
+      volume: 0.05,
     });
   }
 
   update() {
-    console.log("Deathhh");
     if (this.deathFontSize < 120) {
       this.deathText.setFontSize(this.deathFontSize++);
     }

@@ -45,7 +45,6 @@ class UiScene extends Phaser.Scene {
     });
     // listen for healthCount event?
     this.combatScene.events.on('updateHealth', (health) => {
-      console.log("What combatScene is: ", this.combatScene);
       this.hearts.children.each((gameObj, index) => {
         const heart = gameObj;
         if (index < health) {
