@@ -1,7 +1,7 @@
 class CombatScene extends Phaser.Scene {
   constructor() {
     super("Combat");
-    this.enemyHealth = 1;
+
   }
 
 
@@ -9,7 +9,9 @@ class CombatScene extends Phaser.Scene {
   init(data) {
     let { health } = data;
     this.playerHealth = health;
+    this.enemyHealth = 2;
     console.log("(inside combat)Health from player: ", this.playerHealth);
+    console.log("(inside combat)Health of enemy: ", this.enemyHealth);
   }
 
   create() {
@@ -108,6 +110,7 @@ class CombatScene extends Phaser.Scene {
 
   healthChecker() {
     console.log("new player health: ", this.playerHealth);
+    console.log("Enemy health remaining: ", this.enemyHealth);
 
     if (this.playerHealth <= 0) {
 
@@ -122,8 +125,8 @@ class CombatScene extends Phaser.Scene {
     if (this.enemyHealth <= 0) {
       this.events.emit("updateHealth", this.playerHealth);
       this.events.off("results");
-      this.scene.sleep("Combat");
-//       this.scene.wake("Game", { gameOver: true }); //pass a game status to the Game Scene
+      this.scene.stop("Combat");
+      this.scene.wake("Game", { gameOver: true }); //pass a game status to the Game Scene
     }
     
     this.events.emit("updateHealth", this.playerHealth);
