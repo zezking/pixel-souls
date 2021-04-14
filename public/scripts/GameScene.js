@@ -20,6 +20,9 @@ class GameScene extends Phaser.Scene {
   }
 
   create() {
+    this.mainBGM = this.sound.add("bg-music", {
+      volume: 0.04,
+    });
     this.createMap();
     // this.createAudio();
     this.createPlayer();
@@ -45,7 +48,7 @@ class GameScene extends Phaser.Scene {
     //Background Music
     this.createMusic();
     this.mainBGM.play();
-
+    console.log(this);
     this.OverlayLayer.setDepth(2239); //MUST ALWAYS BE LAST ON THIS LIST!!
   }
 
@@ -370,14 +373,14 @@ class GameScene extends Phaser.Scene {
           enemy.setStatic(true);
         });
         this.scene.sleep();
-        this.mainBGM.stop();
+        this.mainBGM.pause();
         this.scene.add("Loading", LoadingScene, true);
         this.scene.launch("Combat", {
           health: this.player.health,
           enemyGroup: this.enemies,
         });
       },
-      callbackScope: this,
+      context: this,
     });
   }
 
@@ -432,7 +435,7 @@ class GameScene extends Phaser.Scene {
     });
 
     this.events.on("enemyDeath", (enemy) => {
-      this.enemies = this.enemies.filter(e => e.id !== enemy.id);
+      this.enemies = this.enemies.filter((e) => e.id !== enemy.id);
       enemy.enemyKilled();
       // this.events.off("enemyDeath");
     });
@@ -454,7 +457,7 @@ class GameScene extends Phaser.Scene {
 
     this.uiScene.events.on("healthUpdated", (health) => {
       this.player.health = health;
-    })
+    });
   }
 
   createAreaText() {
@@ -477,7 +480,10 @@ class GameScene extends Phaser.Scene {
   freeEnemy(enemyGroup) {
     if (enemyGroup) {
       this.events.on("wake", function (sys, data) {
-        let { gameOver } = data;
+        let { gameOver, playback } = data;
+
+        playback.play();
+
         if (gameOver) {
           this.enemyTimer = sys.time.addEvent({
             delay: 1000,
@@ -495,9 +501,5 @@ class GameScene extends Phaser.Scene {
     }
   }
 
-  createMusic() {
-    this.mainBGM = this.sound.add("bg-music", {
-      volume: 0.04,
-    });
-  }
+  createMusic() {}
 }
