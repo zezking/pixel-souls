@@ -1,7 +1,6 @@
 class CombatScene extends Phaser.Scene {
   constructor() {
     super("Combat");
-
   }
 
   init(data) {
@@ -14,8 +13,13 @@ class CombatScene extends Phaser.Scene {
   }
 
   create() {
+    this.cameras.main.fadeIn(1000);
     this.setupCombatUi();
     this.resultListener();
+
+    this.mainBGM = this.sound.add("bg-music", {
+      volume: 0.04,
+    });
   }
 
   setupCombatUi() {
@@ -112,20 +116,19 @@ class CombatScene extends Phaser.Scene {
     console.log("Enemy health remaining: ", this.enemyHealth);
 
     if (this.playerHealth <= 0) {
-
-
       this.events.off("pointerdown");
       this.events.off("results");
       this.scene.start("Death");
     }
 
     if (this.enemyHealth <= 0) {
+      console.log(this.mainBGM);
       this.events.emit("updateHealth", this.playerHealth);
       this.events.off("results");
       this.scene.stop("Combat");
-      this.scene.wake("Game", { gameOver: true }); //pass a game status to the Game Scene
+      this.scene.wake("Game", { gameOver: true, playback: this.mainBGM }); //pass a game status to the Game Scene
     }
-    
+
     this.events.emit("updateHealth", this.playerHealth);
   }
   

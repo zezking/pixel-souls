@@ -96,6 +96,7 @@ class BootScene extends Phaser.Scene {
     this.load.audio("menu-music", "public/assets/audio/menu_theme.mp3");
     this.load.audio("bg-music", "public/assets/audio/firelink_shrine.mp3");
     this.load.audio("start-menu", "public/assets/audio/start_menu.mp3");
+    this.load.audio("died-audio", "public/assets/audio/You_Died.mp3");
   }
 
   loadTilemap() {
