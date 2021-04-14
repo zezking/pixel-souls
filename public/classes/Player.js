@@ -52,7 +52,7 @@ class Player extends Phaser.Physics.Matter.Sprite {
     this.setFixedRotation();
     this.health = 5;
     this.souls = 0;
-    this.atBonfire = false
+    this.atBonfire = false;
   }
 
   static preload(scene) {
@@ -67,7 +67,6 @@ class Player extends Phaser.Physics.Matter.Sprite {
     );
   }
 
-
   updateSouls(souls) {
     this.souls += souls;
   }
@@ -77,7 +76,6 @@ class Player extends Phaser.Physics.Matter.Sprite {
   }
 
   update() {
-
     // if(!this.atBonfire){
     //   this.anims.play("player_spawn")
     // }
@@ -92,8 +90,8 @@ class Player extends Phaser.Physics.Matter.Sprite {
       this.anims.play("player_up", true);
     } else if (this.inputKeys.down.isDown) {
       this.anims.play("player_down", true);
-    } else if(this.atBonfire){
-      this.anims.play("player_spawn", true)
+    } else if (this.atBonfire) {
+      this.anims.play("player_spawn", true);
     } else {
       this.anims.stop();
     }

@@ -5,7 +5,7 @@ class GameScene extends Phaser.Scene {
     super("Game");
   }
 
-  init() {
+  init(data) {
     this.scene.launch("Ui");
     //references to other scenes for event listening
     this.uiScene = this.scene.get("Ui");
@@ -20,7 +20,6 @@ class GameScene extends Phaser.Scene {
   }
 
   create() {
-    this.createAreaText();
     this.createMap();
     // this.createAudio();
     this.createPlayer();
@@ -42,8 +41,10 @@ class GameScene extends Phaser.Scene {
     this.createOverlay();
     this.setupEventListener();
 
+    this.freeEnemy(this.enemies);
     //Background Music
-    this.bgm();
+    this.createMusic();
+    this.mainBGM.play();
 
     this.OverlayLayer.setDepth(2239); //MUST ALWAYS BE LAST ON THIS LIST!!
   }
@@ -54,7 +55,7 @@ class GameScene extends Phaser.Scene {
     // enemies list
     this.enemies.forEach((enemy) => {
       enemy.update();
-    })
+    });
 
     this.crestfallenWarrior.update();
     this.bonfire.update();
@@ -361,12 +362,22 @@ class GameScene extends Phaser.Scene {
       objectA: this.player,
       objectB: this.enemies,
       callback: (eventData) => {
-        // this.scene.start("Preloader");
         console.log("Event Data inside createCombat: ", eventData);
+
         this.events.emit("enemyDeath", eventData.gameObjectB);
+        this.enemies.forEach((enemy) => {
+          console.log(enemy);
+          enemy.setStatic(true);
+        });
         this.scene.sleep();
-        this.scene.launch("Combat", { health: this.player.health });
+        this.mainBGM.stop();
+        this.scene.add("Loading", LoadingScene, true);
+        this.scene.launch("Combat", {
+          health: this.player.health,
+          enemyGroup: this.enemies,
+        });
       },
+      callbackScope: this,
     });
   }
 
@@ -424,7 +435,7 @@ class GameScene extends Phaser.Scene {
       this.enemies = this.enemies.filter(e => e.id !== enemy.id);
       enemy.enemyKilled();
       // this.events.off("enemyDeath");
-    })
+    });
 
     this.events.once("deathClear", () => {
       this.player.souls = 0;
@@ -446,11 +457,6 @@ class GameScene extends Phaser.Scene {
     })
   }
 
-  bgm() {
-    let bgm = this.sound.add("bg-music", { loop: true, volume: 0.02 });
-    bgm.play();
-  }
-
   createAreaText() {
     this.areaText = this.add
       .text(this.scale.width / 2, this.scale.height / 2, "Firelink Shrine", {
@@ -465,6 +471,33 @@ class GameScene extends Phaser.Scene {
       alpha: { start: 1, from: 1, to: 0, duration: 2000, ease: "Linear" },
       yoyo: true,
       loop: -1,
+    });
+  }
+
+  freeEnemy(enemyGroup) {
+    if (enemyGroup) {
+      this.events.on("wake", function (sys, data) {
+        let { gameOver } = data;
+        if (gameOver) {
+          this.enemyTimer = sys.time.addEvent({
+            delay: 1000,
+            callback: () => {
+              enemyGroup.forEach((enemy) => {
+                if (enemy.active) {
+                  enemy.setStatic(false); //set it's static to false if enemy is still active (not killed)
+                }
+              });
+            },
+            callbackScope: sys,
+          });
+        }
+      });
+    }
+  }
+
+  createMusic() {
+    this.mainBGM = this.sound.add("bg-music", {
+      volume: 0.04,
     });
   }
 }

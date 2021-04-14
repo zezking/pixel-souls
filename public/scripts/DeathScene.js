@@ -69,15 +69,6 @@ class DeathScene extends Phaser.Scene {
     });
     this.startText.setOrigin(0.5);
 
-    // time to end and return to Title
-    // this.dialogsTimer = this.time.addEvent({
-    //   delay: 5000,
-    //   callback: () => {
-    //     // this.scene.remove("Death");
-    //     this.scene.start("Title");
-    //   },
-    // });
-
     // Title frozen if Pressing directly to title, and too soon
 
     this.input.keyboard.on("keydown-E", () => {
@@ -85,12 +76,11 @@ class DeathScene extends Phaser.Scene {
       this.scene.stop("Ui");
       // this.scene.stop("Game");
       this.scene.start("Title");
-
-      // ee.removeAllListeners();
     });
   }
 
   update() {
+    console.log("Deathhh");
     if (this.deathFontSize < 120) {
       this.deathText.setFontSize(this.deathFontSize++);
     }
