@@ -28,8 +28,8 @@ class Player extends Phaser.Physics.Matter.Sprite {
         attractors: [
           function (bodyA, bodyB) {
             if (
-              bodyA.position.x - bodyB.position.x < 125 &&
-              bodyA.position.y - bodyB.position.y < 125
+              bodyA.position.x - bodyB.position.x < 125 && bodyB.position.x - bodyA.position.x < 125 &&
+              bodyA.position.y - bodyB.position.y < 125 && bodyB.position.y - bodyA.position.y < 125
             ) {
               return {
                 x: (bodyA.position.x - bodyB.position.x) * 0.000045, //You can change this value to adjust the force of X axis
@@ -52,7 +52,7 @@ class Player extends Phaser.Physics.Matter.Sprite {
     this.setFixedRotation();
     this.health = 5;
     this.souls = 0;
-    this.atBonfire = false
+    this.atBonfire = false;
   }
 
   static preload(scene) {
@@ -67,7 +67,6 @@ class Player extends Phaser.Physics.Matter.Sprite {
     );
   }
 
-
   updateSouls(souls) {
     this.souls += souls;
   }
@@ -77,7 +76,6 @@ class Player extends Phaser.Physics.Matter.Sprite {
   }
 
   update() {
-
     // if(!this.atBonfire){
     //   this.anims.play("player_spawn")
     // }
@@ -92,8 +90,8 @@ class Player extends Phaser.Physics.Matter.Sprite {
       this.anims.play("player_up", true);
     } else if (this.inputKeys.down.isDown) {
       this.anims.play("player_down", true);
-    } else if(this.atBonfire){
-      this.anims.play("player_spawn", true)
+    } else if (this.atBonfire) {
+      this.anims.play("player_spawn", true);
     } else {
       this.anims.stop();
     }
@@ -128,5 +126,14 @@ class Player extends Phaser.Physics.Matter.Sprite {
 
     playerVelocity.scale(speed);
     this.setVelocity(playerVelocity.x, playerVelocity.y);
+  }
+
+
+  
+  playerKilled() {
+    this.setActive(false);
+    this.setVisible(false);
+
+    this.destroy();
   }
 }

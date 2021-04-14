@@ -3,6 +3,10 @@ class TitleScene extends Phaser.Scene {
     super("Title");
   }
 
+  init() {
+    this.scene.remove("Game");
+  }
+
   create() {
     this.titleScreenSFX();
     this.logoDetailEffect();
@@ -62,7 +66,8 @@ class TitleScene extends Phaser.Scene {
     this.input.keyboard.on("keydown", () => {
       this.menuBGM.stop();
       this.startMenuSound.play();
-      this.scene.start("Game");
+      this.scene.add("Game", GameScene, true);
+      this.scene.stop("Title");
     });
   }
 

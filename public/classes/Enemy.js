@@ -8,8 +8,7 @@ class Enemy extends Phaser.Physics.Matter.Sprite {
 
     this.depthSorting = true; //Allows this entity to be depth-sorted
 
-
-    let enemyCollider = Bodies.circle(this.x,this.y + 12,12,{
+    let enemyCollider = Bodies.circle(this.x, this.y + 12, 12, {
       isSensor: false,
       lable: "enemyCollider",
     });
@@ -27,11 +26,9 @@ class Enemy extends Phaser.Physics.Matter.Sprite {
     this.setScale(1.25);
     // fixed rotation of character
     this.setFixedRotation();
-
   }
 
   static preload(scene) {
-
     scene.load.atlas(
       "skeleton_sprite",
       "/public/assets/skele_sprites/skeleton_sprite.png",
@@ -41,7 +38,6 @@ class Enemy extends Phaser.Physics.Matter.Sprite {
       "skele_anim",
       "/public/assets/skele_sprites/skeleton_sprite_anim.json"
     );
-
   }
 
   get velocity() {
@@ -49,7 +45,6 @@ class Enemy extends Phaser.Physics.Matter.Sprite {
   }
 
   update() {
-
     // const speed = 10;
     let enemyVelocity = new Phaser.Math.Vector2();
 
@@ -64,16 +59,23 @@ class Enemy extends Phaser.Physics.Matter.Sprite {
       this.anims.play(`skeleton_idle`, true);
     }
 
-
     enemyVelocity.normalize();
     // enemyVelocity.scale(speed);
     // this.setVelocity(enemyVelocity.x, enemyVelocity.y);
-
   }
-
   enemyKilled() {
     this.setActive(false);
     this.setVisible(false);
+
     this.destroy();
+  }
+
+  freeEnemey() {
+    this.enemyTimer = this.time.addEvent({
+      delay: 3000,
+      callback: () => {
+        this.setStatic(false);
+      },
+    });
   }
 }

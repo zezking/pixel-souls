@@ -2,7 +2,15 @@ const config = {
   type: Phaser.AUTO,
   width: 800,
   height: 800,
-  scene: [BootScene, TitleScene, GameScene, UiScene, LogoScene, CombatScene, DeathScene, Preloader],
+  scene: [
+    BootScene,
+    TitleScene,
+    // GameScene,   //Disabled, but here as a reminder to where it needs to sit on this list.
+    UiScene,
+    LogoScene,
+    CombatScene,
+    DeathScene,
+  ],
   // zoom: 2,
   pixelArt: true,
   physics: {
