@@ -50,8 +50,4 @@ class DialogScene extends Phaser.Scene {
       });
     }
   }
-
-  randomDialog() {}
-
-  update() {}
 }

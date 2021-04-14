@@ -69,23 +69,12 @@ class DeathScene extends Phaser.Scene {
     });
     this.startText.setOrigin(0.5);
 
-    // time to end and return to Title
-    // this.dialogsTimer = this.time.addEvent({
-    //   delay: 5000,
-    //   callback: () => {
-    //     // this.scene.remove("Death");
-    //     this.scene.start("Title");
-    //   },
-    // });
-
     // Title frozen if Pressing directly to title, and too soon
 
     this.input.keyboard.on("keydown-E", () => {
       // this.UiScene.scene.restart();
       this.scene.sleep("Ui");
       this.scene.start("Title");
-
-      // ee.removeAllListeners();
     });
   }
 
