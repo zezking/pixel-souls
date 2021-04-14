@@ -7,9 +7,11 @@ class GameScene extends Phaser.Scene {
 
   init(data) {
     this.scene.launch("Ui");
+    this.scene.moveAbove("Title");
     //references to other scenes for event listening
     this.uiScene = this.scene.get("Ui");
     this.combatScene = this.scene.get("Combat");
+    console.log("game: ", this);
   }
 
   preload() {
@@ -21,7 +23,6 @@ class GameScene extends Phaser.Scene {
 
   create() {
     this.createMap();
-    // this.createAudio();
     this.createPlayer();
     this.createEnemy();
     this.addCollisions();
@@ -68,11 +69,7 @@ class GameScene extends Phaser.Scene {
       }
     });
   }
-
-  // createAudio() {
-
-  // }
-
+//--------------SPAWN ENTITIES IN GAME------------------
   createPlayer() {
     this.player = new Player({
       scene: this,
@@ -282,6 +279,8 @@ class GameScene extends Phaser.Scene {
       frame: "bonfire0",
     });
   }
+//--------------------------------
+//--------------------------------
 
   createInput() {
     // capture so that spacebar doesn't scroll downwards in window
@@ -368,7 +367,7 @@ class GameScene extends Phaser.Scene {
         });
         this.scene.sleep();
         this.mainBGM.stop();
-        this.scene.add("Loading", LoadingScene, true);
+        // this.scene.add("Loading", LoadingScene, true);
         this.scene.launch("Combat", {
           health: this.player.health,
           enemyGroup: this.enemies,

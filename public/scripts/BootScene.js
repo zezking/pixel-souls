@@ -28,24 +28,14 @@ class BootScene extends Phaser.Scene {
     this.load.image("sword", "public/assets/ui/battle/sword.png");
     this.load.image("magic", "public/assets/ui/battle/magic.png");
     this.load.image("shield", "public/assets/ui/battle/shield.png");
-    // this.load.image("bonfire", "public/assets/ui/battle/shield.png");
   }
 
   loadSpriteSheets() {
-    // this.load.spritesheet('ashen_one', 'public/assets/character_sprites/ashen_one.png', { frameWidth: 32, frameHeight: 50 });
-
     this.load.atlas(
       "sheet",
       "public/assets/map/fullmap-collision-atlas.png",
       "public/assets/map/fullmap-collision-atlas_atlas.json"
     );
-    // this.load.spritesheet('skele', 'public/assets/skele_sprites/skele_idle.png', { frameWidth: 32, frameHeight: 32 });
-
-    // this.load.spritesheet(
-    //   "ashen_one",
-    //   "public/assets/character_sprites/ashen_one.png",
-    //   { frameWidth: 32, frameHeight: 50 }
-    // );
 
     this.load.spritesheet("bird", "public/assets/sprites/bird.png", {
       frameWidth: 128,
@@ -59,39 +49,25 @@ class BootScene extends Phaser.Scene {
       frameWidth: 23,
       frameHeight: 39,
     });
-    this.load.spritesheet(
-      "laurentius",
-      "public/assets/sprites/laurentius.png",
-      {
+    this.load.spritesheet("laurentius", "public/assets/sprites/laurentius.png", {
         frameWidth: 26,
         frameHeight: 32,
-      }
-    );
-    this.load.spritesheet(
-      "bigHatLogan",
-      "public/assets/sprites/bigHatLogan.png",
-      {
+      });
+      
+    this.load.spritesheet("bigHatLogan", "public/assets/sprites/bigHatLogan.png", {
         frameWidth: 40,
         frameHeight: 34,
-      }
-    );
-    this.load.spritesheet(
-      "fireKeeper",
-      "public/assets/sprites/fireKeeper.png",
-      {
+      });
+
+    this.load.spritesheet("fireKeeper", "public/assets/sprites/fireKeeper.png", {
         frameWidth: 96,
         frameHeight: 67,
-      }
-    );
+      });
+
     this.load.spritesheet("griggs", "public/assets/sprites/griggs.png", {
       frameWidth: 32,
       frameHeight: 54,
     });
-
-    // this.load.spritesheet("crestfallenWarrior", "public/assets/sprites/crestfallenWarrior.png", {
-    //   frameWidth: 70,
-    //   frameHeight: 36
-    // });
 
     this.load.spritesheet("lautrec", "public/assets/sprites/lautrec.png", {
       frameWidth: 25,
@@ -114,10 +90,6 @@ class BootScene extends Phaser.Scene {
       frameWidth: 32,
       frameHeight: 32,
     });
-    // this.load.spritesheet("bonfire", "public/assets/entities/bonfire_animation/bonfire.png", {
-    //   frameWidth: 90,
-    //   frameHeight: 60,
-    // });
   }
 
   loadAudio() {
@@ -149,6 +121,6 @@ class BootScene extends Phaser.Scene {
   }
 
   create() {
-    this.scene.launch("Game");
+    this.scene.launch("Title");
   }
 }
