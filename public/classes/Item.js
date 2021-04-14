@@ -30,8 +30,9 @@ class Item extends Phaser.Physics.Matter.Sprite{
   }
   
   update() {
-      this.anims.play(`soul_idle`, true);
+    this.anims.play(`soul_idle`, true);
   }
+
   makeInactive() {
     this.setActive(false);
     this.setVisible(false);
