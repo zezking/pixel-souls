@@ -387,7 +387,7 @@ class GameScene extends Phaser.Scene {
           enemy.setStatic(true);
         });
         this.scene.sleep();
-        this.mainBGM.pause();
+        this.mainBGM.stop();
         this.scene.add("Loading", LoadingScene, true);
 
         this.scene.launch("Combat", {
@@ -453,6 +453,7 @@ class GameScene extends Phaser.Scene {
     this.events.on("enemyDeath", (enemy) => {
       this.enemies = this.enemies.filter((e) => e.id !== enemy.id);
       enemy.enemyKilled();
+      this.mainBGM.stop()
       // this.events.off("enemyDeath");
     });
 

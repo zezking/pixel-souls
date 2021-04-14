@@ -128,15 +128,22 @@ class CombatScene extends Phaser.Scene {
       this.events.off("pointerdown");
       this.events.off("results");
       this.scene.start("Death");
-    }
-
-    if (this.enemyHealth <= 0) {
+      this.mainBGM.stop();
+      // added this incase both Player and Enemy die on a draw
+    } else if (this.playerHealth <= 0 && this.enemyHealth <= 0){
+      this.events.off("pointerdown");
+      this.events.off("results");
+      this.scene.start("Death");
+      this.mainBGM.stop();
+    } else if (this.enemyHealth <= 0) {
       console.log(this.mainBGM);
       this.events.emit("updateHealth", this.playerHealth);
       this.events.off("results");
       this.scene.stop("Combat");
+      // this.mainBGM.play();
       this.scene.wake("Game", { gameOver: true, playback: this.mainBGM }); //pass a game status to the Game Scene
     }
+
 
     this.events.emit("updateHealth", this.playerHealth);
   }
