@@ -24,9 +24,6 @@ class GameScene extends Phaser.Scene {
   }
 
   create() {
-    this.mainBGM = this.sound.add("bg-music", {
-      volume: 0.04,
-    });
     this.createMap();
     this.createPlayer();
     this.createEnemy();
@@ -457,7 +454,6 @@ class GameScene extends Phaser.Scene {
     this.events.on("enemyDeath", (enemy) => {
       this.enemies = this.enemies.filter((e) => e.id !== enemy.id);
       enemy.enemyKilled();
-      this.mainBGM.stop()
       // this.events.off("enemyDeath");
     });
 
@@ -523,5 +519,12 @@ class GameScene extends Phaser.Scene {
     }
   }
 
-  createMusic() {}
+  createMusic() {
+    this.mainBGM = this.sound.add("bg-music", {
+      volume: 0.04,
+    });
+    this.battleBGM = this.sound.add("battle-audio", {
+      volume: 0.04,
+    });
+  }
 }

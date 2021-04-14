@@ -19,7 +19,14 @@ class CombatScene extends Phaser.Scene {
     this.createCombatPlayer();
     this.drawCombatUIBackground();
     this.createCombatSkeleton();
+    this.createMusic();
+    this.battleBGM.play();
+  }
+  createMusic() {
     this.mainBGM = this.sound.add("bg-music", {
+      volume: 0.04,
+    });
+    this.battleBGM = this.sound.add("battle-audio", {
       volume: 0.04,
     });
   }
@@ -127,19 +134,21 @@ class CombatScene extends Phaser.Scene {
       this.events.off("pointerdown");
       this.events.off("results");
       this.scene.start("Death");
-      this.mainBGM.stop();
+
+
       // added this incase both Player and Enemy die on a draw
     } else if (this.playerHealth <= 0 && this.enemyHealth <= 0){
       this.events.off("pointerdown");
       this.events.off("results");
       this.scene.start("Death");
       this.mainBGM.stop();
+
     } else if (this.enemyHealth <= 0) {
       console.log(this.mainBGM);
       this.events.emit("updateHealth", this.playerHealth);
       this.events.off("results");
       this.scene.stop("Combat");
-      // this.mainBGM.play();
+      this.battleBGM.stop();
       this.scene.wake("Game", { gameOver: true, playback: this.mainBGM }); //pass a game status to the Game Scene
     }
 
