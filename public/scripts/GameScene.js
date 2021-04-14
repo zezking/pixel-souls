@@ -1,5 +1,6 @@
 let enemy_speed = 20;
 let timedEvent;
+
 class GameScene extends Phaser.Scene {
   constructor() {
     super("Game");
@@ -24,6 +25,9 @@ class GameScene extends Phaser.Scene {
     // this.createAudio();
     this.createPlayer();
     this.createEnemy();
+
+    this.createAreaText();
+
     this.addCollisions();
     this.createInput();
     this.createEntity();
@@ -108,7 +112,15 @@ class GameScene extends Phaser.Scene {
       frame: "skele_idling0",
       id: 3,
     });
-    this.enemies = [this.enemy, this.enemy2, this.enemy3];
+    this.enemy4 = new Enemy({
+      scene: this,
+      x: 100,
+      y: 100,
+      key: "skeleton_sprite",
+      frame: "skele_idling0",
+      id: 4,
+    });
+    this.enemies = [this.enemy, this.enemy2, this.enemy3, this.enemy4];
   }
 
   createNPC() {
@@ -407,6 +419,7 @@ class GameScene extends Phaser.Scene {
       objectB: this.bonfire,
       callback: () => {
         this.events.emit("characterLit");
+
       },
     });
   }
@@ -418,6 +431,7 @@ class GameScene extends Phaser.Scene {
   onEvent() {
     this.events.emit("characterNotLit");
     this.events.emit("deathClear");
+
   }
 
   setupEventListener() {
@@ -452,6 +466,7 @@ class GameScene extends Phaser.Scene {
       this.player.atBonfire = false;
     });
 
+
     this.uiScene.events.on("healthUpdated", (health) => {
       this.player.health = health;
     })
@@ -459,18 +474,21 @@ class GameScene extends Phaser.Scene {
 
   createAreaText() {
     this.areaText = this.add
-      .text(this.scale.width / 2, this.scale.height / 2, "Firelink Shrine", {
+
+    // had to hardcode position of text, couldn't get it to follow player camera, might need to look into it
+      .text(550, 1700, "Firelink Shrine", {
         fontFamily: "titleFont",
         fill: "#ffffff",
-        fontSize: "120px",
+        fontSize: "56px",
       })
-      .setAlpha(1);
+      .setOrigin(0.5)
+      .setAlpha(0);
 
     this.tweens.add({
       targets: this.areaText,
-      alpha: { start: 1, from: 1, to: 0, duration: 2000, ease: "Linear" },
+      alpha: { start: 0, from: 0, to: 1, duration: 2000, ease: "Linear" },
       yoyo: true,
-      loop: -1,
+      // loop: -1,
     });
   }
 
