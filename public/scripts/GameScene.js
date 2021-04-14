@@ -40,7 +40,8 @@ class GameScene extends Phaser.Scene {
 
     this.freeEnemy(this.enemies);
     //Background Music
-    bgm.play();
+    this.createMusic();
+    this.mainBGM.play();
 
     this.OverlayLayer.setDepth(2239); //MUST ALWAYS BE LAST ON THIS LIST!!
   }
@@ -485,5 +486,11 @@ class GameScene extends Phaser.Scene {
         }
       });
     }
+  }
+
+  createMusic() {
+    this.mainBGM = this.sound.add("bg-music", {
+      volume: 0.04,
+    });
   }
 }
