@@ -5,7 +5,7 @@ const config = {
   scene: [
     BootScene,
     TitleScene,
-    GameScene,
+    // GameScene,   //Disabled, but here as a reminder to where it needs to sit on this list.
     UiScene,
     LogoScene,
     CombatScene,
