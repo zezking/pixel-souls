@@ -453,7 +453,6 @@ class GameScene extends Phaser.Scene {
     this.events.on("enemyDeath", (enemy) => {
       this.enemies = this.enemies.filter((e) => e.id !== enemy.id);
       enemy.enemyKilled();
-      this.mainBGM.stop()
       // this.events.off("enemyDeath");
     });
 
@@ -518,6 +517,10 @@ class GameScene extends Phaser.Scene {
   }
 
   createMusic() {
+    this.battleBGM = this.sound.add("battle-audio", {
+      volume: 0.04,
+    });
+
     this.newAreaSFX = this.sound.add("new-area", {
       volume: 0.04,
     });
