@@ -478,7 +478,6 @@ class GameScene extends Phaser.Scene {
 
   createAreaText() {
     this.areaText = this.add
-      // had to hardcode position of text, couldn't get it to follow player camera, might need to look into it
       .text(525, 1700, "Firelink Shrine", {
         fontFamily: "titleFont",
         fill: "#ffffff",
