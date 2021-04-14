@@ -12,6 +12,10 @@ class CombatScene extends Phaser.Scene {
     console.log("(inside combat)Health of enemy: ", this.enemyHealth);
   }
 
+  preload() {
+    Enemy.preload(this);
+  }
+
   create() {
     this.cameras.main.fadeIn(1000);
     this.setupCombatUi();
@@ -137,9 +141,9 @@ class CombatScene extends Phaser.Scene {
     this.events.emit("updateHealth", this.playerHealth);
   }
 
-  // update() {
-
-  // }
+  update() {
+    this.enemyCombat.update();
+  }
 
   createCombatPlayer() {
     this.combatPlayer = this.make
@@ -156,18 +160,16 @@ class CombatScene extends Phaser.Scene {
       .setDepth(0);
   }
   createCombatSkeleton() {
-    this.CombatSkeleton = this.make
-      .image({
-        x: 650,
-        y: 150,
-        key: "skeleton_battle",
-        scale: {
-          x: 7,
-          y: 7,
-        },
-        add: true,
-      })
-      .setDepth(3);
+    this.enemyCombat = new Enemy({
+      scene: this,
+      x: 650,
+      y: 150,
+      key: "skeleton_sprite",
+      frame: "skele_idling8",
+      id: 5,
+    })
+      .setDepth(400)
+      .setScale(8);
   }
 
   drawCombatUIBackground() {
