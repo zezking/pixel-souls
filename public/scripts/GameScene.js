@@ -21,6 +21,9 @@ class GameScene extends Phaser.Scene {
   }
 
   create() {
+    this.mainBGM = this.sound.add("bg-music", {
+      volume: 0.04,
+    });
     this.createMap();
     // this.createAudio();
     this.createPlayer();
@@ -49,7 +52,7 @@ class GameScene extends Phaser.Scene {
     //Background Music
     this.createMusic();
     this.mainBGM.play();
-
+    console.log(this);
     this.OverlayLayer.setDepth(2239); //MUST ALWAYS BE LAST ON THIS LIST!!
   }
 
@@ -309,7 +312,7 @@ class GameScene extends Phaser.Scene {
     let camera = this.cameras.main;
 
     // Zoom in and out of Player
-    camera.zoom = 1;
+    camera.zoom = 2;
 
     camera.startFollow(this.player);
     // Camera to center leeway, the higher, the tighter
@@ -382,14 +385,14 @@ class GameScene extends Phaser.Scene {
           enemy.setStatic(true);
         });
         this.scene.sleep();
-        this.mainBGM.stop();
+        this.mainBGM.pause();
         this.scene.add("Loading", LoadingScene, true);
         this.scene.launch("Combat", {
           health: this.player.health,
           enemyGroup: this.enemies,
         });
       },
-      callbackScope: this,
+      context: this,
     });
   }
 
@@ -419,7 +422,6 @@ class GameScene extends Phaser.Scene {
       objectB: this.bonfire,
       callback: () => {
         this.events.emit("characterLit");
-
       },
     });
   }
@@ -431,7 +433,6 @@ class GameScene extends Phaser.Scene {
   onEvent() {
     this.events.emit("characterNotLit");
     this.events.emit("deathClear");
-
   }
 
   setupEventListener() {
@@ -446,7 +447,7 @@ class GameScene extends Phaser.Scene {
     });
 
     this.events.on("enemyDeath", (enemy) => {
-      this.enemies = this.enemies.filter(e => e.id !== enemy.id);
+      this.enemies = this.enemies.filter((e) => e.id !== enemy.id);
       enemy.enemyKilled();
       // this.events.off("enemyDeath");
     });
@@ -466,20 +467,19 @@ class GameScene extends Phaser.Scene {
       this.player.atBonfire = false;
     });
 
-
     this.uiScene.events.on("healthUpdated", (health) => {
       this.player.health = health;
-    })
+    });
   }
 
   createAreaText() {
     this.areaText = this.add
 
-    // had to hardcode position of text, couldn't get it to follow player camera, might need to look into it
+      // had to hardcode position of text, couldn't get it to follow player camera, might need to look into it
       .text(550, 1700, "Firelink Shrine", {
         fontFamily: "titleFont",
         fill: "#ffffff",
-        fontSize: "56px",
+        fontSize: "30px",
       })
       .setOrigin(0.5)
       .setAlpha(0);
@@ -495,7 +495,10 @@ class GameScene extends Phaser.Scene {
   freeEnemy(enemyGroup) {
     if (enemyGroup) {
       this.events.on("wake", function (sys, data) {
-        let { gameOver } = data;
+        let { gameOver, playback } = data;
+
+        playback.play();
+
         if (gameOver) {
           this.enemyTimer = sys.time.addEvent({
             delay: 1000,
@@ -513,9 +516,5 @@ class GameScene extends Phaser.Scene {
     }
   }
 
-  createMusic() {
-    this.mainBGM = this.sound.add("bg-music", {
-      volume: 0.04,
-    });
-  }
+  createMusic() {}
 }
