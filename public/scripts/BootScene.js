@@ -28,6 +28,13 @@ class BootScene extends Phaser.Scene {
     this.load.image("sword", "public/assets/ui/battle/sword.png");
     this.load.image("magic", "public/assets/ui/battle/magic.png");
     this.load.image("shield", "public/assets/ui/battle/shield.png");
+    this.load.image(
+      "skeleton_battle",
+      "public/assets/skele_sprites/skeleton_battle.png"
+    );
+    this.load.image("PLAYERBACK", "public/assets/sprites/PLAYERBACK.png");
+    this.load.image("ui_background", "public/assets/ui/ui_background.png");
+    // this.load.image("bonfire", "public/assets/ui/battle/shield.png");
   }
 
   loadSpriteSheets() {
@@ -49,20 +56,32 @@ class BootScene extends Phaser.Scene {
       frameWidth: 23,
       frameHeight: 39,
     });
-    this.load.spritesheet("laurentius", "public/assets/sprites/laurentius.png", {
+    this.load.spritesheet(
+      "laurentius",
+      "public/assets/sprites/laurentius.png",
+      {
         frameWidth: 26,
         frameHeight: 32,
-      });
-      
-    this.load.spritesheet("bigHatLogan", "public/assets/sprites/bigHatLogan.png", {
+      }
+    );
+
+    this.load.spritesheet(
+      "bigHatLogan",
+      "public/assets/sprites/bigHatLogan.png",
+      {
         frameWidth: 40,
         frameHeight: 34,
-      });
+      }
+    );
 
-    this.load.spritesheet("fireKeeper", "public/assets/sprites/fireKeeper.png", {
+    this.load.spritesheet(
+      "fireKeeper",
+      "public/assets/sprites/fireKeeper.png",
+      {
         frameWidth: 96,
         frameHeight: 67,
-      });
+      }
+    );
 
     this.load.spritesheet("griggs", "public/assets/sprites/griggs.png", {
       frameWidth: 32,

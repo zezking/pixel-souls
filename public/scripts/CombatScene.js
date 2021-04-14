@@ -16,18 +16,26 @@ class CombatScene extends Phaser.Scene {
     this.cameras.main.fadeIn(1000);
     this.setupCombatUi();
     this.resultListener();
-
+    this.createCombatPlayer();
+    this.drawCombatUIBackground();
+    this.createCombatSkeleton();
     this.mainBGM = this.sound.add("bg-music", {
       volume: 0.04,
     });
   }
 
   setupCombatUi() {
-    this.sword = this.add.image(200, 600, "sword");
+    this.sword = this.make
+      .image({ x: 200, y: 640, key: "sword", add: true })
+      .setDepth(100);
     this.sword.setInteractive();
-    this.magic = this.add.image(400, 600, "magic");
+    this.magic = this.make
+      .image({ x: 400, y: 640, key: "magic", add: true })
+      .setDepth(100);
     this.magic.setInteractive();
-    this.shield = this.add.image(600, 600, "shield");
+    this.shield = this.make
+      .image({ x: 600, y: 640, key: "shield", add: true })
+      .setDepth(100);
     this.shield.setInteractive();
 
     const aiResult = () => {
@@ -131,5 +139,52 @@ class CombatScene extends Phaser.Scene {
 
     this.events.emit("updateHealth", this.playerHealth);
   }
-  
+
+  // update() {
+
+  // }
+
+  createCombatPlayer() {
+    this.combatPlayer = this.make
+      .image({
+        x: 200,
+        y: 500,
+        key: "PLAYERBACK",
+        scale: {
+          x: 12,
+          y: 12,
+        },
+        add: true,
+      })
+      .setDepth(0);
+  }
+  createCombatSkeleton() {
+    this.CombatSkeleton = this.make
+      .image({
+        x: 650,
+        y: 150,
+        key: "skeleton_battle",
+        scale: {
+          x: 7,
+          y: 7,
+        },
+        add: true,
+      })
+      .setDepth(3);
+  }
+
+  drawCombatUIBackground() {
+    this.combatPlayer = this.make
+      .image({
+        x: 400,
+        y: 640,
+        key: "ui_background",
+        scale: {
+          x: 0.6,
+          y: 0.5,
+        },
+        add: true,
+      })
+      .setDepth(1);
+  }
 }
