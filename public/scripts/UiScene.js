@@ -32,6 +32,7 @@ class UiScene extends Phaser.Scene {
       fontSize: "16px",
       fill: "#fff",
     });
+
     Phaser.Display.Align.In.Center(this.soulText, this.soulCounter);
 
     // Estus Count
@@ -44,20 +45,24 @@ class UiScene extends Phaser.Scene {
       this.soulText.setText(`${newSouls}`);
     });
     // listen for healthCount event?
-    this.combatScene.events.on('updateHealth', (health) => {
+    this.combatScene.events.on("updateHealth", (health) => {
       this.hearts.children.each((gameObj, index) => {
         const heart = gameObj;
         if (index < health) {
-          heart.setTexture("ui-heart-full")
+          heart.setTexture("ui-heart-full");
         } else {
-          heart.setTexture("ui-heart-empty")
-        };
-      })
+          heart.setTexture("ui-heart-empty");
+        }
+      });
       this.healthUpdater(health);
-    })
+    });
   }
 
   healthUpdater(health) {
     this.events.emit("healthUpdated", health);
   }
+
+  createAnimatingScore;
+
+  update() {}
 }
