@@ -17,7 +17,6 @@ class GameScene extends Phaser.Scene {
   }
 
   create() {
-    this.createAreaText();
     this.createMap();
     // this.createAudio();
     this.createPlayer();
@@ -41,7 +40,7 @@ class GameScene extends Phaser.Scene {
 
     this.freeEnemy(this.enemies);
     //Background Music
-    this.playBGM();
+    bgm.play();
 
     this.OverlayLayer.setDepth(2239); //MUST ALWAYS BE LAST ON THIS LIST!!
   }
@@ -366,6 +365,8 @@ class GameScene extends Phaser.Scene {
           enemy.setStatic(true);
         });
         this.scene.sleep();
+        bgm.stop();
+        this.scene.add("Loading", LoadingScene, true);
         this.scene.launch("Combat", {
           health: this.player.health,
           enemyGroup: this.enemies,
@@ -446,11 +447,6 @@ class GameScene extends Phaser.Scene {
     this.events.once("characterNotLit", () => {
       this.player.atBonfire = false;
     });
-  }
-
-  playBGM() {
-    let bgm = this.sound.add("bg-music", { loop: true, volume: 0.02 });
-    bgm.play();
   }
 
   createAreaText() {
