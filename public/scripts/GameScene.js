@@ -7,6 +7,7 @@ class GameScene extends Phaser.Scene {
 
   init() {
     this.scene.launch("Ui");
+    this.uiScene = this.scene.get("Ui") //reference to UI for event listening
   }
 
   preload() {
@@ -418,9 +419,7 @@ class GameScene extends Phaser.Scene {
     });
 
     this.events.on("enemyDeath", (enemy) => {
-      console.log("Inside enemyDeath? Enemy: ", enemy);
       this.enemies = this.enemies.filter(e => e.id !== enemy.id);
-      console.log("this.enemies: ", this.enemies);
       enemy.enemyKilled();
       // this.events.off("enemyDeath");
     })
@@ -439,6 +438,10 @@ class GameScene extends Phaser.Scene {
     this.events.once("characterNotLit", () => {
       this.player.atBonfire = false;
     });
+
+    this.uiScene.events.on("healthUpdated", (health) => {
+      this.player.health = health;
+    })
   }
 
   bgm() {

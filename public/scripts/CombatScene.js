@@ -9,8 +9,7 @@ class CombatScene extends Phaser.Scene {
   init(data) {
     let { health } = data;
     this.playerHealth = health;
-    console.log("(inside combat)Carried-over data?: ", this.playerHealth);
-    console.log("(inside combat)THIS: ", this);
+    console.log("(inside combat)Health from player: ", this.playerHealth);
   }
 
   create() {
@@ -111,17 +110,21 @@ class CombatScene extends Phaser.Scene {
     console.log("new player health: ", this.playerHealth);
 
     if (this.playerHealth <= 0) {
-      this.events.off("pointerdown");
-      this.events.off("results");
-      this.events.off("pickupItem");
-      this.scene.stop("Game");
+      this.events.removeAllListeners();
+      // this.events.off("pointerdown");
+      // this.events.off("results");
+      // this.events.off("pickupItem");
+      // this.scene.stop("Game");
       this.scene.start("Death");
     }
     if (this.enemyHealth <= 0) {
+      this.events.emit("updateHealth", this.playerHealth);
       this.events.off("results");
       this.scene.wake("Game");
       this.scene.stop("Combat");
     }
+    
+    this.events.emit("updateHealth", this.playerHealth);
   }
 
   // update() {
