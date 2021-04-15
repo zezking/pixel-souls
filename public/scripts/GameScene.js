@@ -57,11 +57,12 @@ class GameScene extends Phaser.Scene {
 
   update() {
     this.player.update();
-    //this.AudioScene.stepSFX(this);
     // enemies list
     this.enemies.forEach((enemy) => {
       enemy.update();
     });
+
+    //console.log(this.player.x, this.player.y);
 
     // this.crestfallenWarrior.update();
     // this.griggs.update();
@@ -438,6 +439,7 @@ class GameScene extends Phaser.Scene {
       objectA: this.player,
       objectB: this.enemies,
       callback: (eventData) => {
+        this.combatScene.playerPosition(this.player.x, this.player.y);
         this.events.emit("enemyDeath", eventData.gameObjectB);
         this.enemies.forEach((enemy) => {
           enemy.setStatic(true);
