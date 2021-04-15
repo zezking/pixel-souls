@@ -50,8 +50,6 @@ class GameScene extends Phaser.Scene {
     //Background Music
     this.AudioScene.playMainBgm();
     this.AudioScene.playAreaSFX();
-    console.log(this.player.isWalking);
-    this.AudioScene.stepSFX(this, this.player.isWalking);
 
     this.OverlayLayer.setDepth(2239); //MUST ALWAYS BE LAST ON THIS LIST!!
   }
@@ -147,7 +145,7 @@ class GameScene extends Phaser.Scene {
       x: 766,
       y: 766,
       key: "reah",
-      name:"reah",
+      name: "reah",
     });
     this.laurentius = new NPC({
       scene: this,
@@ -420,7 +418,7 @@ class GameScene extends Phaser.Scene {
           enemy.setStatic(true);
         });
         this.AudioScene.stopMainBgm();
-        this.scene.sleep();
+        this.scene.pause();
         this.scene.add("Loading", LoadingScene, true);
 
         this.scene.launch("Combat", {

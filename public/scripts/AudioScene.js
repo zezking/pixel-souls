@@ -21,7 +21,7 @@ class AudioScene extends Phaser.Scene {
     this.battleBGM = this.sound.add("battle-audio", {
       volume: 0.04,
     });
-    //this.battleBGM.play();
+    this.battleBGM.play();
   }
   stopBattleBgm() {
     this.battleBGM.stop();

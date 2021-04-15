@@ -10,10 +10,19 @@ class DeathScene extends Phaser.Scene {
     this.UIScene = this.scene.get("Ui");
     this.deathStrokeThickness = 50;
     this.deathFontSize = 40;
+    let rect = new Phaser.Geom.Rectangle(0, 0, 1000, 1000);
+    var graphics = this.add
+      .graphics({
+        fillStyle: { color: "#000000" },
+      })
+      .setDepth(0);
+
+    graphics.fillRectShape(rect);
     let camera = this.cameras.main;
     // Transition fade effect
     camera.fade(1000);
     camera.fadeIn(1000);
+
     camera.flash(1000);
 
     // create title text
@@ -73,9 +82,8 @@ class DeathScene extends Phaser.Scene {
       this.scene.start("Title");
     });
 
-
     this.deathAudio();
-    this.deathBGM.play()
+    this.deathBGM.play();
   }
 
   deathAudio() {

@@ -7,7 +7,7 @@ class CombatScene extends Phaser.Scene {
     let { health } = data;
     this.playerHealth = health;
     this.enemyHealth = 3;
-
+    this.input.enabled = false;
     this.AudioScene = this.scene.get("Audio");
 
     console.log("(inside combat)Health from player: ", this.playerHealth);
@@ -19,13 +19,14 @@ class CombatScene extends Phaser.Scene {
   }
 
   create() {
+    console.log(this.tilesBottom);
     this.cameras.main.fadeIn(1000);
     this.setupCombatUi();
     this.resultListener();
     this.createCombatPlayer();
     this.drawCombatUIBackground();
     this.createCombatSkeleton();
-    this.createMusic();
+    this.disableClickTimer();
     this.AudioScene.playBattleBgm();
   }
   setupCombatUi() {
@@ -199,5 +200,14 @@ class CombatScene extends Phaser.Scene {
         add: true,
       })
       .setDepth(1);
+  }
+
+  disableClickTimer() {
+    this.disableClick = this.time.addEvent({
+      delay: 3000,
+      callback: () => {
+        this.input.enabled = true;
+      },
+    });
   }
 }
