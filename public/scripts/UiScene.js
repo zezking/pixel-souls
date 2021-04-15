@@ -48,15 +48,24 @@ class UiScene extends Phaser.Scene {
       let timer = 0;
       for (let i = counter; i < newSouls; i++) {
         setTimeout(() => {
-          console.log("dfdfd");
-          console.log(this.soulText);
-          console.log(counter);
           this.soulText.setText(`${i + 1}`);
         }, (timer += 5));
       }
     });
     // listen for healthCount event?
     this.combatScene.events.on("updateHealth", (health) => {
+      this.hearts.children.each((gameObj, index) => {
+        const heart = gameObj;
+        if (index < health) {
+          heart.setTexture("ui-heart-full");
+        } else {
+          heart.setTexture("ui-heart-empty");
+        }
+      });
+      this.healthUpdater(health);
+    });
+    //Same event as above, but for gameScene:
+    this.gameScene.events.on("updateHealth", (health) => {
       this.hearts.children.each((gameObj, index) => {
         const heart = gameObj;
         if (index < health) {
