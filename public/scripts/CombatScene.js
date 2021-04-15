@@ -23,6 +23,9 @@ class CombatScene extends Phaser.Scene {
     this.setupCombatUi();
     this.resultListener();
     this.createCombatPlayer();
+    // this.bothHurt();
+    // this.enemyHurt();
+    // this.playerHurt();
     this.drawCombatUIBackground();
     this.createCombatSkeleton();
     this.disableClickTimer();
@@ -70,6 +73,16 @@ class CombatScene extends Phaser.Scene {
       this.result = this.checkWinner("shield", aiResult());
       this.events.emit("results", this.result);
     });
+
+    //enemy hearts
+    this.enemyHearts = this.add.group({
+      classType: Phaser.GameObjects.Image,
+    });
+    this.enemyHearts.createMultiple({
+      key: "ui-heart-full",
+      setXY: { x: 615, y: 325, stepX: 40 },
+      quantity: 3,
+    });
   }
 
   //Sword > Magic > Shield > Sword...  :)
@@ -112,16 +125,22 @@ class CombatScene extends Phaser.Scene {
           console.log("winner: ", winner, "Enemy chose: ", enemyChoice);
           this.playerHealth -= 1;
           this.enemyHealth -= 1;
+          this.bothHurt();
+          this.cameras.main.flash(300).shake(300)
           this.healthChecker();
           break;
         case "enemy":
           console.log("winner: ", winner, "Enemy chose: ", enemyChoice);
           this.playerHealth -= 1;
+          this.playerHurt();
+          this.cameras.main.flash(300).shake(300)
           this.healthChecker();
           break;
         case "player":
           console.log("winner: ", winner, "Enemy chose: ", enemyChoice);
           this.enemyHealth -= 1;
+          this.enemyHurt();
+          this.cameras.main.flash(300).shake(300)
           this.healthChecker();
           break;
       }
@@ -151,6 +170,7 @@ class CombatScene extends Phaser.Scene {
       this.AudioScene.stopBattleBgm();
       this.AudioScene.playMainBgm();
       this.events.emit("updateHealth", this.playerHealth);
+      this.cameras.main.flash(300).shake(300)
       this.events.off("results");
       this.scene.stop("Combat");
 
@@ -158,6 +178,16 @@ class CombatScene extends Phaser.Scene {
     }
 
     this.events.emit("updateHealth", this.playerHealth);
+
+    //Update enemy's health
+    this.enemyHearts.children.each((gameObj, index) => {
+      const heart = gameObj;
+      if (index < this.enemyHealth) {
+        heart.setTexture("ui-heart-full");
+      } else {
+        heart.setTexture("ui-heart-empty");
+      }
+    });
   }
 
   update() {
@@ -189,6 +219,70 @@ class CombatScene extends Phaser.Scene {
     })
       .setDepth(400)
       .setScale(8);
+  }
+
+  playerHurt() {
+    this.player_hurt = this.make
+      .image({
+        x: 400,
+        y: 300,
+        key: "player_hurt",
+        scale: {
+          x: 1,
+          y: 1,
+        },
+        add: true,
+      })
+      .setDepth(1)
+      .setAlpha(0)
+      this.tweens.add({
+        targets: this.player_hurt,
+        alpha: { start: 0, from: 0, to: 1, duration: 500, ease: "Linear" },
+        yoyo: true,
+      });
+  }
+  
+
+  enemyHurt() {
+    this.enemy_hurt = this.make
+      .image({
+        x: 400,
+        y: 300,
+        key: "enemy_hurt",
+        scale: {
+          x: 1,
+          y: 1,
+        },
+        add: true,
+      })
+      .setDepth(1)
+      .setAlpha(0)
+      this.tweens.add({
+        targets: this.enemy_hurt,
+        alpha: { start: 0, from: 0, to: 1, duration: 500, ease: "Linear" },
+        yoyo: true,
+      });
+  }
+
+  bothHurt() {
+    this.both_hurt = this.make
+      .image({
+        x: 400,
+        y: 300,
+        key: "both_hurt",
+        scale: {
+          x: 1,
+          y: 1,
+        },
+        add: true,
+      })
+      .setDepth(1)
+      .setAlpha(0)
+      this.tweens.add({
+        targets: this.both_hurt,
+        alpha: { start: 0, from: 0, to: 1, duration: 500, ease: "Linear" },
+        yoyo: true,
+      });
   }
 
   drawCombatUIBackground() {
