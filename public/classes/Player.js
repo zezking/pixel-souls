@@ -138,7 +138,7 @@ class Player extends Phaser.Physics.Matter.Sprite {
         this.health = 5;
         this.estus -= 1;
         this.inputKeys.drink.reset();
-        this.scene.events.emit("updateHealth", this.health);
+        this.scene.events.emit("updateHealth", this.health, this.estus);
         console.log("Drank an estus. Estus remaining: ", this.estus);
       } else {
         this.inputKeys.drink.reset();
