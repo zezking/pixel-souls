@@ -23,6 +23,9 @@ class CombatScene extends Phaser.Scene {
     this.setupCombatUi();
     this.resultListener();
     this.createCombatPlayer();
+    // this.bothHurt();
+    // this.enemyHurt();
+    // this.playerHurt();
     this.drawCombatUIBackground();
     this.createCombatSkeleton();
     this.disableClickTimer();
@@ -122,16 +125,22 @@ class CombatScene extends Phaser.Scene {
           console.log("winner: ", winner, "Enemy chose: ", enemyChoice);
           this.playerHealth -= 1;
           this.enemyHealth -= 1;
+          this.bothHurt();
+          this.cameras.main.flash(300).shake(300)
           this.healthChecker();
           break;
         case "enemy":
           console.log("winner: ", winner, "Enemy chose: ", enemyChoice);
           this.playerHealth -= 1;
+          this.playerHurt();
+          this.cameras.main.flash(300).shake(300)
           this.healthChecker();
           break;
         case "player":
           console.log("winner: ", winner, "Enemy chose: ", enemyChoice);
           this.enemyHealth -= 1;
+          this.enemyHurt();
+          this.cameras.main.flash(300).shake(300)
           this.healthChecker();
           break;
       }
@@ -161,6 +170,7 @@ class CombatScene extends Phaser.Scene {
       this.AudioScene.stopBattleBgm();
       this.AudioScene.playMainBgm();
       this.events.emit("updateHealth", this.playerHealth);
+      this.cameras.main.flash(300).shake(300)
       this.events.off("results");
       this.scene.stop("Combat");
 
@@ -209,6 +219,70 @@ class CombatScene extends Phaser.Scene {
     })
       .setDepth(400)
       .setScale(8);
+  }
+
+  playerHurt() {
+    this.player_hurt = this.make
+      .image({
+        x: 400,
+        y: 300,
+        key: "player_hurt",
+        scale: {
+          x: 1,
+          y: 1,
+        },
+        add: true,
+      })
+      .setDepth(1)
+      .setAlpha(0)
+      this.tweens.add({
+        targets: this.player_hurt,
+        alpha: { start: 0, from: 0, to: 1, duration: 500, ease: "Linear" },
+        yoyo: true,
+      });
+  }
+  
+
+  enemyHurt() {
+    this.enemy_hurt = this.make
+      .image({
+        x: 400,
+        y: 300,
+        key: "enemy_hurt",
+        scale: {
+          x: 1,
+          y: 1,
+        },
+        add: true,
+      })
+      .setDepth(1)
+      .setAlpha(0)
+      this.tweens.add({
+        targets: this.enemy_hurt,
+        alpha: { start: 0, from: 0, to: 1, duration: 500, ease: "Linear" },
+        yoyo: true,
+      });
+  }
+
+  bothHurt() {
+    this.both_hurt = this.make
+      .image({
+        x: 400,
+        y: 300,
+        key: "both_hurt",
+        scale: {
+          x: 1,
+          y: 1,
+        },
+        add: true,
+      })
+      .setDepth(1)
+      .setAlpha(0)
+      this.tweens.add({
+        targets: this.both_hurt,
+        alpha: { start: 0, from: 0, to: 1, duration: 500, ease: "Linear" },
+        yoyo: true,
+      });
   }
 
   drawCombatUIBackground() {
