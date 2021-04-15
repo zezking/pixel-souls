@@ -108,7 +108,7 @@ class GameScene extends Phaser.Scene {
     });
     this.enemy3 = new Enemy({
       scene: this,
-      x: 688,
+      x: 708,
       y: 1022,
       key: "skeleton_sprite",
       frame: "skele_idling0",
@@ -313,11 +313,11 @@ class GameScene extends Phaser.Scene {
       shift: Phaser.Input.Keyboard.KeyCodes.SHIFT,
       interact: Phaser.Input.Keyboard.KeyCodes.E,
     });
+
     let camera = this.cameras.main;
 
     // Zoom in and out of Player
-
-    camera.zoom = 3;
+    camera.zoom = 1;
 
     camera.startFollow(this.player);
     // Camera to center leeway, the higher, the tighter
@@ -327,7 +327,6 @@ class GameScene extends Phaser.Scene {
     // camera.flash(1000);
     camera.fadeIn(1000);
 
-    // this.player.update(this.player.anims.play("player_down"));
   }
 
   addCollisions() {
@@ -427,6 +426,16 @@ class GameScene extends Phaser.Scene {
         this.events.emit("characterLit");
       },
     });
+    this.matterCollision.addOnCollideActive({
+      objectA: this.player,
+      objectB: this.bonfire,
+      callback: () => {
+        if (this.player.inputKeys.interact.isDown) {
+          this.events.emit("useBonfire");
+          this.player.inputKeys.interact.reset()
+        }
+      }
+    })
   }
 
   //Delay and activation for
@@ -474,6 +483,19 @@ class GameScene extends Phaser.Scene {
     this.uiScene.events.on("healthUpdated", (health) => {
       this.player.health = health;
     });
+
+    //Use bonfire, reset spawns/heal/restore estus
+    this.events.on("useBonfire", () => {
+      console.log("Bonfire used!!")
+      this.player.health = 5;
+      this.player.estus = 3;
+      this.events.emit("updateHealth", this.player.health);
+      this.enemies.forEach((enemy) => {
+        enemy.enemyKilled();
+      });
+      this.createEnemy();
+      // this.events.off("useBonfire");
+    })
   }
 
   createAreaText() {
