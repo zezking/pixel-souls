@@ -233,7 +233,13 @@ class CombatScene extends Phaser.Scene {
         },
         add: true,
       })
-      .setDepth(1);
+      .setDepth(1)
+      .setAlpha(0)
+      this.tweens.add({
+        targets: this.player_hurt,
+        alpha: { start: 0, from: 0, to: 1, duration: 500, ease: "Linear" },
+        yoyo: true,
+      });
   }
   
 
@@ -249,7 +255,13 @@ class CombatScene extends Phaser.Scene {
         },
         add: true,
       })
-      .setDepth(1);
+      .setDepth(1)
+      .setAlpha(0)
+      this.tweens.add({
+        targets: this.enemy_hurt,
+        alpha: { start: 0, from: 0, to: 1, duration: 500, ease: "Linear" },
+        yoyo: true,
+      });
   }
 
   bothHurt() {
@@ -264,7 +276,13 @@ class CombatScene extends Phaser.Scene {
         },
         add: true,
       })
-      .setDepth(1);
+      .setDepth(1)
+      .setAlpha(0)
+      this.tweens.add({
+        targets: this.both_hurt,
+        alpha: { start: 0, from: 0, to: 1, duration: 500, ease: "Linear" },
+        yoyo: true,
+      });
   }
 
   drawCombatUIBackground() {
