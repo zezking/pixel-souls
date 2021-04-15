@@ -13,8 +13,6 @@ class GameScene extends Phaser.Scene {
     this.uiScene = this.scene.get("Ui");
     this.combatScene = this.scene.get("Combat");
     this.AudioScene = this.scene.get("Audio");
-    console.log("game: ", this);
-    console.log(this.AudioScene);
   }
 
   preload() {
@@ -48,13 +46,11 @@ class GameScene extends Phaser.Scene {
 
     this.createOverlay();
     this.setupEventListener();
-
     this.freeEnemy(this.enemies);
     //Background Music
     //this.createMusic();
     this.AudioScene.playMainBgm();
 
-    console.log(this.enemies)
     this.OverlayLayer.setDepth(2239); //MUST ALWAYS BE LAST ON THIS LIST!!
   }
 
@@ -494,15 +490,14 @@ class GameScene extends Phaser.Scene {
       this.player.health = 5;
       this.player.estus = 3;
       this.events.emit("updateHealth", this.player.health);
-      console.log(this.enemies);
       this.enemies.forEach((enemy) => {
         enemy.enemyKilled();
       });
       this.createEnemy();
-      this.enemies.forEach((enemy) => {
-        enemy.setActive(true);
-      });
-      console.log(this.enemies);
+      this.createCombat();
+      this.freeEnemy(this.enemies);
+
+
       // this.events.off("useBonfire");
     })
   }
