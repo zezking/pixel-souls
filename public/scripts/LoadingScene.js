@@ -12,16 +12,10 @@ class LoadingScene extends Phaser.Scene {
     this.createBonFire();
     this.createLoadingText();
 
-    let rect = new Phaser.Geom.Rectangle(
-      0, //position of text box
-      0,
-      1000, //height and width of the rectangle
-      1000
-    );
+    let rect = new Phaser.Geom.Rectangle(0, 0, 1000, 1000);
     var graphics = this.add
       .graphics({
         fillStyle: { color: "#000000" },
-        //change this value to change opacity of textbox background
       })
       .setDepth(0);
 

@@ -44,12 +44,11 @@ class BootScene extends Phaser.Scene {
       frameHeight: 109,
     });
 
-    
     this.load.spritesheet("reah", "public/assets/sprites/reah.png", {
       frameWidth: 23,
       frameHeight: 39,
     });
-    
+
     // this.load.spritesheet("petrus", "public/assets/sprites/petrus.png", {
     //   frameWidth: 34,
     //   frameHeight: 52,
@@ -121,6 +120,7 @@ class BootScene extends Phaser.Scene {
     this.load.audio("battle-audio", "public/assets/audio/battle_theme.mp3");
     this.load.audio("new-area", "public/assets/audio/new_area.mp3");
     this.load.audio("soul-get", "public/assets/audio/soul-get.wav.mp3");
+    this.load.audio("armor", "public/assets/audio/body-armor.wav.mp3");
   }
 
   loadTilemap() {
