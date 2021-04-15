@@ -10,6 +10,7 @@ const config = {
     LogoScene,
     CombatScene,
     DeathScene,
+    AudioScene,
   ],
   // zoom: 2,
   pixelArt: true,
