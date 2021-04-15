@@ -1,0 +1,86 @@
+{
+    "frames": [
+        {
+            "filename": "fireKeeper_0",
+            "frame": {
+                "w": 96,
+                "h": 67,
+                "x": 0,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "fireKeeper_1",
+            "frame": {
+                "w": 96,
+                "h": 67,
+                "x": 0,
+                "y": 67
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "fireKeeper_2",
+            "frame": {
+                "w": 96,
+                "h": 67,
+                "x": 96,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "fireKeeper_3",
+            "frame": {
+                "w": 96,
+                "h": 67,
+                "x": 96,
+                "y": 67
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "fireKeeper_4",
+            "frame": {
+                "w": 96,
+                "h": 67,
+                "x": 0,
+                "y": 134
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "fireKeeper_5",
+            "frame": {
+                "w": 96,
+                "h": 67,
+                "x": 96,
+                "y": 134
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        }
+    ],
+    "meta": {
+        "description": "Atlas generado con Atlas Packer Gamma V2",
+        "web": "https://gammafp.github.io/atlas-packer-phaser/"
+    }
+}

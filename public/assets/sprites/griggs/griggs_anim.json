@@ -1,0 +1,52 @@
+{
+    "anims": [
+        {
+            "key": "griggs_idle",
+            "type": "frames",
+            "repeat": -1,
+            "frameRate": 3,
+            "frames": [
+                {
+                    "key": "griggs",
+                    "frame": "griggs_1"
+                },
+                {
+                    "key": "griggs",
+                    "frame": "griggs_2"
+                },
+                {
+                    "key": "griggs",
+                    "frame": "griggs_3"
+                },
+                {
+                    "key": "griggs",
+                    "frame": "griggs_4"
+                },
+                {
+                    "key": "griggs",
+                    "frame": "griggs_5"
+                },
+                {
+                    "key": "griggs",
+                    "frame": "griggs_4"
+                },
+                {
+                    "key": "griggs",
+                    "frame": "griggs_3"
+                },
+                {
+                    "key": "griggs",
+                    "frame": "griggs_2"
+                },
+                {
+                    "key": "griggs",
+                    "frame": "griggs_1"
+                },
+                {
+                    "key": "griggs",
+                    "frame": "griggs_0"
+                }
+            ]
+        }
+    ]
+}

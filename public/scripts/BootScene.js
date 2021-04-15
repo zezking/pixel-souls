@@ -44,52 +44,53 @@ class BootScene extends Phaser.Scene {
       frameHeight: 109,
     });
 
-    this.load.spritesheet("petrus", "public/assets/sprites/petrus.png", {
-      frameWidth: 34,
-      frameHeight: 52,
-    });
-
+    
     this.load.spritesheet("reah", "public/assets/sprites/reah.png", {
       frameWidth: 23,
       frameHeight: 39,
     });
+    
+    // this.load.spritesheet("petrus", "public/assets/sprites/petrus.png", {
+    //   frameWidth: 34,
+    //   frameHeight: 52,
+    // });
 
-    this.load.spritesheet(
-      "laurentius",
-      "public/assets/sprites/laurentius.png",
-      {
-        frameWidth: 26,
-        frameHeight: 32,
-      }
-    );
+    // this.load.spritesheet(
+    //   "laurentius",
+    //   "public/assets/sprites/laurentius.png",
+    //   {
+    //     frameWidth: 26,
+    //     frameHeight: 32,
+    //   }
+    // );
 
-    this.load.spritesheet(
-      "bigHatLogan",
-      "public/assets/sprites/bigHatLogan.png",
-      {
-        frameWidth: 40,
-        frameHeight: 34,
-      }
-    );
+    // this.load.spritesheet(
+    //   "bigHatLogan",
+    //   "public/assets/sprites/bigHatLogan.png",
+    //   {
+    //     frameWidth: 40,
+    //     frameHeight: 34,
+    //   }
+    // );
 
-    this.load.spritesheet(
-      "fireKeeper",
-      "public/assets/sprites/fireKeeper.png",
-      {
-        frameWidth: 96,
-        frameHeight: 67,
-      }
-    );
+    // this.load.spritesheet(
+    //   "fireKeeper",
+    //   "public/assets/sprites/fireKeeper.png",
+    //   {
+    //     frameWidth: 96,
+    //     frameHeight: 67,
+    //   }
+    // );
 
-    this.load.spritesheet("griggs", "public/assets/sprites/griggs.png", {
-      frameWidth: 32,
-      frameHeight: 54,
-    });
+    // this.load.spritesheet("griggs", "public/assets/sprites/griggs.png", {
+    //   frameWidth: 32,
+    //   frameHeight: 54,
+    // });
 
-    this.load.spritesheet("lautrec", "public/assets/sprites/lautrec.png", {
-      frameWidth: 25,
-      frameHeight: 35,
-    });
+    // this.load.spritesheet("lautrec", "public/assets/sprites/lautrec.png", {
+    //   frameWidth: 25,
+    //   frameHeight: 35,
+    // });
 
     this.load.spritesheet("well", "public/assets/entities/well.png", {
       frameWidth: 88,
@@ -117,7 +118,7 @@ class BootScene extends Phaser.Scene {
     this.load.audio("bg-music", "public/assets/audio/firelink_shrine.mp3");
     this.load.audio("start-menu", "public/assets/audio/start_menu.mp3");
     this.load.audio("died-audio", "public/assets/audio/You_Died.mp3");
-    this.load.audio("battle-audio", "public/assets/audio/battle_theme.mp3");
+    this.load.audio("battle-audio", "public/assets/audio/battle_music.mp3");
     this.load.audio("new-area", "public/assets/audio/new_area.mp3");
     this.load.audio("soul-get", "public/assets/audio/soul-get.wav.mp3");
     this.load.audio("armor", "public/assets/audio/body-armor.wav.mp3");
