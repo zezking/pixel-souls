@@ -36,8 +36,8 @@ class UiScene extends Phaser.Scene {
 
     Phaser.Display.Align.In.Center(this.soulText, this.soulCounter);
 
-    // Estus Count
-    // --goes here--
+    // Estus Flask
+    this.estusFlask = this.add.image(75, 725, "estus-full");
   }
 
   setupEvents() {
@@ -64,8 +64,9 @@ class UiScene extends Phaser.Scene {
       });
       this.healthUpdater(health);
     });
-    //Same event as above, but for gameScene:
-    this.gameScene.events.on("updateHealth", (health) => {
+    //Health and Estus flasks from gameScene:
+    this.gameScene.events.on("updateHealth", (health, estus) => {
+      //Health hearts
       this.hearts.children.each((gameObj, index) => {
         const heart = gameObj;
         if (index < health) {
@@ -75,6 +76,16 @@ class UiScene extends Phaser.Scene {
         }
       });
       this.healthUpdater(health);
+      //Estus flask
+      if (estus === 3) {
+        this.estusFlask.setTexture("estus-full");
+      } else if (estus === 2) {
+        this.estusFlask.setTexture("estus-half");
+      } else if (estus === 1) {
+        this.estusFlask.setTexture("estus-quarter");
+      } else {
+        this.estusFlask.setTexture("estus-empty");
+      }
     });
   }
 
