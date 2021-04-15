@@ -12,7 +12,9 @@ class GameScene extends Phaser.Scene {
     //references to other scenes for event listening
     this.uiScene = this.scene.get("Ui");
     this.combatScene = this.scene.get("Combat");
+    this.AudioScene = this.scene.get("Audio");
     console.log("game: ", this);
+    console.log(this.AudioScene);
   }
 
   preload() {
@@ -49,7 +51,8 @@ class GameScene extends Phaser.Scene {
 
     this.freeEnemy(this.enemies);
     //Background Music
-    this.createMusic();
+    //this.createMusic();
+    this.AudioScene.playMainBgm();
 
     this.OverlayLayer.setDepth(2239); //MUST ALWAYS BE LAST ON THIS LIST!!
   }
@@ -386,8 +389,8 @@ class GameScene extends Phaser.Scene {
         this.enemies.forEach((enemy) => {
           enemy.setStatic(true);
         });
+        this.AudioScene.stopMainBgm();
         this.scene.sleep();
-        this.mainBGM.stop();
         this.scene.add("Loading", LoadingScene, true);
 
         this.scene.launch("Combat", {
@@ -498,7 +501,6 @@ class GameScene extends Phaser.Scene {
     if (enemyGroup) {
       this.events.on("wake", function (sys, data) {
         let { gameOver } = data;
-
         if (gameOver) {
           this.enemyTimer = sys.time.addEvent({
             delay: 1000,
@@ -524,11 +526,6 @@ class GameScene extends Phaser.Scene {
     this.newAreaSFX = this.sound.add("new-area", {
       volume: 0.04,
     });
-    this.mainBGM = this.sound.add("bg-music", {
-      volume: 0.04,
-      loop: true,
-    });
-    this.mainBGM.play();
     this.newAreaSFX.play();
   }
 }
