@@ -344,6 +344,7 @@ class GameScene extends Phaser.Scene {
       right: Phaser.Input.Keyboard.KeyCodes.D,
       shift: Phaser.Input.Keyboard.KeyCodes.SHIFT,
       interact: Phaser.Input.Keyboard.KeyCodes.E,
+      drink: Phaser.Input.Keyboard.KeyCodes.R,
     });
 
     let camera = this.cameras.main;

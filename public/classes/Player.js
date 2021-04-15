@@ -130,6 +130,21 @@ class Player extends Phaser.Physics.Matter.Sprite {
 
     playerVelocity.scale(speed);
     this.setVelocity(playerVelocity.x, playerVelocity.y);
+
+
+    //Estus Logic
+    if(this.inputKeys.drink.isDown) {
+      if (this.estus > 0) {
+        this.health = 5;
+        this.estus -= 1;
+        this.inputKeys.drink.reset();
+        this.scene.events.emit("updateHealth", this.health);
+        console.log("Drank an estus. Estus remaining: ", this.estus);
+      } else {
+        this.inputKeys.drink.reset();
+        console.log("Out of estus :(");
+      }
+    }
   }
 
   playerKilled() {
