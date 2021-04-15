@@ -1,8 +1,9 @@
 class NPC extends Phaser.Physics.Matter.Sprite {
   constructor(data) {
-    let { scene, x, y, key, frame } = data;
+    let { scene, x, y, key, frame, name } = data;
     super(scene.matter.world, x, y, key, frame);
     this.scene.add.existing(this); // the scene this container will be added to
+    this.name = name;
     this.depthSorting = true; //Allows this entity to be depth-sorted
     const { Body, Bodies } = Phaser.Physics.Matter.Matter;
     // let NPCCollider = Bodies.circle(this.x,this.y,12,{isSensor:false, lable:'NPCCollider'});
@@ -40,16 +41,32 @@ class NPC extends Phaser.Physics.Matter.Sprite {
     scene.load.atlas(
       "crestfallenWarrior",
       "/public/assets/sprites/crestfallenWarrior/crestfallenwarrior.png",
-      "public/assets/sprites/crestfallenWarrior/crestfallenwarrior_atlas.json"
+      "public/assets/sprites/crestfallenWarrior/crestfallenwarrior_atlas.json",      
+      // "griggs",
+      // "/public/assets/sprites/griggs/griggs.png",
+      // "public/assets/sprites/griggs/griggs_atlas.json"
     );
     scene.load.animation(
       "crestfallenwarrior_anim",
-      "/public/assets/sprites/crestfallenWarrior/crestfallenwarrior_anim.json"
+      "/public/assets/sprites/crestfallenWarrior/crestfallenwarrior_anim.json",
+      // "griggs_anim",
+      // "/public/assets/sprites/griggs/griggs_anim.json"
+    );
+
+    scene.load.atlas(
+      "griggs",
+      "/public/assets/sprites/griggs/griggs.png",
+      "public/assets/sprites/griggs/griggs_atlas.json"
+    );
+    scene.load.animation(
+      "griggs_anim",
+      "/public/assets/sprites/griggs/griggs_anim.json"
     );
 
   }
   
   update() {
-    this.anims.play(`crestfallenWarrior_idle`, true);
+    this.anims.play(`${this.name}_idle`, true);
+
   }
 }

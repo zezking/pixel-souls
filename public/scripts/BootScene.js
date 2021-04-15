@@ -81,10 +81,10 @@ class BootScene extends Phaser.Scene {
       }
     );
 
-    this.load.spritesheet("griggs", "public/assets/sprites/griggs.png", {
-      frameWidth: 32,
-      frameHeight: 54,
-    });
+    // this.load.spritesheet("griggs", "public/assets/sprites/griggs.png", {
+    //   frameWidth: 32,
+    //   frameHeight: 54,
+    // });
 
     this.load.spritesheet("lautrec", "public/assets/sprites/lautrec.png", {
       frameWidth: 25,
