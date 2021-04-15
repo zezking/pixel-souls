@@ -79,7 +79,6 @@ class Player extends Phaser.Physics.Matter.Sprite {
   }
 
   update() {
-    // console.log(this.souls);
 
     // if(!this.atBonfire){
     //   this.anims.play("player_spawn")

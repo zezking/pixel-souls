@@ -46,13 +46,11 @@ class GameScene extends Phaser.Scene {
 
     this.createOverlay();
     this.setupEventListener();
-
     this.freeEnemy(this.enemies);
     //Background Music
     //this.createMusic();
     this.AudioScene.playMainBgm();
 
-    console.log(this)
     this.OverlayLayer.setDepth(2239); //MUST ALWAYS BE LAST ON THIS LIST!!
   }
 
@@ -383,7 +381,6 @@ class GameScene extends Phaser.Scene {
       objectA: this.player,
       objectB: this.enemies,
       callback: (eventData) => {
-        console.log("Collided with enemy!");
         this.events.emit("enemyDeath", eventData.gameObjectB);
         this.enemies.forEach((enemy) => {
           enemy.setStatic(true);
@@ -498,10 +495,9 @@ class GameScene extends Phaser.Scene {
       });
       this.createEnemy();
       this.createCombat();
-      // this.enemies.forEach((enemy) => {
-      //   enemy.setActive(true);
-      // });
-      console.log(this.enemies);
+      this.freeEnemy(this.enemies);
+
+
       // this.events.off("useBonfire");
     })
   }
