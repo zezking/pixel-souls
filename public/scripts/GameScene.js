@@ -48,6 +48,7 @@ class GameScene extends Phaser.Scene {
     this.createOverlay();
     this.setupEventListener();
     this.freeEnemy(this.enemies);
+    this.combatScene.combatBackgroundGenerator(this.player.x, this.player.y);
     //Background Music
     this.AudioScene.playMainBgm();
     this.AudioScene.playAreaSFX();
@@ -351,7 +352,7 @@ class GameScene extends Phaser.Scene {
     let camera = this.cameras.main;
 
     // Zoom in and out of Player
-    camera.zoom = 3;
+    camera.zoom = 1;
 
     camera.startFollow(this.player);
     // Camera to center leeway, the higher, the tighter
