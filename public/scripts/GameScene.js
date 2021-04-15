@@ -159,6 +159,7 @@ class GameScene extends Phaser.Scene {
       x: 496,
       y: 1961,
       key: "fireKeeper",
+      frame: "fireKeeper_0",
       name: "fireKeeper",
     });
     this.crestfallenWarrior = new NPC({
@@ -206,9 +207,9 @@ class GameScene extends Phaser.Scene {
       this.bigHatLogan,
       this.griggs,
       this.petrus,
+      this.fireKeeper,
       // this.bird,
       // this.reah,
-      // this.fireKeeper,
       // this.lautrec,
     ];
 

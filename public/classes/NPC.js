@@ -87,6 +87,16 @@ class NPC extends Phaser.Physics.Matter.Sprite {
       "petrus_anim",
       "public/assets/sprites/petrus/petrus_anim.json"
     );
+
+    scene.load.atlas(
+      "fireKeeper",
+      "public/assets/sprites/fireKeeper/firekeeper.png",
+      "public/assets/sprites/fireKeeper/firekeeper_atlas.json"
+    );
+    scene.load.animation(
+      "firekeeper_anim",
+      "public/assets/sprites/fireKeeper/firekeeper_anim.json"
+    );
   }
   
   update() {

@@ -1,0 +1,48 @@
+{
+    "anims": [
+        {
+            "key": "fireKeeper_idle",
+            "type": "frames",
+            "repeat": -1,
+            "frameRate": 3,
+            "frames": [
+                {
+                    "key": "fireKeeper",
+                    "frame": "fireKeeper_0"
+                },
+                {
+                    "key": "fireKeeper",
+                    "frame": "fireKeeper_1"
+                },
+                {
+                    "key": "fireKeeper",
+                    "frame": "fireKeeper_2"
+                },
+                {
+                    "key": "fireKeeper",
+                    "frame": "fireKeeper_3"
+                },
+                {
+                    "key": "fireKeeper",
+                    "frame": "fireKeeper_4"
+                },
+                {
+                    "key": "fireKeeper",
+                    "frame": "fireKeeper_5"
+                },
+                {
+                    "key": "fireKeeper",
+                    "frame": "fireKeeper_4"
+                },
+                {
+                    "key": "fireKeeper",
+                    "frame": "fireKeeper_3"
+                },
+                {
+                    "key": "fireKeeper",
+                    "frame": "fireKeeper_1"
+                }
+            ]
+        }
+    ]
+}
