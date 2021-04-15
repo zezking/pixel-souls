@@ -87,10 +87,10 @@ class BootScene extends Phaser.Scene {
     //   frameHeight: 54,
     // });
 
-    this.load.spritesheet("lautrec", "public/assets/sprites/lautrec.png", {
-      frameWidth: 25,
-      frameHeight: 35,
-    });
+    // this.load.spritesheet("lautrec", "public/assets/sprites/lautrec.png", {
+    //   frameWidth: 25,
+    //   frameHeight: 35,
+    // });
 
     this.load.spritesheet("well", "public/assets/entities/well.png", {
       frameWidth: 88,
