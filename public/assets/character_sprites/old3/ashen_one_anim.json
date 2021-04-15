@@ -29,106 +29,10 @@
             ]
         },
         {
-            "key": "player_sw",
-            "type": "frames",
-            "repeat": -1,
-            "frameRate": 8,
-            "frames": [
-                {
-                    "key": "ashen_one",
-                    "frame": "player_24"
-                },
-                {
-                    "key": "ashen_one",
-                    "frame": "player_23"
-                },
-                {
-                    "key": "ashen_one",
-                    "frame": "player_24"
-                },
-                {
-                    "key": "ashen_one",
-                    "frame": "player_25"
-                }
-            ]
-        },
-        {
-            "key": "player_nw",
-            "type": "frames",
-            "repeat": -1,
-            "frameRate": 8,
-            "frames": [
-                {
-                    "key": "ashen_one",
-                    "frame": "player_21"
-                },
-                {
-                    "key": "ashen_one",
-                    "frame": "player_20"
-                },
-                {
-                    "key": "ashen_one",
-                    "frame": "player_21"
-                },
-                {
-                    "key": "ashen_one",
-                    "frame": "player_22"
-                }
-            ]
-        },
-        {
-            "key": "player_se",
-            "type": "frames",
-            "repeat": -1,
-            "frameRate": 8,
-            "frames": [
-                {
-                    "key": "ashen_one",
-                    "frame": "player_27"
-                },
-                {
-                    "key": "ashen_one",
-                    "frame": "player_26"
-                },
-                {
-                    "key": "ashen_one",
-                    "frame": "player_27"
-                },
-                {
-                    "key": "ashen_one",
-                    "frame": "player_28"
-                }
-            ]
-        },
-        {
-            "key": "player_ne",
-            "type": "frames",
-            "repeat": -1,
-            "frameRate": 8,
-            "frames": [
-                {
-                    "key": "ashen_one",
-                    "frame": "player_18"
-                },
-                {
-                    "key": "ashen_one",
-                    "frame": "player_17"
-                },
-                {
-                    "key": "ashen_one",
-                    "frame": "player_18"
-                },
-                {
-                    "key": "ashen_one",
-                    "frame": "player_19"
-                }
-            ]
-        },
-        {
             "key": "player_right",
             "type": "frames",
             "repeat": -1,
-            "frameRate": 8,
+            "frameRate": 12,
             "frames": [
                 {
                     "key": "ashen_one",
@@ -152,7 +56,7 @@
             "key": "player_left",
             "type": "frames",
             "repeat": -1,
-            "frameRate": 8,
+            "frameRate": 12,
             "frames": [
                 {
                     "key": "ashen_one",
