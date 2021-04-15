@@ -127,21 +127,21 @@ class CombatScene extends Phaser.Scene {
           this.enemyHealth -= 1;
           this.playerHurt();
           this.enemyHurt();
-          this.cameras.main.flash(300).shake(300)
+          this.cameras.main.flash(300).shake(300);
           this.healthChecker();
           break;
         case "enemy":
           console.log("winner: ", winner, "Enemy chose: ", enemyChoice);
           this.playerHealth -= 1;
           this.playerHurt();
-          this.cameras.main.flash(300).shake(300)
+          this.cameras.main.flash(300).shake(300);
           this.healthChecker();
           break;
         case "player":
           console.log("winner: ", winner, "Enemy chose: ", enemyChoice);
           this.enemyHealth -= 1;
           this.enemyHurt();
-          this.cameras.main.flash(300).shake(300)
+          this.cameras.main.flash(300).shake(300);
           this.healthChecker();
           break;
       }
@@ -168,7 +168,7 @@ class CombatScene extends Phaser.Scene {
 
       this.scene.start("Death");
     } else if (this.enemyHealth <= 0) {
-      this.cameras.main.flash(300).shake(300)
+      this.cameras.main.flash(300).shake(300);
       this.AudioScene.stopBattleBgm();
       this.AudioScene.playMainBgm();
       this.events.emit("updateHealth", this.playerHealth);
@@ -234,14 +234,13 @@ class CombatScene extends Phaser.Scene {
         add: true,
       })
       .setDepth(1)
-      .setAlpha(0)
-      this.tweens.add({
-        targets: this.player_hurt,
-        alpha: { start: 0, from: 0, to: 1, duration: 600, ease: "Linear" },
-        yoyo: true,
-      });
+      .setAlpha(0);
+    this.tweens.add({
+      targets: this.player_hurt,
+      alpha: { start: 0, from: 0, to: 1, duration: 600, ease: "Linear" },
+      yoyo: true,
+    });
   }
-  
 
   enemyHurt() {
     this.enemy_hurt = this.make
@@ -256,12 +255,12 @@ class CombatScene extends Phaser.Scene {
         add: true,
       })
       .setDepth(1)
-      .setAlpha(0)
-      this.tweens.add({
-        targets: this.enemy_hurt,
-        alpha: { start: 0, from: 0, to: 1, duration: 600, ease: "Linear" },
-        yoyo: true,
-      });
+      .setAlpha(0);
+    this.tweens.add({
+      targets: this.enemy_hurt,
+      alpha: { start: 0, from: 0, to: 1, duration: 600, ease: "Linear" },
+      yoyo: true,
+    });
   }
 
   drawCombatUIBackground() {
@@ -315,7 +314,7 @@ class CombatScene extends Phaser.Scene {
     if (
       this.playerX >= 361 &&
       this.playerX <= 597 &&
-      this.playerY >= 667 &&
+      this.playerY >= 650 &&
       this.playerY <= 1221
     ) {
       this.combatMapX = this.scale.width + 260;
@@ -324,10 +323,10 @@ class CombatScene extends Phaser.Scene {
     }
     //cementary combatMap
     if (
-      this.playerX >= 50 &&
-      this.playerX <= 610 &&
-      this.playerY >= 25 &&
-      this.playerY <= 645
+      this.playerX >= 60 &&
+      this.playerX <= 488 &&
+      this.playerY >= 278 &&
+      this.playerY <= 517
     ) {
       this.combatMapX = this.scale.width + 1600;
       this.combatMapY = this.scale.height + 1800;

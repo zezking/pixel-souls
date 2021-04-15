@@ -61,9 +61,6 @@ class GameScene extends Phaser.Scene {
     this.enemies.forEach((enemy) => {
       enemy.update();
     });
-
-    //console.log(this.player.x, this.player.y);
-
     // this.crestfallenWarrior.update();
     // this.griggs.update();
     // this.bigHatLogan.update();
@@ -138,7 +135,13 @@ class GameScene extends Phaser.Scene {
       frame: "skele_idling0",
       id: 5,
     });
-    this.enemies = [this.enemy, this.enemy2, this.enemy3, this.enemy4, this.enemy5];
+    this.enemies = [
+      this.enemy,
+      this.enemy2,
+      this.enemy3,
+      this.enemy4,
+      this.enemy5,
+    ];
   }
 
   createNPC() {
