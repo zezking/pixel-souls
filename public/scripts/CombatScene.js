@@ -237,7 +237,7 @@ class CombatScene extends Phaser.Scene {
       .setAlpha(0)
       this.tweens.add({
         targets: this.player_hurt,
-        alpha: { start: 0, from: 0, to: 1, duration: 500, ease: "Linear" },
+        alpha: { start: 0, from: 0, to: 1, duration: 600, ease: "Linear" },
         yoyo: true,
       });
   }
@@ -259,7 +259,7 @@ class CombatScene extends Phaser.Scene {
       .setAlpha(0)
       this.tweens.add({
         targets: this.enemy_hurt,
-        alpha: { start: 0, from: 0, to: 1, duration: 500, ease: "Linear" },
+        alpha: { start: 0, from: 0, to: 1, duration: 600, ease: "Linear" },
         yoyo: true,
       });
   }
