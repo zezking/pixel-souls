@@ -64,6 +64,18 @@ class UiScene extends Phaser.Scene {
       });
       this.healthUpdater(health);
     });
+    //Same event as above, but for gameScene:
+    this.gameScene.events.on("updateHealth", (health) => {
+      this.hearts.children.each((gameObj, index) => {
+        const heart = gameObj;
+        if (index < health) {
+          heart.setTexture("ui-heart-full");
+        } else {
+          heart.setTexture("ui-heart-empty");
+        }
+      });
+      this.healthUpdater(health);
+    });
   }
 
   healthUpdater(health) {

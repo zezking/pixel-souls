@@ -54,6 +54,7 @@ class Player extends Phaser.Physics.Matter.Sprite {
     this.setFixedRotation();
     this.health = 5;
     this.souls = 0;
+    this.estus = 3;
     this.atBonfire = false;
   }
 
