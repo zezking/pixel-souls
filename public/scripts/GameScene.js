@@ -61,9 +61,6 @@ class GameScene extends Phaser.Scene {
     this.enemies.forEach((enemy) => {
       enemy.update();
     });
-
-    console.log(this.player.x, this.player.y);
-
     // this.crestfallenWarrior.update();
     // this.griggs.update();
     // this.bigHatLogan.update();
