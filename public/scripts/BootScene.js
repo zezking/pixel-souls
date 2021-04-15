@@ -34,6 +34,10 @@ class BootScene extends Phaser.Scene {
     this.load.image("shield", "public/assets/ui/battle/shield.png");
     this.load.image("PLAYERBACK", "public/assets/sprites/PLAYERBACK.png");
     this.load.image("ui_background", "public/assets/ui/ui_background.png");
+    this.load.image(
+      "combat_background",
+      "public/assets/map/FULLMAP_bottom.png"
+    );
   }
 
   loadSpriteSheets() {
@@ -150,6 +154,6 @@ class BootScene extends Phaser.Scene {
   }
 
   create() {
-    this.scene.launch("Title");
+    this.scene.launch("Logo");
   }
 }
