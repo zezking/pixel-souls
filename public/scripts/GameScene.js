@@ -185,6 +185,7 @@ class GameScene extends Phaser.Scene {
       x: 688,
       y: 1082,
       key: "petrus",
+      frame: "petrus_0",
       name: "petrus",
     });
     this.bigHatLogan = new NPC({
@@ -208,11 +209,11 @@ class GameScene extends Phaser.Scene {
       this.crestfallenWarrior,
       this.bigHatLogan,
       this.griggs,
+      this.petrus,
       // this.bird,
       // this.reah,
       // this.fireKeeper,
       // this.lautrec,
-      // this.petrus,
     ];
 
     //here's a stupid step to get the bird on top of the wall
