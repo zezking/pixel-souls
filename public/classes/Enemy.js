@@ -66,7 +66,6 @@ class Enemy extends Phaser.Physics.Matter.Sprite {
   enemyKilled() {
     this.setActive(false);
     this.setVisible(false);
-
     this.destroy();
   }
 
