@@ -50,11 +50,14 @@ class GameScene extends Phaser.Scene {
     //Background Music
     this.AudioScene.playMainBgm();
     this.AudioScene.playAreaSFX();
+    console.log(this.player.isWalking);
+    this.AudioScene.stepSFX(this, this.player.isWalking);
 
     this.OverlayLayer.setDepth(2239); //MUST ALWAYS BE LAST ON THIS LIST!!
   }
 
   update() {
+    this.playerWalking();
     this.player.update();
     //this.AudioScene.stepSFX(this);
     // enemies list
@@ -496,7 +499,6 @@ class GameScene extends Phaser.Scene {
       this.createCombat();
       this.freeEnemy(this.enemies);
 
-
       // this.events.off("useBonfire");
     });
   }
@@ -537,6 +539,19 @@ class GameScene extends Phaser.Scene {
           });
         }
       });
+    }
+  }
+
+  playerWalking() {
+    if (
+      this.player.inputKeys.up.isDown ||
+      this.player.inputKeys.down.isDown ||
+      this.player.inputKeys.left.isDown ||
+      this.player.inputKeys.right.isDown
+    ) {
+      this.player.isWalking = true;
+    } else {
+      this.player.isWalking = false;
     }
   }
 }

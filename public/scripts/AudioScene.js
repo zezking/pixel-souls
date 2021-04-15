@@ -54,21 +54,26 @@ class AudioScene extends Phaser.Scene {
     this.areaSFX.play();
   }
 
-  stepSFX(scene) {
+  stepSFX(scene, walking) {
     this.armorSFX = this.sound.add("armor", {
       volume: 0.04,
-      rate: 1,
-      forceRestart: false,
     });
 
-    let keyW = scene.input.keyboard.addKey("W");
-    let keyS = scene.input.keyboard.addKey("S");
-    let keyA = scene.input.keyboard.addKey("A");
-    let keyD = scene.input.keyboard.addKey("D");
+    console.log(walking);
 
-    if (keyW.isDown || keyS.isDown || keyA.isDown || keyD.isDown) {
-      this.armorSFX.play();
-    }
+    scene.footsteps = scene.time.addEvent({
+      duration: 500,
+      repeat: -1,
+      callbackScope: this,
+      callback: function () {
+        console.log(walking);
+        if (walking) {
+          console.log("here");
+          this.armorSFX.play();
+        }
+      },
+    });
+
     //       this.armorSFX.play();
     // scene.time.addEvent({
     //   delay: 1000,
