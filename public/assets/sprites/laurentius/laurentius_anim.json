@@ -1,0 +1,72 @@
+{
+    "anims": [
+        {
+            "key": "laurentius_idle",
+            "type": "frames",
+            "repeat": -1,
+            "frameRate": 6,
+            "frames": [
+                {
+                    "key": "laurentius",
+                    "frame": "laurentius_0"
+                },
+                {
+                    "key": "laurentius",
+                    "frame": "laurentius_1"
+                },
+                {
+                    "key": "laurentius",
+                    "frame": "laurentius_1"
+                },
+                {
+                    "key": "laurentius",
+                    "frame": "laurentius_1"
+                },
+                {
+                    "key": "laurentius",
+                    "frame": "laurentius_2"
+                },
+                {
+                    "key": "laurentius",
+                    "frame": "laurentius_2"
+                },
+                {
+                    "key": "laurentius",
+                    "frame": "laurentius_2"
+                },
+                {
+                    "key": "laurentius",
+                    "frame": "laurentius_2"
+                },
+                {
+                    "key": "laurentius",
+                    "frame": "laurentius_2"
+                },
+                {
+                    "key": "laurentius",
+                    "frame": "laurentius_2"
+                },
+                {
+                    "key": "laurentius",
+                    "frame": "laurentius_1"
+                },
+                {
+                    "key": "laurentius",
+                    "frame": "laurentius_1"
+                },
+                {
+                    "key": "laurentius",
+                    "frame": "laurentius_1"
+                },
+                {
+                    "key": "laurentius",
+                    "frame": "laurentius_0"
+                },
+                {
+                    "key": "laurentius",
+                    "frame": "laurentius_0"
+                }
+            ]
+        }
+    ]
+}

@@ -62,7 +62,13 @@ class GameScene extends Phaser.Scene {
       enemy.update();
     });
 
-    this.crestfallenWarrior.update();
+    // this.crestfallenWarrior.update();
+    // this.griggs.update();
+    // this.bigHatLogan.update();
+    // this.laurentius.update();
+    this.npcs.forEach((npc) => {
+      npc.update();
+    });
     this.bonfire.update();
 
     //items list
@@ -131,24 +137,29 @@ class GameScene extends Phaser.Scene {
       x: 330,
       y: 865,
       key: "bird",
+      name: "bird",
     }).setOrigin(0, 0.7);
     this.reah = new NPC({
       scene: this,
       x: 766,
       y: 766,
       key: "reah",
+      name:"reah",
     });
     this.laurentius = new NPC({
       scene: this,
       x: 400,
       y: 1440,
       key: "laurentius",
+      frame: "laurentius_0",
+      name: "laurentius",
     });
     this.fireKeeper = new NPC({
       scene: this,
       x: 496,
       y: 1961,
       key: "fireKeeper",
+      name: "fireKeeper",
     });
     this.crestfallenWarrior = new NPC({
       scene: this,
@@ -156,31 +167,50 @@ class GameScene extends Phaser.Scene {
       y: 1667,
       key: "crestfallenWarrior",
       frame: "crestfallenWarrior0",
+      name: "crestfallenWarrior",
     });
     this.lautrec = new NPC({
       scene: this,
       x: 584,
       y: 2138,
       key: "lautrec",
+      name: "lautrec",
     }).setOrigin(0.5, 0.3);
     this.petrus = new NPC({
       scene: this,
       x: 688,
       y: 1082,
       key: "petrus",
+      frame: "petrus_0",
+      name: "petrus",
     });
     this.bigHatLogan = new NPC({
       scene: this,
       x: 872,
       y: 1545,
       key: "bigHatLogan",
+      frame: "bighat_0",
+      name: "bigHatLogan",
     });
     this.griggs = new NPC({
       scene: this,
       x: 825.64,
       y: 1640,
       key: "griggs",
+      frame: "griggs_1",
+      name: "griggs",
     });
+    this.npcs = [
+      this.laurentius,
+      this.crestfallenWarrior,
+      this.bigHatLogan,
+      this.griggs,
+      this.petrus,
+      // this.bird,
+      // this.reah,
+      // this.fireKeeper,
+      // this.lautrec,
+    ];
 
     //here's a stupid step to get the bird on top of the wall
     this.children.each((c) => {

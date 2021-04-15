@@ -1,0 +1,86 @@
+{
+    "frames": [
+        {
+            "filename": "bighat_0",
+            "frame": {
+                "w": 40,
+                "h": 34,
+                "x": 0,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "bighat_1",
+            "frame": {
+                "w": 40,
+                "h": 34,
+                "x": 0,
+                "y": 34
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "bighat_2",
+            "frame": {
+                "w": 40,
+                "h": 34,
+                "x": 40,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "bighat_3",
+            "frame": {
+                "w": 40,
+                "h": 34,
+                "x": 40,
+                "y": 34
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "bighat_4",
+            "frame": {
+                "w": 40,
+                "h": 34,
+                "x": 0,
+                "y": 68
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "bighat_5",
+            "frame": {
+                "w": 40,
+                "h": 34,
+                "x": 40,
+                "y": 68
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        }
+    ],
+    "meta": {
+        "description": "Atlas generado con Atlas Packer Gamma V2",
+        "web": "https://gammafp.github.io/atlas-packer-phaser/"
+    }
+}
