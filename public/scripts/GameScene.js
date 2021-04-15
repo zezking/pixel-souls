@@ -51,16 +51,15 @@ class GameScene extends Phaser.Scene {
 
     this.freeEnemy(this.enemies);
     //Background Music
-    //this.createMusic();
     this.AudioScene.playMainBgm();
+    this.AudioScene.playAreaSFX();
 
-    console.log(this.enemies)
     this.OverlayLayer.setDepth(2239); //MUST ALWAYS BE LAST ON THIS LIST!!
   }
 
   update() {
     this.player.update();
-
+    this.AudioScene.stepSFX();
     // enemies list
     this.enemies.forEach((enemy) => {
       enemy.update();
@@ -330,7 +329,6 @@ class GameScene extends Phaser.Scene {
     // //spawn flash
     // camera.flash(1000);
     camera.fadeIn(1000);
-
   }
 
   addCollisions() {
@@ -436,10 +434,10 @@ class GameScene extends Phaser.Scene {
       callback: () => {
         if (this.player.inputKeys.interact.isDown) {
           this.events.emit("useBonfire");
-          this.player.inputKeys.interact.reset()
+          this.player.inputKeys.interact.reset();
         }
-      }
-    })
+      },
+    });
   }
 
   //Delay and activation for
@@ -490,7 +488,7 @@ class GameScene extends Phaser.Scene {
 
     //Use bonfire, reset spawns/heal/restore estus
     this.events.on("useBonfire", () => {
-      console.log("Bonfire used!!")
+      console.log("Bonfire used!!");
       this.player.health = 5;
       this.player.estus = 3;
       this.events.emit("updateHealth", this.player.health);
@@ -504,7 +502,7 @@ class GameScene extends Phaser.Scene {
       });
       console.log(this.enemies);
       // this.events.off("useBonfire");
-    })
+    });
   }
 
   createAreaText() {
@@ -544,16 +542,5 @@ class GameScene extends Phaser.Scene {
         }
       });
     }
-  }
-
-  createMusic() {
-    this.battleBGM = this.sound.add("battle-audio", {
-      volume: 0.04,
-    });
-
-    this.newAreaSFX = this.sound.add("new-area", {
-      volume: 0.04,
-    });
-    this.newAreaSFX.play();
   }
 }

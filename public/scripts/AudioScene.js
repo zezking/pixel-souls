@@ -43,4 +43,19 @@ class AudioScene extends Phaser.Scene {
 
     this.startMenuSFX.play();
   }
+
+  playAreaSFX() {
+    this.areaSFX = this.sound.add("new-area", {
+      volume: 0.04,
+    });
+    this.areaSFX.play();
+  }
+
+  stepSFX() {
+    this.keys = this.input.keyboard.addKeys("W,S,A,D");
+
+    if (this.keys.isDown) {
+      console.log("step");
+    }
+  }
 }
