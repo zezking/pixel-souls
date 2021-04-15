@@ -24,6 +24,7 @@ class GameScene extends Phaser.Scene {
   }
 
   create() {
+    this.uiScene.scene.bringToTop();
     this.createMap();
     this.createPlayer();
     this.createEnemy();
@@ -55,7 +56,6 @@ class GameScene extends Phaser.Scene {
   }
 
   update() {
-    this.playerWalking();
     this.player.update();
     //this.AudioScene.stepSFX(this);
     // enemies list
@@ -418,10 +418,6 @@ class GameScene extends Phaser.Scene {
         this.enemies.forEach((enemy) => {
           enemy.setStatic(true);
         });
-        this.combatScene.combatBackgroundGenerator(
-          this.player.x,
-          this.player.y
-        );
         this.AudioScene.stopMainBgm();
         this.scene.sleep();
         this.scene.add("Loading", LoadingScene, true);
@@ -573,19 +569,6 @@ class GameScene extends Phaser.Scene {
           });
         }
       });
-    }
-  }
-
-  playerWalking() {
-    if (
-      this.player.inputKeys.up.isDown ||
-      this.player.inputKeys.down.isDown ||
-      this.player.inputKeys.left.isDown ||
-      this.player.inputKeys.right.isDown
-    ) {
-      this.player.isWalking = true;
-    } else {
-      this.player.isWalking = false;
     }
   }
 }

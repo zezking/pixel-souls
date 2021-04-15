@@ -222,10 +222,8 @@ class CombatScene extends Phaser.Scene {
         x: this.scale.height + this.generateCombatMapBounds(),
         y: this.scale.height + 2500,
       })
-      .setDepth(0)
+      .setDepth(-1)
       .setScale(3);
-
-    console.log(this.generateCombatMapBounds());
   }
 
   generateCombatMapBounds() {
