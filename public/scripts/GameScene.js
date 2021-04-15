@@ -66,12 +66,13 @@ class GameScene extends Phaser.Scene {
       enemy.update();
     });
 
-    this.crestfallenWarrior.update();
-    this.griggs.update();
-    this.bigHatLogan.update();
-    // this.npcs.forEach((npc) => {
-    //   npc.update();
-    // });
+    // this.crestfallenWarrior.update();
+    // this.griggs.update();
+    // this.bigHatLogan.update();
+    // this.laurentius.update();
+    this.npcs.forEach((npc) => {
+      npc.update();
+    });
     this.bonfire.update();
 
     //items list
@@ -154,6 +155,7 @@ class GameScene extends Phaser.Scene {
       x: 400,
       y: 1440,
       key: "laurentius",
+      frame: "laurentius_0",
       name: "laurentius",
     });
     this.fireKeeper = new NPC({
@@ -202,15 +204,15 @@ class GameScene extends Phaser.Scene {
       name: "griggs",
     });
     this.npcs = [
-      this.bird,
-      this.reah,
       this.laurentius,
-      this.fireKeeper,
       this.crestfallenWarrior,
-      this.lautrec,
-      this.petrus,
       this.bigHatLogan,
       this.griggs,
+      // this.bird,
+      // this.reah,
+      // this.fireKeeper,
+      // this.lautrec,
+      // this.petrus,
     ];
 
     //here's a stupid step to get the bird on top of the wall

@@ -57,7 +57,7 @@ class NPC extends Phaser.Physics.Matter.Sprite {
       "griggs_anim",
       "/public/assets/sprites/griggs/griggs_anim.json"
     );
-    
+
     scene.load.atlas(
       "bigHatLogan",
       "public/assets/sprites/bigHatLogan/bighatlogan.png",
@@ -66,6 +66,16 @@ class NPC extends Phaser.Physics.Matter.Sprite {
     scene.load.animation(
       "bigHatLogan_anim",
       "public/assets/sprites/bigHatLogan/bighatlogan_anim.json"
+    );
+
+    scene.load.atlas(
+      "laurentius",
+      "public/assets/sprites/laurentius/laurentius.png",
+      "public/assets/sprites/laurentius/laurentius_atlas.json"
+    );
+    scene.load.animation(
+      "laurentius_anim",
+      "public/assets/sprites/laurentius/laurentius_anim.json"
     );
 
   }
