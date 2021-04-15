@@ -159,6 +159,7 @@ class GameScene extends Phaser.Scene {
       x: 496,
       y: 1961,
       key: "fireKeeper",
+      frame: "fireKeeper_0",
       name: "fireKeeper",
     });
     this.crestfallenWarrior = new NPC({
@@ -174,6 +175,7 @@ class GameScene extends Phaser.Scene {
       x: 584,
       y: 2138,
       key: "lautrec",
+      frame: "lautrec_0",
       name: "lautrec",
     }).setOrigin(0.5, 0.3);
     this.petrus = new NPC({
@@ -206,10 +208,10 @@ class GameScene extends Phaser.Scene {
       this.bigHatLogan,
       this.griggs,
       this.petrus,
+      this.fireKeeper,
+      this.lautrec,
       // this.bird,
       // this.reah,
-      // this.fireKeeper,
-      // this.lautrec,
     ];
 
     //here's a stupid step to get the bird on top of the wall

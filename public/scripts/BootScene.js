@@ -44,15 +44,16 @@ class BootScene extends Phaser.Scene {
       frameHeight: 109,
     });
 
-    // this.load.spritesheet("petrus", "public/assets/sprites/petrus.png", {
-    //   frameWidth: 34,
-    //   frameHeight: 52,
-    // });
-
+    
     this.load.spritesheet("reah", "public/assets/sprites/reah.png", {
       frameWidth: 23,
       frameHeight: 39,
     });
+    
+    // this.load.spritesheet("petrus", "public/assets/sprites/petrus.png", {
+    //   frameWidth: 34,
+    //   frameHeight: 52,
+    // });
 
     // this.load.spritesheet(
     //   "laurentius",
@@ -72,24 +73,24 @@ class BootScene extends Phaser.Scene {
     //   }
     // );
 
-    this.load.spritesheet(
-      "fireKeeper",
-      "public/assets/sprites/fireKeeper.png",
-      {
-        frameWidth: 96,
-        frameHeight: 67,
-      }
-    );
+    // this.load.spritesheet(
+    //   "fireKeeper",
+    //   "public/assets/sprites/fireKeeper.png",
+    //   {
+    //     frameWidth: 96,
+    //     frameHeight: 67,
+    //   }
+    // );
 
     // this.load.spritesheet("griggs", "public/assets/sprites/griggs.png", {
     //   frameWidth: 32,
     //   frameHeight: 54,
     // });
 
-    this.load.spritesheet("lautrec", "public/assets/sprites/lautrec.png", {
-      frameWidth: 25,
-      frameHeight: 35,
-    });
+    // this.load.spritesheet("lautrec", "public/assets/sprites/lautrec.png", {
+    //   frameWidth: 25,
+    //   frameHeight: 35,
+    // });
 
     this.load.spritesheet("well", "public/assets/entities/well.png", {
       frameWidth: 88,
