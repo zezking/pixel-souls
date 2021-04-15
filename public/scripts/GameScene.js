@@ -48,15 +48,16 @@ class GameScene extends Phaser.Scene {
     this.setupEventListener();
     this.freeEnemy(this.enemies);
     //Background Music
-    //this.createMusic();
     this.AudioScene.playMainBgm();
+    this.AudioScene.playAreaSFX();
 
     this.OverlayLayer.setDepth(2239); //MUST ALWAYS BE LAST ON THIS LIST!!
   }
 
   update() {
+    this.playerWalking();
     this.player.update();
-
+    //this.AudioScene.stepSFX(this);
     // enemies list
     this.enemies.forEach((enemy) => {
       enemy.update();
@@ -144,7 +145,7 @@ class GameScene extends Phaser.Scene {
       x: 766,
       y: 766,
       key: "reah",
-      name:"reah",
+      name: "reah",
     });
     this.laurentius = new NPC({
       scene: this,
@@ -159,6 +160,7 @@ class GameScene extends Phaser.Scene {
       x: 496,
       y: 1961,
       key: "fireKeeper",
+      frame: "fireKeeper_0",
       name: "fireKeeper",
     });
     this.crestfallenWarrior = new NPC({
@@ -174,6 +176,7 @@ class GameScene extends Phaser.Scene {
       x: 584,
       y: 2138,
       key: "lautrec",
+      frame: "lautrec_0",
       name: "lautrec",
     }).setOrigin(0.5, 0.3);
     this.petrus = new NPC({
@@ -206,10 +209,10 @@ class GameScene extends Phaser.Scene {
       this.bigHatLogan,
       this.griggs,
       this.petrus,
+      this.fireKeeper,
+      this.lautrec,
       // this.bird,
       // this.reah,
-      // this.fireKeeper,
-      // this.lautrec,
     ];
 
     //here's a stupid step to get the bird on top of the wall
@@ -342,6 +345,7 @@ class GameScene extends Phaser.Scene {
       right: Phaser.Input.Keyboard.KeyCodes.D,
       shift: Phaser.Input.Keyboard.KeyCodes.SHIFT,
       interact: Phaser.Input.Keyboard.KeyCodes.E,
+      drink: Phaser.Input.Keyboard.KeyCodes.R,
     });
 
     let camera = this.cameras.main;
@@ -356,7 +360,6 @@ class GameScene extends Phaser.Scene {
     // //spawn flash
     // camera.flash(1000);
     camera.fadeIn(1000);
-
   }
 
   addCollisions() {
@@ -462,10 +465,10 @@ class GameScene extends Phaser.Scene {
       callback: () => {
         if (this.player.inputKeys.interact.isDown) {
           this.events.emit("useBonfire");
-          this.player.inputKeys.interact.reset()
+          this.player.inputKeys.interact.reset();
         }
-      }
-    })
+      },
+    });
   }
 
   //Delay and activation for
@@ -516,10 +519,10 @@ class GameScene extends Phaser.Scene {
 
     //Use bonfire, reset spawns/heal/restore estus
     this.events.on("useBonfire", () => {
-      console.log("Bonfire used!!")
+      console.log("Bonfire used!!");
       this.player.health = 5;
       this.player.estus = 3;
-      this.events.emit("updateHealth", this.player.health);
+      this.events.emit("updateHealth", this.player.health, this.player.estus);
       this.enemies.forEach((enemy) => {
         enemy.enemyKilled();
       });
@@ -527,9 +530,8 @@ class GameScene extends Phaser.Scene {
       this.createCombat();
       this.freeEnemy(this.enemies);
 
-
       // this.events.off("useBonfire");
-    })
+    });
   }
 
   createAreaText() {
@@ -571,14 +573,16 @@ class GameScene extends Phaser.Scene {
     }
   }
 
-  createMusic() {
-    this.battleBGM = this.sound.add("battle-audio", {
-      volume: 0.04,
-    });
-
-    this.newAreaSFX = this.sound.add("new-area", {
-      volume: 0.04,
-    });
-    this.newAreaSFX.play();
+  playerWalking() {
+    if (
+      this.player.inputKeys.up.isDown ||
+      this.player.inputKeys.down.isDown ||
+      this.player.inputKeys.left.isDown ||
+      this.player.inputKeys.right.isDown
+    ) {
+      this.player.isWalking = true;
+    } else {
+      this.player.isWalking = false;
+    }
   }
 }

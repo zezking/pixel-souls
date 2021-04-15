@@ -2,6 +2,9 @@ class AudioScene extends Phaser.Scene {
   constructor() {
     super("Audio");
   }
+  init() {
+    this.playing = false;
+  }
 
   playMainBgm() {
     this.mainBGM = this.sound.add("bg-music", {
@@ -43,4 +46,13 @@ class AudioScene extends Phaser.Scene {
 
     this.startMenuSFX.play();
   }
+
+  playAreaSFX() {
+    this.areaSFX = this.sound.add("new-area", {
+      volume: 0.04,
+    });
+    this.areaSFX.play();
+  }
+
+  battleSFX() {}
 }
