@@ -2,6 +2,9 @@ class AudioScene extends Phaser.Scene {
   constructor() {
     super("Audio");
   }
+  init() {
+    this.playing = false;
+  }
 
   playMainBgm() {
     this.mainBGM = this.sound.add("bg-music", {
@@ -51,11 +54,31 @@ class AudioScene extends Phaser.Scene {
     this.areaSFX.play();
   }
 
-  stepSFX() {
-    this.keys = this.input.keyboard.addKeys("W,S,A,D");
+  stepSFX(scene) {
+    this.armorSFX = this.sound.add("armor", {
+      volume: 0.04,
+      rate: 1,
+      forceRestart: false,
+    });
 
-    if (this.keys.isDown) {
-      console.log("step");
+    let keyW = scene.input.keyboard.addKey("W");
+    let keyS = scene.input.keyboard.addKey("S");
+    let keyA = scene.input.keyboard.addKey("A");
+    let keyD = scene.input.keyboard.addKey("D");
+
+    if (keyW.isDown || keyS.isDown || keyA.isDown || keyD.isDown) {
+      this.armorSFX.play();
     }
+    //       this.armorSFX.play();
+    // scene.time.addEvent({
+    //   delay: 1000,
+    //   repeat: -1,
+    //   callbackScope: this,
+    //   callback: function () {
+    //     if (keyW.isDown || keyS.isDown || keyA.isDown || keyD.isDown) {
+    //       this.armorSFX.play();
+    //     }
+    //   },
+    // });
   }
 }

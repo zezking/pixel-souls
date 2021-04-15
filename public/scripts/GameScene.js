@@ -59,7 +59,7 @@ class GameScene extends Phaser.Scene {
 
   update() {
     this.player.update();
-    this.AudioScene.stepSFX();
+    //this.AudioScene.stepSFX(this);
     // enemies list
     this.enemies.forEach((enemy) => {
       enemy.update();
