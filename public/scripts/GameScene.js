@@ -109,7 +109,7 @@ class GameScene extends Phaser.Scene {
     this.enemy3 = new Enemy({
       scene: this,
       x: 708,
-      y: 1022,
+      y: 922,
       key: "skeleton_sprite",
       frame: "skele_idling0",
       id: 3,
