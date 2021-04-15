@@ -21,7 +21,7 @@ class AudioScene extends Phaser.Scene {
     this.battleBGM = this.sound.add("battle-audio", {
       volume: 0.04,
     });
-    this.battleBGM.play();
+    //this.battleBGM.play();
   }
   stopBattleBgm() {
     this.battleBGM.stop();
@@ -54,36 +54,5 @@ class AudioScene extends Phaser.Scene {
     this.areaSFX.play();
   }
 
-  stepSFX(scene, walking) {
-    this.armorSFX = this.sound.add("armor", {
-      volume: 0.04,
-    });
-
-    console.log(walking);
-
-    scene.footsteps = scene.time.addEvent({
-      duration: 500,
-      repeat: -1,
-      callbackScope: this,
-      callback: function () {
-        console.log(walking);
-        if (walking) {
-          console.log("here");
-          this.armorSFX.play();
-        }
-      },
-    });
-
-    //       this.armorSFX.play();
-    // scene.time.addEvent({
-    //   delay: 1000,
-    //   repeat: -1,
-    //   callbackScope: this,
-    //   callback: function () {
-    //     if (keyW.isDown || keyS.isDown || keyA.isDown || keyD.isDown) {
-    //       this.armorSFX.play();
-    //     }
-    //   },
-    // });
-  }
+  battleSFX() {}
 }

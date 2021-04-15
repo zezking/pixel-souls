@@ -44,12 +44,11 @@ class BootScene extends Phaser.Scene {
       frameHeight: 109,
     });
 
-    
     this.load.spritesheet("reah", "public/assets/sprites/reah.png", {
       frameWidth: 23,
       frameHeight: 39,
     });
-    
+
     // this.load.spritesheet("petrus", "public/assets/sprites/petrus.png", {
     //   frameWidth: 34,
     //   frameHeight: 52,
@@ -147,6 +146,6 @@ class BootScene extends Phaser.Scene {
   }
 
   create() {
-    this.scene.launch("Title");
+    this.scene.launch("Combat");
   }
 }

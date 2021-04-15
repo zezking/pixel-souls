@@ -27,17 +27,7 @@ class CombatScene extends Phaser.Scene {
     this.createCombatSkeleton();
     this.createMusic();
     this.AudioScene.playBattleBgm();
-    //this.battleBGM.play();
   }
-  createMusic() {
-    this.mainBGM = this.sound.add("bg-music", {
-      volume: 0.04,
-    });
-    this.battleBGM = this.sound.add("battle-audio", {
-      volume: 0.04,
-    });
-  }
-
   setupCombatUi() {
     this.sword = this.make
       .image({ x: 200, y: 640, key: "sword", add: true })
