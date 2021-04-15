@@ -51,6 +51,7 @@ class GameScene extends Phaser.Scene {
     //Background Music
     this.createMusic();
 
+    console.log(this.enemies)
     this.OverlayLayer.setDepth(2239); //MUST ALWAYS BE LAST ON THIS LIST!!
   }
 
@@ -109,7 +110,7 @@ class GameScene extends Phaser.Scene {
     this.enemy3 = new Enemy({
       scene: this,
       x: 708,
-      y: 1022,
+      y: 922,
       key: "skeleton_sprite",
       frame: "skele_idling0",
       id: 3,
@@ -490,10 +491,15 @@ class GameScene extends Phaser.Scene {
       this.player.health = 5;
       this.player.estus = 3;
       this.events.emit("updateHealth", this.player.health);
+      console.log(this.enemies);
       this.enemies.forEach((enemy) => {
         enemy.enemyKilled();
       });
       this.createEnemy();
+      this.enemies.forEach((enemy) => {
+        enemy.setActive(true);
+      });
+      console.log(this.enemies);
       // this.events.off("useBonfire");
     })
   }
