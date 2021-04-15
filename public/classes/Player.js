@@ -88,16 +88,16 @@ class Player extends Phaser.Physics.Matter.Sprite {
     this.anims.play("player_nw", true);
     this.flipX = false;
     }
+    else if (this.inputKeys.left.isDown && this.inputKeys.down.isDown) {
+      this.anims.play("player_sw", true);
+      this.flipX = false;
+    }
     else if (this.inputKeys.right.isDown && this.inputKeys.up.isDown) {
       this.anims.play("player_ne", true);
       this.flipX = false;
     }
     else if (this.inputKeys.right.isDown && this.inputKeys.down.isDown) {
       this.anims.play("player_se", true);
-      this.flipX = false;
-    }
-    else if (this.inputKeys.left.isDown && this.inputKeys.down.isDown) {
-      this.anims.play("player_sw", true);
       this.flipX = false;
     }
     else if (this.inputKeys.left.isDown) {
