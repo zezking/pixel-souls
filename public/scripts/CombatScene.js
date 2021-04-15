@@ -70,6 +70,16 @@ class CombatScene extends Phaser.Scene {
       this.result = this.checkWinner("shield", aiResult());
       this.events.emit("results", this.result);
     });
+
+    //enemy hearts
+    this.enemyHearts = this.add.group({
+      classType: Phaser.GameObjects.Image,
+    });
+    this.enemyHearts.createMultiple({
+      key: "ui-heart-full",
+      setXY: { x: 615, y: 325, stepX: 40 },
+      quantity: 3,
+    });
   }
 
   //Sword > Magic > Shield > Sword...  :)
@@ -158,6 +168,16 @@ class CombatScene extends Phaser.Scene {
     }
 
     this.events.emit("updateHealth", this.playerHealth);
+
+    //Update enemy's health
+    this.enemyHearts.children.each((gameObj, index) => {
+      const heart = gameObj;
+      if (index < this.enemyHealth) {
+        heart.setTexture("ui-heart-full");
+      } else {
+        heart.setTexture("ui-heart-empty");
+      }
+    });
   }
 
   update() {
