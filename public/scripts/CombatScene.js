@@ -8,26 +8,48 @@ class CombatScene extends Phaser.Scene {
     this.playerHealth = health;
     this.enemyHealth = 3;
 
+    this.AudioScene = this.scene.get("Audio");
+
     console.log("(inside combat)Health from player: ", this.playerHealth);
     console.log("(inside combat)Health of enemy: ", this.enemyHealth);
+  }
+
+  preload() {
+    Enemy.preload(this);
   }
 
   create() {
     this.cameras.main.fadeIn(1000);
     this.setupCombatUi();
     this.resultListener();
-
+    this.createCombatPlayer();
+    this.drawCombatUIBackground();
+    this.createCombatSkeleton();
+    this.createMusic();
+    this.AudioScene.playBattleBgm();
+    //this.battleBGM.play();
+  }
+  createMusic() {
     this.mainBGM = this.sound.add("bg-music", {
+      volume: 0.04,
+    });
+    this.battleBGM = this.sound.add("battle-audio", {
       volume: 0.04,
     });
   }
 
   setupCombatUi() {
-    this.sword = this.add.image(200, 600, "sword");
+    this.sword = this.make
+      .image({ x: 200, y: 640, key: "sword", add: true })
+      .setDepth(100);
     this.sword.setInteractive();
-    this.magic = this.add.image(400, 600, "magic");
+    this.magic = this.make
+      .image({ x: 400, y: 640, key: "magic", add: true })
+      .setDepth(100);
     this.magic.setInteractive();
-    this.shield = this.add.image(600, 600, "shield");
+    this.shield = this.make
+      .image({ x: 600, y: 640, key: "shield", add: true })
+      .setDepth(100);
     this.shield.setInteractive();
 
     const aiResult = () => {
@@ -116,20 +138,76 @@ class CombatScene extends Phaser.Scene {
     console.log("Enemy health remaining: ", this.enemyHealth);
 
     if (this.playerHealth <= 0) {
+      this.AudioScene.stopBattleBgm();
+      this.AudioScene.stopMainBgm();
       this.events.off("pointerdown");
       this.events.off("results");
       this.scene.start("Death");
-    }
 
-    if (this.enemyHealth <= 0) {
-      console.log(this.mainBGM);
+      // added this incase both Player and Enemy die on a draw
+    } else if (this.playerHealth <= 0 && this.enemyHealth <= 0) {
+      this.AudioScene.stopBattleBgm();
+      this.AudioScene.playMainBgm();
+      this.events.off("pointerdown");
+      this.events.off("results");
+
+      this.scene.start("Death");
+    } else if (this.enemyHealth <= 0) {
+      this.AudioScene.stopBattleBgm();
+      this.AudioScene.playMainBgm();
       this.events.emit("updateHealth", this.playerHealth);
       this.events.off("results");
       this.scene.stop("Combat");
+
       this.scene.wake("Game", { gameOver: true, playback: this.mainBGM }); //pass a game status to the Game Scene
     }
 
     this.events.emit("updateHealth", this.playerHealth);
   }
-  
+
+  update() {
+    this.enemyCombat.update();
+  }
+
+  createCombatPlayer() {
+    this.combatPlayer = this.make
+      .image({
+        x: 200,
+        y: 500,
+        key: "PLAYERBACK",
+        scale: {
+          x: 12,
+          y: 12,
+        },
+        add: true,
+      })
+      .setDepth(0);
+  }
+  createCombatSkeleton() {
+    this.enemyCombat = new Enemy({
+      scene: this,
+      x: 650,
+      y: 150,
+      key: "skeleton_sprite",
+      frame: "skele_idling8",
+      id: 5,
+    })
+      .setDepth(400)
+      .setScale(8);
+  }
+
+  drawCombatUIBackground() {
+    this.combatPlayer = this.make
+      .image({
+        x: 400,
+        y: 640,
+        key: "ui_background",
+        scale: {
+          x: 0.6,
+          y: 0.5,
+        },
+        add: true,
+      })
+      .setDepth(1);
+  }
 }

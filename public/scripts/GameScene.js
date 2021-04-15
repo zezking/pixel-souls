@@ -12,20 +12,18 @@ class GameScene extends Phaser.Scene {
     //references to other scenes for event listening
     this.uiScene = this.scene.get("Ui");
     this.combatScene = this.scene.get("Combat");
-    console.log("game: ", this);
+    this.AudioScene = this.scene.get("Audio");
   }
 
   preload() {
     Enemy.preload(this);
     Bonfire.preload(this);
     NPC.preload(this);
+    Item.preload(this);
     Player.preload(this);
   }
 
   create() {
-    this.mainBGM = this.sound.add("bg-music", {
-      volume: 0.04,
-    });
     this.createMap();
     this.createPlayer();
     this.createEnemy();
@@ -48,12 +46,11 @@ class GameScene extends Phaser.Scene {
 
     this.createOverlay();
     this.setupEventListener();
-
     this.freeEnemy(this.enemies);
     //Background Music
-    this.createMusic();
-    this.mainBGM.play();
-    console.log(this);
+    //this.createMusic();
+    this.AudioScene.playMainBgm();
+
     this.OverlayLayer.setDepth(2239); //MUST ALWAYS BE LAST ON THIS LIST!!
   }
 
@@ -65,8 +62,19 @@ class GameScene extends Phaser.Scene {
       enemy.update();
     });
 
-    this.crestfallenWarrior.update();
+    // this.crestfallenWarrior.update();
+    // this.griggs.update();
+    // this.bigHatLogan.update();
+    // this.laurentius.update();
+    this.npcs.forEach((npc) => {
+      npc.update();
+    });
     this.bonfire.update();
+
+    //items list
+    this.items.forEach((item) => {
+      item.update();
+    });
 
     //Sprite depth-sorting
     this.children.each((c) => {
@@ -76,7 +84,7 @@ class GameScene extends Phaser.Scene {
       }
     });
   }
-//--------------SPAWN ENTITIES IN GAME------------------
+  //--------------SPAWN ENTITIES IN GAME------------------
   createPlayer() {
     this.player = new Player({
       scene: this,
@@ -106,8 +114,8 @@ class GameScene extends Phaser.Scene {
     });
     this.enemy3 = new Enemy({
       scene: this,
-      x: 688,
-      y: 1022,
+      x: 708,
+      y: 922,
       key: "skeleton_sprite",
       frame: "skele_idling0",
       id: 3,
@@ -129,24 +137,29 @@ class GameScene extends Phaser.Scene {
       x: 330,
       y: 865,
       key: "bird",
+      name: "bird",
     }).setOrigin(0, 0.7);
     this.reah = new NPC({
       scene: this,
       x: 766,
       y: 766,
       key: "reah",
+      name:"reah",
     });
     this.laurentius = new NPC({
       scene: this,
       x: 400,
       y: 1440,
       key: "laurentius",
+      frame: "laurentius_0",
+      name: "laurentius",
     });
     this.fireKeeper = new NPC({
       scene: this,
       x: 496,
       y: 1961,
       key: "fireKeeper",
+      name: "fireKeeper",
     });
     this.crestfallenWarrior = new NPC({
       scene: this,
@@ -154,31 +167,50 @@ class GameScene extends Phaser.Scene {
       y: 1667,
       key: "crestfallenWarrior",
       frame: "crestfallenWarrior0",
+      name: "crestfallenWarrior",
     });
     this.lautrec = new NPC({
       scene: this,
       x: 584,
       y: 2138,
       key: "lautrec",
+      name: "lautrec",
     }).setOrigin(0.5, 0.3);
     this.petrus = new NPC({
       scene: this,
       x: 688,
       y: 1082,
       key: "petrus",
+      frame: "petrus_0",
+      name: "petrus",
     });
     this.bigHatLogan = new NPC({
       scene: this,
       x: 872,
       y: 1545,
       key: "bigHatLogan",
+      frame: "bighat_0",
+      name: "bigHatLogan",
     });
     this.griggs = new NPC({
       scene: this,
       x: 825.64,
       y: 1640,
       key: "griggs",
+      frame: "griggs_1",
+      name: "griggs",
     });
+    this.npcs = [
+      this.laurentius,
+      this.crestfallenWarrior,
+      this.bigHatLogan,
+      this.griggs,
+      this.petrus,
+      // this.bird,
+      // this.reah,
+      // this.fireKeeper,
+      // this.lautrec,
+    ];
 
     //here's a stupid step to get the bird on top of the wall
     this.children.each((c) => {
@@ -262,6 +294,7 @@ class GameScene extends Phaser.Scene {
       x: 700,
       y: 1740,
       key: "soul",
+      frame: "soul_0",
       id: 1,
     });
     this.item2 = new Item({
@@ -269,8 +302,10 @@ class GameScene extends Phaser.Scene {
       x: 750,
       y: 1740,
       key: "soul",
+      frame: "soul_0",
       id: 2,
     });
+    this.items = [this.item, this.item2];
 
     this.item.depthSorting = false;
     this.item.setDepth(1771);
@@ -294,8 +329,8 @@ class GameScene extends Phaser.Scene {
       frame: "bonfire0",
     });
   }
-//--------------------------------
-//--------------------------------
+  //--------------------------------
+  //--------------------------------
 
   createInput() {
     // capture so that spacebar doesn't scroll downwards in window
@@ -308,11 +343,11 @@ class GameScene extends Phaser.Scene {
       shift: Phaser.Input.Keyboard.KeyCodes.SHIFT,
       interact: Phaser.Input.Keyboard.KeyCodes.E,
     });
+
     let camera = this.cameras.main;
 
     // Zoom in and out of Player
-
-    camera.zoom = 3;
+    camera.zoom = 1;
 
     camera.startFollow(this.player);
     // Camera to center leeway, the higher, the tighter
@@ -322,7 +357,6 @@ class GameScene extends Phaser.Scene {
     // camera.flash(1000);
     camera.fadeIn(1000);
 
-    // this.player.update(this.player.anims.play("player_down"));
   }
 
   addCollisions() {
@@ -381,8 +415,8 @@ class GameScene extends Phaser.Scene {
         this.enemies.forEach((enemy) => {
           enemy.setStatic(true);
         });
+        this.AudioScene.stopMainBgm();
         this.scene.sleep();
-        this.mainBGM.pause();
         this.scene.add("Loading", LoadingScene, true);
 
         this.scene.launch("Combat", {
@@ -422,6 +456,16 @@ class GameScene extends Phaser.Scene {
         this.events.emit("characterLit");
       },
     });
+    this.matterCollision.addOnCollideActive({
+      objectA: this.player,
+      objectB: this.bonfire,
+      callback: () => {
+        if (this.player.inputKeys.interact.isDown) {
+          this.events.emit("useBonfire");
+          this.player.inputKeys.interact.reset()
+        }
+      }
+    })
   }
 
   //Delay and activation for
@@ -435,13 +479,14 @@ class GameScene extends Phaser.Scene {
 
   setupEventListener() {
     this.events.on("pickupItem", (item) => {
+      this.items = this.items.filter((e) => e.id !== item.id);
+      item.makeInactive();
       //update Soul Counter
       let prevSouls = this.player.souls;
       this.player.updateSouls(300); //currently all soulItems give a hard-coded 300 souls.
       console.log("picked up item!");
       this.events.emit("updateSouls", prevSouls, this.player.souls);
       //remove item
-      item.makeInactive();
     });
 
     this.events.on("enemyDeath", (enemy) => {
@@ -468,16 +513,31 @@ class GameScene extends Phaser.Scene {
     this.uiScene.events.on("healthUpdated", (health) => {
       this.player.health = health;
     });
+
+    //Use bonfire, reset spawns/heal/restore estus
+    this.events.on("useBonfire", () => {
+      console.log("Bonfire used!!")
+      this.player.health = 5;
+      this.player.estus = 3;
+      this.events.emit("updateHealth", this.player.health);
+      this.enemies.forEach((enemy) => {
+        enemy.enemyKilled();
+      });
+      this.createEnemy();
+      this.createCombat();
+      this.freeEnemy(this.enemies);
+
+
+      // this.events.off("useBonfire");
+    })
   }
 
   createAreaText() {
     this.areaText = this.add
-    // had to hardcode position of text, couldn't get it to follow player camera, might need to look into it
       .text(525, 1700, "Firelink Shrine", {
         fontFamily: "titleFont",
         fill: "#ffffff",
         fontSize: "30px",
-
       })
       .setOrigin(0.5)
       .setAlpha(0);
@@ -494,7 +554,6 @@ class GameScene extends Phaser.Scene {
     if (enemyGroup) {
       this.events.on("wake", function (sys, data) {
         let { gameOver } = data;
-
         if (gameOver) {
           this.enemyTimer = sys.time.addEvent({
             delay: 1000,
@@ -512,5 +571,14 @@ class GameScene extends Phaser.Scene {
     }
   }
 
-  createMusic() {}
+  createMusic() {
+    this.battleBGM = this.sound.add("battle-audio", {
+      volume: 0.04,
+    });
+
+    this.newAreaSFX = this.sound.add("new-area", {
+      volume: 0.04,
+    });
+    this.newAreaSFX.play();
+  }
 }

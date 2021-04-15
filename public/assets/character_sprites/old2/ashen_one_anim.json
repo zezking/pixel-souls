@@ -77,30 +77,6 @@
             ]
         },
         {
-            "key": "player_down",
-            "type": "frames",
-            "repeat": -1,
-            "frameRate": 12,
-            "frames": [
-                {
-                    "key": "ashen_one",
-                    "frame": "player_01"
-                },
-                {
-                    "key": "ashen_one",
-                    "frame": "player_00"
-                },
-                {
-                    "key": "ashen_one",
-                    "frame": "player_01"
-                },
-                {
-                    "key": "ashen_one",
-                    "frame": "player_02"
-                }
-            ]
-        },
-        {
             "key": "player_up",
             "type": "frames",
             "repeat": -1,
@@ -121,6 +97,30 @@
                 {
                     "key": "ashen_one",
                     "frame": "player_11"
+                }
+            ]
+        },
+        {
+            "key": "player_down",
+            "type": "frames",
+            "repeat": -1,
+            "frameRate": 12,
+            "frames": [
+                {
+                    "key": "ashen_one",
+                    "frame": "player_01"
+                },
+                {
+                    "key": "ashen_one",
+                    "frame": "player_00"
+                },
+                {
+                    "key": "ashen_one",
+                    "frame": "player_01"
+                },
+                {
+                    "key": "ashen_one",
+                    "frame": "player_02"
                 }
             ]
         }

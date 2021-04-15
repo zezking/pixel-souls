@@ -5,16 +5,16 @@ class TitleScene extends Phaser.Scene {
 
   init() {
     this.scene.remove("Game");
+    this.AudioScene = this.scene.get("Audio");
   }
 
   create() {
-    this.titleScreenSFX();
+    //this.titleScreenSFX();
     this.logoDetailEffect();
     this.titleTextEffect();
     this.startTextEffects();
     this.pressToStartGame();
-    //This is the menue background music
-    this.menuBGM.play();
+    this.AudioScene.playMenuBgm();
   }
 
   logoDetailEffect() {
@@ -64,8 +64,8 @@ class TitleScene extends Phaser.Scene {
 
   pressToStartGame() {
     this.input.keyboard.on("keydown", () => {
-      this.menuBGM.stop();
-      this.startMenuSound.play();
+      this.AudioScene.stopMenuBgm();
+      this.AudioScene.playStartSFX();
       this.scene.add("Game", GameScene, true);
       this.scene.stop("Title");
     });
@@ -87,15 +87,15 @@ class TitleScene extends Phaser.Scene {
     });
   }
 
-  titleScreenSFX() {
-    this.menuBGM = this.sound.add("menu-music", {
-      volume: 0.04,
-    });
-    //change the startMenue sond between 0 and 1
-    this.startMenuSound = this.sound.add("start-menu", {
-      volume: 0.04,
-    });
-  }
+  // titleScreenSFX() {
+  //   this.menuBGM = this.sound.add("menu-music", {
+  //     volume: 0.07,
+  //   });
+  //   //change the startMenue sond between 0 and 1
+  //   this.startMenuSound = this.sound.add("start-menu", {
+  //     volume: 0.06,
+  //   });
+  // }
 
   update() {
     if (this.titleStrokeThickness > -1) {

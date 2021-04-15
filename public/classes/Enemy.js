@@ -63,19 +63,10 @@ class Enemy extends Phaser.Physics.Matter.Sprite {
     // enemyVelocity.scale(speed);
     // this.setVelocity(enemyVelocity.x, enemyVelocity.y);
   }
+
   enemyKilled() {
-    this.setActive(false);
-    this.setVisible(false);
-
+    // this.setActive(false);
+    // this.setVisible(false);
     this.destroy();
-  }
-
-  freeEnemey() {
-    this.enemyTimer = this.time.addEvent({
-      delay: 3000,
-      callback: () => {
-        this.setStatic(false);
-      },
-    });
   }
 }

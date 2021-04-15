@@ -28,6 +28,8 @@ class BootScene extends Phaser.Scene {
     this.load.image("sword", "public/assets/ui/battle/sword.png");
     this.load.image("magic", "public/assets/ui/battle/magic.png");
     this.load.image("shield", "public/assets/ui/battle/shield.png");
+    this.load.image("PLAYERBACK", "public/assets/sprites/PLAYERBACK.png");
+    this.load.image("ui_background", "public/assets/ui/ui_background.png");
   }
 
   loadSpriteSheets() {
@@ -41,33 +43,48 @@ class BootScene extends Phaser.Scene {
       frameWidth: 128,
       frameHeight: 109,
     });
-    this.load.spritesheet("petrus", "public/assets/sprites/petrus.png", {
-      frameWidth: 34,
-      frameHeight: 52,
-    });
+
+    // this.load.spritesheet("petrus", "public/assets/sprites/petrus.png", {
+    //   frameWidth: 34,
+    //   frameHeight: 52,
+    // });
+
     this.load.spritesheet("reah", "public/assets/sprites/reah.png", {
       frameWidth: 23,
       frameHeight: 39,
     });
-    this.load.spritesheet("laurentius", "public/assets/sprites/laurentius.png", {
-        frameWidth: 26,
-        frameHeight: 32,
-      });
-      
-    this.load.spritesheet("bigHatLogan", "public/assets/sprites/bigHatLogan.png", {
-        frameWidth: 40,
-        frameHeight: 34,
-      });
 
-    this.load.spritesheet("fireKeeper", "public/assets/sprites/fireKeeper.png", {
+    // this.load.spritesheet(
+    //   "laurentius",
+    //   "public/assets/sprites/laurentius.png",
+    //   {
+    //     frameWidth: 26,
+    //     frameHeight: 32,
+    //   }
+    // );
+
+    // this.load.spritesheet(
+    //   "bigHatLogan",
+    //   "public/assets/sprites/bigHatLogan.png",
+    //   {
+    //     frameWidth: 40,
+    //     frameHeight: 34,
+    //   }
+    // );
+
+    this.load.spritesheet(
+      "fireKeeper",
+      "public/assets/sprites/fireKeeper.png",
+      {
         frameWidth: 96,
         frameHeight: 67,
-      });
+      }
+    );
 
-    this.load.spritesheet("griggs", "public/assets/sprites/griggs.png", {
-      frameWidth: 32,
-      frameHeight: 54,
-    });
+    // this.load.spritesheet("griggs", "public/assets/sprites/griggs.png", {
+    //   frameWidth: 32,
+    //   frameHeight: 54,
+    // });
 
     this.load.spritesheet("lautrec", "public/assets/sprites/lautrec.png", {
       frameWidth: 25,
@@ -78,18 +95,21 @@ class BootScene extends Phaser.Scene {
       frameWidth: 88,
       frameHeight: 56,
     });
+
     this.load.spritesheet("pillar01", "public/assets/entities/pillar01.png", {
       frameWidth: 24,
       frameHeight: 118,
     });
+
     this.load.spritesheet("pillar02", "public/assets/entities/pillar02.png", {
       frameWidth: 24,
       frameHeight: 148,
     });
-    this.load.spritesheet("soul", "public/assets/entities/soul.png", {
-      frameWidth: 32,
-      frameHeight: 32,
-    });
+
+    // this.load.spritesheet("soul", "public/assets/entities/soul.png", {
+    //   frameWidth: 32,
+    //   frameHeight: 32,
+    // });
   }
 
   loadAudio() {
@@ -97,6 +117,9 @@ class BootScene extends Phaser.Scene {
     this.load.audio("bg-music", "public/assets/audio/firelink_shrine.mp3");
     this.load.audio("start-menu", "public/assets/audio/start_menu.mp3");
     this.load.audio("died-audio", "public/assets/audio/You_Died.mp3");
+    this.load.audio("battle-audio", "public/assets/audio/battle_music.mp3");
+    this.load.audio("new-area", "public/assets/audio/new_area.mp3");
+    this.load.audio("soul-get", "public/assets/audio/soul-get.wav.mp3");
   }
 
   loadTilemap() {
