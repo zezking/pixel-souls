@@ -63,14 +63,14 @@ class BootScene extends Phaser.Scene {
       }
     );
 
-    this.load.spritesheet(
-      "bigHatLogan",
-      "public/assets/sprites/bigHatLogan.png",
-      {
-        frameWidth: 40,
-        frameHeight: 34,
-      }
-    );
+    // this.load.spritesheet(
+    //   "bigHatLogan",
+    //   "public/assets/sprites/bigHatLogan.png",
+    //   {
+    //     frameWidth: 40,
+    //     frameHeight: 34,
+    //   }
+    // );
 
     this.load.spritesheet(
       "fireKeeper",

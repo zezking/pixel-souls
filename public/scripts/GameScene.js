@@ -68,6 +68,7 @@ class GameScene extends Phaser.Scene {
 
     this.crestfallenWarrior.update();
     this.griggs.update();
+    this.bigHatLogan.update();
     // this.npcs.forEach((npc) => {
     //   npc.update();
     // });
@@ -189,6 +190,7 @@ class GameScene extends Phaser.Scene {
       x: 872,
       y: 1545,
       key: "bigHatLogan",
+      frame: "bighat_0",
       name: "bigHatLogan",
     });
     this.griggs = new NPC({

@@ -42,15 +42,10 @@ class NPC extends Phaser.Physics.Matter.Sprite {
       "crestfallenWarrior",
       "/public/assets/sprites/crestfallenWarrior/crestfallenwarrior.png",
       "public/assets/sprites/crestfallenWarrior/crestfallenwarrior_atlas.json",      
-      // "griggs",
-      // "/public/assets/sprites/griggs/griggs.png",
-      // "public/assets/sprites/griggs/griggs_atlas.json"
     );
     scene.load.animation(
       "crestfallenwarrior_anim",
       "/public/assets/sprites/crestfallenWarrior/crestfallenwarrior_anim.json",
-      // "griggs_anim",
-      // "/public/assets/sprites/griggs/griggs_anim.json"
     );
 
     scene.load.atlas(
@@ -61,6 +56,16 @@ class NPC extends Phaser.Physics.Matter.Sprite {
     scene.load.animation(
       "griggs_anim",
       "/public/assets/sprites/griggs/griggs_anim.json"
+    );
+    
+    scene.load.atlas(
+      "bigHatLogan",
+      "public/assets/sprites/bigHatLogan/bighatlogan.png",
+      "public/assets/sprites/bigHatLogan/bighatlogan_atlas.json"
+    );
+    scene.load.animation(
+      "bigHatLogan_anim",
+      "public/assets/sprites/bigHatLogan/bighatlogan_anim.json"
     );
 
   }

@@ -1,0 +1,36 @@
+{
+    "anims": [
+        {
+            "key": "bigHatLogan_idle",
+            "type": "frames",
+            "repeat": -1,
+            "frameRate": 4,
+            "frames": [
+                {
+                    "key": "bigHatLogan",
+                    "frame": "bighat_0"
+                },
+                {
+                    "key": "bigHatLogan",
+                    "frame": "bighat_1"
+                },
+                {
+                    "key": "bigHatLogan",
+                    "frame": "bighat_2"
+                },
+                {
+                    "key": "bigHatLogan",
+                    "frame": "bighat_3"
+                },
+                {
+                    "key": "bigHatLogan",
+                    "frame": "bighat_4"
+                },
+                {
+                    "key": "bigHatLogan",
+                    "frame": "bighat_5"
+                }
+            ]
+        }
+    ]
+}
