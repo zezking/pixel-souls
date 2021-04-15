@@ -418,7 +418,7 @@ class GameScene extends Phaser.Scene {
           enemy.setStatic(true);
         });
         this.AudioScene.stopMainBgm();
-        this.scene.pause();
+        this.scene.sleep();
         this.scene.add("Loading", LoadingScene, true);
 
         this.scene.launch("Combat", {

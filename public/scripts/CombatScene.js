@@ -19,7 +19,6 @@ class CombatScene extends Phaser.Scene {
   }
 
   create() {
-    console.log(this.tilesBottom);
     this.cameras.main.fadeIn(1000);
     this.setupCombatUi();
     this.resultListener();
