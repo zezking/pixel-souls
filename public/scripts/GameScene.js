@@ -340,7 +340,7 @@ class GameScene extends Phaser.Scene {
     //item collision detection
     this.matterCollision.addOnCollideStart({
       objectA: this.player,
-      objectB: [this.item, this.item2],
+      objectB: this.items,
       callback: (eventData) => {
         this.events.emit("pickupItem", eventData.gameObjectB);
       },
