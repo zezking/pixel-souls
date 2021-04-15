@@ -254,7 +254,7 @@ class CombatScene extends Phaser.Scene {
         },
         add: true,
       })
-      .setDepth(1)
+      .setDepth(401)
       .setAlpha(0);
     this.tweens.add({
       targets: this.enemy_hurt,
