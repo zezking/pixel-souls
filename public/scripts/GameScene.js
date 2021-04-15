@@ -525,7 +525,7 @@ class GameScene extends Phaser.Scene {
       console.log("Bonfire used!!");
       this.player.health = 5;
       this.player.estus = 3;
-      this.events.emit("updateHealth", this.player.health);
+      this.events.emit("updateHealth", this.player.health, this.player.estus);
       this.enemies.forEach((enemy) => {
         enemy.enemyKilled();
       });

@@ -21,6 +21,10 @@ class BootScene extends Phaser.Scene {
     this.load.image("ui-heart-empty", "public/assets/ui/heart_empty.png");
     this.load.image("ui-heart-full", "public/assets/ui/heart_full.png");
     this.load.image("soul-counter", "public/assets/ui/soul_counter.png");
+    this.load.image("estus-full", "public/assets/ui/estus_full.png");
+    this.load.image("estus-half", "public/assets/ui/estus_half.png");
+    this.load.image("estus-quarter", "public/assets/ui/estus_quarter.png");
+    this.load.image("estus-empty", "public/assets/ui/estus_empty.png");
     this.load.image("logo", "public/assets/ui/logo.png");
     this.load.image("logoDetail", "public/assets/ui/LogoDetail.png");
 
