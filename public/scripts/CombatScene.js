@@ -26,6 +26,10 @@ class CombatScene extends Phaser.Scene {
     this.drawCombatUIBackground();
     this.createCombatSkeleton();
     this.disableClickTimer();
+    this.createCombatPlayer();
+    this.generateCombatMap();
+
+    this.combatBackgroundGenerator();
 
     this.AudioScene.playBattleBgm();
   }
@@ -199,7 +203,7 @@ class CombatScene extends Phaser.Scene {
         },
         add: true,
       })
-      .setDepth(1);
+      .setDepth(2);
   }
 
   disableClickTimer() {
@@ -211,24 +215,59 @@ class CombatScene extends Phaser.Scene {
     });
   }
 
-  combatBackgroundGenerator(playerX, playerY) {
-    console.log(playerX, playerY);
+  combatBackgroundGenerator() {
     this.mapCombat = this.make
       .image({
         key: "combat_background",
-        x: this.scale.height + this.generateCemetary(),
-        y: this.scale.height + 2500,
+        x: this.combatMapX,
+        y: this.combatMapY,
       })
-      .setDepth(-1)
-      .setScale(3);
+      .setDepth(0)
+      .setScale(4);
   }
 
-  generateCemetary(playerX, playerY) {
-    let random = Math.floor(Math.random() * 11) * 50;
-    return random < 1100 ? random : 0;
+  generateCombatMap() {
+    //tiles combatMap
+    if (
+      this.playerX >= 665 &&
+      this.playerX <= 1110 &&
+      this.playerY >= 760 &&
+      this.playerY <= 1257
+    ) {
+      this.combatMapX = this.scale.width - 865;
+      this.combatMapY = this.scale.height;
+      return;
+    }
+    //carpet combatMap
+    if (
+      this.playerX >= 361 &&
+      this.playerX <= 597 &&
+      this.playerY >= 667 &&
+      this.playerY <= 1221
+    ) {
+      this.combatMapX = this.scale.width + 260;
+      this.combatMapY = this.scale.height;
+      return;
+    }
+    //cementary combatMap
+    if (
+      this.playerX >= 50 &&
+      this.playerX <= 610 &&
+      this.playerY >= 25 &&
+      this.playerY <= 645
+    ) {
+      this.combatMapX = this.scale.width + 1600;
+      this.combatMapY = this.scale.height + 1800;
+      return;
+    }
+
+    this.combatMapX = this.scale.width;
+    this.combatMapY = this.scale.height - 1700;
+    return;
   }
-  generateTiledFloor(playerX, playerY) {
-    let random = Math.floor(Math.random() * 11) * 50;
-    return random < 1100 ? random : 0;
+
+  playerPosition(playerX, playerY) {
+    this.playerX = playerX;
+    this.playerY = playerY;
   }
 }
