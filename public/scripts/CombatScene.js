@@ -26,6 +26,7 @@ class CombatScene extends Phaser.Scene {
     this.drawCombatUIBackground();
     this.createCombatSkeleton();
     this.disableClickTimer();
+    this.combatBackgroundGenerator();
     this.AudioScene.playBattleBgm();
   }
   setupCombatUi() {
@@ -53,6 +54,10 @@ class CombatScene extends Phaser.Scene {
       }
     };
 
+    this.sword.on("pointerdown", () => {
+      this.result = this.checkWinner("sword", aiResult());
+      this.events.emit("results", this.result);
+    });
     this.sword.on("pointerdown", () => {
       this.result = this.checkWinner("sword", aiResult());
       this.events.emit("results", this.result);
@@ -171,7 +176,7 @@ class CombatScene extends Phaser.Scene {
         },
         add: true,
       })
-      .setDepth(0);
+      .setDepth(1);
   }
   createCombatSkeleton() {
     this.enemyCombat = new Enemy({
@@ -208,5 +213,23 @@ class CombatScene extends Phaser.Scene {
         this.input.enabled = true;
       },
     });
+  }
+
+  combatBackgroundGenerator() {
+    this.mapCombat = this.make
+      .image({
+        key: "combat_background",
+        x: this.scale.height + this.generateCombatMapBounds(),
+        y: this.scale.height + 2500,
+      })
+      .setDepth(0)
+      .setScale(3);
+
+    console.log(this.generateCombatMapBounds());
+  }
+
+  generateCombatMapBounds() {
+    let random = Math.floor(Math.random() * 11) * 100;
+    return random < 1100 ? random : 0;
   }
 }

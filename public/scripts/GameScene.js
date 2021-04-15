@@ -418,10 +418,13 @@ class GameScene extends Phaser.Scene {
         this.enemies.forEach((enemy) => {
           enemy.setStatic(true);
         });
+        this.combatScene.combatBackgroundGenerator(
+          this.player.x,
+          this.player.y
+        );
         this.AudioScene.stopMainBgm();
         this.scene.sleep();
         this.scene.add("Loading", LoadingScene, true);
-
         this.scene.launch("Combat", {
           health: this.player.health,
           enemyGroup: this.enemies,
