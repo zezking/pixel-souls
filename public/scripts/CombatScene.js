@@ -335,7 +335,7 @@ class CombatScene extends Phaser.Scene {
     if (
       this.playerX >= 361 &&
       this.playerX <= 597 &&
-      this.playerY >= 667 &&
+      this.playerY >= 650 &&
       this.playerY <= 1221
     ) {
       this.combatMapX = this.scale.width + 260;
