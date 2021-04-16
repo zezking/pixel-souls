@@ -509,7 +509,7 @@ class GameScene extends Phaser.Scene {
       objectB: this.well,
       callback: () => {
         if (this.player.inputKeys.interact.isDown) {
-          this.events.emit("useBonfire");
+          this.events.emit("useWell");
           this.player.inputKeys.interact.reset();
         }
       },
@@ -586,6 +586,10 @@ class GameScene extends Phaser.Scene {
 
       // this.events.off("useBonfire");
     });
+
+    this.events.on("useWell", () => {
+      this.wellEasterEgg();
+    });
   }
 
   // this is for the BonFire Smoke Effect
@@ -603,6 +607,26 @@ class GameScene extends Phaser.Scene {
 
   this.tweens.add({
     targets: this.bonfireEffect,
+    alpha: { start: 0, from: 0, to: 1, duration: 2000, ease: "Linear" },
+    yoyo: true,
+    // loop: -1,
+  });
+  }
+
+  wellEasterEgg() {
+    this.wellEasterEggFX = this.make
+    .image({ x: this.player.x, y: this.player.y, key: "saintTravis", add: true,
+    scale: {
+      //fog FX distance
+      x: 0.75,
+      y: 0.75,
+    }, })
+    .setOrigin(0.5)
+    .setDepth(3000)
+    .setAlpha(0);
+
+  this.tweens.add({
+    targets: this.wellEasterEggFX,
     alpha: { start: 0, from: 0, to: 1, duration: 2000, ease: "Linear" },
     yoyo: true,
     // loop: -1,
