@@ -17,6 +17,7 @@ class BootScene extends Phaser.Scene {
     this.load.image("bottom", "public/assets/map/FULLMAP_bottom.png");
     this.load.image("overlay", "public/assets/map/FULLMAP_overlay.png");
     this.load.image("bonfireFX", "public/assets/map/bonfireEffect.png");
+    this.load.image("saintTravis", "public/assets/entities/easter_eggs/saint travis.png")
 
     //UI elements
     this.load.image("ui-heart-empty", "public/assets/ui/heart_empty.png");
@@ -67,10 +68,10 @@ class BootScene extends Phaser.Scene {
       frameHeight: 39,
     });
 
-    this.load.spritesheet("well", "public/assets/entities/well.png", {
-      frameWidth: 88,
-      frameHeight: 56,
-    });
+    // this.load.spritesheet("well", "public/assets/entities/well.png", {
+    //   frameWidth: 88,
+    //   frameHeight: 56,
+    // });
 
     this.load.spritesheet("pillar01", "public/assets/entities/pillar01.png", {
       frameWidth: 24,
