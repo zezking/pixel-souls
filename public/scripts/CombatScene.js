@@ -125,6 +125,7 @@ class CombatScene extends Phaser.Scene {
           console.log("winner: ", winner, "Enemy chose: ", enemyChoice);
           this.playerHealth -= 1;
           this.enemyHealth -= 1;
+          this.damageSfx()
           this.playerHurt();
           this.enemyHurt();
           this.cameras.main.flash(300).shake(300);
@@ -133,6 +134,7 @@ class CombatScene extends Phaser.Scene {
         case "enemy":
           console.log("winner: ", winner, "Enemy chose: ", enemyChoice);
           this.playerHealth -= 1;
+          this.damageSfx()
           this.playerHurt();
           this.cameras.main.flash(300).shake(300);
           this.healthChecker();
@@ -168,13 +170,13 @@ class CombatScene extends Phaser.Scene {
 
       this.scene.start("Death");
     } else if (this.enemyHealth <= 0) {
-      this.cameras.main.flash(300).shake(300);
       this.AudioScene.stopBattleBgm();
       this.AudioScene.playMainBgm();
       this.events.emit("updateHealth", this.playerHealth);
       this.events.off("results");
       this.scene.stop("Combat");
       this.scene.wake("Game", { gameOver: true, playback: this.mainBGM }); //pass a game status to the Game Scene
+
     }
 
     this.events.emit("updateHealth", this.playerHealth);
@@ -254,7 +256,7 @@ class CombatScene extends Phaser.Scene {
         },
         add: true,
       })
-      .setDepth(1)
+      .setDepth(401)
       .setAlpha(0);
     this.tweens.add({
       targets: this.enemy_hurt,
@@ -341,5 +343,12 @@ class CombatScene extends Phaser.Scene {
   playerPosition(playerX, playerY) {
     this.playerX = playerX;
     this.playerY = playerY;
+  }
+
+  damageSfx() {
+    this.damagedOof = this.sound.add("oof", {
+      volume: 0.04,
+    });
+    this.damagedOof.play();
   }
 }
