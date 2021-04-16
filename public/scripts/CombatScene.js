@@ -125,6 +125,7 @@ class CombatScene extends Phaser.Scene {
           console.log("winner: ", winner, "Enemy chose: ", enemyChoice);
           this.playerHealth -= 1;
           this.enemyHealth -= 1;
+          this.damageSfx()
           this.playerHurt();
           this.enemyHurt();
           this.cameras.main.flash(300).shake(300);
@@ -133,6 +134,7 @@ class CombatScene extends Phaser.Scene {
         case "enemy":
           console.log("winner: ", winner, "Enemy chose: ", enemyChoice);
           this.playerHealth -= 1;
+          this.damageSfx()
           this.playerHurt();
           this.cameras.main.flash(300).shake(300);
           this.healthChecker();
@@ -341,5 +343,12 @@ class CombatScene extends Phaser.Scene {
   playerPosition(playerX, playerY) {
     this.playerX = playerX;
     this.playerY = playerY;
+  }
+
+  damageSfx() {
+    this.damagedOof = this.sound.add("oof", {
+      volume: 0.04,
+    });
+    this.damagedOof.play();
   }
 }
