@@ -55,17 +55,17 @@ class AudioScene extends Phaser.Scene {
   }
 
   playPlayerDmgSFX() {
-    this.damagedOof = this.sound.add("oof", {
+    this.damagedHit = this.sound.add("hit", {
       volume: 0.05,
     });
-    this.damagedOof.play();
+    this.damagedHit.play();
   }
 
   playEnemyDmgSFX() {
-    this.damagedrsHit = this.sound.add("rs_hit", {
-      volume: 0.5,
+    this.damagedHit = this.sound.add("atk", {
+      volume: 0.05,
     });
-    this.damagedrsHit.play();
+    this.damagedHit.play();
   }
 
   playBonfire() {
