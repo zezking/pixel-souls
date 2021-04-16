@@ -168,13 +168,13 @@ class CombatScene extends Phaser.Scene {
 
       this.scene.start("Death");
     } else if (this.enemyHealth <= 0) {
-      this.cameras.main.flash(300).shake(300);
       this.AudioScene.stopBattleBgm();
       this.AudioScene.playMainBgm();
       this.events.emit("updateHealth", this.playerHealth);
       this.events.off("results");
       this.scene.stop("Combat");
       this.scene.wake("Game", { gameOver: true, playback: this.mainBGM }); //pass a game status to the Game Scene
+
     }
 
     this.events.emit("updateHealth", this.playerHealth);

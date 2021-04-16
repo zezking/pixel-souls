@@ -523,6 +523,7 @@ class GameScene extends Phaser.Scene {
     this.events.on("enemyDeath", (enemy) => {
       this.enemies = this.enemies.filter((e) => e.id !== enemy.id);
       enemy.enemyKilled();
+      this.cameras.main.flash(300).shake(300);
       // this.events.off("enemyDeath");
     });
 
