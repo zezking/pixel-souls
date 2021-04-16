@@ -132,6 +132,7 @@ class BootScene extends Phaser.Scene {
     this.load.audio("soul-get", "public/assets/audio/soul-get.wav.mp3");
     this.load.audio("armor", "public/assets/audio/body-armor.wav.mp3");
     this.load.audio("oof", "public/assets/audio/Oof sfx.mp3");
+    this.load.audio("rs_hit", "public/assets/audio/rs_hit_sfx.mp3");
   }
 
   loadTilemap() {
