@@ -549,6 +549,7 @@ class GameScene extends Phaser.Scene {
     //Use bonfire, reset spawns/heal/restore estus
     this.events.on("useBonfire", () => {
       console.log("Bonfire used!!");
+      this.AudioScene.playBonfire();
       this.player.health = 5;
       this.player.estus = 3;
       this.events.emit("updateHealth", this.player.health, this.player.estus);

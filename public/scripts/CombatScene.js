@@ -125,6 +125,7 @@ class CombatScene extends Phaser.Scene {
           console.log("winner: ", winner, "Enemy chose: ", enemyChoice);
           this.playerHealth -= 1;
           this.enemyHealth -= 1;
+
           this.playerHurt();
           this.enemyHurt();
           this.cameras.main.flash(300).shake(300);
@@ -221,56 +222,6 @@ class CombatScene extends Phaser.Scene {
       .setScale(8);
   }
 
-  playerHurt() {
-    this.player_hurt = this.make
-      .image({
-        x: 200,
-        y: 400,
-        key: "player_hurt",
-        scale: {
-          x: 5,
-          y: 5,
-        },
-        add: true,
-      })
-      .setDepth(1)
-      .setAlpha(0);
-    this.tweens.add({
-      targets: this.player_hurt,
-      alpha: { start: 0, from: 0, to: 1, duration: 600, ease: "Linear" },
-      yoyo: true,
-    });
-    this.damagedOof = this.sound.add("oof", {
-      volume: 0.05,
-    });
-    this.damagedOof.play();
-  }
-
-  enemyHurt() {
-    this.enemy_hurt = this.make
-      .image({
-        x: 600,
-        y: 100,
-        key: "enemy_hurt",
-        scale: {
-          x: 5,
-          y: 5,
-        },
-        add: true,
-      })
-      .setDepth(401)
-      .setAlpha(0);
-    this.tweens.add({
-      targets: this.enemy_hurt,
-      alpha: { start: 0, from: 0, to: 1, duration: 600, ease: "Linear" },
-      yoyo: true,
-    });
-    this.damagedrsHit = this.sound.add("rs_hit", {
-      volume: 0.5,
-    });
-    this.damagedrsHit.play();
-  }
-
   drawCombatUIBackground() {
     this.combatPlayer = this.make
       .image({
@@ -351,4 +302,53 @@ class CombatScene extends Phaser.Scene {
     this.playerY = playerY;
   }
 
+/************************** Player/Enemy Damage FX *************************/
+
+  playerHurt() {
+    this.player_hurt = this.make
+      .image({
+        x: 200,
+        y: 400,
+        key: "player_hurt",
+        scale: {
+          x: 5,
+          y: 5,
+        },
+        add: true,
+      })
+      .setDepth(1)
+      .setAlpha(0);
+    this.tweens.add({
+      targets: this.player_hurt,
+      alpha: { start: 0, from: 0, to: 1, duration: 600, ease: "Linear" },
+      yoyo: true,
+    });
+    this.AudioScene.playPlayerDmgSFX()
+
+  }
+
+  enemyHurt() {
+    this.enemy_hurt = this.make
+      .image({
+        x: 600,
+        y: 100,
+        key: "enemy_hurt",
+        scale: {
+          x: 5,
+          y: 5,
+        },
+        add: true,
+      })
+      .setDepth(401)
+      .setAlpha(0);
+    this.tweens.add({
+      targets: this.enemy_hurt,
+      alpha: { start: 0, from: 0, to: 1, duration: 600, ease: "Linear" },
+      yoyo: true,
+    });
+    this.AudioScene.playEnemyDmgSFX()
+
+  }
+
+/****************************************************************************/
 }
