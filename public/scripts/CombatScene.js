@@ -19,6 +19,7 @@ class CombatScene extends Phaser.Scene {
   }
 
   create() {
+    //this.createSwordCursor();
     this.cameras.main.fadeIn(1000);
     this.setupCombatUi();
     this.resultListener();
@@ -31,7 +32,7 @@ class CombatScene extends Phaser.Scene {
     this.disableClickTimer();
     this.createCombatPlayer();
     this.generateCombatMap();
-
+    // this.swordCursorHover();
     this.combatBackgroundGenerator();
 
     this.AudioScene.playBattleBgm();
@@ -61,10 +62,12 @@ class CombatScene extends Phaser.Scene {
       }
     };
 
+    //pointer action
     this.sword.on("pointerdown", () => {
       this.result = this.checkWinner("sword", aiResult());
       this.events.emit("results", this.result);
     });
+
     this.magic.on("pointerdown", () => {
       this.result = this.checkWinner("magic", aiResult());
       this.events.emit("results", this.result);
@@ -166,7 +169,6 @@ class CombatScene extends Phaser.Scene {
       this.AudioScene.playMainBgm();
       this.events.off("pointerdown");
       this.events.off("results");
-
       this.scene.start("Death");
     } else if (this.enemyHealth <= 0) {
       this.AudioScene.stopBattleBgm();
@@ -176,7 +178,6 @@ class CombatScene extends Phaser.Scene {
       this.events.off("results");
       this.scene.stop("Combat");
       this.scene.wake("Game", { gameOver: true, playback: this.mainBGM }); //pass a game status to the Game Scene
-
     }
 
     this.events.emit("updateHealth", this.playerHealth);
@@ -227,11 +228,11 @@ class CombatScene extends Phaser.Scene {
     this.combatPlayer = this.make
       .image({
         x: 400,
-        y: 640,
+        y: 670,
         key: "ui_background",
         scale: {
-          x: 0.6,
-          y: 0.5,
+          x: 1.2,
+          y: 0.7,
         },
         add: true,
       })
@@ -303,7 +304,7 @@ class CombatScene extends Phaser.Scene {
     this.playerY = playerY;
   }
 
-/************************** Player/Enemy Damage FX *************************/
+  /************************** Player/Enemy Damage FX *************************/
 
   playerHurt() {
     this.player_hurt = this.make
@@ -324,8 +325,7 @@ class CombatScene extends Phaser.Scene {
       alpha: { start: 0, from: 0, to: 1, duration: 600, ease: "Linear" },
       yoyo: true,
     });
-    this.AudioScene.playPlayerDmgSFX()
-
+    this.AudioScene.playPlayerDmgSFX();
   }
 
   enemyHurt() {
@@ -347,9 +347,8 @@ class CombatScene extends Phaser.Scene {
       alpha: { start: 0, from: 0, to: 1, duration: 600, ease: "Linear" },
       yoyo: true,
     });
-    this.AudioScene.playEnemyDmgSFX()
-
+    this.AudioScene.playEnemyDmgSFX();
   }
 
-/****************************************************************************/
+  /****************************************************************************/
 }
