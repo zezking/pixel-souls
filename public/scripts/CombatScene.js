@@ -267,11 +267,11 @@ class CombatScene extends Phaser.Scene {
     this.combatPlayer = this.make
       .image({
         x: 400,
-        y: 640,
+        y: 670,
         key: "ui_background",
         scale: {
-          x: 0.6,
-          y: 0.5,
+          x: 1.3,
+          y: 0.76,
         },
         add: true,
       })

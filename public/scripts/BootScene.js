@@ -38,8 +38,14 @@ class BootScene extends Phaser.Scene {
       "combat_background",
       "public/assets/map/FULLMAP_bottom.png"
     );
-    this.load.image("enemy_hurt","public/assets/ui/battle/hurt/enemy_hurt.png");
-    this.load.image("player_hurt","public/assets/ui/battle/hurt/player_hurt.png");
+    this.load.image(
+      "enemy_hurt",
+      "public/assets/ui/battle/hurt/enemy_hurt.png"
+    );
+    this.load.image(
+      "player_hurt",
+      "public/assets/ui/battle/hurt/player_hurt.png"
+    );
   }
 
   loadSpriteSheets() {
@@ -156,6 +162,6 @@ class BootScene extends Phaser.Scene {
   }
 
   create() {
-    this.scene.launch("Title");
+    this.scene.launch("Combat");
   }
 }
