@@ -588,6 +588,7 @@ class GameScene extends Phaser.Scene {
     });
 
     this.events.on("useWell", () => {
+      this.AudioScene.playHeavenly();
       this.wellEasterEgg();
     });
   }
@@ -627,7 +628,7 @@ class GameScene extends Phaser.Scene {
 
   this.tweens.add({
     targets: this.wellEasterEggFX,
-    alpha: { start: 0, from: 0, to: 1, duration: 2000, ease: "Linear" },
+    alpha: { start: 0, from: 0, to: 1, duration: 3000, ease: "Linear" },
     yoyo: true,
     // loop: -1,
   });
