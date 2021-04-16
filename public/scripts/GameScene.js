@@ -576,6 +576,7 @@ class GameScene extends Phaser.Scene {
     this.bonfireEffect = this.make
     .image({ x: this.player.x, y: this.player.y, key: "bonfireFX", add: true,
     scale: {
+      //fog FX distance
       x: 0.35,
       y: 0.4,
     }, })
