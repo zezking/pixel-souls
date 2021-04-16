@@ -19,13 +19,22 @@ class CombatScene extends Phaser.Scene {
   }
 
   create() {
+    //this.createSwordCursor();
     this.cameras.main.fadeIn(1000);
     this.setupCombatUi();
     this.resultListener();
     this.createCombatPlayer();
+    // this.bothHurt();
+    // this.enemyHurt();
+    // this.playerHurt();
     this.drawCombatUIBackground();
     this.createCombatSkeleton();
     this.disableClickTimer();
+    this.createCombatPlayer();
+    this.generateCombatMap();
+    // this.swordCursorHover();
+    this.combatBackgroundGenerator();
+
     this.AudioScene.playBattleBgm();
   }
   setupCombatUi() {
@@ -53,10 +62,12 @@ class CombatScene extends Phaser.Scene {
       }
     };
 
+    //pointer action
     this.sword.on("pointerdown", () => {
       this.result = this.checkWinner("sword", aiResult());
       this.events.emit("results", this.result);
     });
+
     this.magic.on("pointerdown", () => {
       this.result = this.checkWinner("magic", aiResult());
       this.events.emit("results", this.result);
@@ -64,6 +75,16 @@ class CombatScene extends Phaser.Scene {
     this.shield.on("pointerdown", () => {
       this.result = this.checkWinner("shield", aiResult());
       this.events.emit("results", this.result);
+    });
+
+    //enemy hearts
+    this.enemyHearts = this.add.group({
+      classType: Phaser.GameObjects.Image,
+    });
+    this.enemyHearts.createMultiple({
+      key: "ui-heart-full",
+      setXY: { x: 615, y: 325, stepX: 40 },
+      quantity: 3,
     });
   }
 
@@ -107,16 +128,24 @@ class CombatScene extends Phaser.Scene {
           console.log("winner: ", winner, "Enemy chose: ", enemyChoice);
           this.playerHealth -= 1;
           this.enemyHealth -= 1;
+
+          this.playerHurt();
+          this.enemyHurt();
+          this.cameras.main.flash(300).shake(300);
           this.healthChecker();
           break;
         case "enemy":
           console.log("winner: ", winner, "Enemy chose: ", enemyChoice);
           this.playerHealth -= 1;
+          this.playerHurt();
+          this.cameras.main.flash(300).shake(300);
           this.healthChecker();
           break;
         case "player":
           console.log("winner: ", winner, "Enemy chose: ", enemyChoice);
           this.enemyHealth -= 1;
+          this.enemyHurt();
+          this.cameras.main.flash(300).shake(300);
           this.healthChecker();
           break;
       }
@@ -140,19 +169,28 @@ class CombatScene extends Phaser.Scene {
       this.AudioScene.playMainBgm();
       this.events.off("pointerdown");
       this.events.off("results");
-
       this.scene.start("Death");
     } else if (this.enemyHealth <= 0) {
       this.AudioScene.stopBattleBgm();
       this.AudioScene.playMainBgm();
       this.events.emit("updateHealth", this.playerHealth);
+      this.events.emit("enemySoulGet");
       this.events.off("results");
       this.scene.stop("Combat");
-
       this.scene.wake("Game", { gameOver: true, playback: this.mainBGM }); //pass a game status to the Game Scene
     }
 
     this.events.emit("updateHealth", this.playerHealth);
+
+    //Update enemy's health
+    this.enemyHearts.children.each((gameObj, index) => {
+      const heart = gameObj;
+      if (index < this.enemyHealth) {
+        heart.setTexture("ui-heart-full");
+      } else {
+        heart.setTexture("ui-heart-empty");
+      }
+    });
   }
 
   update() {
@@ -171,7 +209,7 @@ class CombatScene extends Phaser.Scene {
         },
         add: true,
       })
-      .setDepth(0);
+      .setDepth(1);
   }
   createCombatSkeleton() {
     this.enemyCombat = new Enemy({
@@ -190,15 +228,15 @@ class CombatScene extends Phaser.Scene {
     this.combatPlayer = this.make
       .image({
         x: 400,
-        y: 640,
+        y: 670,
         key: "ui_background",
         scale: {
-          x: 0.6,
-          y: 0.5,
+          x: 1.2,
+          y: 0.7,
         },
         add: true,
       })
-      .setDepth(1);
+      .setDepth(2);
   }
 
   disableClickTimer() {
@@ -209,4 +247,108 @@ class CombatScene extends Phaser.Scene {
       },
     });
   }
+
+  combatBackgroundGenerator() {
+    this.mapCombat = this.make
+      .image({
+        key: "combat_background",
+        x: this.combatMapX,
+        y: this.combatMapY,
+      })
+      .setDepth(0)
+      .setScale(4);
+  }
+
+  generateCombatMap() {
+    //tiles combatMap
+    if (
+      this.playerX >= 665 &&
+      this.playerX <= 1110 &&
+      this.playerY >= 760 &&
+      this.playerY <= 1257
+    ) {
+      this.combatMapX = this.scale.width - 865;
+      this.combatMapY = this.scale.height;
+      return;
+    }
+    //carpet combatMap
+    if (
+      this.playerX >= 361 &&
+      this.playerX <= 597 &&
+      this.playerY >= 650 &&
+      this.playerY <= 1221
+    ) {
+      this.combatMapX = this.scale.width + 260;
+      this.combatMapY = this.scale.height;
+      return;
+    }
+    //cementary combatMap
+    if (
+      this.playerX >= 60 &&
+      this.playerX <= 488 &&
+      this.playerY >= 278 &&
+      this.playerY <= 517
+    ) {
+      this.combatMapX = this.scale.width + 1600;
+      this.combatMapY = this.scale.height + 1800;
+      return;
+    }
+
+    this.combatMapX = this.scale.width;
+    this.combatMapY = this.scale.height - 1700;
+    return;
+  }
+
+  playerPosition(playerX, playerY) {
+    this.playerX = playerX;
+    this.playerY = playerY;
+  }
+
+  /************************** Player/Enemy Damage FX *************************/
+
+  playerHurt() {
+    this.player_hurt = this.make
+      .image({
+        x: 200,
+        y: 400,
+        key: "player_hurt",
+        scale: {
+          x: 5,
+          y: 5,
+        },
+        add: true,
+      })
+      .setDepth(1)
+      .setAlpha(0);
+    this.tweens.add({
+      targets: this.player_hurt,
+      alpha: { start: 0, from: 0, to: 1, duration: 600, ease: "Linear" },
+      yoyo: true,
+    });
+    this.AudioScene.playPlayerDmgSFX();
+  }
+
+  enemyHurt() {
+    this.enemy_hurt = this.make
+      .image({
+        x: 600,
+        y: 100,
+        key: "enemy_hurt",
+        scale: {
+          x: 5,
+          y: 5,
+        },
+        add: true,
+      })
+      .setDepth(401)
+      .setAlpha(0);
+    this.tweens.add({
+      targets: this.enemy_hurt,
+      alpha: { start: 0, from: 0, to: 1, duration: 600, ease: "Linear" },
+      yoyo: true,
+    });
+    this.AudioScene.playEnemyDmgSFX();
+  }
+
+  /****************************************************************************/
 }

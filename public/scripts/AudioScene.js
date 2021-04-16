@@ -54,5 +54,33 @@ class AudioScene extends Phaser.Scene {
     this.areaSFX.play();
   }
 
+  playPlayerDmgSFX() {
+    this.damagedHit = this.sound.add("hit", {
+      volume: 0.05,
+    });
+    this.damagedHit.play();
+  }
+
+  playEnemyDmgSFX() {
+    this.damagedHit = this.sound.add("atk", {
+      volume: 0.05,
+    });
+    this.damagedHit.play();
+  }
+
+  playBonfire() {
+    this.bonfireLit = this.sound.add("bonfireSFX", {
+      volume: 0.04,
+    });
+    this.bonfireLit.play();
+  }
+
+  playEstus() {
+    this.estusDrink = this.sound.add("estusSFX", {
+      volume: 0.04,
+    });
+    this.estusDrink.play();
+  }
+  
   battleSFX() {}
 }

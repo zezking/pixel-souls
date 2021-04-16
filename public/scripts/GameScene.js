@@ -24,6 +24,7 @@ class GameScene extends Phaser.Scene {
   }
 
   create() {
+    this.uiScene.scene.bringToTop();
     this.createMap();
     this.createPlayer();
     this.createEnemy();
@@ -55,14 +56,11 @@ class GameScene extends Phaser.Scene {
   }
 
   update() {
-    this.playerWalking();
     this.player.update();
-    //this.AudioScene.stepSFX(this);
     // enemies list
     this.enemies.forEach((enemy) => {
       enemy.update();
     });
-
     // this.crestfallenWarrior.update();
     // this.griggs.update();
     // this.bigHatLogan.update();
@@ -99,24 +97,24 @@ class GameScene extends Phaser.Scene {
   createEnemy() {
     this.enemy = new Enemy({
       scene: this,
-      x: 288,
-      y: 1022,
+      x: 300,
+      y: 122,
       key: "skeleton_sprite",
       frame: "skele_idling0",
       id: 1,
     });
     this.enemy2 = new Enemy({
       scene: this,
-      x: 688,
-      y: 1022,
+      x: 125,
+      y: 400,
       key: "skeleton_sprite",
       frame: "skele_idling0",
       id: 2,
     });
     this.enemy3 = new Enemy({
       scene: this,
-      x: 708,
-      y: 922,
+      x: 1060,
+      y: 822,
       key: "skeleton_sprite",
       frame: "skele_idling0",
       id: 3,
@@ -129,7 +127,21 @@ class GameScene extends Phaser.Scene {
       frame: "skele_idling0",
       id: 4,
     });
-    this.enemies = [this.enemy, this.enemy2, this.enemy3, this.enemy4];
+    this.enemy5 = new Enemy({
+      scene: this,
+      x: 570,
+      y: 70,
+      key: "skeleton_sprite",
+      frame: "skele_idling0",
+      id: 5,
+    });
+    this.enemies = [
+      this.enemy,
+      this.enemy2,
+      this.enemy3,
+      this.enemy4,
+      this.enemy5,
+    ];
   }
 
   createNPC() {
@@ -216,13 +228,8 @@ class GameScene extends Phaser.Scene {
     ];
 
     //here's a stupid step to get the bird on top of the wall
-    this.children.each((c) => {
-      const child = c;
-      if (child.depthSorting && child.texture.key === "bird") {
-        child.depthSorting = false;
-        child.setDepth(2240);
-      }
-    });
+    this.bird.depthSorting = false;
+    this.bird.setDepth(2240);
 
     let npcs = [
       this.bird,
@@ -302,13 +309,29 @@ class GameScene extends Phaser.Scene {
     });
     this.item2 = new Item({
       scene: this,
-      x: 750,
-      y: 1740,
+      x: 700,
+      y: 2170,
       key: "soul",
       frame: "soul_0",
       id: 2,
     });
-    this.items = [this.item, this.item2];
+    this.item3 = new Item({
+      scene: this,
+      x: 1075,
+      y: 1260,
+      key: "soul",
+      frame: "soul_0",
+      id: 3,
+    });
+    this.item4 = new Item({
+      scene: this,
+      x: 480,
+      y: 680,
+      key: "soul",
+      frame: "soul_0",
+      id: 4,
+    });
+    this.items = [this.item, this.item2, this.item3, this.item4];
 
     this.item.depthSorting = false;
     this.item.setDepth(1771);
@@ -316,7 +339,7 @@ class GameScene extends Phaser.Scene {
     //item collision detection
     this.matterCollision.addOnCollideStart({
       objectA: this.player,
-      objectB: [this.item, this.item2],
+      objectB: this.items,
       callback: (eventData) => {
         this.events.emit("pickupItem", eventData.gameObjectB);
       },
@@ -351,7 +374,7 @@ class GameScene extends Phaser.Scene {
     let camera = this.cameras.main;
 
     // Zoom in and out of Player
-    camera.zoom = 1;
+    camera.zoom = 3;
 
     camera.startFollow(this.player);
     // Camera to center leeway, the higher, the tighter
@@ -414,6 +437,7 @@ class GameScene extends Phaser.Scene {
       objectA: this.player,
       objectB: this.enemies,
       callback: (eventData) => {
+        this.combatScene.playerPosition(this.player.x, this.player.y);
         this.events.emit("enemyDeath", eventData.gameObjectB);
         this.enemies.forEach((enemy) => {
           enemy.setStatic(true);
@@ -421,7 +445,6 @@ class GameScene extends Phaser.Scene {
         this.AudioScene.stopMainBgm();
         this.scene.sleep();
         this.scene.add("Loading", LoadingScene, true);
-
         this.scene.launch("Combat", {
           health: this.player.health,
           enemyGroup: this.enemies,
@@ -492,9 +515,16 @@ class GameScene extends Phaser.Scene {
       //remove item
     });
 
+    this.combatScene.events.on("enemySoulGet", () => {
+      let prevSouls = this.player.souls;
+      this.player.updateSouls(100); //all enemies are hardcoded 100 souls
+      this.events.emit("updateSouls", prevSouls, this.player.souls);
+    })
+
     this.events.on("enemyDeath", (enemy) => {
       this.enemies = this.enemies.filter((e) => e.id !== enemy.id);
       enemy.enemyKilled();
+      this.cameras.main.flash(300).shake(300);
       // this.events.off("enemyDeath");
     });
 
@@ -520,6 +550,8 @@ class GameScene extends Phaser.Scene {
     //Use bonfire, reset spawns/heal/restore estus
     this.events.on("useBonfire", () => {
       console.log("Bonfire used!!");
+      this.bonfireFX();
+      this.AudioScene.playBonfire();
       this.player.health = 5;
       this.player.estus = 3;
       this.events.emit("updateHealth", this.player.health, this.player.estus);
@@ -532,6 +564,27 @@ class GameScene extends Phaser.Scene {
 
       // this.events.off("useBonfire");
     });
+  }
+
+  // this is for the BonFire Smoke Effect
+  bonfireFX() {
+    this.bonfireEffect = this.make
+    .image({ x: this.player.x, y: this.player.y, key: "bonfireFX", add: true,
+    scale: {
+      //fog FX distance
+      x: 0.35,
+      y: 0.4,
+    }, })
+    .setOrigin(0.5)
+    .setDepth(3000)
+    .setAlpha(0);
+
+  this.tweens.add({
+    targets: this.bonfireEffect,
+    alpha: { start: 0, from: 0, to: 1, duration: 2000, ease: "Linear" },
+    yoyo: true,
+    // loop: -1,
+  });
   }
 
   createAreaText() {
@@ -573,16 +626,6 @@ class GameScene extends Phaser.Scene {
     }
   }
 
-  playerWalking() {
-    if (
-      this.player.inputKeys.up.isDown ||
-      this.player.inputKeys.down.isDown ||
-      this.player.inputKeys.left.isDown ||
-      this.player.inputKeys.right.isDown
-    ) {
-      this.player.isWalking = true;
-    } else {
-      this.player.isWalking = false;
-    }
-  }
+
+
 }

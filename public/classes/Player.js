@@ -58,6 +58,7 @@ class Player extends Phaser.Physics.Matter.Sprite {
     this.atBonfire = false;
   }
 
+
   static preload(scene) {
     scene.load.atlas(
       "ashen_one",
@@ -79,28 +80,23 @@ class Player extends Phaser.Physics.Matter.Sprite {
   }
 
   update() {
-
     // if(!this.atBonfire){
     //   this.anims.play("player_spawn")
     // }
     // this.body.setVelocity()
     if (this.inputKeys.left.isDown && this.inputKeys.up.isDown) {
-    this.anims.play("player_nw", true);
-    this.flipX = false;
-    }
-    else if (this.inputKeys.right.isDown && this.inputKeys.up.isDown) {
-      this.anims.play("player_ne", true);
+      this.anims.play("player_nw", true);
       this.flipX = false;
-    }
-    else if (this.inputKeys.right.isDown && this.inputKeys.down.isDown) {
-      this.anims.play("player_se", true);
-      this.flipX = false;
-    }
-    else if (this.inputKeys.left.isDown && this.inputKeys.down.isDown) {
+    } else if (this.inputKeys.left.isDown && this.inputKeys.down.isDown) {
       this.anims.play("player_sw", true);
       this.flipX = false;
-    }
-    else if (this.inputKeys.left.isDown) {
+    } else if (this.inputKeys.right.isDown && this.inputKeys.up.isDown) {
+      this.anims.play("player_ne", true);
+      this.flipX = false;
+    } else if (this.inputKeys.right.isDown && this.inputKeys.down.isDown) {
+      this.anims.play("player_se", true);
+      this.flipX = false;
+    } else if (this.inputKeys.left.isDown) {
       this.anims.play("player_left", true);
       this.flipX = false;
     } else if (this.inputKeys.right.isDown) {
@@ -147,12 +143,12 @@ class Player extends Phaser.Physics.Matter.Sprite {
     playerVelocity.scale(speed);
     this.setVelocity(playerVelocity.x, playerVelocity.y);
 
-
     //Estus Logic
-    if(this.inputKeys.drink.isDown) {
+    if (this.inputKeys.drink.isDown) {
       if (this.estus > 0) {
         this.health = 5;
         this.estus -= 1;
+        this.scene.AudioScene.playEstus();
         this.inputKeys.drink.reset();
         this.scene.events.emit("updateHealth", this.health, this.estus);
         console.log("Drank an estus. Estus remaining: ", this.estus);
@@ -166,7 +162,6 @@ class Player extends Phaser.Physics.Matter.Sprite {
   playerKilled() {
     this.setActive(false);
     this.setVisible(false);
-
     this.destroy();
   }
 }
