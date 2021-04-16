@@ -555,6 +555,7 @@ class GameScene extends Phaser.Scene {
     //Use bonfire, reset spawns/heal/restore estus
     this.events.on("useBonfire", () => {
       console.log("Bonfire used!!");
+      this.bonfireFX();
       this.AudioScene.playBonfire();
       this.player.health = 5;
       this.player.estus = 3;
@@ -568,6 +569,26 @@ class GameScene extends Phaser.Scene {
 
       // this.events.off("useBonfire");
     });
+  }
+
+  // this is for the BonFire Smoke Effect
+  bonfireFX() {
+    this.bonfireEffect = this.make
+    .image({ x: this.player.x, y: this.player.y, key: "bonfireFX", add: true,
+    scale: {
+      x: 1,
+      y: 2,
+    }, })
+    .setOrigin(0.5)
+    .setDepth(3000)
+    .setAlpha(0);
+
+  this.tweens.add({
+    targets: this.bonfireEffect,
+    alpha: { start: 0, from: 0, to: 1, duration: 1000, ease: "Linear" },
+    yoyo: true,
+    // loop: -1,
+  });
   }
 
   createAreaText() {
@@ -608,4 +629,7 @@ class GameScene extends Phaser.Scene {
       });
     }
   }
+
+
+
 }
