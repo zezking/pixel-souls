@@ -81,6 +81,10 @@ class BootScene extends Phaser.Scene {
       frameWidth: 24,
       frameHeight: 148,
     });
+    this.load.spritesheet("eventTrigger", "public/assets/sprites/eventTrigger.png", {
+      frameWidth: 5,
+      frameHeight: 5,
+    });
   }
 
   loadAudio() {
