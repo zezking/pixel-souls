@@ -103,6 +103,7 @@ class BootScene extends Phaser.Scene {
     this.load.audio("atk", "public/assets/audio/attacksfx.mp3");
     this.load.audio("bonfireSFX", "public/assets/audio/bonfire_lit.mp3");
     this.load.audio("estusSFX", "public/assets/audio/estusSFX.mp3");
+    this.load.audio("soul-suck", "public/assets/audio/soul-suck.wav.mp3");
   }
 
   loadTilemap() {
@@ -128,6 +129,6 @@ class BootScene extends Phaser.Scene {
   }
 
   create() {
-    this.scene.launch("Combat");
+    this.scene.launch("Title");
   }
 }

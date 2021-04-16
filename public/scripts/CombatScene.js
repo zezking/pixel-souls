@@ -195,6 +195,7 @@ class CombatScene extends Phaser.Scene {
     } else if (this.enemyHealth <= 0) {
       this.AudioScene.stopBattleBgm();
       this.AudioScene.playMainBgm();
+      this.AudioScene.playSoulSucking();
       this.events.emit("updateHealth", this.playerHealth);
       this.events.emit("enemySoulGet");
       this.events.off("results");
