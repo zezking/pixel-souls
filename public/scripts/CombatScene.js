@@ -172,6 +172,7 @@ class CombatScene extends Phaser.Scene {
       this.AudioScene.stopBattleBgm();
       this.AudioScene.playMainBgm();
       this.events.emit("updateHealth", this.playerHealth);
+      this.events.emit("enemySoulGet");
       this.events.off("results");
       this.scene.stop("Combat");
       this.scene.wake("Game", { gameOver: true, playback: this.mainBGM }); //pass a game status to the Game Scene
