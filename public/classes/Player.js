@@ -81,9 +81,6 @@ class Player extends Phaser.Physics.Matter.Sprite {
 
   update() {
 
-    // if(!this.atBonfire){
-    //   this.anims.play("player_spawn")
-    // }
     // this.body.setVelocity()
     if (this.inputKeys.left.isDown && this.inputKeys.up.isDown) {
     this.anims.play("player_nw", true);
