@@ -19,7 +19,7 @@ class CombatScene extends Phaser.Scene {
   }
 
   create() {
-    this.createSwordCursor();
+    //this.createSwordCursor();
     this.cameras.main.fadeIn(1000);
     this.setupCombatUi();
     this.resultListener();
@@ -32,7 +32,7 @@ class CombatScene extends Phaser.Scene {
     this.disableClickTimer();
     this.createCombatPlayer();
     this.generateCombatMap();
-
+    // this.swordCursorHover();
     this.combatBackgroundGenerator();
 
     this.AudioScene.playBattleBgm();
@@ -194,7 +194,6 @@ class CombatScene extends Phaser.Scene {
 
   update() {
     this.enemyCombat.update();
-    this.swordCursorHover();
   }
 
   createCombatPlayer() {
@@ -346,26 +345,26 @@ class CombatScene extends Phaser.Scene {
     this.playerY = playerY;
   }
 
-  createSwordCursor() {
-    this.swordCursor = this.make
-      .image({
-        key: "sword_cursor",
-        x: 200,
-        y: 640,
-        scale: {
-          x: 0.5,
-          y: 0.5,
-        },
-      })
-      .setDepth(10)
-      .setVisible(false);
-  }
+  // createSwordCursor() {
+  //   this.swordCursor = this.add
+  //     .button({
+  //       key: "sword_cursor",
+  //       x: 200,
+  //       y: 640,
+  //       scale: {
+  //         x: 0.5,
+  //         y: 0.5,
+  //       },
+  //     })
+  //     .setDepth(10);
+  // }
 
   swordCursorHover() {
-    if (this.sword.pointerOver()) {
-      this.swordCursor.setVisible(true);
-    } else {
-      this.swordCursor.setVisible(false);
-    }
+    this.input.on("pointerover", function (event, gameObjects) {
+      gameObjects[0].setVisible(true);
+    });
+    this.sword.on("pointerout", function (event, gameObjects) {
+      gameObjects[0].setVisible(false);
+    });
   }
 }
