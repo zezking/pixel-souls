@@ -19,6 +19,7 @@ class CombatScene extends Phaser.Scene {
   }
 
   create() {
+    this.createSwordCursor();
     this.cameras.main.fadeIn(1000);
     this.setupCombatUi();
     this.resultListener();
@@ -61,10 +62,12 @@ class CombatScene extends Phaser.Scene {
       }
     };
 
+    //pointer action
     this.sword.on("pointerdown", () => {
       this.result = this.checkWinner("sword", aiResult());
       this.events.emit("results", this.result);
     });
+
     this.magic.on("pointerdown", () => {
       this.result = this.checkWinner("magic", aiResult());
       this.events.emit("results", this.result);
@@ -165,7 +168,6 @@ class CombatScene extends Phaser.Scene {
       this.AudioScene.playMainBgm();
       this.events.off("pointerdown");
       this.events.off("results");
-
       this.scene.start("Death");
     } else if (this.enemyHealth <= 0) {
       this.cameras.main.flash(300).shake(300);
@@ -192,6 +194,7 @@ class CombatScene extends Phaser.Scene {
 
   update() {
     this.enemyCombat.update();
+    this.swordCursorHover();
   }
 
   createCombatPlayer() {
@@ -271,7 +274,7 @@ class CombatScene extends Phaser.Scene {
         key: "ui_background",
         scale: {
           x: 1.3,
-          y: 0.76,
+          y: 0.8,
         },
         add: true,
       })
@@ -341,5 +344,28 @@ class CombatScene extends Phaser.Scene {
   playerPosition(playerX, playerY) {
     this.playerX = playerX;
     this.playerY = playerY;
+  }
+
+  createSwordCursor() {
+    this.swordCursor = this.make
+      .image({
+        key: "sword_cursor",
+        x: 200,
+        y: 640,
+        scale: {
+          x: 0.5,
+          y: 0.5,
+        },
+      })
+      .setDepth(10)
+      .setVisible(false);
+  }
+
+  swordCursorHover() {
+    if (this.sword.pointerOver()) {
+      this.swordCursor.setVisible(true);
+    } else {
+      this.swordCursor.setVisible(false);
+    }
   }
 }

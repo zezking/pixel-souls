@@ -46,6 +46,7 @@ class BootScene extends Phaser.Scene {
       "player_hurt",
       "public/assets/ui/battle/hurt/player_hurt.png"
     );
+    this.load.image("sword_cursor", "public/assets/ui/battle/sword_cursor.png");
   }
 
   loadSpriteSheets() {
