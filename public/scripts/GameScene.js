@@ -379,7 +379,7 @@ class GameScene extends Phaser.Scene {
     let camera = this.cameras.main;
 
     // Zoom in and out of Player
-    camera.zoom = 1;
+    camera.zoom = 3;
 
     camera.startFollow(this.player);
     // Camera to center leeway, the higher, the tighter
@@ -576,8 +576,8 @@ class GameScene extends Phaser.Scene {
     this.bonfireEffect = this.make
     .image({ x: this.player.x, y: this.player.y, key: "bonfireFX", add: true,
     scale: {
-      x: 1,
-      y: 2,
+      x: 0.35,
+      y: 0.4,
     }, })
     .setOrigin(0.5)
     .setDepth(3000)
@@ -585,7 +585,7 @@ class GameScene extends Phaser.Scene {
 
   this.tweens.add({
     targets: this.bonfireEffect,
-    alpha: { start: 0, from: 0, to: 1, duration: 1000, ease: "Linear" },
+    alpha: { start: 0, from: 0, to: 1, duration: 2000, ease: "Linear" },
     yoyo: true,
     // loop: -1,
   });
