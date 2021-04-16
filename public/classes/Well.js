@@ -1,4 +1,4 @@
-class Bonfire extends Phaser.Physics.Matter.Sprite{
+class Well extends Phaser.Physics.Matter.Sprite{
   constructor(data) {
     let {scene,x,y,key,frame} = data;
     super(scene.matter.world,x,y,key,frame);
@@ -6,9 +6,9 @@ class Bonfire extends Phaser.Physics.Matter.Sprite{
     this.depthSorting = true;  //Allows this entity to be depth-sorted
     const {Body, Bodies} = Phaser.Physics.Matter.Matter;
     // let fireCollider = Bodies.circle(this.x,this.y,12,{isSensor:false, lable:'fireCollider'});
-    let fireSensor = Bodies.circle(this.x,this.y,24, {isSensor:true, label: 'fireSensor'});
+    let wellSensor = Bodies.circle(this.x,this.y,24, {isSensor:true, label: 'wellSensor'});
     const compoundBody = Body.create({
-      parts:[fireSensor],
+      parts:[wellSensor],
       frictiasdonAir: 0.35,
       isStatic:true
     });
@@ -21,14 +21,17 @@ class Bonfire extends Phaser.Physics.Matter.Sprite{
   }
 
   static preload(scene) {
-    scene.load.atlas('bonfire','/public/assets/entities/bonfire_animation/bonfire.png','/public/assets/entities/bonfire_animation/bonfire_atlas.json')
-    scene.load.animation('bonfire_anim','/public/assets/entities/bonfire_animation/bonfire_anim.json')
+    scene.load.spritesheet("well", "public/assets/entities/well.png", {
+      frameWidth: 88,
+      frameHeight: 56,
+    });
+  //   scene.load.animation('bonfire_anim','/public/assets/entities/bonfire_animation/bonfire_anim.json')
     
-  }
+  // }
   
-  update() {
-    this.anims.play('bonfire_lit',true)
-  }
+  // update() {
+  //   this.anims.play('bonfire_lit',true)
+  // }
   
 }
-
+}

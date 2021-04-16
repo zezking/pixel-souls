@@ -21,6 +21,7 @@ class GameScene extends Phaser.Scene {
     NPC.preload(this);
     Item.preload(this);
     Player.preload(this);
+    Well.preload(this)
   }
 
   create() {
@@ -39,7 +40,10 @@ class GameScene extends Phaser.Scene {
     this.createBonfire();
     // Near Bonfire for light up on player?
     this.createNearBonfire();
+    this.createWell();
+    this.createNearWell();
     this.createCombat();
+
 
     // Spawn Effect
     this.createDelay();
@@ -61,10 +65,7 @@ class GameScene extends Phaser.Scene {
     this.enemies.forEach((enemy) => {
       enemy.update();
     });
-    // this.crestfallenWarrior.update();
-    // this.griggs.update();
-    // this.bigHatLogan.update();
-    // this.laurentius.update();
+
     this.npcs.forEach((npc) => {
       npc.update();
     });
@@ -248,12 +249,12 @@ class GameScene extends Phaser.Scene {
   }
 
   createEntity() {
-    this.entity = new Entity({
-      scene: this,
-      x: 735,
-      y: 1770,
-      key: "well",
-    });
+    // this.entity = new Entity({
+    //   scene: this,
+    //   x: 735,
+    //   y: 1770,
+    //   key: "well",
+    // });
     this.entity = new Entity({
       scene: this,
       x: 769,
@@ -346,6 +347,14 @@ class GameScene extends Phaser.Scene {
     });
   }
 
+  createWell() {
+    this.well = new Well({
+      scene: this,
+      x: 735,
+      y: 1770,
+      key: "well",
+    });
+  }
   createBonfire() {
     this.bonfire = new Bonfire({
       scene: this,
@@ -494,6 +503,19 @@ class GameScene extends Phaser.Scene {
     });
   }
 
+  createNearWell() {
+    this.matterCollision.addOnCollideActive({
+      objectA: this.player,
+      objectB: this.well,
+      callback: () => {
+        if (this.player.inputKeys.interact.isDown) {
+          this.events.emit("useWell");
+          this.player.inputKeys.interact.reset();
+        }
+      },
+    });
+  }
+
   //Delay and activation for
   createDelay() {
     timedEvent = this.time.delayedCall(600, this.onEvent, [], this);
@@ -564,6 +586,10 @@ class GameScene extends Phaser.Scene {
 
       // this.events.off("useBonfire");
     });
+
+    this.events.on("useWell", () => {
+      this.wellEasterEgg();
+    });
   }
 
   // this is for the BonFire Smoke Effect
@@ -581,6 +607,26 @@ class GameScene extends Phaser.Scene {
 
   this.tweens.add({
     targets: this.bonfireEffect,
+    alpha: { start: 0, from: 0, to: 1, duration: 2000, ease: "Linear" },
+    yoyo: true,
+    // loop: -1,
+  });
+  }
+
+  wellEasterEgg() {
+    this.wellEasterEggFX = this.make
+    .image({ x: this.player.x, y: this.player.y, key: "saintTravis", add: true,
+    scale: {
+      //fog FX distance
+      x: 0.75,
+      y: 0.75,
+    }, })
+    .setOrigin(0.5)
+    .setDepth(3000)
+    .setAlpha(0);
+
+  this.tweens.add({
+    targets: this.wellEasterEggFX,
     alpha: { start: 0, from: 0, to: 1, duration: 2000, ease: "Linear" },
     yoyo: true,
     // loop: -1,
