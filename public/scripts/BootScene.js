@@ -88,6 +88,7 @@ class BootScene extends Phaser.Scene {
     this.load.audio("hit", "public/assets/audio/hitsfx.mp3");
     this.load.audio("atk", "public/assets/audio/attacksfx.mp3");
     this.load.audio("bonfireSFX", "public/assets/audio/bonfire_lit.mp3");
+    this.load.audio("estusSFX", "public/assets/audio/estusSFX.mp3");
   }
 
   loadTilemap() {
