@@ -19,7 +19,9 @@ class CombatScene extends Phaser.Scene {
   }
 
   create() {
-    //this.createSwordCursor();
+    this.createSwordCursor();
+    //this.cursorHover();
+
     this.cameras.main.fadeIn(1000);
     this.setupCombatUi();
     this.resultListener();
@@ -32,7 +34,6 @@ class CombatScene extends Phaser.Scene {
     this.disableClickTimer();
     this.createCombatPlayer();
     this.generateCombatMap();
-    // this.swordCursorHover();
     this.combatBackgroundGenerator();
 
     this.AudioScene.playBattleBgm();
@@ -63,19 +64,40 @@ class CombatScene extends Phaser.Scene {
     };
 
     //pointer action
-    this.sword.on("pointerdown", () => {
-      this.result = this.checkWinner("sword", aiResult());
-      this.events.emit("results", this.result);
-    });
+    this.sword
+      .on("pointerdown", () => {
+        this.result = this.checkWinner("sword", aiResult());
+        this.events.emit("results", this.result);
+      })
+      .on("pointerover", () => {
+        this.swordCursor.setVisible(true);
+      })
+      .on("pointerout", () => {
+        this.swordCursor.setVisible(false);
+      });
 
-    this.magic.on("pointerdown", () => {
-      this.result = this.checkWinner("magic", aiResult());
-      this.events.emit("results", this.result);
-    });
-    this.shield.on("pointerdown", () => {
-      this.result = this.checkWinner("shield", aiResult());
-      this.events.emit("results", this.result);
-    });
+    this.magic
+      .on("pointerdown", () => {
+        this.result = this.checkWinner("magic", aiResult());
+        this.events.emit("results", this.result);
+      })
+      .on("pointerover", () => {
+        this.magicCursor.setVisible(true);
+      })
+      .on("pointerout", () => {
+        this.magicCursor.setVisible(false);
+      });
+    this.shield
+      .on("pointerdown", () => {
+        this.result = this.checkWinner("shield", aiResult());
+        this.events.emit("results", this.result);
+      })
+      .on("pointerover", () => {
+        this.shieldCursor.setVisible(true);
+      })
+      .on("pointerout", () => {
+        this.shieldCursor.setVisible(false);
+      });
 
     //enemy hearts
     this.enemyHearts = this.add.group({
@@ -351,4 +373,60 @@ class CombatScene extends Phaser.Scene {
   }
 
   /****************************************************************************/
+
+  cursorHover() {
+    this.swordCursor.on("pointerover", () => {
+      console.log(this);
+      swordCursor.setVisible(true);
+    });
+    this.swordCursor.on("pointerout", () => {
+      console.log("here");
+      swordCursor.setVisible(false);
+    });
+  }
+
+  createSwordCursor() {
+    this.swordCursor = this.make
+      .image({
+        key: "sword_cursor",
+        x: 150,
+        y: 630,
+        scale: {
+          x: 1,
+          y: 1,
+        },
+        add: true,
+      })
+      .setDepth(100)
+      .setVisible(false);
+    this.magicCursor = this.make
+      .image({
+        key: "sword_cursor",
+        x: 350,
+        y: 630,
+        scale: {
+          x: 1,
+          y: 1,
+        },
+        add: true,
+      })
+      .setDepth(100)
+      .setVisible(false);
+    this.shieldCursor = this.make
+      .image({
+        key: "sword_cursor",
+        x: 550,
+        y: 630,
+        scale: {
+          x: 1,
+          y: 1,
+        },
+        add: true,
+      })
+      .setDepth(100)
+      .setVisible(false);
+
+    this.magicCursor.setInteractive();
+    this.swordCursor.setInteractive();
+  }
 }

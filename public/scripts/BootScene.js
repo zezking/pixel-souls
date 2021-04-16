@@ -81,10 +81,14 @@ class BootScene extends Phaser.Scene {
       frameWidth: 24,
       frameHeight: 148,
     });
-    this.load.spritesheet("eventTrigger", "public/assets/sprites/eventTrigger.png", {
-      frameWidth: 5,
-      frameHeight: 5,
-    });
+    this.load.spritesheet(
+      "eventTrigger",
+      "public/assets/sprites/eventTrigger.png",
+      {
+        frameWidth: 5,
+        frameHeight: 5,
+      }
+    );
   }
 
   loadAudio() {
@@ -95,7 +99,6 @@ class BootScene extends Phaser.Scene {
     this.load.audio("battle-audio", "public/assets/audio/battle_theme.mp3");
     this.load.audio("new-area", "public/assets/audio/new_area.mp3");
     this.load.audio("soul-get", "public/assets/audio/soul-get.wav.mp3");
-    this.load.audio("armor", "public/assets/audio/body-armor.wav.mp3");
     this.load.audio("hit", "public/assets/audio/hitsfx.mp3");
     this.load.audio("atk", "public/assets/audio/attacksfx.mp3");
     this.load.audio("bonfireSFX", "public/assets/audio/bonfire_lit.mp3");
@@ -125,6 +128,6 @@ class BootScene extends Phaser.Scene {
   }
 
   create() {
-    this.scene.launch("Title");
+    this.scene.launch("Combat");
   }
 }
