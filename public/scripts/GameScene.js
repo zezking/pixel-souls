@@ -228,13 +228,8 @@ class GameScene extends Phaser.Scene {
     ];
 
     //here's a stupid step to get the bird on top of the wall
-    this.children.each((c) => {
-      const child = c;
-      if (child.depthSorting && child.texture.key === "bird") {
-        child.depthSorting = false;
-        child.setDepth(2240);
-      }
-    });
+    this.bird.depthSorting = false;
+    this.bird.setDepth(2240);
 
     let npcs = [
       this.bird,
