@@ -68,6 +68,12 @@ class AudioScene extends Phaser.Scene {
     this.damagedrsHit.play();
   }
 
+  playBonfire() {
+    this.bonfireLit = this.sound.add("bonfireSFX", {
+      volume: 0.04,
+    });
+    this.bonfireLit.play();
+  }
 
   battleSFX() {}
 }
