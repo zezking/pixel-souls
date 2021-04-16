@@ -128,6 +128,7 @@ class CombatScene extends Phaser.Scene {
           console.log("winner: ", winner, "Enemy chose: ", enemyChoice);
           this.playerHealth -= 1;
           this.enemyHealth -= 1;
+
           this.playerHurt();
           this.enemyHurt();
           this.cameras.main.flash(300).shake(300);
@@ -170,10 +171,10 @@ class CombatScene extends Phaser.Scene {
       this.events.off("results");
       this.scene.start("Death");
     } else if (this.enemyHealth <= 0) {
-      this.cameras.main.flash(300).shake(300);
       this.AudioScene.stopBattleBgm();
       this.AudioScene.playMainBgm();
       this.events.emit("updateHealth", this.playerHealth);
+      this.events.emit("enemySoulGet");
       this.events.off("results");
       this.scene.stop("Combat");
       this.scene.wake("Game", { gameOver: true, playback: this.mainBGM }); //pass a game status to the Game Scene
@@ -223,48 +224,6 @@ class CombatScene extends Phaser.Scene {
       .setScale(8);
   }
 
-  playerHurt() {
-    this.player_hurt = this.make
-      .image({
-        x: 200,
-        y: 400,
-        key: "player_hurt",
-        scale: {
-          x: 5,
-          y: 5,
-        },
-        add: true,
-      })
-      .setDepth(1)
-      .setAlpha(0);
-    this.tweens.add({
-      targets: this.player_hurt,
-      alpha: { start: 0, from: 0, to: 1, duration: 600, ease: "Linear" },
-      yoyo: true,
-    });
-  }
-
-  enemyHurt() {
-    this.enemy_hurt = this.make
-      .image({
-        x: 600,
-        y: 100,
-        key: "enemy_hurt",
-        scale: {
-          x: 5,
-          y: 5,
-        },
-        add: true,
-      })
-      .setDepth(1)
-      .setAlpha(0);
-    this.tweens.add({
-      targets: this.enemy_hurt,
-      alpha: { start: 0, from: 0, to: 1, duration: 600, ease: "Linear" },
-      yoyo: true,
-    });
-  }
-
   drawCombatUIBackground() {
     this.combatPlayer = this.make
       .image({
@@ -272,8 +231,8 @@ class CombatScene extends Phaser.Scene {
         y: 670,
         key: "ui_background",
         scale: {
-          x: 1.3,
-          y: 0.8,
+          x: 1.2,
+          y: 0.7,
         },
         add: true,
       })
@@ -345,26 +304,51 @@ class CombatScene extends Phaser.Scene {
     this.playerY = playerY;
   }
 
-  // createSwordCursor() {
-  //   this.swordCursor = this.add
-  //     .button({
-  //       key: "sword_cursor",
-  //       x: 200,
-  //       y: 640,
-  //       scale: {
-  //         x: 0.5,
-  //         y: 0.5,
-  //       },
-  //     })
-  //     .setDepth(10);
-  // }
+  /************************** Player/Enemy Damage FX *************************/
 
-  swordCursorHover() {
-    this.input.on("pointerover", function (event, gameObjects) {
-      gameObjects[0].setVisible(true);
+  playerHurt() {
+    this.player_hurt = this.make
+      .image({
+        x: 200,
+        y: 400,
+        key: "player_hurt",
+        scale: {
+          x: 5,
+          y: 5,
+        },
+        add: true,
+      })
+      .setDepth(1)
+      .setAlpha(0);
+    this.tweens.add({
+      targets: this.player_hurt,
+      alpha: { start: 0, from: 0, to: 1, duration: 600, ease: "Linear" },
+      yoyo: true,
     });
-    this.sword.on("pointerout", function (event, gameObjects) {
-      gameObjects[0].setVisible(false);
-    });
+    this.AudioScene.playPlayerDmgSFX();
   }
+
+  enemyHurt() {
+    this.enemy_hurt = this.make
+      .image({
+        x: 600,
+        y: 100,
+        key: "enemy_hurt",
+        scale: {
+          x: 5,
+          y: 5,
+        },
+        add: true,
+      })
+      .setDepth(401)
+      .setAlpha(0);
+    this.tweens.add({
+      targets: this.enemy_hurt,
+      alpha: { start: 0, from: 0, to: 1, duration: 600, ease: "Linear" },
+      yoyo: true,
+    });
+    this.AudioScene.playEnemyDmgSFX();
+  }
+
+  /****************************************************************************/
 }

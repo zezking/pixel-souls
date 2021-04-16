@@ -520,9 +520,16 @@ class GameScene extends Phaser.Scene {
       //remove item
     });
 
+    this.combatScene.events.on("enemySoulGet", () => {
+      let prevSouls = this.player.souls;
+      this.player.updateSouls(100); //all enemies are hardcoded 100 souls
+      this.events.emit("updateSouls", prevSouls, this.player.souls);
+    })
+
     this.events.on("enemyDeath", (enemy) => {
       this.enemies = this.enemies.filter((e) => e.id !== enemy.id);
       enemy.enemyKilled();
+      this.cameras.main.flash(300).shake(300);
       // this.events.off("enemyDeath");
     });
 
@@ -548,6 +555,8 @@ class GameScene extends Phaser.Scene {
     //Use bonfire, reset spawns/heal/restore estus
     this.events.on("useBonfire", () => {
       console.log("Bonfire used!!");
+      this.bonfireFX();
+      this.AudioScene.playBonfire();
       this.player.health = 5;
       this.player.estus = 3;
       this.events.emit("updateHealth", this.player.health, this.player.estus);
@@ -560,6 +569,27 @@ class GameScene extends Phaser.Scene {
 
       // this.events.off("useBonfire");
     });
+  }
+
+  // this is for the BonFire Smoke Effect
+  bonfireFX() {
+    this.bonfireEffect = this.make
+    .image({ x: this.player.x, y: this.player.y, key: "bonfireFX", add: true,
+    scale: {
+      //fog FX distance
+      x: 0.35,
+      y: 0.4,
+    }, })
+    .setOrigin(0.5)
+    .setDepth(3000)
+    .setAlpha(0);
+
+  this.tweens.add({
+    targets: this.bonfireEffect,
+    alpha: { start: 0, from: 0, to: 1, duration: 2000, ease: "Linear" },
+    yoyo: true,
+    // loop: -1,
+  });
   }
 
   createAreaText() {
@@ -600,4 +630,7 @@ class GameScene extends Phaser.Scene {
       });
     }
   }
+
+
+
 }
