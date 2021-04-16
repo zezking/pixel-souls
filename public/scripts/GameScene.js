@@ -21,6 +21,7 @@ class GameScene extends Phaser.Scene {
     NPC.preload(this);
     Item.preload(this);
     Player.preload(this);
+    Well.preload(this)
   }
 
   create() {
@@ -39,7 +40,10 @@ class GameScene extends Phaser.Scene {
     this.createBonfire();
     // Near Bonfire for light up on player?
     this.createNearBonfire();
+    this.createWell();
+    this.createNearWell();
     this.createCombat();
+
 
     // Spawn Effect
     this.createDelay();
@@ -61,10 +65,7 @@ class GameScene extends Phaser.Scene {
     this.enemies.forEach((enemy) => {
       enemy.update();
     });
-    // this.crestfallenWarrior.update();
-    // this.griggs.update();
-    // this.bigHatLogan.update();
-    // this.laurentius.update();
+
     this.npcs.forEach((npc) => {
       npc.update();
     });
@@ -253,12 +254,12 @@ class GameScene extends Phaser.Scene {
   }
 
   createEntity() {
-    this.entity = new Entity({
-      scene: this,
-      x: 735,
-      y: 1770,
-      key: "well",
-    });
+    // this.entity = new Entity({
+    //   scene: this,
+    //   x: 735,
+    //   y: 1770,
+    //   key: "well",
+    // });
     this.entity = new Entity({
       scene: this,
       x: 769,
@@ -351,6 +352,14 @@ class GameScene extends Phaser.Scene {
     });
   }
 
+  createWell() {
+    this.well = new Well({
+      scene: this,
+      x: 735,
+      y: 1770,
+      key: "well",
+    });
+  }
   createBonfire() {
     this.bonfire = new Bonfire({
       scene: this,
@@ -490,6 +499,19 @@ class GameScene extends Phaser.Scene {
     this.matterCollision.addOnCollideActive({
       objectA: this.player,
       objectB: this.bonfire,
+      callback: () => {
+        if (this.player.inputKeys.interact.isDown) {
+          this.events.emit("useBonfire");
+          this.player.inputKeys.interact.reset();
+        }
+      },
+    });
+  }
+
+  createNearWell() {
+    this.matterCollision.addOnCollideActive({
+      objectA: this.player,
+      objectB: this.well,
       callback: () => {
         if (this.player.inputKeys.interact.isDown) {
           this.events.emit("useBonfire");
