@@ -58,6 +58,7 @@ class Player extends Phaser.Physics.Matter.Sprite {
     this.atBonfire = false;
   }
 
+
   static preload(scene) {
     scene.load.atlas(
       "ashen_one",
@@ -153,6 +154,7 @@ class Player extends Phaser.Physics.Matter.Sprite {
       if (this.estus > 0) {
         this.health = 5;
         this.estus -= 1;
+        this.scene.AudioScene.playEstus();
         this.inputKeys.drink.reset();
         this.scene.events.emit("updateHealth", this.health, this.estus);
         console.log("Drank an estus. Estus remaining: ", this.estus);

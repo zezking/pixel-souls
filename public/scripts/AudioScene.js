@@ -75,5 +75,12 @@ class AudioScene extends Phaser.Scene {
     this.bonfireLit.play();
   }
 
+  playEstus() {
+    this.estusDrink = this.sound.add("estusSFX", {
+      volume: 0.04,
+    });
+    this.estusDrink.play();
+  }
+  
   battleSFX() {}
 }
