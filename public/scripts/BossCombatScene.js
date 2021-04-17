@@ -435,7 +435,7 @@ class BossCombatScene extends Phaser.Scene {
 
   loadingTimer() {
     this.time.addEvent({
-      delay: 3000,
+      delay: 3500,
       callback: () => {
         this.scene.add("Loading", LoadingScene, true);
       },
