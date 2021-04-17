@@ -50,6 +50,7 @@ class GameScene extends Phaser.Scene {
     this.onEvent();
 
     this.createOverlay();
+    this.createEventTrigger();
     this.setupEventListener();
     this.freeEnemy(this.enemies);
     //Background Music
@@ -362,6 +363,29 @@ class GameScene extends Phaser.Scene {
       y: 1760,
       key: "bonfire",
       frame: "bonfire0",
+    });
+  }
+
+  createEventTrigger() {
+    this.event1 = new EventTrigger({
+      scene: this,
+      x: 1200,
+      y: 830,
+      key: "eventTrigger",
+      id: 1,
+    })
+    this.event1.setVisible(false);
+
+    //Interact listener
+    this.matterCollision.addOnCollideActive({
+      objectA: this.player,
+      objectB: this.event1,
+      callback: () => {
+        if (this.player.inputKeys.interact.isDown) {
+          this.events.emit("bossTrigger");
+          this.player.inputKeys.interact.reset();
+        }
+      },
     });
   }
   //--------------------------------

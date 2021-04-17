@@ -7,7 +7,7 @@ class EventTrigger extends Phaser.Physics.Matter.Sprite{
     this.id = id;
     const {Body, Bodies} = Phaser.Physics.Matter.Matter;
 
-    let eventSensor = Bodies.circle(this.x,this.y,1, {isSensor:true, label: 'eventSensor'});
+    let eventSensor = Bodies.circle(this.x,this.y,10, {isSensor:true, label: 'eventSensor'});
     const compoundBody = Body.create({
       parts:[eventSensor],
       frictionAir: 0.35,
