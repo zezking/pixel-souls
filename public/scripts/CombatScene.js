@@ -141,7 +141,6 @@ class CombatScene extends Phaser.Scene {
     this.events.on("results", () => {
       let winner = this.result[0];
       let enemyChoice = this.result[1];
-      //this.CombatPromptScene.winLoseDrawMsg(winner);
       this.CombatPromptScene.displayWinLoseDraw(this, winner);
       switch (winner) {
         case "draw":
@@ -262,7 +261,7 @@ class CombatScene extends Phaser.Scene {
 
   disableClickTimer() {
     this.disableClick = this.time.addEvent({
-      delay: 3000,
+      delay: 2500,
       callback: () => {
         this.input.enabled = true;
       },
