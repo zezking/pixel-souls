@@ -8,6 +8,7 @@ class UiScene extends Phaser.Scene {
 
     this.gameScene = this.scene.get("Game");
     this.combatScene = this.scene.get("Combat");
+    this.bossCombatScene = this.scene.get("BossCombat");
   }
 
   create() {
@@ -54,6 +55,17 @@ class UiScene extends Phaser.Scene {
     });
     // listen for healthCount event?
     this.combatScene.events.on("updateHealth", (health) => {
+      this.hearts.children.each((gameObj, index) => {
+        const heart = gameObj;
+        if (index < health) {
+          heart.setTexture("ui-heart-full");
+        } else {
+          heart.setTexture("ui-heart-empty");
+        }
+      });
+      this.healthUpdater(health);
+    });
+    this.bossCombatScene.events.on("updateHealth", (health) => {
       this.hearts.children.each((gameObj, index) => {
         const heart = gameObj;
         if (index < health) {
