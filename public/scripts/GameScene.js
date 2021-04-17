@@ -113,14 +113,14 @@ class GameScene extends Phaser.Scene {
       frame: "skele_idling0",
       id: 2,
     });
-    this.enemy3 = new Enemy({
-      scene: this,
-      x: 1060,
-      y: 822,
-      key: "skeleton_sprite",
-      frame: "skele_idling0",
-      id: 3,
-    });
+    // this.enemy3 = new Enemy({
+    //   scene: this,
+    //   x: 1060,
+    //   y: 822,
+    //   key: "skeleton_sprite",
+    //   frame: "skele_idling0",
+    //   id: 3,
+    // });
     this.enemy4 = new Enemy({
       scene: this,
       x: 100,
@@ -140,7 +140,7 @@ class GameScene extends Phaser.Scene {
     this.enemies = [
       this.enemy,
       this.enemy2,
-      this.enemy3,
+      // this.enemy3,
       this.enemy4,
       this.enemy5,
     ];
@@ -474,6 +474,7 @@ class GameScene extends Phaser.Scene {
       callback: (eventData) => {
         this.combatScene.playerPosition(this.player.x, this.player.y);
         this.events.emit("enemyDeath", eventData.gameObjectB);
+        console.log("eventData: ", eventData.gameObjectB)
         this.enemies.forEach((enemy) => {
           enemy.setStatic(true);
         });
@@ -483,7 +484,7 @@ class GameScene extends Phaser.Scene {
         this.scene.launch("Combat", {
           playerHP: this.player.health, 
           enemyGroup: this.enemies,
-          enemyHP: this.enemy.health,
+          enemyHP: eventData.gameObjectB.health,
         });
       },
       context: this,
@@ -620,10 +621,10 @@ class GameScene extends Phaser.Scene {
     });
 
     this.events.on("bossTrigger", () => {
-      if (this.player.souls >= 1000) {
-        let prevSouls = this.player.souls;
-        this.player.souls -= 1000;
-        this.events.emit("updateSouls", prevSouls, this.player.souls);
+      if (this.player.souls >= 300) {
+        // let prevSouls = this.player.souls;
+        // this.player.souls -= 1000;
+        // this.events.emit("updateSouls", prevSouls, this.player.souls);
         this.AudioScene.stopMainBgm();
         this.scene.sleep();
         this.scene.add("Loading", LoadingScene, true);
