@@ -236,12 +236,12 @@ class BossCombatScene extends Phaser.Scene {
     this.enemyCombat = new Boss({
       scene: this,
       x: 650,
-      y: 150,
-      key: "andy",
+      y: 500,
+      key: "andyHighRes",
       id: 5,
     })
-      .setDepth(200)
-      .setScale(8);
+      .setDepth(1)
+      .setScale(1);
   }
 
   drawCombatUIBackground() {
