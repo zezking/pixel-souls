@@ -127,19 +127,15 @@ class BootScene extends Phaser.Scene {
     this.load.audio("estusSFX", "public/assets/audio/estusSFX.mp3");
     this.load.audio("soul-suck", "public/assets/audio/soul-suck.wav.mp3");
     this.load.audio("heavenlySFX", "public/assets/audio/Heavens Choir SFX.mp3");
+    this.load.audio("bossRoom", "public/assets/audio/boss_andy.mp3");
     this.load.audio(
-      "boss-fight-bgm",
-      "public/assets/audio/fine della vento aureo cut.mp3"
+      "bossReveal",
+      "public/assets/audio/fine_della_vento_aureo_cut.mp3"
     );
   }
 
   loadVideo() {
-    this.load.video(
-      "boss-loading",
-      "public/assets/video/andy_gwyn.mp4",
-      true,
-      true
-    );
+    this.load.video("boss-loading", "public/assets/video/andy_gwyn.mp4", true);
   }
 
   loadTilemap() {

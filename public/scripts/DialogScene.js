@@ -39,7 +39,7 @@ class DialogScene extends Phaser.Scene {
         .setFontFamily("HonokaMincho");
 
       this.dialogsTimer = this.time.addEvent({
-        delay: 3000,
+        delay: 4000,
         callback: () => {
           this.scene.remove("Dialog");
         },
