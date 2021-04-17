@@ -10,6 +10,7 @@ class BossCombatScene extends Phaser.Scene {
     this.input.enabled = false;
     this.AudioScene = this.scene.get("Audio");
     this.CombatPromptScene = this.scene.get("Prompt");
+    this.BossLoadingScene = this.scene.get("BossLoading");
 
     console.log("(inside combat)Health from player: ", this.playerHealth);
     console.log("(inside combat)Health of enemy: ", this.enemyHealth);
@@ -21,7 +22,7 @@ class BossCombatScene extends Phaser.Scene {
 
   create() {
     this.createSwordCursor();
-
+    this.BossLoadingScene.playVideo();
     this.cameras.main.fadeIn(1000);
     this.setupCombatUi();
     this.resultListener();

@@ -1,4 +1,7 @@
 class BossLoadingScene extends Phaser.Scene {
+  constructor() {
+    super("BossLoading");
+  }
   init() {}
 
   create() {
@@ -6,6 +9,7 @@ class BossLoadingScene extends Phaser.Scene {
   }
 
   playVideo() {
-    this.bossLoadingVideo.play();
+    console.log("here");
+    this.bossLoadingVideo = this.add.video(0, 0, "boss-loading");
   }
 }
