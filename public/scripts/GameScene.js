@@ -50,6 +50,7 @@ class GameScene extends Phaser.Scene {
     this.onEvent();
 
     this.createOverlay();
+    this.createEventTrigger();
     this.setupEventListener();
     this.freeEnemy(this.enemies);
     //Background Music
@@ -364,6 +365,29 @@ class GameScene extends Phaser.Scene {
       frame: "bonfire0",
     });
   }
+
+  createEventTrigger() {
+    this.event1 = new EventTrigger({
+      scene: this,
+      x: 1200,
+      y: 830,
+      key: "eventTrigger",
+      id: 1,
+    })
+    this.event1.setVisible(false);
+
+    //Interact listener
+    this.matterCollision.addOnCollideActive({
+      objectA: this.player,
+      objectB: this.event1,
+      callback: () => {
+        if (this.player.inputKeys.interact.isDown) {
+          this.events.emit("bossTrigger");
+          this.player.inputKeys.interact.reset();
+        }
+      },
+    });
+  }
   //--------------------------------
   //--------------------------------
 
@@ -588,6 +612,7 @@ class GameScene extends Phaser.Scene {
     });
 
     this.events.on("useWell", () => {
+      this.AudioScene.playHeavenly();
       this.wellEasterEgg();
     });
   }
@@ -618,8 +643,8 @@ class GameScene extends Phaser.Scene {
     .image({ x: this.player.x, y: this.player.y, key: "saintTravis", add: true,
     scale: {
       //fog FX distance
-      x: 0.75,
-      y: 0.75,
+      x: 1,
+      y: 1,
     }, })
     .setOrigin(0.5)
     .setDepth(3000)
@@ -627,7 +652,7 @@ class GameScene extends Phaser.Scene {
 
   this.tweens.add({
     targets: this.wellEasterEggFX,
-    alpha: { start: 0, from: 0, to: 1, duration: 2000, ease: "Linear" },
+    alpha: { start: 0, from: 0, to: 1, duration: 3000, ease: "Linear" },
     yoyo: true,
     // loop: -1,
   });
