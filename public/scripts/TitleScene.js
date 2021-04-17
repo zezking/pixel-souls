@@ -86,17 +86,6 @@ class TitleScene extends Phaser.Scene {
       loop: -1,
     });
   }
-
-  // titleScreenSFX() {
-  //   this.menuBGM = this.sound.add("menu-music", {
-  //     volume: 0.07,
-  //   });
-  //   //change the startMenue sond between 0 and 1
-  //   this.startMenuSound = this.sound.add("start-menu", {
-  //     volume: 0.06,
-  //   });
-  // }
-
   update() {
     if (this.titleStrokeThickness > -1) {
       this.titleText
