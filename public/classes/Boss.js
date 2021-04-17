@@ -26,27 +26,27 @@ class Boss extends Phaser.Physics.Matter.Sprite {
     this.setScale(1.25);
     // fixed rotation of character
     this.setFixedRotation();
-    this.health = 3
+    this.health = 10
   }
 
-  static preload(scene) {
-    scene.load.atlas(
-      "skeleton_sprite",
-      "/public/assets/skele_sprites/skeleton_sprite.png",
-      "/public/assets/skele_sprites/skeleton_sprite_atlas.json"
-    );
-    scene.load.animation(
-      "skele_anim",
-      "/public/assets/skele_sprites/skeleton_sprite_anim.json"
-    );
-  }
+  // static preload(scene) {
+  //   scene.load.atlas(
+  //     "skeleton_sprite",
+  //     "/public/assets/skele_sprites/skeleton_sprite.png",
+  //     "/public/assets/skele_sprites/skeleton_sprite_atlas.json"
+  //   );
+  //   scene.load.animation(
+  //     "skele_anim",
+  //     "/public/assets/skele_sprites/skeleton_sprite_anim.json"
+  //   );
+  // }
 
   get velocity() {
     return this.body.velocity;
   }
 
   update() {
-    // const speed = 10;
+    // const speed = 0;
     let bossVelocity = new Phaser.Math.Vector2();
 
     this.setFlipX(this.velocity.x > 0);
@@ -66,8 +66,6 @@ class Boss extends Phaser.Physics.Matter.Sprite {
   }
 
   bossKilled() {
-    // this.setActive(false);
-    // this.setVisible(false);
     this.destroy();
   }
 }

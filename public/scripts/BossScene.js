@@ -5,7 +5,7 @@ class BossScene extends Phaser.Scene {
 
   init(data) {
     let { player } = data;
-    this.player = player;
+    this.oldPlayer = player;
 
     //references to other scenes for event listening
     this.uiScene = this.scene.get("Ui");
@@ -16,7 +16,7 @@ class BossScene extends Phaser.Scene {
 
   preload() {
     Player.preload(this);
-    Enemy.preload(this);
+    // Boss.preload(this);
   }
 
   create() {
@@ -25,16 +25,15 @@ class BossScene extends Phaser.Scene {
     // this.addCollisions();  //function not set up properly
     this.playerStartPoint();
     this.createInput();
-    this.createEnemy();  //New class for Andy?
+    this.createBoss();  //New class for Andy?
     this.createCombat();
+
+    this.OverlayLayer.setDepth(2239);
   }
 
   update() {
     this.player.update();
-    // this.enemies.forEach((enemy) => {
-    //   enemy.update();
-    // });
-    this.enemy.update();
+    this.boss.update();
   }
 
   //----------------------------
@@ -47,19 +46,21 @@ class BossScene extends Phaser.Scene {
         key: "ashen_one",
         frame: "player_00",
       });
+      this.player.health = this.oldPlayer.health;
+      this.player.souls = this.oldPlayer.souls;
+      this.player.estus = this.oldPlayer.estus;
     }
 
-  createEnemy() {
-    this.enemy = new Enemy({
+  createBoss() {
+    this.boss = new Boss({
       scene: this,
       x: 400,
       y: 200,
-      key: "skeleton_sprite",
-      frame: "skele_idling0",
+      key: "andy",
       id: 1,
     });
-    this.enemy.setStatic(true);
-    // this.enemies = [this.enemy]
+    this.boss.setStatic(true);
+
   }
 
 
@@ -96,20 +97,6 @@ class BossScene extends Phaser.Scene {
     this.OverlayLayer = map.createLayer("boss_overlay", this.tilesOverlay, 0, 0);
   }
 
-  addCollisions() {
-    // grab the physics map from FULLMAP_collision.json
-    let shapes = this.cache.json.get("shapes");
-
-    let collisionLayer = this.matter.add.sprite(
-      0,
-      0,
-      "sheet",
-      "BOSSMAP_collision",
-      { shape: shapes.FULLMAP_collision }
-    );
-    collisionLayer.setPosition(0 + 684, 0 + 1136); //manual offset for center of mass. Will have to find a better way to calculate this.
-    collisionLayer.visible = false;
-  }
   // addCollisions() {
   //   // grab the physics map from FULLMAP_collision.json
   //   let shapes = this.cache.json.get("shapes");
@@ -118,10 +105,10 @@ class BossScene extends Phaser.Scene {
   //     0,
   //     0,
   //     "sheet",
-  //     "FULLMAP_collision",
-  //     { shape: shapes.FULLMAP_collision }
+  //     "BOSSMAP_collision",
+  //     { shape: shapes2.BOSSMAP_collision }
   //   );
-  //   collisionLayer.setPosition(0 + 684, 0 + 1136); //manual offset for center of mass. Will have to find a better way to calculate this.
+  //   collisionLayer.setPosition(0, 0); //manual offset for center of mass. Will have to find a better way to calculate this.
   //   collisionLayer.visible = false;
   // }
 
@@ -156,43 +143,23 @@ class BossScene extends Phaser.Scene {
   createCombat() {
     this.matterCollision.addOnCollideStart({
       objectA: this.player,
-      objectB: this.enemy,
+      objectB: this.boss,
       callback: (eventData) => {
         this.combatScene.playerPosition(this.player.x, this.player.y);
-        this.enemy.enemyKilled();
-        this.enemy.setStatic(true);
-        this.AudioScene.stopMainBgm();
+        this.boss.bossKilled();
+        // this.AudioScene.stopMainBgm();
         this.scene.sleep();
         this.scene.add("Loading", LoadingScene, true);
         this.scene.launch("Combat", {
           health: this.player.health,
-          enemiesGroup: this.enemy,
+          enemiesGroup: this.boss,
         });
       },
       context: this,
     });
   }
 
-  // freeEnemy(enemiesGroup) {
-  //   if (enemiesGroup) {
-  //     this.events.on("wake", function (sys, data) {
-  //       let { gameOver } = data;
-  //       if (gameOver) {
-  //         this.enemyTimer = sys.time.addEvent({
-  //           delay: 1000,
-  //           callback: () => {
-  //             enemiesGroup.forEach((enemy) => {
-  //               if (enemy.active) {
-  //                 enemy.setStatic(false); //set it's static to false if enemy is still active (not killed)
-  //               }
-  //             });
-  //           },
-  //           callbackScope: sys,
-  //         });
-  //       }
-  //     });
-  //   }
-  // }
+
 
 
 }
