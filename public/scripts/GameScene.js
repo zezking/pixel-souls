@@ -21,7 +21,7 @@ class GameScene extends Phaser.Scene {
     NPC.preload(this);
     Item.preload(this);
     Player.preload(this);
-    Well.preload(this)
+    Well.preload(this);
   }
 
   create() {
@@ -43,7 +43,6 @@ class GameScene extends Phaser.Scene {
     this.createWell();
     this.createNearWell();
     this.createCombat();
-
 
     // Spawn Effect
     this.createDelay();
@@ -373,7 +372,7 @@ class GameScene extends Phaser.Scene {
       y: 830,
       key: "eventTrigger",
       id: 1,
-    })
+    });
     this.event1.setVisible(false);
 
     //Interact listener
@@ -474,7 +473,7 @@ class GameScene extends Phaser.Scene {
       callback: (eventData) => {
         this.combatScene.playerPosition(this.player.x, this.player.y);
         this.events.emit("enemyDeath", eventData.gameObjectB);
-        console.log("eventData: ", eventData.gameObjectB)
+        console.log("eventData: ", eventData.gameObjectB);
         this.enemies.forEach((enemy) => {
           enemy.setStatic(true);
         });
@@ -482,7 +481,7 @@ class GameScene extends Phaser.Scene {
         this.scene.sleep();
         this.scene.add("Loading", LoadingScene, true);
         this.scene.launch("Combat", {
-          playerHP: this.player.health, 
+          playerHP: this.player.health,
           enemyGroup: this.enemies,
           enemyHP: eventData.gameObjectB.health,
         });
@@ -569,7 +568,7 @@ class GameScene extends Phaser.Scene {
       let prevSouls = this.player.souls;
       this.player.updateSouls(100); //all enemies are hardcoded 100 souls
       this.events.emit("updateSouls", prevSouls, this.player.souls);
-    })
+    });
 
     this.events.on("enemyDeath", (enemy) => {
       this.enemies = this.enemies.filter((e) => e.id !== enemy.id);
@@ -625,6 +624,7 @@ class GameScene extends Phaser.Scene {
         // let prevSouls = this.player.souls;
         // this.player.souls -= 1000;
         // this.events.emit("updateSouls", prevSouls, this.player.souls);
+
         this.AudioScene.stopMainBgm();
         this.scene.sleep();
         this.AudioScene.playBossRoom();
@@ -633,50 +633,60 @@ class GameScene extends Phaser.Scene {
           player: this.player,
         });
       } else {
-        console.log("Not enough souls?")
+        console.log("Not enough souls?");
       }
-    })
+    });
   }
 
   // this is for the BonFire Smoke Effect
   bonfireFX() {
     this.bonfireEffect = this.make
-    .image({ x: this.player.x, y: this.player.y, key: "bonfireFX", add: true,
-    scale: {
-      //fog FX distance
-      x: 0.75,
-      y: 0.75,
-    }, })
-    .setOrigin(0.5)
-    .setDepth(3000)
-    .setAlpha(0);
+      .image({
+        x: this.player.x,
+        y: this.player.y,
+        key: "bonfireFX",
+        add: true,
+        scale: {
+          //fog FX distance
+          x: 0.75,
+          y: 0.75,
+        },
+      })
+      .setOrigin(0.5)
+      .setDepth(3000)
+      .setAlpha(0);
 
-  this.tweens.add({
-    targets: this.bonfireEffect,
-    alpha: { start: 0, from: 0, to: 1, duration: 2000, ease: "Linear" },
-    yoyo: true,
-    // loop: -1,
-  });
+    this.tweens.add({
+      targets: this.bonfireEffect,
+      alpha: { start: 0, from: 0, to: 1, duration: 2000, ease: "Linear" },
+      yoyo: true,
+      // loop: -1,
+    });
   }
 
   wellEasterEgg() {
     this.wellEasterEggFX = this.make
-    .image({ x: this.player.x, y: this.player.y, key: "saintTravis", add: true,
-    scale: {
-      //fog FX distance
-      x: 1,
-      y: 1,
-    }, })
-    .setOrigin(0.5)
-    .setDepth(3000)
-    .setAlpha(0);
+      .image({
+        x: this.player.x,
+        y: this.player.y,
+        key: "saintTravis",
+        add: true,
+        scale: {
+          //fog FX distance
+          x: 1,
+          y: 1,
+        },
+      })
+      .setOrigin(0.5)
+      .setDepth(3000)
+      .setAlpha(0);
 
-  this.tweens.add({
-    targets: this.wellEasterEggFX,
-    alpha: { start: 0, from: 0, to: 1, duration: 3000, ease: "Linear" },
-    yoyo: true,
-    // loop: -1,
-  });
+    this.tweens.add({
+      targets: this.wellEasterEggFX,
+      alpha: { start: 0, from: 0, to: 1, duration: 3000, ease: "Linear" },
+      yoyo: true,
+      // loop: -1,
+    });
   }
 
   createAreaText() {
@@ -717,7 +727,4 @@ class GameScene extends Phaser.Scene {
       });
     }
   }
-
-
-
 }

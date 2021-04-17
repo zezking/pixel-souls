@@ -9,7 +9,6 @@ class BossCombatScene extends Phaser.Scene {
     this.enemyHealth = enemyHP;
     this.input.enabled = false;
     this.AudioScene = this.scene.get("Audio");
-    this.CombatPromptScene = this.scene.get("Prompt");
 
     console.log("(inside combat)Health from player: ", this.playerHealth);
     console.log("(inside combat)Health of enemy: ", this.enemyHealth);
@@ -33,6 +32,7 @@ class BossCombatScene extends Phaser.Scene {
     this.generateCombatMap();
     this.combatBackgroundGenerator();
 
+    this.loadingTimer();
     this.AudioScene.playBossReveal(); //boss music
     // this.AudioScene.playBattleBgm(); //boss music
   }
@@ -431,5 +431,14 @@ class BossCombatScene extends Phaser.Scene {
 
     this.magicCursor.setInteractive();
     this.swordCursor.setInteractive();
+  }
+
+  loadingTimer() {
+    this.time.addEvent({
+      delay: 3500,
+      callback: () => {
+        this.scene.add("Loading", LoadingScene, true);
+      },
+    });
   }
 }

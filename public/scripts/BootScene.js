@@ -10,6 +10,7 @@ class BootScene extends Phaser.Scene {
     this.loadConversations();
     this.loadTilemap();
     this.loadFont();
+    this.loadVideo();
   }
 
   loadImages() {
@@ -23,10 +24,7 @@ class BootScene extends Phaser.Scene {
       "public/assets/entities/easter_eggs/saint travis.png"
     );
 
-    this.load.image(
-      "andyHighRes",
-      "public/assets/sprites/andy high res.png"
-    );
+    this.load.image("andyHighRes", "public/assets/sprites/andy high res.png");
 
     this.load.image("boss_bottom", "public/assets/map/BOSSMAP_bottom.png");
     this.load.image("boss_overlay", "public/assets/map/BOSSMAP_overlay.png");
@@ -130,7 +128,14 @@ class BootScene extends Phaser.Scene {
     this.load.audio("soul-suck", "public/assets/audio/soul-suck.wav.mp3");
     this.load.audio("heavenlySFX", "public/assets/audio/Heavens Choir SFX.mp3");
     this.load.audio("bossRoom", "public/assets/audio/boss_andy.mp3");
-    this.load.audio("bossReveal", "public/assets/audio/fine_della_vento_aureo_cut.mp3");
+    this.load.audio(
+      "bossReveal",
+      "public/assets/audio/fine_della_vento_aureo_cut.mp3"
+    );
+  }
+
+  loadVideo() {
+    this.load.video("boss-loading", "public/assets/video/andy_gwyn.mp4", true);
   }
 
   loadTilemap() {
