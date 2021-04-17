@@ -41,24 +41,24 @@ class Boss extends Phaser.Physics.Matter.Sprite {
   //   );
   // }
 
-  get velocity() {
-    return this.body.velocity;
-  }
+  // get velocity() {
+  //   return this.body.velocity;
+  // }
 
   update() {
     // const speed = 0;
     let bossVelocity = new Phaser.Math.Vector2();
 
-    this.setFlipX(this.velocity.x > 0);
+    // this.setFlipX(this.velocity.x > 0);
 
-    this.setFlipX(this.velocity.x > 0);
-    // this.setFlipY(this.velocity.y < 0);
+    // this.setFlipX(this.velocity.x > 0);
+    // // this.setFlipY(this.velocity.y < 0);
 
-    if (Math.abs(this.velocity.x) > 0.1 || Math.abs(this.velocity.y) > 0.1) {
-      this.anims.play(`skeleton_walk`, true);
-    } else {
-      this.anims.play(`skeleton_idle`, true);
-    }
+    // if (Math.abs(this.velocity.x) > 0.1 || Math.abs(this.velocity.y) > 0.1) {
+    //   this.anims.play(`skeleton_walk`, true);
+    // } else {
+    //   this.anims.play(`skeleton_idle`, true);
+    // }
 
     bossVelocity.normalize();
     // bossVelocity.scale(speed);

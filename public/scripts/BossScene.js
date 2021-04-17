@@ -63,8 +63,6 @@ class BossScene extends Phaser.Scene {
 
   }
 
-
-
   createMap() {
     let map = this.make.tilemap({ key: "bossmap" });
     this.tilesBottom = map.addTilesetImage(
@@ -151,8 +149,9 @@ class BossScene extends Phaser.Scene {
         this.scene.sleep();
         this.scene.add("Loading", LoadingScene, true);
         this.scene.launch("Combat", {
-          health: this.player.health,
-          enemiesGroup: this.boss,
+          playerHP: this.player.health,
+          enemiesGroup: [this.boss],
+          enemyHP: this.boss.health,
         });
       },
       context: this,
