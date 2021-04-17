@@ -151,6 +151,6 @@ class BootScene extends Phaser.Scene {
   }
 
   create() {
-    this.scene.launch("Combat");
+    this.scene.launch("Title");
   }
 }
