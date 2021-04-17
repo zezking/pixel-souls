@@ -148,7 +148,8 @@ class BossCombatScene extends Phaser.Scene {
           console.log("winner: ", winner, "Enemy chose: ", enemyChoice);
           this.playerHealth -= 1;
           this.enemyHealth -= 1;
-
+          this.AudioScene.playPlayerDmgSFX();
+          this.AudioScene.playEnemyDmgSFX();
           //this.playerHurt();
           //this.enemyHurt();
           this.cameras.main.flash(300).shake(300);
@@ -157,6 +158,7 @@ class BossCombatScene extends Phaser.Scene {
         case "enemy":
           console.log("winner: ", winner, "Enemy chose: ", enemyChoice);
           this.playerHealth -= 1;
+          this.AudioScene.playPlayerDmgSFX();
           //this.playerHurt();
           this.cameras.main.flash(300).shake(300);
           this.healthChecker();
@@ -164,6 +166,7 @@ class BossCombatScene extends Phaser.Scene {
         case "player":
           console.log("winner: ", winner, "Enemy chose: ", enemyChoice);
           this.enemyHealth -= 1;
+          this.AudioScene.playEnemyDmgSFX();
           //this.enemyHurt();
           this.cameras.main.flash(300).shake(300);
           this.healthChecker();
