@@ -627,6 +627,7 @@ class GameScene extends Phaser.Scene {
         // this.events.emit("updateSouls", prevSouls, this.player.souls);
         this.AudioScene.stopMainBgm();
         this.scene.sleep();
+        this.AudioScene.playBossRoom();
         this.scene.add("Loading", LoadingScene, true);
         this.scene.launch("Boss", {
           player: this.player,

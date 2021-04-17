@@ -145,7 +145,7 @@ class BossScene extends Phaser.Scene {
       callback: (eventData) => {
         this.combatScene.playerPosition(this.player.x, this.player.y);
         this.boss.bossKilled();
-        // this.AudioScene.stopMainBgm();
+        this.AudioScene.stopBossRoom();
         this.scene.sleep();
         this.scene.add("Loading", LoadingScene, true);
         this.scene.launch("BossCombat", {
