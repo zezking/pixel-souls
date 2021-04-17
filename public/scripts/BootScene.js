@@ -17,10 +17,11 @@ class BootScene extends Phaser.Scene {
     this.load.image("bottom", "public/assets/map/FULLMAP_bottom.png");
     this.load.image("overlay", "public/assets/map/FULLMAP_overlay.png");
     this.load.image("bonfireFX", "public/assets/map/bonfireEffect.png");
-    this.load.image(
-      "saintTravis",
-      "public/assets/entities/easter_eggs/saint travis.png"
-    );
+
+    this.load.image("saintTravis", "public/assets/entities/easter_eggs/saint travis.png")
+    
+    this.load.image("boss_bottom", "public/assets/map/BOSSMAP_bottom.png");
+    this.load.image("boss_overlay", "public/assets/map/BOSSMAP_overlay.png");
 
     //UI elements
     this.load.image("ui-heart-empty", "public/assets/ui/heart_empty.png");
@@ -116,8 +117,12 @@ class BootScene extends Phaser.Scene {
     //bottom/overlay map JSON file
     this.load.tilemapTiledJSON("map", "public/assets/map/Firelink_Shrine.json");
 
-    //collision map JSON file
+    //collision main map JSON file
     this.load.json("shapes", "public/assets/map/FULLMAP_collision.json");
+
+    //boss room JSON files
+    this.load.tilemapTiledJSON("bossmap", "public/assets/map/Boss_Arena.json");
+    this.load.json("shapes2", "public/assets/map/BOSSMAP_collision.json");
   }
 
   loadConversations() {
