@@ -65,6 +65,11 @@ class BootScene extends Phaser.Scene {
       "public/assets/map/fullmap-collision-atlas.png",
       "public/assets/map/fullmap-collision-atlas_atlas.json"
     );
+    this.load.atlas(
+      "sheet2",
+      "public/assets/map/BOSSMAP_collision.png",
+      "public/assets/map/BOSSMAP-collision-atlas.json"
+    );
 
     this.load.spritesheet("bird", "public/assets/sprites/bird.png", {
       frameWidth: 128,
@@ -122,10 +127,8 @@ class BootScene extends Phaser.Scene {
   }
 
   loadTilemap() {
-    //bottom/overlay map JSON file
+    //main map JSON files
     this.load.tilemapTiledJSON("map", "public/assets/map/Firelink_Shrine.json");
-
-    //collision main map JSON file
     this.load.json("shapes", "public/assets/map/FULLMAP_collision.json");
 
     //boss room JSON files

@@ -96,17 +96,17 @@ class BossScene extends Phaser.Scene {
   }
 
   // addCollisions() {
-  //   // grab the physics map from FULLMAP_collision.json
-  //   let shapes = this.cache.json.get("shapes");
+  //   // grab the physics map from BOSSMAP_collision.json
+  //   let shapes = this.cache.json.get("shapes2");
 
   //   let collisionLayer = this.matter.add.sprite(
   //     0,
   //     0,
-  //     "sheet",
+  //     "sheet2",
   //     "BOSSMAP_collision",
-  //     { shape: shapes2.BOSSMAP_collision }
+  //     { shape: shapes.BOSSMAP_collision }
   //   );
-  //   collisionLayer.setPosition(0, 0); //manual offset for center of mass. Will have to find a better way to calculate this.
+  //   collisionLayer.setPosition(320, 144); //manual offset for center of mass. Will have to find a better way to calculate this.
   //   collisionLayer.visible = false;
   // }
 
