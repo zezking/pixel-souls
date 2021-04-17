@@ -10,6 +10,7 @@ const config = {
     UiScene,
     LogoScene,
     CombatScene,
+    BossCombatScene,
     DeathScene,
     AudioScene,
     CombatPromptScene,
