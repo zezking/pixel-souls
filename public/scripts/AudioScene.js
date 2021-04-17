@@ -81,6 +81,20 @@ class AudioScene extends Phaser.Scene {
     });
     this.estusDrink.play();
   }
-  
+
+  playSoulSucking() {
+    this.soulSucking = this.sound.add("soul-suck", {
+      volume: 0.04,
+    });
+    this.soulSucking.play();
+  }
+
+  playHeavenly() {
+    this.heavenly = this.sound.add("heavenlySFX", {
+      volume: 0.04,
+    });
+    this.heavenly.play();
+  }
+
   battleSFX() {}
 }

@@ -26,6 +26,7 @@ class Enemy extends Phaser.Physics.Matter.Sprite {
     this.setScale(1.25);
     // fixed rotation of character
     this.setFixedRotation();
+    this.health = 3
   }
 
   static preload(scene) {

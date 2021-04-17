@@ -18,6 +18,11 @@ class BootScene extends Phaser.Scene {
     this.load.image("overlay", "public/assets/map/FULLMAP_overlay.png");
     this.load.image("bonfireFX", "public/assets/map/bonfireEffect.png");
 
+    this.load.image("saintTravis", "public/assets/entities/easter_eggs/saint travis.png")
+    
+    this.load.image("boss_bottom", "public/assets/map/BOSSMAP_bottom.png");
+    this.load.image("boss_overlay", "public/assets/map/BOSSMAP_overlay.png");
+
     //UI elements
     this.load.image("ui-heart-empty", "public/assets/ui/heart_empty.png");
     this.load.image("ui-heart-full", "public/assets/ui/heart_full.png");
@@ -47,6 +52,7 @@ class BootScene extends Phaser.Scene {
       "player_hurt",
       "public/assets/ui/battle/hurt/player_hurt.png"
     );
+    this.load.image("damage", "public/assets/ui/battle/hurt/damage.png");
     this.load.image("sword_cursor", "public/assets/ui/battle/sword_cursor.png");
   }
 
@@ -55,6 +61,11 @@ class BootScene extends Phaser.Scene {
       "sheet",
       "public/assets/map/fullmap-collision-atlas.png",
       "public/assets/map/fullmap-collision-atlas_atlas.json"
+    );
+    this.load.atlas(
+      "sheet2",
+      "public/assets/map/BOSSMAP_collision.png",
+      "public/assets/map/BOSSMAP-collision-atlas.json"
     );
 
     this.load.spritesheet("bird", "public/assets/sprites/bird.png", {
@@ -67,10 +78,15 @@ class BootScene extends Phaser.Scene {
       frameHeight: 39,
     });
 
-    this.load.spritesheet("well", "public/assets/entities/well.png", {
-      frameWidth: 88,
-      frameHeight: 56,
+    this.load.spritesheet("andy", "public/assets/sprites/andy.png", {
+      frameWidth: 48,
+      frameHeight: 70,
     });
+
+    // this.load.spritesheet("well", "public/assets/entities/well.png", {
+    //   frameWidth: 88,
+    //   frameHeight: 56,
+    // });
 
     this.load.spritesheet("pillar01", "public/assets/entities/pillar01.png", {
       frameWidth: 24,
@@ -81,10 +97,14 @@ class BootScene extends Phaser.Scene {
       frameWidth: 24,
       frameHeight: 148,
     });
-    this.load.spritesheet("eventTrigger", "public/assets/sprites/eventTrigger.png", {
-      frameWidth: 5,
-      frameHeight: 5,
-    });
+    this.load.spritesheet(
+      "eventTrigger",
+      "public/assets/sprites/eventTrigger.png",
+      {
+        frameWidth: 5,
+        frameHeight: 5,
+      }
+    );
   }
 
   loadAudio() {
@@ -95,19 +115,22 @@ class BootScene extends Phaser.Scene {
     this.load.audio("battle-audio", "public/assets/audio/battle_theme.mp3");
     this.load.audio("new-area", "public/assets/audio/new_area.mp3");
     this.load.audio("soul-get", "public/assets/audio/soul-get.wav.mp3");
-    this.load.audio("armor", "public/assets/audio/body-armor.wav.mp3");
     this.load.audio("hit", "public/assets/audio/hitsfx.mp3");
     this.load.audio("atk", "public/assets/audio/attacksfx.mp3");
     this.load.audio("bonfireSFX", "public/assets/audio/bonfire_lit.mp3");
     this.load.audio("estusSFX", "public/assets/audio/estusSFX.mp3");
+    this.load.audio("soul-suck", "public/assets/audio/soul-suck.wav.mp3");
+    this.load.audio("heavenlySFX", "public/assets/audio/Heavens Choir SFX.mp3");
   }
 
   loadTilemap() {
-    //bottom/overlay map JSON file
+    //main map JSON files
     this.load.tilemapTiledJSON("map", "public/assets/map/Firelink_Shrine.json");
-
-    //collision map JSON file
     this.load.json("shapes", "public/assets/map/FULLMAP_collision.json");
+
+    //boss room JSON files
+    this.load.tilemapTiledJSON("bossmap", "public/assets/map/Boss_Arena.json");
+    this.load.json("shapes2", "public/assets/map/BOSSMAP_collision.json");
   }
 
   loadConversations() {

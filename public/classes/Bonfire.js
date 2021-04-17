@@ -31,3 +31,4 @@ class Bonfire extends Phaser.Physics.Matter.Sprite{
   }
   
 }
+

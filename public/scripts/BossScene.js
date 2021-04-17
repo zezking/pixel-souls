@@ -5,16 +5,18 @@ class BossScene extends Phaser.Scene {
 
   init(data) {
     let { player } = data;
-    this.player = player;
+    this.oldPlayer = player;
 
     //references to other scenes for event listening
     this.uiScene = this.scene.get("Ui");
     this.combatScene = this.scene.get("Combat");
     this.AudioScene = this.scene.get("Audio");
+
   }
 
   preload() {
-
+    Player.preload(this);
+    // Boss.preload(this);
   }
 
   create() {
@@ -22,43 +24,56 @@ class BossScene extends Phaser.Scene {
     this.createOverlay();
     // this.addCollisions();  //function not set up properly
     this.playerStartPoint();
+    this.createInput();
     this.createBoss();  //New class for Andy?
     this.createCombat();
+
+    this.OverlayLayer.setDepth(2239);
   }
 
   update() {
-
+    this.player.update();
+    this.boss.update();
   }
 
   //----------------------------
 
   playerStartPoint() {
-    //This is probably not correct. Change the player's x/y coordinates so that they are moved to the elevator upon scene change.
-    this.player.x = 100;  
-    this.player.y = 100;
-  }
+      this.player = new Player({
+        scene: this,
+        x: 65,
+        y: 155,
+        key: "ashen_one",
+        frame: "player_00",
+      });
+      this.player.health = this.oldPlayer.health;
+      this.player.souls = this.oldPlayer.souls;
+      this.player.estus = this.oldPlayer.estus;
+    }
 
   createBoss() {
-    this.boss = new Enemy({
+    this.boss = new Boss({
       scene: this,
-      x: 200,
+      x: 400,
       y: 200,
       key: "andy",
-      id: 1
-    })
+      id: 1,
+    });
+    this.boss.setStatic(true);
+
   }
 
   createMap() {
     let map = this.make.tilemap({ key: "bossmap" });
     this.tilesBottom = map.addTilesetImage(
       "BOSSMAP_bottom",
-      "bottom",
+      "boss_bottom",
       32,
       32,
       0,
       0
     );
-    this.bottomLayer = map.createLayer("bottom", this.tilesBottom, 0, 0);
+    this.bottomLayer = map.createLayer("boss_bottom", this.tilesBottom, 0, 0);
 
     // character camera bounds
     // world bounded to map size
@@ -71,29 +86,57 @@ class BossScene extends Phaser.Scene {
     let map = this.make.tilemap({ key: "bossmap" });
     this.tilesOverlay = map.addTilesetImage(
       "BOSSMAP_overlay",
-      "overlay",
+      "boss_overlay",
       32,
       32,
       0,
       0
     );
-    this.OverlayLayer = map.createLayer("overlay", this.tilesOverlay, 0, 0);
+    this.OverlayLayer = map.createLayer("boss_overlay", this.tilesOverlay, 0, 0);
   }
 
   // addCollisions() {
-  //   // grab the physics map from FULLMAP_collision.json
-  //   let shapes = this.cache.json.get("shapes");
+  //   // grab the physics map from BOSSMAP_collision.json
+  //   let shapes = this.cache.json.get("shapes2");
 
   //   let collisionLayer = this.matter.add.sprite(
   //     0,
   //     0,
-  //     "sheet",
-  //     "FULLMAP_collision",
-  //     { shape: shapes.FULLMAP_collision }
+  //     "sheet2",
+  //     "BOSSMAP_collision",
+  //     { shape: shapes.BOSSMAP_collision }
   //   );
-  //   collisionLayer.setPosition(0 + 684, 0 + 1136); //manual offset for center of mass. Will have to find a better way to calculate this.
+  //   collisionLayer.setPosition(320, 144); //manual offset for center of mass. Will have to find a better way to calculate this.
   //   collisionLayer.visible = false;
   // }
+
+  createInput() {
+    // capture so that spacebar doesn't scroll downwards in window
+    this.input.keyboard.addCapture("SPACE");
+    this.player.inputKeys = this.input.keyboard.addKeys({
+      up: Phaser.Input.Keyboard.KeyCodes.W,
+      down: Phaser.Input.Keyboard.KeyCodes.S,
+      left: Phaser.Input.Keyboard.KeyCodes.A,
+      right: Phaser.Input.Keyboard.KeyCodes.D,
+      shift: Phaser.Input.Keyboard.KeyCodes.SHIFT,
+      interact: Phaser.Input.Keyboard.KeyCodes.E,
+      drink: Phaser.Input.Keyboard.KeyCodes.R,
+    });
+
+    let camera = this.cameras.main;
+
+    // Zoom in and out of Player
+    camera.zoom = 3;
+
+    camera.startFollow(this.player);
+    // Camera to center leeway, the higher, the tighter
+    camera.setLerp(0.1, 0.1);
+
+    // //spawn flash
+    // camera.flash(1000);
+    camera.fadeIn(1000);
+    this.player.update(this.player.anims.play("player_down"));
+  }
 
   createCombat() {
     this.matterCollision.addOnCollideStart({
@@ -101,17 +144,21 @@ class BossScene extends Phaser.Scene {
       objectB: this.boss,
       callback: (eventData) => {
         this.combatScene.playerPosition(this.player.x, this.player.y);
-        this.boss.enemyKilled();
-        this.boss.setStatic(true);
-        this.AudioScene.stopMainBgm();
+        this.boss.bossKilled();
+        // this.AudioScene.stopMainBgm();
         this.scene.sleep();
         this.scene.add("Loading", LoadingScene, true);
         this.scene.launch("Combat", {
-          health: this.player.health,
-          enemyGroup: [this.boss],
+          playerHP: this.player.health,
+          enemiesGroup: [this.boss],
+          enemyHP: this.boss.health,
         });
       },
       context: this,
     });
   }
+
+
+
+
 }

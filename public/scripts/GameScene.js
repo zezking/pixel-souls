@@ -21,6 +21,7 @@ class GameScene extends Phaser.Scene {
     NPC.preload(this);
     Item.preload(this);
     Player.preload(this);
+    Well.preload(this)
   }
 
   create() {
@@ -39,13 +40,17 @@ class GameScene extends Phaser.Scene {
     this.createBonfire();
     // Near Bonfire for light up on player?
     this.createNearBonfire();
+    this.createWell();
+    this.createNearWell();
     this.createCombat();
+
 
     // Spawn Effect
     this.createDelay();
     this.onEvent();
 
     this.createOverlay();
+    this.createEventTrigger();
     this.setupEventListener();
     this.freeEnemy(this.enemies);
     //Background Music
@@ -61,10 +66,7 @@ class GameScene extends Phaser.Scene {
     this.enemies.forEach((enemy) => {
       enemy.update();
     });
-    // this.crestfallenWarrior.update();
-    // this.griggs.update();
-    // this.bigHatLogan.update();
-    // this.laurentius.update();
+
     this.npcs.forEach((npc) => {
       npc.update();
     });
@@ -111,14 +113,14 @@ class GameScene extends Phaser.Scene {
       frame: "skele_idling0",
       id: 2,
     });
-    this.enemy3 = new Enemy({
-      scene: this,
-      x: 1060,
-      y: 822,
-      key: "skeleton_sprite",
-      frame: "skele_idling0",
-      id: 3,
-    });
+    // this.enemy3 = new Enemy({
+    //   scene: this,
+    //   x: 1060,
+    //   y: 822,
+    //   key: "skeleton_sprite",
+    //   frame: "skele_idling0",
+    //   id: 3,
+    // });
     this.enemy4 = new Enemy({
       scene: this,
       x: 100,
@@ -138,7 +140,7 @@ class GameScene extends Phaser.Scene {
     this.enemies = [
       this.enemy,
       this.enemy2,
-      this.enemy3,
+      // this.enemy3,
       this.enemy4,
       this.enemy5,
     ];
@@ -248,12 +250,12 @@ class GameScene extends Phaser.Scene {
   }
 
   createEntity() {
-    this.entity = new Entity({
-      scene: this,
-      x: 735,
-      y: 1770,
-      key: "well",
-    });
+    // this.entity = new Entity({
+    //   scene: this,
+    //   x: 735,
+    //   y: 1770,
+    //   key: "well",
+    // });
     this.entity = new Entity({
       scene: this,
       x: 769,
@@ -346,6 +348,14 @@ class GameScene extends Phaser.Scene {
     });
   }
 
+  createWell() {
+    this.well = new Well({
+      scene: this,
+      x: 735,
+      y: 1770,
+      key: "well",
+    });
+  }
   createBonfire() {
     this.bonfire = new Bonfire({
       scene: this,
@@ -353,6 +363,29 @@ class GameScene extends Phaser.Scene {
       y: 1760,
       key: "bonfire",
       frame: "bonfire0",
+    });
+  }
+
+  createEventTrigger() {
+    this.event1 = new EventTrigger({
+      scene: this,
+      x: 1200,
+      y: 830,
+      key: "eventTrigger",
+      id: 1,
+    })
+    this.event1.setVisible(false);
+
+    //Interact listener
+    this.matterCollision.addOnCollideActive({
+      objectA: this.player,
+      objectB: this.event1,
+      callback: () => {
+        if (this.player.inputKeys.interact.isDown) {
+          this.events.emit("bossTrigger");
+          this.player.inputKeys.interact.reset();
+        }
+      },
     });
   }
   //--------------------------------
@@ -383,6 +416,8 @@ class GameScene extends Phaser.Scene {
     // //spawn flash
     // camera.flash(1000);
     camera.fadeIn(1000);
+    // used when player spawns in as invisible, plz dont delete
+    // this.player.update(this.player.anims.play("player_down"));
   }
 
   addCollisions() {
@@ -439,6 +474,7 @@ class GameScene extends Phaser.Scene {
       callback: (eventData) => {
         this.combatScene.playerPosition(this.player.x, this.player.y);
         this.events.emit("enemyDeath", eventData.gameObjectB);
+        console.log("eventData: ", eventData.gameObjectB)
         this.enemies.forEach((enemy) => {
           enemy.setStatic(true);
         });
@@ -446,8 +482,9 @@ class GameScene extends Phaser.Scene {
         this.scene.sleep();
         this.scene.add("Loading", LoadingScene, true);
         this.scene.launch("Combat", {
-          health: this.player.health,
+          playerHP: this.player.health, 
           enemyGroup: this.enemies,
+          enemyHP: eventData.gameObjectB.health,
         });
       },
       context: this,
@@ -488,6 +525,19 @@ class GameScene extends Phaser.Scene {
       callback: () => {
         if (this.player.inputKeys.interact.isDown) {
           this.events.emit("useBonfire");
+          this.player.inputKeys.interact.reset();
+        }
+      },
+    });
+  }
+
+  createNearWell() {
+    this.matterCollision.addOnCollideActive({
+      objectA: this.player,
+      objectB: this.well,
+      callback: () => {
+        if (this.player.inputKeys.interact.isDown) {
+          this.events.emit("useWell");
           this.player.inputKeys.interact.reset();
         }
       },
@@ -564,6 +614,27 @@ class GameScene extends Phaser.Scene {
 
       // this.events.off("useBonfire");
     });
+
+    this.events.on("useWell", () => {
+      this.AudioScene.playHeavenly();
+      this.wellEasterEgg();
+    });
+
+    this.events.on("bossTrigger", () => {
+      if (this.player.souls >= 300) {
+        // let prevSouls = this.player.souls;
+        // this.player.souls -= 1000;
+        // this.events.emit("updateSouls", prevSouls, this.player.souls);
+        this.AudioScene.stopMainBgm();
+        this.scene.sleep();
+        this.scene.add("Loading", LoadingScene, true);
+        this.scene.launch("Boss", {
+          player: this.player,
+        });
+      } else {
+        console.log("Not enough souls?")
+      }
+    })
   }
 
   // this is for the BonFire Smoke Effect
@@ -572,8 +643,8 @@ class GameScene extends Phaser.Scene {
     .image({ x: this.player.x, y: this.player.y, key: "bonfireFX", add: true,
     scale: {
       //fog FX distance
-      x: 0.35,
-      y: 0.4,
+      x: 0.75,
+      y: 0.75,
     }, })
     .setOrigin(0.5)
     .setDepth(3000)
@@ -582,6 +653,26 @@ class GameScene extends Phaser.Scene {
   this.tweens.add({
     targets: this.bonfireEffect,
     alpha: { start: 0, from: 0, to: 1, duration: 2000, ease: "Linear" },
+    yoyo: true,
+    // loop: -1,
+  });
+  }
+
+  wellEasterEgg() {
+    this.wellEasterEggFX = this.make
+    .image({ x: this.player.x, y: this.player.y, key: "saintTravis", add: true,
+    scale: {
+      //fog FX distance
+      x: 1,
+      y: 1,
+    }, })
+    .setOrigin(0.5)
+    .setDepth(3000)
+    .setAlpha(0);
+
+  this.tweens.add({
+    targets: this.wellEasterEggFX,
+    alpha: { start: 0, from: 0, to: 1, duration: 3000, ease: "Linear" },
     yoyo: true,
     // loop: -1,
   });

@@ -1,6 +1,6 @@
-class CombatScene extends Phaser.Scene {
+class BossCombatScene extends Phaser.Scene {
   constructor() {
-    super("Combat");
+    super("BossCombat");
   }
 
   init(data) {
@@ -33,7 +33,7 @@ class CombatScene extends Phaser.Scene {
     this.generateCombatMap();
     this.combatBackgroundGenerator();
 
-    this.AudioScene.playBattleBgm();
+    this.AudioScene.playBattleBgm(); //boss music
   }
   setupCombatUi() {
     this.sword = this.make
@@ -103,7 +103,7 @@ class CombatScene extends Phaser.Scene {
     this.enemyHearts.createMultiple({
       key: "ui-heart-full",
       setXY: { x: 615, y: 325, stepX: 40 },
-      quantity: 3,
+      quantity: 20,
     });
   }
 
@@ -233,12 +233,11 @@ class CombatScene extends Phaser.Scene {
       .setDepth(1);
   }
   createCombatSkeleton() {
-    this.enemyCombat = new Enemy({
+    this.enemyCombat = new Boss({
       scene: this,
       x: 650,
       y: 150,
-      key: "skeleton_sprite",
-      frame: "skele_idling8",
+      key: "andy",
       id: 5,
     })
       .setDepth(200)
