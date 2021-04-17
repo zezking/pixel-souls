@@ -9,6 +9,7 @@ class CombatScene extends Phaser.Scene {
     this.enemyHealth = 1;
     this.input.enabled = false;
     this.AudioScene = this.scene.get("Audio");
+    this.CombatPromptScene = this.scene.get("Prompt");
 
     console.log("(inside combat)Health from player: ", this.playerHealth);
     console.log("(inside combat)Health of enemy: ", this.enemyHealth);
@@ -19,20 +20,17 @@ class CombatScene extends Phaser.Scene {
   }
 
   create() {
-    //this.createSwordCursor();
+    this.createSwordCursor();
+
     this.cameras.main.fadeIn(1000);
     this.setupCombatUi();
     this.resultListener();
     this.createCombatPlayer();
-    // this.bothHurt();
-    // this.enemyHurt();
-    // this.playerHurt();
     this.drawCombatUIBackground();
     this.createCombatSkeleton();
     this.disableClickTimer();
     this.createCombatPlayer();
     this.generateCombatMap();
-    // this.swordCursorHover();
     this.combatBackgroundGenerator();
 
     this.AudioScene.playBattleBgm();
@@ -63,19 +61,40 @@ class CombatScene extends Phaser.Scene {
     };
 
     //pointer action
-    this.sword.on("pointerdown", () => {
-      this.result = this.checkWinner("sword", aiResult());
-      this.events.emit("results", this.result);
-    });
+    this.sword
+      .on("pointerdown", () => {
+        this.result = this.checkWinner("sword", aiResult());
+        this.events.emit("results", this.result);
+      })
+      .on("pointerover", () => {
+        this.swordCursor.setVisible(true);
+      })
+      .on("pointerout", () => {
+        this.swordCursor.setVisible(false);
+      });
 
-    this.magic.on("pointerdown", () => {
-      this.result = this.checkWinner("magic", aiResult());
-      this.events.emit("results", this.result);
-    });
-    this.shield.on("pointerdown", () => {
-      this.result = this.checkWinner("shield", aiResult());
-      this.events.emit("results", this.result);
-    });
+    this.magic
+      .on("pointerdown", () => {
+        this.result = this.checkWinner("magic", aiResult());
+        this.events.emit("results", this.result);
+      })
+      .on("pointerover", () => {
+        this.magicCursor.setVisible(true);
+      })
+      .on("pointerout", () => {
+        this.magicCursor.setVisible(false);
+      });
+    this.shield
+      .on("pointerdown", () => {
+        this.result = this.checkWinner("shield", aiResult());
+        this.events.emit("results", this.result);
+      })
+      .on("pointerover", () => {
+        this.shieldCursor.setVisible(true);
+      })
+      .on("pointerout", () => {
+        this.shieldCursor.setVisible(false);
+      });
 
     //enemy hearts
     this.enemyHearts = this.add.group({
@@ -122,29 +141,30 @@ class CombatScene extends Phaser.Scene {
     this.events.on("results", () => {
       let winner = this.result[0];
       let enemyChoice = this.result[1];
-
+      //this.CombatPromptScene.winLoseDrawMsg(winner);
+      this.CombatPromptScene.displayWinLoseDraw(this, winner);
       switch (winner) {
         case "draw":
           console.log("winner: ", winner, "Enemy chose: ", enemyChoice);
           this.playerHealth -= 1;
           this.enemyHealth -= 1;
 
-          this.playerHurt();
-          this.enemyHurt();
+          //this.playerHurt();
+          //this.enemyHurt();
           this.cameras.main.flash(300).shake(300);
           this.healthChecker();
           break;
         case "enemy":
           console.log("winner: ", winner, "Enemy chose: ", enemyChoice);
           this.playerHealth -= 1;
-          this.playerHurt();
+          //this.playerHurt();
           this.cameras.main.flash(300).shake(300);
           this.healthChecker();
           break;
         case "player":
           console.log("winner: ", winner, "Enemy chose: ", enemyChoice);
           this.enemyHealth -= 1;
-          this.enemyHurt();
+          //this.enemyHurt();
           this.cameras.main.flash(300).shake(300);
           this.healthChecker();
           break;
@@ -173,6 +193,7 @@ class CombatScene extends Phaser.Scene {
     } else if (this.enemyHealth <= 0) {
       this.AudioScene.stopBattleBgm();
       this.AudioScene.playMainBgm();
+      this.AudioScene.playSoulSucking();
       this.events.emit("updateHealth", this.playerHealth);
       this.events.emit("enemySoulGet");
       this.events.off("results");
@@ -220,7 +241,7 @@ class CombatScene extends Phaser.Scene {
       frame: "skele_idling8",
       id: 5,
     })
-      .setDepth(400)
+      .setDepth(200)
       .setScale(8);
   }
 
@@ -351,4 +372,60 @@ class CombatScene extends Phaser.Scene {
   }
 
   /****************************************************************************/
+
+  cursorHover() {
+    this.swordCursor.on("pointerover", () => {
+      console.log(this);
+      swordCursor.setVisible(true);
+    });
+    this.swordCursor.on("pointerout", () => {
+      console.log("here");
+      swordCursor.setVisible(false);
+    });
+  }
+
+  createSwordCursor() {
+    this.swordCursor = this.make
+      .image({
+        key: "sword_cursor",
+        x: 150,
+        y: 630,
+        scale: {
+          x: 1,
+          y: 1,
+        },
+        add: true,
+      })
+      .setDepth(100)
+      .setVisible(false);
+    this.magicCursor = this.make
+      .image({
+        key: "sword_cursor",
+        x: 350,
+        y: 630,
+        scale: {
+          x: 1,
+          y: 1,
+        },
+        add: true,
+      })
+      .setDepth(100)
+      .setVisible(false);
+    this.shieldCursor = this.make
+      .image({
+        key: "sword_cursor",
+        x: 550,
+        y: 630,
+        scale: {
+          x: 1,
+          y: 1,
+        },
+        add: true,
+      })
+      .setDepth(100)
+      .setVisible(false);
+
+    this.magicCursor.setInteractive();
+    this.swordCursor.setInteractive();
+  }
 }

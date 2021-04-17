@@ -659,8 +659,8 @@ class GameScene extends Phaser.Scene {
     .image({ x: this.player.x, y: this.player.y, key: "saintTravis", add: true,
     scale: {
       //fog FX distance
-      x: 0.75,
-      y: 0.75,
+      x: 1,
+      y: 1,
     }, })
     .setOrigin(0.5)
     .setDepth(3000)

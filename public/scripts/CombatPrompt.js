@@ -1,50 +1,135 @@
-class LogoScene extends Phaser.Scene {
+class CombatPromptScene extends Phaser.Scene {
   constructor() {
-    super("");
+    super("Prompt");
   }
 
-  create() {
-    this.logoEffects();
-    this.productionTextEffects();
-  }
+  displayWinLoseDraw(scene, msg) {
+    //show player damage heart
+    if (msg === "enemy") {
+      scene.damageHeart = scene.make
+        .image({
+          key: "damage",
+          x: this.scale.width / 2 - 220,
+          y: this.scale.height / 2 - 90,
+          add: true,
+        })
+        .setDepth(500);
 
-  logoEffects() {
-    this.logo = this.add.image(380, 400, "logo");
-    this.tweens.add({
-      targets: this.logo,
-      alpha: {
-        start: 1,
-        from: 1,
-        to: 0,
-        delay: 3000,
-        duration: 3000,
-        ease: "Linear",
-      },
-    });
-  }
+      scene.tweens.add({
+        targets: scene.damageHeart,
 
-  productionTextEffects() {
-    this.productionText = this.add
-      .text(210, 470, "two and a half asians presents", {
-        fontFamily: "titleFont",
-        fontSize: "26px",
-        fill: "#ffffff",
+        alpha: {
+          start: 0,
+          from: 1,
+          to: 0,
+          duration: 2300,
+          ease: "Cubic",
+        },
+      });
+      scene.tweens.add({
+        targets: scene.damageHeart,
+        y: {
+          from: this.scale.height / 2 - 90,
+          to: this.scale.height / 2 - 120,
+        },
+        duration: 2500,
+      });
+      return;
+    }
+    //display enemy damange
+    if (msg === "player") {
+      scene.damageHeart = scene.make
+        .image({
+          key: "damage",
+          x: this.scale.width / 2 + 250,
+          y: this.scale.height / 2 - 240,
+          add: true,
+        })
+        .setDepth(500);
+
+      scene.tweens.add({
+        targets: scene.damageHeart,
+
+        alpha: {
+          start: 0,
+          from: 1,
+          to: 0,
+          duration: 2300,
+          ease: "Cubic",
+        },
+      });
+      scene.tweens.add({
+        targets: scene.damageHeart,
+        y: {
+          from: this.scale.height / 2 - 240,
+          to: this.scale.height / 2 - 280,
+        },
+        duration: 2500,
+      });
+      return;
+    }
+
+    scene.damageHeart1 = scene.make
+      .image({
+        key: "damage",
+        x: this.scale.width / 2 - 220,
+        y: this.scale.height / 2 - 90,
+        add: true,
       })
-      .setAlpha(0);
+      .setDepth(500);
 
-    this.tweens.add({
-      targets: this.productionText,
+    scene.damageHeart2 = scene.make
+      .image({
+        key: "damage",
+        x: this.scale.width / 2 + 250,
+        y: this.scale.height / 2 - 240,
+        add: true,
+      })
+      .setDepth(500);
+
+    scene.tweens.add({
+      targets: scene.damageHeart1,
+
       alpha: {
-        start: 1,
+        start: 0,
         from: 1,
         to: 0,
-        delay: 3000,
-        duration: 3000,
-        ease: "Linear",
-      },
-      onComplete: () => {
-        this.scene.start("Title");
+        duration: 2300,
+        ease: "Cubic",
       },
     });
+    scene.tweens.add({
+      targets: scene.damageHeart1,
+      y: {
+        from: this.scale.height / 2,
+        to: this.scale.height / 2 - 30,
+      },
+      duration: 2500,
+    });
+
+    scene.tweens.add({
+      targets: scene.damageHeart2,
+
+      alpha: {
+        start: 0,
+        from: 1,
+        to: 0,
+        duration: 2300,
+        ease: "Cubic",
+      },
+    });
+    scene.tweens.add({
+      targets: scene.damageHeart2,
+      y: {
+        from: this.scale.height / 2 - 240,
+        to: this.scale.height / 2 - 280,
+      },
+      duration: 2500,
+    });
+    return;
+  }
+
+  healthDecreaseEffect() {
+    this.damageText = this.add.text();
   }
 }

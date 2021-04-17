@@ -12,6 +12,7 @@ const config = {
     CombatScene,
     DeathScene,
     AudioScene,
+    CombatPromptScene,
   ],
   // zoom: 2,
   pixelArt: true,
