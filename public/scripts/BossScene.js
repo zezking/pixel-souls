@@ -151,7 +151,8 @@ class BossScene extends Phaser.Scene {
         this.boss.bossKilled();
         this.AudioScene.stopMainBgm();
         this.scene.sleep();
-        this.scene.add("Loading", LoadingScene, true);
+        this.scene.add("BossLoading", BossLoadingScene, true);
+        //this.scene.add("Loading", LoadingScene, true);
         this.scene.launch("BossCombat", {
           playerHP: this.player.health,
           enemiesGroup: [this.boss],

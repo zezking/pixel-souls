@@ -13,7 +13,6 @@ const config = {
     BossCombatScene,
     DeathScene,
     AudioScene,
-    BossLoadingScene,
     CombatPromptScene,
   ],
   // zoom: 2,
