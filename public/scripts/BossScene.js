@@ -22,7 +22,7 @@ class BossScene extends Phaser.Scene {
     this.createOverlay();
     // this.addCollisions();  //function not set up properly
     this.playerStartPoint();
-    this.createBoss();  //New class for Andy?
+    // this.createBoss();  //New class for Andy?
     this.createCombat();
   }
 
@@ -52,7 +52,7 @@ class BossScene extends Phaser.Scene {
     let map = this.make.tilemap({ key: "bossmap" });
     this.tilesBottom = map.addTilesetImage(
       "BOSSMAP_bottom",
-      "bottom",
+      "boss_bottom",
       32,
       32,
       0,
@@ -71,13 +71,13 @@ class BossScene extends Phaser.Scene {
     let map = this.make.tilemap({ key: "bossmap" });
     this.tilesOverlay = map.addTilesetImage(
       "BOSSMAP_overlay",
-      "overlay",
+      "boss_overlay",
       32,
       32,
       0,
       0
     );
-    this.OverlayLayer = map.createLayer("boss_overlay", this.tilesOverlay, 0, 0);
+    this.OverlayLayer = map.createLayer("overlay", this.tilesOverlay, 0, 0);
   }
 
   // addCollisions() {
