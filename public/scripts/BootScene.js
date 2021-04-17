@@ -17,7 +17,10 @@ class BootScene extends Phaser.Scene {
     this.load.image("bottom", "public/assets/map/FULLMAP_bottom.png");
     this.load.image("overlay", "public/assets/map/FULLMAP_overlay.png");
     this.load.image("bonfireFX", "public/assets/map/bonfireEffect.png");
-    this.load.image("saintTravis", "public/assets/entities/easter_eggs/saint travis.png")
+    this.load.image(
+      "saintTravis",
+      "public/assets/entities/easter_eggs/saint travis.png"
+    );
 
     //UI elements
     this.load.image("ui-heart-empty", "public/assets/ui/heart_empty.png");
@@ -48,6 +51,7 @@ class BootScene extends Phaser.Scene {
       "player_hurt",
       "public/assets/ui/battle/hurt/player_hurt.png"
     );
+    this.load.image("damage", "public/assets/ui/battle/hurt/damage.png");
     this.load.image("sword_cursor", "public/assets/ui/battle/sword_cursor.png");
   }
 
@@ -130,6 +134,6 @@ class BootScene extends Phaser.Scene {
   }
 
   create() {
-    this.scene.launch("Title");
+    this.scene.launch("Combat");
   }
 }

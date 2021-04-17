@@ -9,6 +9,7 @@ class CombatScene extends Phaser.Scene {
     this.enemyHealth = 3;
     this.input.enabled = false;
     this.AudioScene = this.scene.get("Audio");
+    this.CombatPromptScene = this.scene.get("Prompt");
 
     console.log("(inside combat)Health from player: ", this.playerHealth);
     console.log("(inside combat)Health of enemy: ", this.enemyHealth);
@@ -20,15 +21,11 @@ class CombatScene extends Phaser.Scene {
 
   create() {
     this.createSwordCursor();
-    //this.cursorHover();
 
     this.cameras.main.fadeIn(1000);
     this.setupCombatUi();
     this.resultListener();
     this.createCombatPlayer();
-    // this.bothHurt();
-    // this.enemyHurt();
-    // this.playerHurt();
     this.drawCombatUIBackground();
     this.createCombatSkeleton();
     this.disableClickTimer();
@@ -144,29 +141,30 @@ class CombatScene extends Phaser.Scene {
     this.events.on("results", () => {
       let winner = this.result[0];
       let enemyChoice = this.result[1];
-
+      //this.CombatPromptScene.winLoseDrawMsg(winner);
+      this.CombatPromptScene.displayWinLoseDraw(this, winner);
       switch (winner) {
         case "draw":
           console.log("winner: ", winner, "Enemy chose: ", enemyChoice);
           this.playerHealth -= 1;
           this.enemyHealth -= 1;
 
-          this.playerHurt();
-          this.enemyHurt();
+          //this.playerHurt();
+          //this.enemyHurt();
           this.cameras.main.flash(300).shake(300);
           this.healthChecker();
           break;
         case "enemy":
           console.log("winner: ", winner, "Enemy chose: ", enemyChoice);
           this.playerHealth -= 1;
-          this.playerHurt();
+          //this.playerHurt();
           this.cameras.main.flash(300).shake(300);
           this.healthChecker();
           break;
         case "player":
           console.log("winner: ", winner, "Enemy chose: ", enemyChoice);
           this.enemyHealth -= 1;
-          this.enemyHurt();
+          //this.enemyHurt();
           this.cameras.main.flash(300).shake(300);
           this.healthChecker();
           break;
@@ -243,7 +241,7 @@ class CombatScene extends Phaser.Scene {
       frame: "skele_idling8",
       id: 5,
     })
-      .setDepth(400)
+      .setDepth(200)
       .setScale(8);
   }
 
