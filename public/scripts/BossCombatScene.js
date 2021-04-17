@@ -233,12 +233,11 @@ class BossCombatScene extends Phaser.Scene {
       .setDepth(1);
   }
   createCombatSkeleton() {
-    this.enemyCombat = new Enemy({
+    this.enemyCombat = new Boss({
       scene: this,
       x: 650,
       y: 150,
-      key: "skeleton_sprite",
-      frame: "skele_idling8",
+      key: "andy",
       id: 5,
     })
       .setDepth(200)
