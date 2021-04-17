@@ -34,10 +34,14 @@ class BossScene extends Phaser.Scene {
   //----------------------------
 
   playerStartPoint() {
-    //This is probably not correct. Change the player's x/y coordinates so that they are moved to the elevator upon scene change.
-    this.player.x = 200;  
-    this.player.y = 200;
-  }
+      this.player = new Player({
+        scene: this,
+        x: 200,
+        y: 200,
+        key: "ashen_one",
+        frame: "player_00",
+      });
+    }
 
   createBoss() {
     this.boss = new Enemy({
