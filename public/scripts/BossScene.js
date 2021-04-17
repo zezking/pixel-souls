@@ -6,7 +6,7 @@ class BossScene extends Phaser.Scene {
   init(data) {
     let { player } = data;
     this.oldPlayer = player;
-
+    this.scene.moveAbove("Game");
     //references to other scenes for event listening
     this.uiScene = this.scene.get("Ui");
     this.combatScene = this.scene.get("Combat");
@@ -151,9 +151,8 @@ class BossScene extends Phaser.Scene {
         this.boss.bossKilled();
         this.AudioScene.stopMainBgm();
         this.scene.sleep();
-        //this.scene.add("Loading", LoadingScene, true);
-        this.BossLoadingScene.playVideo();
-        this.scene.launch("Combat", {
+        this.scene.add("Loading", LoadingScene, true);
+        this.scene.launch("BossCombat", {
           playerHP: this.player.health,
           enemiesGroup: [this.boss],
           enemyHP: this.boss.health,

@@ -103,9 +103,10 @@ class BossCombatScene extends Phaser.Scene {
     });
     this.enemyHearts.createMultiple({
       key: "ui-heart-full",
-      setXY: { x: 615, y: 325, stepX: 40 },
+      setXY: { x: 515, y: 325, stepX: 40 },
       quantity: 20,
     });
+    this.enemyHearts.setDepth(1337);
   }
 
   //Sword > Magic > Shield > Sword...  :)
@@ -149,7 +150,8 @@ class BossCombatScene extends Phaser.Scene {
           console.log("winner: ", winner, "Enemy chose: ", enemyChoice);
           this.playerHealth -= 1;
           this.enemyHealth -= 1;
-
+          this.AudioScene.playPlayerDmgSFX();
+          this.AudioScene.playEnemyDmgSFX();
           //this.playerHurt();
           //this.enemyHurt();
           this.cameras.main.flash(300).shake(300);
@@ -158,6 +160,7 @@ class BossCombatScene extends Phaser.Scene {
         case "enemy":
           console.log("winner: ", winner, "Enemy chose: ", enemyChoice);
           this.playerHealth -= 1;
+          this.AudioScene.playPlayerDmgSFX();
           //this.playerHurt();
           this.cameras.main.flash(300).shake(300);
           this.healthChecker();
@@ -165,6 +168,7 @@ class BossCombatScene extends Phaser.Scene {
         case "player":
           console.log("winner: ", winner, "Enemy chose: ", enemyChoice);
           this.enemyHealth -= 1;
+          this.AudioScene.playEnemyDmgSFX();
           //this.enemyHurt();
           this.cameras.main.flash(300).shake(300);
           this.healthChecker();
@@ -237,12 +241,12 @@ class BossCombatScene extends Phaser.Scene {
     this.enemyCombat = new Boss({
       scene: this,
       x: 650,
-      y: 150,
-      key: "andy",
+      y: 500,
+      key: "andyHighRes",
       id: 5,
     })
-      .setDepth(200)
-      .setScale(8);
+      .setDepth(1)
+      .setScale(1);
   }
 
   drawCombatUIBackground() {

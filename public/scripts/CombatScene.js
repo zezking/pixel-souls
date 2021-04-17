@@ -105,6 +105,7 @@ class CombatScene extends Phaser.Scene {
       setXY: { x: 615, y: 325, stepX: 40 },
       quantity: 3,
     });
+    this.enemyHearts.setDepth(1337);
   }
 
   //Sword > Magic > Shield > Sword...  :)
@@ -147,7 +148,8 @@ class CombatScene extends Phaser.Scene {
           console.log("winner: ", winner, "Enemy chose: ", enemyChoice);
           this.playerHealth -= 1;
           this.enemyHealth -= 1;
-
+          this.AudioScene.playPlayerDmgSFX();
+          this.AudioScene.playEnemyDmgSFX();
           //this.playerHurt();
           //this.enemyHurt();
           this.cameras.main.flash(300).shake(300);
@@ -157,6 +159,7 @@ class CombatScene extends Phaser.Scene {
           console.log("winner: ", winner, "Enemy chose: ", enemyChoice);
           this.playerHealth -= 1;
           //this.playerHurt();
+          this.AudioScene.playPlayerDmgSFX();
           this.cameras.main.flash(300).shake(300);
           this.healthChecker();
           break;
@@ -164,6 +167,7 @@ class CombatScene extends Phaser.Scene {
           console.log("winner: ", winner, "Enemy chose: ", enemyChoice);
           this.enemyHealth -= 1;
           //this.enemyHurt();
+          this.AudioScene.playEnemyDmgSFX();
           this.cameras.main.flash(300).shake(300);
           this.healthChecker();
           break;
@@ -211,6 +215,7 @@ class CombatScene extends Phaser.Scene {
         heart.setTexture("ui-heart-empty");
       }
     });
+    
   }
 
   update() {

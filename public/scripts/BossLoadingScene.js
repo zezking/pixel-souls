@@ -5,11 +5,14 @@ class BossLoadingScene extends Phaser.Scene {
   init() {}
 
   create() {
-    this.bossLoadingVideo = this.add.video(0, 0, "boss-loading");
+    this.bossLoadingVideo = this.add
+      .video(this.scale.width / 2, this.scale.height / 2, "boss-loading")
+      .setScale(0.5);
+
+    this.playVideo();
   }
 
   playVideo() {
-    console.log("here");
-    this.bossLoadingVideo = this.add.video(0, 0, "boss-loading");
+    this.bossLoadingVideo.play();
   }
 }

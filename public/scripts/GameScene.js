@@ -558,7 +558,7 @@ class GameScene extends Phaser.Scene {
       item.makeInactive();
       //update Soul Counter
       let prevSouls = this.player.souls;
-      this.player.updateSouls(300); //currently all soulItems give a hard-coded 300 souls.
+      this.player.updateSouls(1300); //currently all soulItems give a hard-coded 300 souls.
       console.log("picked up item!");
       this.events.emit("updateSouls", prevSouls, this.player.souls);
       //remove item

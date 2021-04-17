@@ -24,6 +24,8 @@ class BootScene extends Phaser.Scene {
       "public/assets/entities/easter_eggs/saint travis.png"
     );
 
+    this.load.image("andyHighRes", "public/assets/sprites/andy high res.png");
+
     this.load.image("boss_bottom", "public/assets/map/BOSSMAP_bottom.png");
     this.load.image("boss_overlay", "public/assets/map/BOSSMAP_overlay.png");
 
@@ -128,7 +130,12 @@ class BootScene extends Phaser.Scene {
   }
 
   loadVideo() {
-    this.load.video("boss-loading", "public/assets/video/andy_gwyn.mp3");
+    this.load.video(
+      "boss-loading",
+      "public/assets/video/andy_gwyn.mp4",
+      true,
+      true
+    );
   }
 
   loadTilemap() {
