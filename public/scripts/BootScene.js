@@ -10,6 +10,7 @@ class BootScene extends Phaser.Scene {
     this.loadConversations();
     this.loadTilemap();
     this.loadFont();
+    this.loadVideo();
   }
 
   loadImages() {
@@ -126,6 +127,10 @@ class BootScene extends Phaser.Scene {
     this.load.audio("heavenlySFX", "public/assets/audio/Heavens Choir SFX.mp3");
   }
 
+  loadVideo() {
+    this.load.video("boss-loading", "public/assets/video/andy_gwyn.mp3");
+  }
+
   loadTilemap() {
     //main map JSON files
     this.load.tilemapTiledJSON("map", "public/assets/map/Firelink_Shrine.json");
@@ -151,6 +156,6 @@ class BootScene extends Phaser.Scene {
   }
 
   create() {
-    this.scene.launch("Combat");
+    this.scene.launch("Title");
   }
 }

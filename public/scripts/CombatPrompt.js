@@ -9,7 +9,7 @@ class CombatPromptScene extends Phaser.Scene {
       scene.damageText = scene.add
         .text(this.scale.width / 2 - 220, this.scale.width / 2 - 250, "HP -1", {
           fontFamily: "HonokaMincho",
-          fontSize: "40px",
+          fontSize: "30px",
         })
         .setDepth(501);
       //create player damage heart
@@ -59,7 +59,7 @@ class CombatPromptScene extends Phaser.Scene {
       scene.damageText = scene.add
         .text(this.scale.width / 2 + 70, this.scale.height / 2 - 300, "HP -1", {
           fontFamily: "HonokaMincho",
-          fontSize: "40px",
+          fontSize: "30px",
         })
         .setDepth(501);
       scene.damageHeart = scene.make
@@ -131,7 +131,7 @@ class CombatPromptScene extends Phaser.Scene {
     scene.damageText2 = scene.add
       .text(this.scale.width / 2 + 70, this.scale.height / 2 - 300, "HP -1", {
         fontFamily: "HonokaMincho",
-        fontSize: "40px",
+        fontSize: "30px",
       })
       .setDepth(501);
 
