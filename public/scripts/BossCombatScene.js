@@ -10,6 +10,8 @@ class BossCombatScene extends Phaser.Scene {
     this.input.enabled = false;
     this.AudioScene = this.scene.get("Audio");
 
+    this.CombatPromptScene = this.scene.get("Prompt");
+
     console.log("(inside combat)Health from player: ", this.playerHealth);
     console.log("(inside combat)Health of enemy: ", this.enemyHealth);
   }
@@ -31,7 +33,6 @@ class BossCombatScene extends Phaser.Scene {
     this.createCombatPlayer();
     this.generateCombatMap();
     this.combatBackgroundGenerator();
-
     this.loadingTimer();
     this.AudioScene.playBossReveal(); //boss music
     // this.AudioScene.playBattleBgm(); //boss music
