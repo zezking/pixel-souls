@@ -416,6 +416,8 @@ class GameScene extends Phaser.Scene {
     // //spawn flash
     // camera.flash(1000);
     camera.fadeIn(1000);
+    // used when player spawns in as invisible, plz dont delete
+    // this.player.update(this.player.anims.play("player_down"));
   }
 
   addCollisions() {
