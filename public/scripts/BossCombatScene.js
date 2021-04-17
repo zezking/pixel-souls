@@ -33,7 +33,8 @@ class BossCombatScene extends Phaser.Scene {
     this.generateCombatMap();
     this.combatBackgroundGenerator();
 
-    this.AudioScene.playBattleBgm(); //boss music
+    this.AudioScene.playBossReveal(); //boss music
+    // this.AudioScene.playBattleBgm(); //boss music
   }
   setupCombatUi() {
     this.sword = this.make
@@ -181,7 +182,7 @@ class BossCombatScene extends Phaser.Scene {
     console.log("Enemy health remaining: ", this.enemyHealth);
 
     if (this.playerHealth <= 0) {
-      this.AudioScene.stopBattleBgm();
+      this.AudioScene.stopBossReveal();
       this.AudioScene.stopMainBgm();
       this.events.off("pointerdown");
       this.events.off("results");
