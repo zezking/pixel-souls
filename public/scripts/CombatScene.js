@@ -4,9 +4,9 @@ class CombatScene extends Phaser.Scene {
   }
 
   init(data) {
-    let { health } = data;
-    this.playerHealth = health;
-    this.enemyHealth = 1;
+    let { playerHP, enemyHP } = data;
+    this.playerHealth = playerHP;
+    this.enemyHealth = enemyHP;
     this.input.enabled = false;
     this.AudioScene = this.scene.get("Audio");
     this.CombatPromptScene = this.scene.get("Prompt");

@@ -479,8 +479,9 @@ class GameScene extends Phaser.Scene {
         this.scene.sleep();
         this.scene.add("Loading", LoadingScene, true);
         this.scene.launch("Combat", {
-          health: this.player.health,
+          playerHP: this.player.health, 
           enemyGroup: this.enemies,
+          enemyHP: this.enemy.health,
         });
       },
       context: this,
