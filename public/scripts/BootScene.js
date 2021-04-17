@@ -73,6 +73,11 @@ class BootScene extends Phaser.Scene {
       frameHeight: 39,
     });
 
+    this.load.spritesheet("andy", "public/assets/sprites/andy.png", {
+      frameWidth: 48,
+      frameHeight: 70,
+    });
+
     // this.load.spritesheet("well", "public/assets/entities/well.png", {
     //   frameWidth: 88,
     //   frameHeight: 56,
@@ -140,6 +145,6 @@ class BootScene extends Phaser.Scene {
   }
 
   create() {
-    this.scene.launch("Boss");
+    this.scene.launch("Title");
   }
 }
