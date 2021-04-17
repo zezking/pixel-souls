@@ -4,6 +4,7 @@ class TitleScene extends Phaser.Scene {
   }
 
   init() {
+    this.scene.remove("Boss");
     this.scene.remove("Game");
     this.AudioScene = this.scene.get("Audio");
   }
@@ -67,6 +68,7 @@ class TitleScene extends Phaser.Scene {
       this.AudioScene.stopMenuBgm();
       this.AudioScene.playStartSFX();
       this.scene.add("Game", GameScene, true);
+      this.scene.add("Boss", BossScene, false);
       this.scene.stop("Title");
     });
   }
