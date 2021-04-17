@@ -8,7 +8,7 @@ class Boss extends Phaser.Physics.Matter.Sprite {
 
     this.depthSorting = true; //Allows this entity to be depth-sorted
 
-    let bossCollider = Bodies.circle(this.x, this.y + 12, 12, {
+    let bossCollider = Bodies.circle(this.x, this.y, 12, {
       isSensor: false,
       lable: "bossCollider",
     });
@@ -26,7 +26,7 @@ class Boss extends Phaser.Physics.Matter.Sprite {
     this.setScale(1.25);
     // fixed rotation of character
     this.setFixedRotation();
-    this.health = 10
+    this.health = 20
   }
 
   // static preload(scene) {
