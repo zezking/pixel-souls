@@ -105,6 +105,7 @@ class CombatScene extends Phaser.Scene {
       setXY: { x: 615, y: 325, stepX: 40 },
       quantity: 3,
     });
+    this.enemyHearts.setDepth(1337);
   }
 
   //Sword > Magic > Shield > Sword...  :)
@@ -214,6 +215,7 @@ class CombatScene extends Phaser.Scene {
         heart.setTexture("ui-heart-empty");
       }
     });
+    
   }
 
   update() {

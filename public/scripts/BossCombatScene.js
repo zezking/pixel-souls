@@ -102,9 +102,10 @@ class BossCombatScene extends Phaser.Scene {
     });
     this.enemyHearts.createMultiple({
       key: "ui-heart-full",
-      setXY: { x: 615, y: 325, stepX: 40 },
+      setXY: { x: 515, y: 325, stepX: 40 },
       quantity: 20,
     });
+    this.enemyHearts.setDepth(1337);
   }
 
   //Sword > Magic > Shield > Sword...  :)
