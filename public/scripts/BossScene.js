@@ -11,10 +11,12 @@ class BossScene extends Phaser.Scene {
     this.uiScene = this.scene.get("Ui");
     this.combatScene = this.scene.get("Combat");
     this.AudioScene = this.scene.get("Audio");
+
   }
 
   preload() {
     Player.preload(this);
+    Enemy.preload(this);
   }
 
   create() {
@@ -23,12 +25,16 @@ class BossScene extends Phaser.Scene {
     // this.addCollisions();  //function not set up properly
     this.playerStartPoint();
     this.createInput();
-    // this.createBoss();  //New class for Andy?
+    this.createEnemy();  //New class for Andy?
     this.createCombat();
   }
 
   update() {
     this.player.update();
+    // this.enemies.forEach((enemy) => {
+    //   enemy.update();
+    // });
+    this.enemy.update();
   }
 
   //----------------------------
@@ -36,22 +42,27 @@ class BossScene extends Phaser.Scene {
   playerStartPoint() {
       this.player = new Player({
         scene: this,
-        x: 200,
-        y: 200,
+        x: 65,
+        y: 155,
         key: "ashen_one",
         frame: "player_00",
       });
     }
 
-  createBoss() {
-    this.boss = new Enemy({
+  createEnemy() {
+    this.enemy = new Enemy({
       scene: this,
-      x: 200,
+      x: 400,
       y: 200,
-      key: "andy",
-      id: 1
-    })
+      key: "skeleton_sprite",
+      frame: "skele_idling0",
+      id: 1,
+    });
+    this.enemy.setStatic(true);
+    // this.enemies = [this.enemy]
   }
+
+
 
   createMap() {
     let map = this.make.tilemap({ key: "bossmap" });
@@ -85,6 +96,20 @@ class BossScene extends Phaser.Scene {
     this.OverlayLayer = map.createLayer("boss_overlay", this.tilesOverlay, 0, 0);
   }
 
+  addCollisions() {
+    // grab the physics map from FULLMAP_collision.json
+    let shapes = this.cache.json.get("shapes");
+
+    let collisionLayer = this.matter.add.sprite(
+      0,
+      0,
+      "sheet",
+      "BOSSMAP_collision",
+      { shape: shapes.FULLMAP_collision }
+    );
+    collisionLayer.setPosition(0 + 684, 0 + 1136); //manual offset for center of mass. Will have to find a better way to calculate this.
+    collisionLayer.visible = false;
+  }
   // addCollisions() {
   //   // grab the physics map from FULLMAP_collision.json
   //   let shapes = this.cache.json.get("shapes");
@@ -125,25 +150,49 @@ class BossScene extends Phaser.Scene {
     // //spawn flash
     // camera.flash(1000);
     camera.fadeIn(1000);
+    this.player.update(this.player.anims.play("player_down"));
   }
 
   createCombat() {
     this.matterCollision.addOnCollideStart({
       objectA: this.player,
-      objectB: this.boss,
+      objectB: this.enemy,
       callback: (eventData) => {
         this.combatScene.playerPosition(this.player.x, this.player.y);
-        this.boss.enemyKilled();
-        this.boss.setStatic(true);
+        this.enemy.enemyKilled();
+        this.enemy.setStatic(true);
         this.AudioScene.stopMainBgm();
         this.scene.sleep();
         this.scene.add("Loading", LoadingScene, true);
         this.scene.launch("Combat", {
           health: this.player.health,
-          enemyGroup: [this.boss],
+          enemiesGroup: this.enemy,
         });
       },
       context: this,
     });
   }
+
+  // freeEnemy(enemiesGroup) {
+  //   if (enemiesGroup) {
+  //     this.events.on("wake", function (sys, data) {
+  //       let { gameOver } = data;
+  //       if (gameOver) {
+  //         this.enemyTimer = sys.time.addEvent({
+  //           delay: 1000,
+  //           callback: () => {
+  //             enemiesGroup.forEach((enemy) => {
+  //               if (enemy.active) {
+  //                 enemy.setStatic(false); //set it's static to false if enemy is still active (not killed)
+  //               }
+  //             });
+  //           },
+  //           callbackScope: sys,
+  //         });
+  //       }
+  //     });
+  //   }
+  // }
+
+
 }
