@@ -107,5 +107,15 @@ class AudioScene extends Phaser.Scene {
     this.bossRoomBGM.stop();
   }
 
+  playBossReveal() {
+    this.bossRevealBGM = this.sound.add("bossReveal", {
+      volume: 0.04,
+    })
+    this.bossRevealBGM.play();
+  }
+  stopBossReveal() {
+    this.bossRevealBGM.stop();
+  }
+
   battleSFX() {}
 }
