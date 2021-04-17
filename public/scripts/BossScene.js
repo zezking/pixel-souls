@@ -6,7 +6,6 @@ class BossScene extends Phaser.Scene {
   init(data) {
     let { player } = data;
     this.player = player;
-
     //references to other scenes for event listening
     this.uiScene = this.scene.get("Ui");
     this.combatScene = this.scene.get("Combat");
@@ -20,6 +19,7 @@ class BossScene extends Phaser.Scene {
   }
 
   create() {
+    this.uiScene.scene.bringToTop();
     this.createMap();
     this.createOverlay();
     // this.addCollisions();  //function not set up properly
@@ -27,14 +27,16 @@ class BossScene extends Phaser.Scene {
     this.createInput();
     this.createEnemy();  //New class for Andy?
     this.createCombat();
+    this.setupEventListener()
+    this.AudioScene.playMainBgm();
   }
 
   update() {
     this.player.update();
-    // this.enemies.forEach((enemy) => {
-    //   enemy.update();
-    // });
-    this.enemy.update();
+    this.enemies.forEach((enemy) => {
+      enemy.update();
+    });
+    // this.enemy.update();
   }
 
   //----------------------------
@@ -59,7 +61,7 @@ class BossScene extends Phaser.Scene {
       id: 1,
     });
     this.enemy.setStatic(true);
-    // this.enemies = [this.enemy]
+    this.enemies = [this.enemy]
   }
 
 
@@ -156,17 +158,20 @@ class BossScene extends Phaser.Scene {
   createCombat() {
     this.matterCollision.addOnCollideStart({
       objectA: this.player,
-      objectB: this.enemy,
+      objectB: this.enemies,
       callback: (eventData) => {
         this.combatScene.playerPosition(this.player.x, this.player.y);
-        this.enemy.enemyKilled();
-        this.enemy.setStatic(true);
+        this.events.emit("enemyDeath", eventData.gameObjectB);
+        this.enemies.forEach((enemy) => {
+          enemy.setStatic(true);
+        });
         this.AudioScene.stopMainBgm();
         this.scene.sleep();
         this.scene.add("Loading", LoadingScene, true);
         this.scene.launch("Combat", {
-          health: this.player.health,
-          enemiesGroup: this.enemy,
+          playerHP: this.player.health, 
+          enemyGroup: this.enemies,
+          enemyHP: this.enemy.health,
         });
       },
       context: this,
@@ -194,5 +199,87 @@ class BossScene extends Phaser.Scene {
   //   }
   // }
 
+  setupEventListener() {
+    this.events.on("pickupItem", (item) => {
+      this.items = this.items.filter((e) => e.id !== item.id);
+      item.makeInactive();
+      //update Soul Counter
+      let prevSouls = this.player.souls;
+      this.player.updateSouls(300); //currently all soulItems give a hard-coded 300 souls.
+      console.log("picked up item!");
+      this.events.emit("updateSouls", prevSouls, this.player.souls);
+      //remove item
+    });
 
+    this.combatScene.events.on("enemySoulGet", () => {
+      let prevSouls = this.player.souls;
+      this.player.updateSouls(100); //all enemies are hardcoded 100 souls
+      this.events.emit("updateSouls", prevSouls, this.player.souls);
+    })
+
+    this.events.on("enemyDeath", (enemy) => {
+      this.enemies = this.enemies.filter((e) => e.id !== enemy.id);
+      enemy.enemyKilled();
+      this.cameras.main.flash(300).shake(300);
+      // this.events.off("enemyDeath");
+    });
+
+    this.events.once("deathClear", () => {
+      this.player.souls = 0;
+      this.player.health = 5;
+      this.events.off("deathClear");
+    });
+
+    // to start Light Effect
+    this.events.once("characterLit", () => {
+      this.player.atBonfire = true;
+    });
+    // to stop Light Effect
+    this.events.once("characterNotLit", () => {
+      this.player.atBonfire = false;
+    });
+
+    this.uiScene.events.on("healthUpdated", (health) => {
+      this.player.health = health;
+    });
+
+    //Use bonfire, reset spawns/heal/restore estus
+    this.events.on("useBonfire", () => {
+      console.log("Bonfire used!!");
+      this.bonfireFX();
+      this.AudioScene.playBonfire();
+      this.player.health = 5;
+      this.player.estus = 3;
+      this.events.emit("updateHealth", this.player.health, this.player.estus);
+      this.enemies.forEach((enemy) => {
+        enemy.enemyKilled();
+      });
+      this.createEnemy();
+      this.createCombat();
+      this.freeEnemy(this.enemies);
+
+      // this.events.off("useBonfire");
+    });
+
+    this.events.on("useWell", () => {
+      this.AudioScene.playHeavenly();
+      this.wellEasterEgg();
+    });
+
+    this.events.on("bossTrigger", () => {
+      if (this.player.souls >= 1000) {
+        let prevSouls = this.player.souls;
+        this.player.souls -= 1000;
+        this.events.emit("updateSouls", prevSouls, this.player.souls);
+        this.AudioScene.stopMainBgm();
+        this.scene.sleep();
+        this.scene.add("Loading", LoadingScene, true);
+        this.scene.launch("Boss", {
+          player: this.player,
+        });
+      } else {
+        console.log("Not enough souls?")
+      }
+    })
+  }
 }
