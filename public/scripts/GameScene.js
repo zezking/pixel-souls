@@ -615,6 +615,22 @@ class GameScene extends Phaser.Scene {
       this.AudioScene.playHeavenly();
       this.wellEasterEgg();
     });
+
+    this.events.on("bossTrigger", () => {
+      if (this.player.souls >= 1000) {
+        let prevSouls = this.player.souls;
+        this.player.souls -= 1000;
+        this.events.emit("updateSouls", prevSouls, this.player.souls);
+        this.AudioScene.stopMainBgm();
+        this.scene.sleep();
+        this.scene.add("Loading", LoadingScene, true);
+        this.scene.launch("Boss", {
+          player: this.player,
+        });
+      } else {
+        console.log("Not enough souls?")
+      }
+    })
   }
 
   // this is for the BonFire Smoke Effect

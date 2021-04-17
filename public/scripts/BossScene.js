@@ -77,7 +77,7 @@ class BossScene extends Phaser.Scene {
       0,
       0
     );
-    this.OverlayLayer = map.createLayer("overlay", this.tilesOverlay, 0, 0);
+    this.OverlayLayer = map.createLayer("boss_overlay", this.tilesOverlay, 0, 0);
   }
 
   // addCollisions() {
