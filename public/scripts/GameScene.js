@@ -84,7 +84,7 @@ class GameScene extends Phaser.Scene {
       }
     });
   }
-  //--------------SPAWN ENTITIES IN GAME------------------
+  //--------------SPAWN SPRITES IN GAME------------------
   createPlayer() {
     this.player = new Player({
       scene: this,
@@ -247,7 +247,10 @@ class GameScene extends Phaser.Scene {
       this.createDialogs(npc);
     }
   }
+//------------------------------------------
+//------------------------------------------
 
+//------------SPAWN ENTITIES IN GAME---------------
   createEntity() {
     // this.entity = new Entity({
     //   scene: this,
@@ -364,7 +367,10 @@ class GameScene extends Phaser.Scene {
       frame: "bonfire0",
     });
   }
+//------------------------------------------
+//------------------------------------------
 
+//Boss event trigger for elevator
   createEventTrigger() {
     this.event1 = new EventTrigger({
       scene: this,
@@ -412,13 +418,12 @@ class GameScene extends Phaser.Scene {
     // Camera to center leeway, the higher, the tighter
     camera.setLerp(0.1, 0.1);
 
-    // //spawn flash
-    // camera.flash(1000);
     camera.fadeIn(1000);
     // used when player spawns in as invisible, plz dont delete
     // this.player.update(this.player.anims.play("player_down"));
   }
 
+//------------------MAP CREATION-----------------------
   addCollisions() {
     // grab the physics map from FULLMAP_collision.json
     let shapes = this.cache.json.get("shapes");
@@ -465,6 +470,9 @@ class GameScene extends Phaser.Scene {
     );
     this.OverlayLayer = map.createLayer("overlay", this.tilesOverlay, 0, 0);
   }
+//------------------------------------------
+//------------------------------------------
+
 
   createCombat() {
     this.matterCollision.addOnCollideStart({
@@ -552,13 +560,14 @@ class GameScene extends Phaser.Scene {
     this.events.emit("deathClear");
   }
 
+//---------------EVENT LISTENERS-------------------
   setupEventListener() {
     this.events.on("pickupItem", (item) => {
       this.items = this.items.filter((e) => e.id !== item.id);
       item.makeInactive();
       //update Soul Counter
       let prevSouls = this.player.souls;
-      this.player.updateSouls(1300); //currently all soulItems give a hard-coded 300 souls.
+      this.player.updateSouls(300); //currently all soulItems give a hard-coded 300 souls.
       console.log("picked up item!");
       this.events.emit("updateSouls", prevSouls, this.player.souls);
       //remove item
@@ -611,7 +620,6 @@ class GameScene extends Phaser.Scene {
       this.createCombat();
       this.freeEnemy(this.enemies);
 
-      // this.events.off("useBonfire");
     });
 
     this.events.on("useWell", () => {
