@@ -157,7 +157,7 @@ class UiScene extends Phaser.Scene {
       scene.tweens.add({
         targets: scene.helperText,
         alpha: { from: 1, to: 0, ease: "Linear" },
-        delay: 3000,
+        delay: 2000,
         duration: 1000,
       });
     }
@@ -182,8 +182,27 @@ class UiScene extends Phaser.Scene {
       scene.tweens.add({
         targets: scene.helperText,
         alpha: { from: 1, to: 0, ease: "Linear" },
-        delay: 3000,
-        duration: 1000,
+        delay: 1000,
+        duration: 500,
+      });
+    }
+
+    if (obj.texture.key === "well") {
+      scene.helperText = scene.add
+        .text(735,1750,"?", {
+            fill: "#FFFFFF",
+            fontSize: "10px",
+            wordWrap: { width: 400, useAdvancedWrap: true }, 
+          }
+        )
+        .setFontFamily("HonokaMincho")
+        .setDepth(3000);
+
+      scene.tweens.add({
+        targets: scene.helperText,
+        alpha: { from: 1, to: 0, ease: "Linear" },
+        delay: 250,
+        duration: 250,
       });
     }
   }
