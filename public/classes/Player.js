@@ -9,7 +9,7 @@ class Player extends Phaser.Physics.Matter.Sprite {
     // the scene this container will be added to
     const { Body, Bodies } = Phaser.Physics.Matter.Matter;
 
-    let playerCollider = Bodies.rectangle(this.x, this.y + 20, 20, 20, {
+    let playerCollider = Bodies.rectangle(this.x, this.y + 20, 28, 28, {
       isSensor: false,
       lable: "playerCollider",
     });
