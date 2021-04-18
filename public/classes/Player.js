@@ -9,7 +9,7 @@ class Player extends Phaser.Physics.Matter.Sprite {
     // the scene this container will be added to
     const { Body, Bodies } = Phaser.Physics.Matter.Matter;
 
-    let playerCollider = Bodies.rectangle(this.x, this.y + 20, 20, 20, {
+    let playerCollider = Bodies.rectangle(this.x, this.y + 20, 28, 28, {
       isSensor: false,
       lable: "playerCollider",
     });
@@ -79,7 +79,7 @@ class Player extends Phaser.Physics.Matter.Sprite {
     return this.body.velocity;
   }
 
-  update() {
+  update(delta) {
 
     // this.body.setVelocity()
     if (this.inputKeys.left.isDown && this.inputKeys.up.isDown) {
@@ -110,7 +110,7 @@ class Player extends Phaser.Physics.Matter.Sprite {
       this.anims.stop();
     }
 
-    const speed = 4;
+    const speed = 0.25 * delta;
     let playerVelocity = new Phaser.Math.Vector2();
     if (this.inputKeys.left.isDown) {
       playerVelocity.x = -1;

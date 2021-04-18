@@ -59,8 +59,8 @@ class GameScene extends Phaser.Scene {
     this.OverlayLayer.setDepth(2239); //MUST ALWAYS BE LAST ON THIS LIST!!
   }
 
-  update() {
-    this.player.update();
+  update(time, delta) {
+    this.player.update(delta);
     // enemies list
     this.enemies.forEach((enemy) => {
       enemy.update();
@@ -87,21 +87,22 @@ class GameScene extends Phaser.Scene {
   //--------------SPAWN SPRITES IN GAME------------------
   createPlayer() {
     // original player location
-    // this.player = new Player({
-    //   scene: this,
-    //   x: 530,
-    //   y: 1740,
-    //   key: "ashen_one",
-    //   frame: "player_00",
-    // });
-
     this.player = new Player({
       scene: this,
-      x: 1060,
-      y: 822,
+      x: 530,
+      y: 1740,
       key: "ashen_one",
       frame: "player_00",
     });
+
+    // location outside boss room
+    // this.player = new Player({
+    //   scene: this,
+    //   x: 1060,
+    //   y: 822,
+    //   key: "ashen_one",
+    //   frame: "player_00",
+    // });
   }
 
   createEnemy() {
@@ -359,14 +360,6 @@ class GameScene extends Phaser.Scene {
     });
   }
 
-  createWell() {
-    this.well = new Well({
-      scene: this,
-      x: 735,
-      y: 1770,
-      key: "well",
-    });
-  }
   createBonfire() {
     this.bonfire = new Bonfire({
       scene: this,
@@ -376,6 +369,23 @@ class GameScene extends Phaser.Scene {
       frame: "bonfire0",
     });
   }
+
+  createWell() {
+    this.well = new Well({
+      scene: this,
+      x: 735,
+      y: 1770,
+      key: "well",
+    });
+    this.matterCollision.addOnCollideStart({
+      objectA: this.player,
+      objectB: this.well,
+      callback: (eventData) => {
+        this.uiScene.displayHelper(this, this.well);
+      },
+    });
+  }
+
   //------------------------------------------
   //------------------------------------------
 
@@ -653,10 +663,7 @@ class GameScene extends Phaser.Scene {
           player: this.player,
         });
       } else {
-        // console.log("Not enough souls?");
-        // console.log("here");
-
-        this.helperText = this.add
+        this.warningText = this.add
           .text(1140,880,"You Require 1500 Souls \n to Enter",
             {
               fill: "#FFFFFF",
@@ -667,11 +674,9 @@ class GameScene extends Phaser.Scene {
           )
           .setFontFamily("HonokaMincho")
           .setDepth(3000);
-  
-        console.log(this.helperText);
-  
+
         this.tweens.add({
-          targets: this.helperText,
+          targets: this.warningText,
           alpha: { from: 1, to: 0, ease: "Linear" },
           delay: 3000,
           duration: 1000,

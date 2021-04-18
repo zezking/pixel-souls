@@ -31,8 +31,8 @@ class BossScene extends Phaser.Scene {
     this.OverlayLayer.setDepth(2239);
   }
 
-  update() {
-    this.player.update();
+  update(time,delta) {
+    this.player.update(delta);
     this.boss.update();
   }
 
