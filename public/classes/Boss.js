@@ -6,7 +6,8 @@ class Boss extends Phaser.Physics.Matter.Sprite {
     this.id = id;
     const { Body, Bodies } = Phaser.Physics.Matter.Matter;
 
-    this.depthSorting = true; //Allows this entity to be depth-sorted
+    this.depthSorting = false; //Allows this entity to be depth-sorted
+    this.setDepth(3); //small number for boss
 
     let bossCollider = Bodies.circle(this.x, this.y, 12, {
       isSensor: false,
