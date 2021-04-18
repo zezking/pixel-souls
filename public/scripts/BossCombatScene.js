@@ -34,9 +34,11 @@ class BossCombatScene extends Phaser.Scene {
     // this.generateCombatMap();
     this.combatBackgroundGenerator();
     this.loadingTimer();
+    this.flashIntro();
     this.AudioScene.playBossReveal(); //boss music
     // this.AudioScene.playBattleBgm(); //boss music
   }
+
   setupCombatUi() {
     this.sword = this.make
       .image({ x: 200, y: 640, key: "sword", add: true })
@@ -442,4 +444,14 @@ class BossCombatScene extends Phaser.Scene {
       },
     });
   }
+
+  flashIntro() {
+    this.time.addEvent({
+      delay: 6000,
+      callback: () => {
+        this.cameras.main.flash(2250);
+      },
+    });
+  }
+  
 }
