@@ -159,7 +159,8 @@ class UiScene extends Phaser.Scene {
       scene.tweens.add({
         targets: scene.helperText,
         alpha: { from: 1, to: 0, ease: "Linear" },
-        duration: 4000,
+        delay: 3000,
+        duration: 1000,
       });
 
       // scene.input.keyboard.on("keydown-" + "E", () => {

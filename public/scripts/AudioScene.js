@@ -19,7 +19,7 @@ class AudioScene extends Phaser.Scene {
 
   playBattleBgm() {
     this.battleBGM = this.sound.add("battle-audio", {
-      volume: 0.04,
+      volume: 0.08,
     });
     this.battleBGM.play();
   }
@@ -56,14 +56,14 @@ class AudioScene extends Phaser.Scene {
 
   playPlayerDmgSFX() {
     this.damagedHit = this.sound.add("hit", {
-      volume: 0.05,
+      volume: 0.08,
     });
     this.damagedHit.play();
   }
 
   playEnemyDmgSFX() {
     this.damagedHit = this.sound.add("atk", {
-      volume: 0.05,
+      volume: 0.08,
     });
     this.damagedHit.play();
   }
@@ -77,7 +77,7 @@ class AudioScene extends Phaser.Scene {
 
   playEstus() {
     this.estusDrink = this.sound.add("estusSFX", {
-      volume: 0.04,
+      volume: 0.06,
     });
     this.estusDrink.play();
   }
@@ -91,14 +91,14 @@ class AudioScene extends Phaser.Scene {
 
   playHeavenly() {
     this.heavenly = this.sound.add("heavenlySFX", {
-      volume: 0.04,
+      volume: 0.06,
     });
     this.heavenly.play();
   }
 
   playBossRoom() {
     this.bossRoomBGM = this.sound.add("bossRoom", {
-      volume: 0.03,
+      volume: 0.06,
     });
     this.bossRoomBGM.play();
   }
@@ -109,7 +109,7 @@ class AudioScene extends Phaser.Scene {
 
   playBossReveal() {
     this.bossRevealBGM = this.sound.add("bossReveal", {
-      volume: 0.04,
+      volume: 0.07,
       loop: true,
     });
     this.bossRevealBGM.play();
@@ -120,7 +120,7 @@ class AudioScene extends Phaser.Scene {
 
   playRumble() {
     this.rumbleSFX = this.sound.add("rumbleSFX", {
-      volume: 0.5,
+      volume: 0.8,
       loop: true,
     });
     this.rumbleSFX.play();
