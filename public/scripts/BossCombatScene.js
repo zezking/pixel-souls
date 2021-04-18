@@ -227,7 +227,7 @@ class BossCombatScene extends Phaser.Scene {
   createCombatPlayer() {
     this.combatPlayer = this.make
       .image({
-        x: 200,
+        x: 100,
         y: 500,
         key: "PLAYERBACK",
         scale: {
@@ -242,7 +242,7 @@ class BossCombatScene extends Phaser.Scene {
     this.enemyCombat = new Boss({
       scene: this,
       x: 650,
-      y: 500,
+      y: 450,
       key: "andyHighRes",
       id: 5,
     })
