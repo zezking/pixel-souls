@@ -5,8 +5,8 @@ const config = {
   scene: [
     BootScene,
     TitleScene,
-      //These ones are disabled, but here as a reminder to where it needs to sit on this list:
-    // GameScene,   
+    //These ones are disabled, but here as a reminder to where it needs to sit on this list:
+    // GameScene,
     // BossScene,
     UiScene,
     LogoScene,
@@ -37,6 +37,11 @@ const config = {
       },
     ],
   },
+  scale: {
+    mode: Phaser.Scale.FIT,
+    autoCenter: Phaser.Scale.CENTER_BOTH,
+  },
+  autoRound: false,
 };
 
 const game = new Phaser.Game(config);
