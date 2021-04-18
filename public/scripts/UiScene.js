@@ -16,7 +16,7 @@ class UiScene extends Phaser.Scene {
     this.createSoulSuckSFX();
   }
 
-//----------Initial UI Setup---------------
+  //----------Initial UI Setup---------------
   setupUiElements() {
     //Health Hearts
     this.hearts = this.add.group({
@@ -78,7 +78,7 @@ class UiScene extends Phaser.Scene {
       });
       this.healthUpdater(health);
     });
-  //-------------------------------------------
+    //-------------------------------------------
     //Health and Estus flasks from GAMESCENE:
     this.gameScene.events.on("updateHealth", (health, estus) => {
       //Health hearts
@@ -137,4 +137,35 @@ class UiScene extends Phaser.Scene {
     });
   }
 
+  displayHelper(scene, obj) {
+    if (obj.texture.key === "bonfire") {
+      console.log("here");
+      scene.helperText = scene.add
+        .text(
+          485, // x position of text
+          1800, // y position of text
+          "E: Rest at bonfire", //this will generate a random conversation with NPC
+          {
+            fill: "#FFFFFF",
+            fontSize: "10px",
+            wordWrap: { width: 400, useAdvancedWrap: true }, //change here to make dialogues text wrap
+          }
+        )
+        .setFontFamily("HonokaMincho")
+        .setDepth(3000);
+
+      console.log(scene.helperText);
+
+      scene.tweens.add({
+        targets: scene.helperText,
+        alpha: { from: 1, to: 0, ease: "Linear" },
+        delay: 3000,
+        duration: 1000,
+      });
+
+      // scene.input.keyboard.on("keydown-" + "E", () => {
+      //   scene.scene.remove("Dialog");
+      // });
+    }
+  }
 }

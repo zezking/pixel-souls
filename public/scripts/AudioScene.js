@@ -8,7 +8,7 @@ class AudioScene extends Phaser.Scene {
 
   playMainBgm() {
     this.mainBGM = this.sound.add("bg-music", {
-      volume: 0.04,
+      volume: 0.08,
       loop: true,
     });
     this.mainBGM.play();
@@ -19,7 +19,7 @@ class AudioScene extends Phaser.Scene {
 
   playBattleBgm() {
     this.battleBGM = this.sound.add("battle-audio", {
-      volume: 0.04,
+      volume: 0.08,
     });
     this.battleBGM.play();
   }
@@ -29,7 +29,7 @@ class AudioScene extends Phaser.Scene {
 
   playMenuBgm() {
     this.menuBGM = this.sound.add("menu-music", {
-      volume: 0.07,
+      volume: 0.3,
     });
     this.menuBGM.play();
     //change the startMenue sond between 0 and 1
@@ -41,7 +41,7 @@ class AudioScene extends Phaser.Scene {
 
   playStartSFX() {
     this.startMenuSFX = this.sound.add("start-menu", {
-      volume: 0.06,
+      volume: 0.4,
     });
 
     this.startMenuSFX.play();
@@ -49,21 +49,21 @@ class AudioScene extends Phaser.Scene {
 
   playAreaSFX() {
     this.areaSFX = this.sound.add("new-area", {
-      volume: 0.04,
+      volume: 0.09,
     });
     this.areaSFX.play();
   }
 
   playPlayerDmgSFX() {
     this.damagedHit = this.sound.add("hit", {
-      volume: 0.05,
+      volume: 0.08,
     });
     this.damagedHit.play();
   }
 
   playEnemyDmgSFX() {
     this.damagedHit = this.sound.add("atk", {
-      volume: 0.05,
+      volume: 0.08,
     });
     this.damagedHit.play();
   }
@@ -77,7 +77,7 @@ class AudioScene extends Phaser.Scene {
 
   playEstus() {
     this.estusDrink = this.sound.add("estusSFX", {
-      volume: 0.04,
+      volume: 0.06,
     });
     this.estusDrink.play();
   }
@@ -91,14 +91,14 @@ class AudioScene extends Phaser.Scene {
 
   playHeavenly() {
     this.heavenly = this.sound.add("heavenlySFX", {
-      volume: 0.04,
+      volume: 0.06,
     });
     this.heavenly.play();
   }
 
   playBossRoom() {
     this.bossRoomBGM = this.sound.add("bossRoom", {
-      volume: 0.03,
+      volume: 0.06,
     });
     this.bossRoomBGM.play();
   }
@@ -109,7 +109,7 @@ class AudioScene extends Phaser.Scene {
 
   playBossReveal() {
     this.bossRevealBGM = this.sound.add("bossReveal", {
-      volume: 0.04,
+      volume: 0.07,
       loop: true,
     });
     this.bossRevealBGM.play();
@@ -120,7 +120,7 @@ class AudioScene extends Phaser.Scene {
 
   playRumble() {
     this.rumbleSFX = this.sound.add("rumbleSFX", {
-      volume: 0.5,
+      volume: 0.8,
       loop: true,
     });
     this.rumbleSFX.play();
