@@ -16,7 +16,6 @@ class BossScene extends Phaser.Scene {
 
   preload() {
     Player.preload(this);
-    // Boss.preload(this);
   }
 
   create() {
@@ -50,6 +49,7 @@ class BossScene extends Phaser.Scene {
     this.player.health = this.oldPlayer.health;
     this.player.souls = this.oldPlayer.souls;
     this.player.estus = this.oldPlayer.estus;
+    this.player.setDepth(3);
   }
 
   createBoss() {
@@ -61,6 +61,7 @@ class BossScene extends Phaser.Scene {
       id: 1,
     });
     this.boss.setStatic(true);
+    this.boss.setDepth(2);
   }
 //---------------------------------------------------
 //---------------------------------------------------

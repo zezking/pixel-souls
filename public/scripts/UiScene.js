@@ -4,8 +4,7 @@ class UiScene extends Phaser.Scene {
   }
 
   init() {
-    // grab a reference to the game scene
-
+    //Scene references for event listening
     this.gameScene = this.scene.get("Game");
     this.combatScene = this.scene.get("Combat");
     this.bossCombatScene = this.scene.get("BossCombat");
@@ -17,6 +16,7 @@ class UiScene extends Phaser.Scene {
     this.createSoulSuckSFX();
   }
 
+//----------Initial UI Setup---------------
   setupUiElements() {
     //Health Hearts
     this.hearts = this.add.group({
@@ -40,6 +40,8 @@ class UiScene extends Phaser.Scene {
     // Estus Flask
     this.estusFlask = this.add.image(75, 725, "estus-full");
   }
+  //-----------------------------------------
+  //-----------------------------------------
 
   setupEvents() {
     // listen for the updateSouls event from the game scene
@@ -53,7 +55,7 @@ class UiScene extends Phaser.Scene {
         }, (timer += 5));
       }
     });
-    // listen for healthCount event?
+    // listen for healthCount event from COMBAT
     this.combatScene.events.on("updateHealth", (health) => {
       this.hearts.children.each((gameObj, index) => {
         const heart = gameObj;
@@ -76,7 +78,31 @@ class UiScene extends Phaser.Scene {
       });
       this.healthUpdater(health);
     });
-    //Health and Estus flasks from gameScene:
+  //-------------------------------------------
+    //Health and Estus flasks from GAMESCENE:
+    this.gameScene.events.on("updateHealth", (health, estus) => {
+      //Health hearts
+      this.hearts.children.each((gameObj, index) => {
+        const heart = gameObj;
+        if (index < health) {
+          heart.setTexture("ui-heart-full");
+        } else {
+          heart.setTexture("ui-heart-empty");
+        }
+      });
+      this.healthUpdater(health);
+      //Estus flask
+      if (estus === 3) {
+        this.estusFlask.setTexture("estus-full");
+      } else if (estus === 2) {
+        this.estusFlask.setTexture("estus-half");
+      } else if (estus === 1) {
+        this.estusFlask.setTexture("estus-quarter");
+      } else {
+        this.estusFlask.setTexture("estus-empty");
+      }
+    });
+    //Health and Estus flasks from BOSS-SCENE:
     this.gameScene.events.on("updateHealth", (health, estus) => {
       //Health hearts
       this.hearts.children.each((gameObj, index) => {
@@ -110,5 +136,5 @@ class UiScene extends Phaser.Scene {
       volume: 0.04,
     });
   }
-  update() {}
+
 }

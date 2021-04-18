@@ -39,6 +39,7 @@ class DialogScene extends Phaser.Scene {
         .setFontFamily("HonokaMincho");
 
       this.dialogsTimer = this.time.addEvent({
+        //How long the box stays on screen
         delay: 4000,
         callback: () => {
           this.scene.remove("Dialog");

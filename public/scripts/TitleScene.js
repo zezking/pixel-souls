@@ -12,7 +12,6 @@ class TitleScene extends Phaser.Scene {
   }
 
   create() {
-    //this.titleScreenSFX();
     this.logoDetailEffect();
     this.titleTextEffect();
     this.startTextEffects();
