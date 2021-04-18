@@ -9,6 +9,7 @@ class BossCombatScene extends Phaser.Scene {
     this.enemyHealth = enemyHP;
     this.input.enabled = false;
     this.AudioScene = this.scene.get("Audio");
+
     this.CombatPromptScene = this.scene.get("Prompt");
 
     console.log("(inside combat)Health from player: ", this.playerHealth);
@@ -32,8 +33,9 @@ class BossCombatScene extends Phaser.Scene {
     this.createCombatPlayer();
     this.generateCombatMap();
     this.combatBackgroundGenerator();
-
-    this.AudioScene.playBattleBgm(); //boss music
+    this.loadingTimer();
+    this.AudioScene.playBossReveal(); //boss music
+    // this.AudioScene.playBattleBgm(); //boss music
   }
   setupCombatUi() {
     this.sword = this.make
@@ -102,9 +104,10 @@ class BossCombatScene extends Phaser.Scene {
     });
     this.enemyHearts.createMultiple({
       key: "ui-heart-full",
-      setXY: { x: 615, y: 325, stepX: 40 },
+      setXY: { x: 445, y: 400, stepX: 40 },
       quantity: 20,
     });
+    this.enemyHearts.setDepth(1337);
   }
 
   //Sword > Magic > Shield > Sword...  :)
@@ -148,7 +151,8 @@ class BossCombatScene extends Phaser.Scene {
           console.log("winner: ", winner, "Enemy chose: ", enemyChoice);
           this.playerHealth -= 1;
           this.enemyHealth -= 1;
-
+          this.AudioScene.playPlayerDmgSFX();
+          this.AudioScene.playEnemyDmgSFX();
           //this.playerHurt();
           //this.enemyHurt();
           this.cameras.main.flash(300).shake(300);
@@ -157,6 +161,7 @@ class BossCombatScene extends Phaser.Scene {
         case "enemy":
           console.log("winner: ", winner, "Enemy chose: ", enemyChoice);
           this.playerHealth -= 1;
+          this.AudioScene.playPlayerDmgSFX();
           //this.playerHurt();
           this.cameras.main.flash(300).shake(300);
           this.healthChecker();
@@ -164,6 +169,7 @@ class BossCombatScene extends Phaser.Scene {
         case "player":
           console.log("winner: ", winner, "Enemy chose: ", enemyChoice);
           this.enemyHealth -= 1;
+          this.AudioScene.playEnemyDmgSFX();
           //this.enemyHurt();
           this.cameras.main.flash(300).shake(300);
           this.healthChecker();
@@ -177,7 +183,7 @@ class BossCombatScene extends Phaser.Scene {
     console.log("Enemy health remaining: ", this.enemyHealth);
 
     if (this.playerHealth <= 0) {
-      this.AudioScene.stopBattleBgm();
+      this.AudioScene.stopBossReveal();
       this.AudioScene.stopMainBgm();
       this.events.off("pointerdown");
       this.events.off("results");
@@ -221,7 +227,7 @@ class BossCombatScene extends Phaser.Scene {
   createCombatPlayer() {
     this.combatPlayer = this.make
       .image({
-        x: 200,
+        x: 100,
         y: 500,
         key: "PLAYERBACK",
         scale: {
@@ -236,12 +242,12 @@ class BossCombatScene extends Phaser.Scene {
     this.enemyCombat = new Boss({
       scene: this,
       x: 650,
-      y: 150,
-      key: "andy",
+      y: 450,
+      key: "andyHighRes",
       id: 5,
     })
-      .setDepth(200)
-      .setScale(8);
+      .setDepth(1)
+      .setScale(1);
   }
 
   drawCombatUIBackground() {
@@ -426,5 +432,14 @@ class BossCombatScene extends Phaser.Scene {
 
     this.magicCursor.setInteractive();
     this.swordCursor.setInteractive();
+  }
+
+  loadingTimer() {
+    this.time.addEvent({
+      delay: 3500,
+      callback: () => {
+        this.scene.add("Loading", LoadingScene, true);
+      },
+    });
   }
 }

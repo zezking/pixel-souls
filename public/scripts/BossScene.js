@@ -6,12 +6,12 @@ class BossScene extends Phaser.Scene {
   init(data) {
     let { player } = data;
     this.oldPlayer = player;
-
+    this.scene.moveAbove("Game");
     //references to other scenes for event listening
     this.uiScene = this.scene.get("Ui");
     this.combatScene = this.scene.get("Combat");
     this.AudioScene = this.scene.get("Audio");
-
+    this.BossLoadingScene = this.scene.get("BossLoading");
   }
 
   preload() {
@@ -25,7 +25,7 @@ class BossScene extends Phaser.Scene {
     // this.addCollisions();  //function not set up properly
     this.playerStartPoint();
     this.createInput();
-    this.createBoss();  //New class for Andy?
+    this.createBoss(); //New class for Andy?
     this.createCombat();
 
     this.OverlayLayer.setDepth(2239);
@@ -39,28 +39,27 @@ class BossScene extends Phaser.Scene {
   //----------------------------
 
   playerStartPoint() {
-      this.player = new Player({
-        scene: this,
-        x: 65,
-        y: 155,
-        key: "ashen_one",
-        frame: "player_00",
-      });
-      this.player.health = this.oldPlayer.health;
-      this.player.souls = this.oldPlayer.souls;
-      this.player.estus = this.oldPlayer.estus;
-    }
+    this.player = new Player({
+      scene: this,
+      x: 65,
+      y: 155,
+      key: "ashen_one",
+      frame: "player_00",
+    });
+    this.player.health = this.oldPlayer.health;
+    this.player.souls = this.oldPlayer.souls;
+    this.player.estus = this.oldPlayer.estus;
+  }
 
   createBoss() {
     this.boss = new Boss({
       scene: this,
-      x: 400,
-      y: 200,
+      x: 375,
+      y: 75,
       key: "andy",
       id: 1,
     });
     this.boss.setStatic(true);
-
   }
 
   createMap() {
@@ -92,7 +91,12 @@ class BossScene extends Phaser.Scene {
       0,
       0
     );
-    this.OverlayLayer = map.createLayer("boss_overlay", this.tilesOverlay, 0, 0);
+    this.OverlayLayer = map.createLayer(
+      "boss_overlay",
+      this.tilesOverlay,
+      0,
+      0
+    );
   }
 
   // addCollisions() {
@@ -145,10 +149,11 @@ class BossScene extends Phaser.Scene {
       callback: (eventData) => {
         this.combatScene.playerPosition(this.player.x, this.player.y);
         this.boss.bossKilled();
-        // this.AudioScene.stopMainBgm();
+        this.AudioScene.stopBossRoom();
         this.scene.sleep();
-        this.scene.add("Loading", LoadingScene, true);
-        this.scene.launch("Combat", {
+        this.scene.add("BossLoading", BossLoadingScene, true);
+        //this.scene.add("Loading", LoadingScene, true);
+        this.scene.launch("BossCombat", {
           playerHP: this.player.health,
           enemiesGroup: [this.boss],
           enemyHP: this.boss.health,
@@ -157,8 +162,4 @@ class BossScene extends Phaser.Scene {
       context: this,
     });
   }
-
-
-
-
 }
