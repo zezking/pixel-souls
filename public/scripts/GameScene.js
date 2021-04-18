@@ -59,8 +59,8 @@ class GameScene extends Phaser.Scene {
     this.OverlayLayer.setDepth(2239); //MUST ALWAYS BE LAST ON THIS LIST!!
   }
 
-  update() {
-    this.player.update();
+  update(time, delta) {
+    this.player.update(delta);
     // enemies list
     this.enemies.forEach((enemy) => {
       enemy.update();
