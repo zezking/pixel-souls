@@ -86,10 +86,19 @@ class GameScene extends Phaser.Scene {
   }
   //--------------SPAWN SPRITES IN GAME------------------
   createPlayer() {
+    // original player location
+    // this.player = new Player({
+    //   scene: this,
+    //   x: 530,
+    //   y: 1740,
+    //   key: "ashen_one",
+    //   frame: "player_00",
+    // });
+
     this.player = new Player({
       scene: this,
-      x: 530,
-      y: 1740,
+      x: 1060,
+      y: 822,
       key: "ashen_one",
       frame: "player_00",
     });
@@ -420,7 +429,7 @@ class GameScene extends Phaser.Scene {
 
     camera.fadeIn(1000);
     // used when player spawns in as invisible, plz dont delete
-    // this.player.update(this.player.anims.play("player_down"));
+    this.player.update(this.player.anims.play("player_down"));
   }
 
   //------------------MAP CREATION-----------------------
@@ -641,7 +650,30 @@ class GameScene extends Phaser.Scene {
           player: this.player,
         });
       } else {
-        console.log("Not enough souls?");
+        // console.log("Not enough souls?");
+        // console.log("here");
+
+        this.helperText = this.add
+          .text(1140,880,"You Require 1500 Souls \n to Enter",
+            {
+              fill: "#FFFFFF",
+              fontSize: "10px",
+              align: "center",
+              wordWrap: { width: 400, useAdvancedWrap: true },
+            }
+          )
+          .setFontFamily("HonokaMincho")
+          .setDepth(3000);
+  
+        console.log(this.helperText);
+  
+        this.tweens.add({
+          targets: this.helperText,
+          alpha: { from: 1, to: 0, ease: "Linear" },
+          delay: 3000,
+          duration: 1000,
+        });
+  
       }
     });
   }
