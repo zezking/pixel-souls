@@ -135,7 +135,7 @@ class BootScene extends Phaser.Scene {
   }
 
   loadVideo() {
-    this.load.video("boss-loading", "public/assets/video/andy_gwyn.mp4", true);
+    this.load.video("boss-loading", "public/assets/video/andy_unrevealed.mp4", true);
   }
 
   loadTilemap() {
