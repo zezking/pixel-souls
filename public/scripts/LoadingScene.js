@@ -34,7 +34,7 @@ class LoadingScene extends Phaser.Scene {
       .setDepth(300);
     this.tweens.add({
       targets: this.bonfire,
-      completeDelay: 2000,
+      completeDelay: 3000,
       onComplete: () => {
         this.scene.remove("Loading");
       },
