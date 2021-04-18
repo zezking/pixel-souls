@@ -247,10 +247,10 @@ class GameScene extends Phaser.Scene {
       this.createDialogs(npc);
     }
   }
-//------------------------------------------
-//------------------------------------------
+  //------------------------------------------
+  //------------------------------------------
 
-//------------SPAWN ENTITIES IN GAME---------------
+  //------------SPAWN ENTITIES IN GAME---------------
   createEntity() {
     // this.entity = new Entity({
     //   scene: this,
@@ -367,10 +367,10 @@ class GameScene extends Phaser.Scene {
       frame: "bonfire0",
     });
   }
-//------------------------------------------
-//------------------------------------------
+  //------------------------------------------
+  //------------------------------------------
 
-//Boss event trigger for elevator
+  //Boss event trigger for elevator
   createEventTrigger() {
     this.event1 = new EventTrigger({
       scene: this,
@@ -423,7 +423,7 @@ class GameScene extends Phaser.Scene {
     // this.player.update(this.player.anims.play("player_down"));
   }
 
-//------------------MAP CREATION-----------------------
+  //------------------MAP CREATION-----------------------
   addCollisions() {
     // grab the physics map from FULLMAP_collision.json
     let shapes = this.cache.json.get("shapes");
@@ -470,9 +470,8 @@ class GameScene extends Phaser.Scene {
     );
     this.OverlayLayer = map.createLayer("overlay", this.tilesOverlay, 0, 0);
   }
-//------------------------------------------
-//------------------------------------------
-
+  //------------------------------------------
+  //------------------------------------------
 
   createCombat() {
     this.matterCollision.addOnCollideStart({
@@ -523,6 +522,8 @@ class GameScene extends Phaser.Scene {
       objectA: this.player,
       objectB: this.bonfire,
       callback: () => {
+        this.uiScene.displayHelper(this, this.bonfire);
+
         this.events.emit("characterLit");
       },
     });
@@ -560,7 +561,7 @@ class GameScene extends Phaser.Scene {
     this.events.emit("deathClear");
   }
 
-//---------------EVENT LISTENERS-------------------
+  //---------------EVENT LISTENERS-------------------
   setupEventListener() {
     this.events.on("pickupItem", (item) => {
       this.items = this.items.filter((e) => e.id !== item.id);
@@ -619,7 +620,6 @@ class GameScene extends Phaser.Scene {
       this.createEnemy();
       this.createCombat();
       this.freeEnemy(this.enemies);
-
     });
 
     this.events.on("useWell", () => {
