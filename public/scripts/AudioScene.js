@@ -8,7 +8,7 @@ class AudioScene extends Phaser.Scene {
 
   playMainBgm() {
     this.mainBGM = this.sound.add("bg-music", {
-      volume: 0.04,
+      volume: 0.08,
       loop: true,
     });
     this.mainBGM.play();
@@ -29,7 +29,7 @@ class AudioScene extends Phaser.Scene {
 
   playMenuBgm() {
     this.menuBGM = this.sound.add("menu-music", {
-      volume: 0.07,
+      volume: 0.3,
     });
     this.menuBGM.play();
     //change the startMenue sond between 0 and 1
@@ -41,7 +41,7 @@ class AudioScene extends Phaser.Scene {
 
   playStartSFX() {
     this.startMenuSFX = this.sound.add("start-menu", {
-      volume: 0.06,
+      volume: 0.4,
     });
 
     this.startMenuSFX.play();
@@ -49,7 +49,7 @@ class AudioScene extends Phaser.Scene {
 
   playAreaSFX() {
     this.areaSFX = this.sound.add("new-area", {
-      volume: 0.04,
+      volume: 0.09,
     });
     this.areaSFX.play();
   }
