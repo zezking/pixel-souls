@@ -139,7 +139,6 @@ class UiScene extends Phaser.Scene {
 
   displayHelper(scene, obj) {
     if (obj.texture.key === "bonfire") {
-      console.log("here");
       scene.helperText = scene.add
         .text(
           485, // x position of text
@@ -154,7 +153,6 @@ class UiScene extends Phaser.Scene {
         .setFontFamily("HonokaMincho")
         .setDepth(3000);
 
-      console.log(scene.helperText);
 
       scene.tweens.add({
         targets: scene.helperText,
@@ -162,10 +160,57 @@ class UiScene extends Phaser.Scene {
         delay: 3000,
         duration: 1000,
       });
-
-      // scene.input.keyboard.on("keydown-" + "E", () => {
-      //   scene.scene.remove("Dialog");
-      // });
     }
+
+    if (obj.texture.key === "eventTrigger") {
+      scene.helperText = scene.add
+        .text(
+          1177, // x position of text
+          850, // y position of text
+          "E: Use lift", //this will generate a random conversation with NPC
+          {
+            fill: "#FFFFFF",
+            fontSize: "10px",
+            wordWrap: { width: 400, useAdvancedWrap: true }, //change here to make dialogues text wrap
+          }
+        )
+        .setFontFamily("HonokaMincho")
+        .setDepth(3000);
+
+      // console.log(scene.helperText);
+
+      scene.tweens.add({
+        targets: scene.helperText,
+        alpha: { from: 1, to: 0, ease: "Linear" },
+        delay: 3000,
+        duration: 1000,
+      });
+    }
+  }
+
+  //Not enough souls to use lift?
+  notEnoughSouls(scene) {
+    scene.helperText = scene.add
+    .text(
+      1128, // x position of text
+      775, // y position of text
+      "NOT ENOUGH SOULS", //this will generate a random conversation with NPC
+      {
+        fill: "#ce0000",
+        fontSize: "14px",
+        wordWrap: { width: 400, useAdvancedWrap: true }, //change here to make dialogues text wrap
+      }
+    )
+    .setFontFamily("HonokaMincho")
+    .setDepth(3000);
+
+  // console.log(scene.helperText);
+
+  scene.tweens.add({
+    targets: scene.helperText,
+    alpha: { from: 1, to: 0, ease: "Linear" },
+    delay: 3000,
+    duration: 1000,
+  });
   }
 }

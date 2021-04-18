@@ -382,6 +382,13 @@ class GameScene extends Phaser.Scene {
     this.event1.setVisible(false);
 
     //Interact listener
+    this.matterCollision.addOnCollideStart({
+      objectA: this.player,
+      objectB: this.event1,
+      callback: (eventData) => {
+        this.uiScene.displayHelper(this, this.event1);
+      },
+    });
     this.matterCollision.addOnCollideActive({
       objectA: this.player,
       objectB: this.event1,
@@ -629,9 +636,6 @@ class GameScene extends Phaser.Scene {
 
     this.events.on("bossTrigger", () => {
       if (this.player.souls >= 300) {
-        // let prevSouls = this.player.souls;
-        // this.player.souls -= 1000;
-        // this.events.emit("updateSouls", prevSouls, this.player.souls);
 
         this.AudioScene.stopMainBgm();
         this.scene.sleep();
@@ -641,6 +645,7 @@ class GameScene extends Phaser.Scene {
           player: this.player,
         });
       } else {
+        this.uiScene.notEnoughSouls(this);
         console.log("Not enough souls?");
       }
     });
