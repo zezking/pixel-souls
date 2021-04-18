@@ -7,7 +7,7 @@ class NPC extends Phaser.Physics.Matter.Sprite {
     this.depthSorting = true; //Allows this entity to be depth-sorted
     const { Body, Bodies } = Phaser.Physics.Matter.Matter;
     // let NPCCollider = Bodies.circle(this.x,this.y,12,{isSensor:false, lable:'NPCCollider'});
-    let NPCSensor = Bodies.circle(this.x, this.y, 24, {
+    let NPCSensor = Bodies.circle(this.x, this.y, 12, {
       isSensor: true,
       label: "NPCSensor",
     });
@@ -21,18 +21,8 @@ class NPC extends Phaser.Physics.Matter.Sprite {
     this.setExistingBody(compoundBody);
     this.setFixedRotation();
 
-    // this.velocity = 5; // the velocity when moving our NPC
-
-    // enable physics
-    // this.scene.physics.world.enable(this);
-    // set immovable if another object collides with our NPC
-    // this.setImmovable(false);
     // scale our NPC
     this.setScale(1);
-    // collide with world bounds
-    // this.setCollideWorldBounds(true);
-    // add the NPC to our existing scene
-    // this.scene.add.existing(this);
 
   }
 
