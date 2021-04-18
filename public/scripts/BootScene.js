@@ -50,6 +50,7 @@ class BootScene extends Phaser.Scene {
       "combat_background",
       "public/assets/map/FULLMAP_bottom.png"
     );
+    this.load.image("boss_background", "public/assets/map/boss_bg.png");
     this.load.image(
       "enemy_hurt",
       "public/assets/ui/battle/hurt/enemy_hurt.png"
