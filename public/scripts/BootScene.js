@@ -60,6 +60,7 @@ class BootScene extends Phaser.Scene {
     );
     this.load.image("damage", "public/assets/ui/battle/hurt/damage.png");
     this.load.image("sword_cursor", "public/assets/ui/battle/sword_cursor.png");
+    this.load.image("kana", "public/assets/ui/battle/hurt/kana.png");
   }
 
   loadSpriteSheets() {
@@ -135,7 +136,11 @@ class BootScene extends Phaser.Scene {
   }
 
   loadVideo() {
-    this.load.video("boss-loading", "public/assets/video/andy_unrevealed.mp4", true);
+    this.load.video(
+      "boss-loading",
+      "public/assets/video/andy_unrevealed.mp4",
+      true
+    );
   }
 
   loadTilemap() {

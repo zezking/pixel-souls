@@ -3,7 +3,11 @@ class CombatPromptScene extends Phaser.Scene {
     super("Prompt");
   }
 
+  init() {}
+
   displayWinLoseDraw(scene, msg) {
+    console.log(scene.scene.key) === "BossCombat";
+
     //create player damage text
     if (msg === "enemy") {
       scene.damageText = scene.add
@@ -54,8 +58,64 @@ class CombatPromptScene extends Phaser.Scene {
       });
       return;
     }
+
     //display enemy damange
     if (msg === "player") {
+      //load kana as damage icon for Lord Andy
+      if (scene.scene.key === "BossCombat") {
+        scene.damageText = scene.add
+          .text(
+            this.scale.width / 2 + 70,
+            this.scale.height / 2 - 300,
+            "HP -1",
+            {
+              fontFamily: "HonokaMincho",
+              fontSize: "30px",
+            }
+          )
+          .setDepth(501);
+        scene.damageKana = scene.make
+          .image({
+            key: "kana",
+            x: this.scale.width / 2 + 250,
+            y: this.scale.height / 2 - 300,
+            add: true,
+          })
+          .setDepth(500);
+
+        scene.tweens.add({
+          targets: scene.damageText,
+
+          alpha: {
+            start: 0,
+            from: 1,
+            to: 0,
+            duration: 3000,
+            ease: "Cubic",
+          },
+        });
+        scene.tweens.add({
+          targets: scene.damageKana,
+
+          alpha: {
+            start: 0,
+            from: 1,
+            to: 0,
+            duration: 2300,
+            ease: "Cubic",
+          },
+        });
+        scene.tweens.add({
+          targets: scene.damageKana,
+          y: {
+            from: this.scale.height / 2 - 300,
+            to: this.scale.height / 2 - 340,
+          },
+          duration: 2500,
+        });
+
+        return;
+      }
       scene.damageText = scene.add
         .text(this.scale.width / 2 + 70, this.scale.height / 2 - 300, "HP -1", {
           fontFamily: "HonokaMincho",
@@ -102,6 +162,54 @@ class CombatPromptScene extends Phaser.Scene {
         duration: 2500,
       });
       return;
+    }
+    //load kana as damage icon for Lord Andy
+    if (scene.scene.key === "BossCombat") {
+      scene.damageText = scene.add
+        .text(this.scale.width / 2 + 70, this.scale.height / 2 - 300, "HP -1", {
+          fontFamily: "HonokaMincho",
+          fontSize: "30px",
+        })
+        .setDepth(501);
+      scene.damageKana = scene.make
+        .image({
+          key: "kana",
+          x: this.scale.width / 2 + 250,
+          y: this.scale.height / 2 - 300,
+          add: true,
+        })
+        .setDepth(500);
+
+      scene.tweens.add({
+        targets: scene.damageText,
+
+        alpha: {
+          start: 0,
+          from: 1,
+          to: 0,
+          duration: 3000,
+          ease: "Cubic",
+        },
+      });
+      scene.tweens.add({
+        targets: scene.damageKana,
+
+        alpha: {
+          start: 0,
+          from: 1,
+          to: 0,
+          duration: 2300,
+          ease: "Cubic",
+        },
+      });
+      scene.tweens.add({
+        targets: scene.damageKana,
+        y: {
+          from: this.scale.height / 2 - 300,
+          to: this.scale.height / 2 - 340,
+        },
+        duration: 2500,
+      });
     }
 
     scene.damageHeart1 = scene.make
