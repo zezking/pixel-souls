@@ -151,8 +151,7 @@ class UiScene extends Phaser.Scene {
             wordWrap: { width: 400, useAdvancedWrap: true }, //change here to make dialogues text wrap
           }
         )
-        .setFontFamily("HonokaMincho")
-        .setDepth(3000);
+        .setFontFamily("HonokaMincho");
 
       console.log(scene.helperText);
 
