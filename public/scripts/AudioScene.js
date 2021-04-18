@@ -118,5 +118,16 @@ class AudioScene extends Phaser.Scene {
     this.bossRevealBGM.stop();
   }
 
+  playRumble() {
+    this.rumbleSFX = this.sound.add("rumbleSFX", {
+      volume: 0.5,
+      loop: true,
+    });
+    this.rumbleSFX.play();
+  }
+  stopRumble() {
+    this.rumbleSFX.stop();
+  }
+
   battleSFX() {}
 }
