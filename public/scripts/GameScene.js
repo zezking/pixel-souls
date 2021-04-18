@@ -644,7 +644,6 @@ class GameScene extends Phaser.Scene {
           player: this.player,
         });
       } else {
-        this.uiScene.notEnoughSouls(this);
         console.log("Not enough souls?");
       }
     });
