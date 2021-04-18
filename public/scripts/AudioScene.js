@@ -99,7 +99,7 @@ class AudioScene extends Phaser.Scene {
   playBossRoom() {
     this.bossRoomBGM = this.sound.add("bossRoom", {
       volume: 0.04,
-    })
+    });
     this.bossRoomBGM.play();
   }
 
@@ -110,7 +110,8 @@ class AudioScene extends Phaser.Scene {
   playBossReveal() {
     this.bossRevealBGM = this.sound.add("bossReveal", {
       volume: 0.04,
-    })
+      loop: true,
+    });
     this.bossRevealBGM.play();
   }
   stopBossReveal() {
