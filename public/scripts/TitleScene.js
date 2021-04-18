@@ -4,13 +4,14 @@ class TitleScene extends Phaser.Scene {
   }
 
   init() {
+    //completely removes old scenes to destroy events
     this.scene.remove("Boss");
     this.scene.remove("Game");
+    
     this.AudioScene = this.scene.get("Audio");
   }
 
   create() {
-    //this.titleScreenSFX();
     this.logoDetailEffect();
     this.titleTextEffect();
     this.startTextEffects();
@@ -63,6 +64,7 @@ class TitleScene extends Phaser.Scene {
     this.titleText.setOrigin(0.5);
   }
 
+//--------SCENE TRANSITIONING LOGIC------------
   pressToStartGame() {
     this.input.keyboard.on("keydown", () => {
       this.AudioScene.stopMenuBgm();
@@ -72,6 +74,8 @@ class TitleScene extends Phaser.Scene {
       this.scene.stop("Title");
     });
   }
+//-----------------------------------------
+//-----------------------------------------
 
   startTextEffects() {
     this.startText = this.add
@@ -97,7 +101,10 @@ class TitleScene extends Phaser.Scene {
     }
   }
 }
-//This is the class for logo scene
+//-----------------------------------------
+//-----------------------------------------
+
+//---------------LOGO CLASS------------------
 class LogoScene extends Phaser.Scene {
   constructor() {
     super("Logo");
@@ -148,3 +155,5 @@ class LogoScene extends Phaser.Scene {
     });
   }
 }
+//-----------------------------------------
+//-----------------------------------------

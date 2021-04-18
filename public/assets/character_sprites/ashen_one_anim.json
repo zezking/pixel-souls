@@ -128,7 +128,7 @@
             "key": "player_right",
             "type": "frames",
             "repeat": -1,
-            "frameRate": 8,
+            "frameRate": 10,
             "frames": [
                 {
                     "key": "ashen_one",
@@ -152,7 +152,7 @@
             "key": "player_left",
             "type": "frames",
             "repeat": -1,
-            "frameRate": 8,
+            "frameRate": 10,
             "frames": [
                 {
                     "key": "ashen_one",

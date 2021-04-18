@@ -5,7 +5,8 @@ const config = {
   scene: [
     BootScene,
     TitleScene,
-    // GameScene,   //Disabled, but here as a reminder to where it needs to sit on this list.
+      //These ones are disabled, but here as a reminder to where it needs to sit on this list:
+    // GameScene,   
     // BossScene,
     UiScene,
     LogoScene,
@@ -21,7 +22,7 @@ const config = {
     default: "matter",
     matter: {
       gravity: { y: 0 },
-      debug: true, // set to true to view zones
+      debug: false, // set to true to view collision boxes
       plugins: {
         attractors: true,
       },

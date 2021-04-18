@@ -16,16 +16,16 @@ class BossScene extends Phaser.Scene {
 
   preload() {
     Player.preload(this);
-    // Boss.preload(this);
   }
 
   create() {
     this.createMap();
     this.createOverlay();
-    // this.addCollisions();  //function not set up properly
+    //Collision sprite does not work for this map
     this.playerStartPoint();
     this.createInput();
-    this.createBoss(); //New class for Andy?
+    
+    this.createBoss();
     this.createCombat();
 
     this.OverlayLayer.setDepth(2239);
@@ -36,7 +36,7 @@ class BossScene extends Phaser.Scene {
     this.boss.update();
   }
 
-  //----------------------------
+  //--------------SPRITE CREATION----------------------
 
   playerStartPoint() {
     this.player = new Player({
@@ -49,6 +49,7 @@ class BossScene extends Phaser.Scene {
     this.player.health = this.oldPlayer.health;
     this.player.souls = this.oldPlayer.souls;
     this.player.estus = this.oldPlayer.estus;
+    this.player.setDepth(3);
   }
 
   createBoss() {
@@ -60,8 +61,13 @@ class BossScene extends Phaser.Scene {
       id: 1,
     });
     this.boss.setStatic(true);
+    this.boss.setDepth(2);
   }
+//---------------------------------------------------
+//---------------------------------------------------
 
+
+//---------------------MAP CREATION-------------------
   createMap() {
     let map = this.make.tilemap({ key: "bossmap" });
     this.tilesBottom = map.addTilesetImage(
@@ -74,8 +80,6 @@ class BossScene extends Phaser.Scene {
     );
     this.bottomLayer = map.createLayer("boss_bottom", this.tilesBottom, 0, 0);
 
-    // character camera bounds
-    // world bounded to map size
     this.matter.world.width = map.widthInPixels;
     this.matter.world.height = map.heightInPixels;
     this.matter.world.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
@@ -98,21 +102,8 @@ class BossScene extends Phaser.Scene {
       0
     );
   }
-
-  // addCollisions() {
-  //   // grab the physics map from BOSSMAP_collision.json
-  //   let shapes = this.cache.json.get("shapes2");
-
-  //   let collisionLayer = this.matter.add.sprite(
-  //     0,
-  //     0,
-  //     "sheet2",
-  //     "BOSSMAP_collision",
-  //     { shape: shapes.BOSSMAP_collision }
-  //   );
-  //   collisionLayer.setPosition(320, 144); //manual offset for center of mass. Will have to find a better way to calculate this.
-  //   collisionLayer.visible = false;
-  // }
+//---------------------------------------------------
+//---------------------------------------------------
 
   createInput() {
     // capture so that spacebar doesn't scroll downwards in window
@@ -136,23 +127,25 @@ class BossScene extends Phaser.Scene {
     // Camera to center leeway, the higher, the tighter
     camera.setLerp(0.1, 0.1);
 
-    // //spawn flash
-    // camera.flash(1000);
     camera.fadeIn(1000);
     this.player.update(this.player.anims.play("player_down"));
   }
+//---------------------------------------------------
+//---------------------------------------------------
 
+  //Collision detection for Andy
   createCombat() {
     this.matterCollision.addOnCollideStart({
       objectA: this.player,
       objectB: this.boss,
-      callback: (eventData) => {
+      callback: () => {
         this.combatScene.playerPosition(this.player.x, this.player.y);
         this.boss.bossKilled();
         this.AudioScene.stopBossRoom();
         this.scene.sleep();
+        //loads Boss cutscene
         this.scene.add("BossLoading", BossLoadingScene, true);
-        //this.scene.add("Loading", LoadingScene, true);
+        //Loads boss combat
         this.scene.launch("BossCombat", {
           playerHP: this.player.health,
           enemiesGroup: [this.boss],

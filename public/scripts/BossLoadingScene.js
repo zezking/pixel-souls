@@ -11,8 +11,9 @@ class BossLoadingScene extends Phaser.Scene {
   }
 
   playVideo() {
+    this.cameras.main.shake(300);
     this.bossLoadingVideo = this.add
-      .video(this.scale.width / 2 - 40, this.scale.height / 2, "boss-loading")
+      .video(this.scale.width / 2 + 20, this.scale.height / 2, "boss-loading")
       .setScale(0.7)
       .setMute(true);
     this.bossLoadingVideo.play();
