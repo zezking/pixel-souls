@@ -12,6 +12,8 @@
 }
 
 canvas {
+  display: block;
+  margin: auto;
   font-family: "HonokaMincho";
   font-family: "titleFont";
 }
