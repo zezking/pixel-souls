@@ -21,12 +21,13 @@ PIXEL-SOULS is a top-down pixelated RPG demo of DARK SOULS I, made as a final pr
 
 ## CONTROLS:
 
-W - up  
-A - left  
-S - down  
-D - right  
+W     - up  
+A     - left  
+S     - down  
+D     - right  
+Shift - sprint
 
-E - interact/close dialogue  
+E - interact/exit NPC dialogue  
 R - drink estus  
 
 ---

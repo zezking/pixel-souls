@@ -134,6 +134,10 @@ class BootScene extends Phaser.Scene {
       "bossReveal",
       "public/assets/audio/fine_della_vento_aureo_cut.mp3"
     );
+    this.load.audio(
+      "rumbleSFX",
+      "public/assets/audio/RumbleSFX.mp3"
+    );
   }
 
   loadVideo() {
