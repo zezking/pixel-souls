@@ -391,6 +391,13 @@ class GameScene extends Phaser.Scene {
     this.event1.setVisible(false);
 
     //Interact listener
+    this.matterCollision.addOnCollideStart({
+      objectA: this.player,
+      objectB: this.event1,
+      callback: (eventData) => {
+        this.uiScene.displayHelper(this, this.event1);
+      },
+    });
     this.matterCollision.addOnCollideActive({
       objectA: this.player,
       objectB: this.event1,
@@ -593,7 +600,6 @@ class GameScene extends Phaser.Scene {
       this.enemies = this.enemies.filter((e) => e.id !== enemy.id);
       enemy.enemyKilled();
       this.cameras.main.flash(300).shake(300);
-      // this.events.off("enemyDeath");
     });
 
     this.events.once("deathClear", () => {
@@ -638,9 +644,6 @@ class GameScene extends Phaser.Scene {
 
     this.events.on("bossTrigger", () => {
       if (this.player.souls >= 300) {
-        // let prevSouls = this.player.souls;
-        // this.player.souls -= 1000;
-        // this.events.emit("updateSouls", prevSouls, this.player.souls);
 
         this.AudioScene.stopMainBgm();
         this.scene.sleep();
