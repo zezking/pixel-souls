@@ -54,8 +54,8 @@ class BossScene extends Phaser.Scene {
   createBoss() {
     this.boss = new Boss({
       scene: this,
-      x: 400,
-      y: 200,
+      x: 375,
+      y: 75,
       key: "andy",
       id: 1,
     });
