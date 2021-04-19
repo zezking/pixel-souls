@@ -128,6 +128,10 @@ class AudioScene extends Phaser.Scene {
   stopRumble() {
     this.rumbleSFX.stop();
   }
-
-  battleSFX() {}
+  confirm() {
+    this.select = this.sound.add("ok", {
+      volume: 0.08,
+    });
+    this.select.play();
+  }
 }
