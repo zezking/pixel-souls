@@ -63,7 +63,7 @@ class GameScene extends Phaser.Scene {
     this.player.update(delta);
     // enemies list
     this.enemies.forEach((enemy) => {
-      enemy.update();
+      enemy.update(delta);
     });
 
     this.npcs.forEach((npc) => {

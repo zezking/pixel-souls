@@ -34,8 +34,8 @@ class Player extends Phaser.Physics.Matter.Sprite {
               bodyB.position.y - bodyA.position.y < 125
             ) {
               return {
-                x: (bodyA.position.x - bodyB.position.x) * 0.000045, //You can change this value to adjust the force of X axis
-                y: (bodyA.position.y - bodyB.position.y) * 0.000045, //You can change this value to adjust the force of Y axis
+                x: (bodyA.position.x - bodyB.position.x) * 0.000050, //You can change this value to adjust the force of X axis
+                y: (bodyA.position.y - bodyB.position.y) * 0.000050, //You can change this value to adjust the force of Y axis
               };
             } else {
               return {
