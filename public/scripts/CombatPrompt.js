@@ -313,9 +313,22 @@ class CombatPromptScene extends Phaser.Scene {
   }
 
   bossName(scene) {
+    scene.enemyNameUi = scene.make
+      .image({
+        key: "enemy-name",
+        x: this.scale.width / 2 + 170,
+        y: this.scale.height / 2 - 29,
+        scale: {
+          x: 1.5,
+          y: 1.5,
+        },
+        add: true,
+      })
+      .setDepth(300);
+
     scene.bossName = scene.add
       .text(
-        this.scale.width / 2 + 30,
+        this.scale.width / 2 + 50,
         this.scale.height / 2 - 40,
         "King Andy Lord of Cinder",
         {
@@ -323,6 +336,6 @@ class CombatPromptScene extends Phaser.Scene {
           fontSize: "20px",
         }
       )
-      .setDepth(501);
+      .setDepth(500);
   }
 }
