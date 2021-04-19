@@ -22,7 +22,6 @@ class BossCombatScene extends Phaser.Scene {
 
   create() {
     this.createSwordCursor();
-
     this.cameras.main.fadeIn(1000);
     this.setupCombatUi();
     this.resultListener();
@@ -36,6 +35,7 @@ class BossCombatScene extends Phaser.Scene {
     this.loadingTimer();
     this.flashIntro();
     this.AudioScene.playBossReveal(); //boss music
+    this.CombatPromptScene.bossName(this);
     // this.AudioScene.playBattleBgm(); //boss music
   }
 
@@ -408,5 +408,4 @@ class BossCombatScene extends Phaser.Scene {
       },
     });
   }
-  
 }

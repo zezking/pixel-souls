@@ -6,8 +6,6 @@ class CombatPromptScene extends Phaser.Scene {
   init() {}
 
   displayWinLoseDraw(scene, msg) {
-    console.log(scene.scene.key) === "BossCombat";
-
     //create player damage text
     if (msg === "enemy") {
       scene.damageText = scene.add
@@ -313,7 +311,18 @@ class CombatPromptScene extends Phaser.Scene {
   healthDecreaseEffect() {
     this.damageText = this.add.text();
   }
-  createHearts(){
-    
+
+  bossName(scene) {
+    scene.bossName = scene.add
+      .text(
+        this.scale.width / 2 + 30,
+        this.scale.height / 2 - 40,
+        "King Andy Lord of Cinder",
+        {
+          fontFamily: "titleFont",
+          fontSize: "20px",
+        }
+      )
+      .setDepth(501);
   }
 }
