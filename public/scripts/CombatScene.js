@@ -65,6 +65,7 @@ class CombatScene extends Phaser.Scene {
       .on("pointerdown", () => {
         this.result = this.checkWinner("sword", aiResult());
         this.events.emit("results", this.result);
+        this.CombatPromptScene.displayPlayerChose("sword");
       })
       .on("pointerover", () => {
         this.swordCursor.setVisible(true);
@@ -77,6 +78,7 @@ class CombatScene extends Phaser.Scene {
       .on("pointerdown", () => {
         this.result = this.checkWinner("magic", aiResult());
         this.events.emit("results", this.result);
+        this.CombatPromptScene.displayPlayerChose("magic");
       })
       .on("pointerover", () => {
         this.magicCursor.setVisible(true);
@@ -88,6 +90,7 @@ class CombatScene extends Phaser.Scene {
       .on("pointerdown", () => {
         this.result = this.checkWinner("shield", aiResult());
         this.events.emit("results", this.result);
+        this.CombatPromptScene.displayPlayerChose("shield");
       })
       .on("pointerover", () => {
         this.shieldCursor.setVisible(true);

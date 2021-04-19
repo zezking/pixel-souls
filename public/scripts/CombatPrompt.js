@@ -379,7 +379,7 @@ class CombatPromptScene extends Phaser.Scene {
           from: 0.5,
           to: 0.8,
           duration: 800,
-          ease: "Expo",
+          ease: "Expo.easeInOut",
         },
 
         alpha: {
@@ -404,7 +404,7 @@ class CombatPromptScene extends Phaser.Scene {
           from: 0.5,
           to: 0.8,
           duration: 800,
-          ease: "Expo",
+          ease: "Expo.easeInOut",
         },
 
         alpha: {
@@ -429,7 +429,7 @@ class CombatPromptScene extends Phaser.Scene {
           from: 0.5,
           to: 0.8,
           duration: 800,
-          ease: "Expo",
+          ease: "Expo.easeInOut",
         },
 
         alpha: {
@@ -443,27 +443,154 @@ class CombatPromptScene extends Phaser.Scene {
       return;
     }
 
-    // scene.shieldChosen = scene.make
-    //   .image({ x: 500, y: 200, key: "magic_chosen", add: true })
-    //   .setDepth(100);
-    // scene.magicChosen = scene.make
-    //   .image({ x: 500, y: 200, key: "shield_chosen", add: true })
-    //   .setDepth(100);
-    console.log(scene, choice);
+    if (choice === "same") {
+      if (this.playerChoice === "sword") {
+        scene.swordPlayerChosen = scene.make
+          .image({ x: 340, y: 300, key: "sword_chosen", add: true })
+          .setDepth(100)
+          .setScale(1.2);
+        scene.tweens.add({
+          targets: scene.swordPlayerChosen,
+          scale: {
+            from: 1.2,
+            to: 1.5,
+            duration: 800,
+            ease: "Expo.easeInOut",
+          },
 
-    //   this.sword = this.make
-    //   .image({ x: 200, y: 640, key: "sword", add: true })
-    //   .setDepth(100);
-    // this.sword.setInteractive();
-    // this.magic = this.make
-    //   .image({ x: 400, y: 640, key: "magic", add: true })
-    //   .setDepth(100);
-    // this.magic.setInteractive();
-    // this.shield = this.make
-    //   .image({ x: 600, y: 640, key: "shield", add: true })
-    //   .setDepth(100);
-    // this.shield.setInteractive();
+          alpha: {
+            from: 1,
+            to: 0,
+            delay: 1000,
+            duration: 1000,
+            ease: "Cubic",
+          },
+        });
+        scene.swordChosen = scene.make
+          .image({ x: 500, y: 200, key: "sword_chosen", add: true })
+          .setDepth(100)
+          .setScale(0.5);
+
+        scene.tweens.add({
+          targets: scene.swordChosen,
+          scale: {
+            from: 0.5,
+            to: 0.8,
+            duration: 800,
+            ease: "Expo.easeInOut",
+          },
+
+          alpha: {
+            from: 1,
+            to: 0,
+            delay: 1000,
+            duration: 1000,
+            ease: "Cubic",
+          },
+        });
+        return;
+      }
+      if (this.playerChoice === "magic") {
+        scene.swordPlayerChosen = scene.make
+          .image({ x: 340, y: 300, key: "magic_chosen", add: true })
+          .setDepth(100)
+          .setScale(1.2);
+        scene.tweens.add({
+          targets: scene.swordPlayerChosen,
+          scale: {
+            from: 1.2,
+            to: 1.5,
+            duration: 800,
+            ease: "Expo.easeInOut",
+          },
+
+          alpha: {
+            from: 1,
+            to: 0,
+            delay: 1000,
+            duration: 1000,
+            ease: "Cubic",
+          },
+        });
+        scene.swordChosen = scene.make
+          .image({ x: 500, y: 200, key: "magic_chosen", add: true })
+          .setDepth(100)
+          .setScale(0.5);
+
+        scene.tweens.add({
+          targets: scene.swordChosen,
+          scale: {
+            from: 0.5,
+            to: 0.8,
+            duration: 800,
+            ease: "Expo.easeInOut",
+          },
+
+          alpha: {
+            from: 1,
+            to: 0,
+            delay: 1000,
+            duration: 1000,
+            ease: "Cubic",
+          },
+        });
+        return;
+      }
+      if (this.playerChoice === "shield") {
+        scene.swordPlayerChosen = scene.make
+          .image({ x: 340, y: 300, key: "shield_chosen", add: true })
+          .setDepth(100)
+          .setScale(1.2);
+        scene.tweens.add({
+          targets: scene.swordPlayerChosen,
+          scale: {
+            from: 1.2,
+            to: 1.5,
+            duration: 800,
+            ease: "Expo.easeInOut",
+          },
+
+          alpha: {
+            from: 1,
+            to: 0,
+            delay: 1000,
+            duration: 1000,
+            ease: "Cubic",
+          },
+        });
+        scene.swordChosen = scene.make
+          .image({ x: 500, y: 200, key: "shield_chosen", add: true })
+          .setDepth(100)
+          .setScale(0.5);
+
+        scene.tweens.add({
+          targets: scene.swordChosen,
+          scale: {
+            from: 0.5,
+            to: 0.8,
+            duration: 800,
+            ease: "Expo.easeInOut",
+          },
+
+          alpha: {
+            from: 1,
+            to: 0,
+            delay: 1000,
+            duration: 1000,
+            ease: "Cubic",
+          },
+        });
+        return;
+      }
+    }
   }
 
-  displayPlayerChose(scene, choice) {}
+  displayPlayerChose(choice) {
+    this.playerChoice = choice;
+    console.log(this.playerChoice);
+  }
+
+  create() {
+    this.displayPlayerChose(choice);
+  }
 }
