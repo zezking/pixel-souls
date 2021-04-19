@@ -63,6 +63,10 @@ class BootScene extends Phaser.Scene {
     this.load.image("sword_cursor", "public/assets/ui/battle/sword_cursor.png");
     this.load.image("kana", "public/assets/ui/battle/hurt/kana.png");
     this.load.image("enemy-name", "public/assets/ui/battle/enemy-name.png");
+    this.load.image(
+      "skeleton-name",
+      "public/assets/ui/battle/skeleton-name.png"
+    );
   }
 
   loadSpriteSheets() {
@@ -171,6 +175,6 @@ class BootScene extends Phaser.Scene {
   }
 
   create() {
-    this.scene.launch("BossCombat");
+    this.scene.launch("Logo");
   }
 }

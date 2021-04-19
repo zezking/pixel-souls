@@ -338,4 +338,25 @@ class CombatPromptScene extends Phaser.Scene {
       )
       .setDepth(500);
   }
+
+  enemyName(scene, name) {
+    scene.enemyNameUi = scene.make
+      .image({
+        key: "skeleton-name",
+        x: this.scale.width / 2 + 260,
+        y: this.scale.height / 2 - 40,
+        scale: {
+          x: 1,
+          y: 1,
+        },
+        add: true,
+      })
+      .setDepth(300);
+    scene.bossName = scene.add
+      .text(this.scale.width / 2 + 225, this.scale.height / 2 - 50, `${name}`, {
+        fontFamily: "titleFont",
+        fontSize: "18px",
+      })
+      .setDepth(500);
+  }
 }

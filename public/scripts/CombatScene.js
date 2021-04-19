@@ -32,7 +32,7 @@ class CombatScene extends Phaser.Scene {
     this.createCombatPlayer();
     this.generateCombatMap();
     this.combatBackgroundGenerator();
-
+    this.CombatPromptScene.enemyName(this, "skeleton");
     this.AudioScene.playBattleBgm();
   }
   setupCombatUi() {
@@ -215,7 +215,6 @@ class CombatScene extends Phaser.Scene {
         heart.setTexture("ui-heart-empty");
       }
     });
-    
   }
 
   update() {
