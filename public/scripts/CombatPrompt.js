@@ -364,4 +364,106 @@ class CombatPromptScene extends Phaser.Scene {
       )
       .setDepth(500);
   }
+  displayEnemyChose(scene, choice) {
+    //obj is either enmey or player
+
+    if (choice === "sword") {
+      scene.swordChosen = scene.make
+        .image({ x: 500, y: 200, key: "sword_chosen", add: true })
+        .setDepth(100)
+        .setScale(0.5);
+
+      scene.tweens.add({
+        targets: scene.swordChosen,
+        scale: {
+          from: 0.5,
+          to: 0.8,
+          duration: 800,
+          ease: "Expo",
+        },
+
+        alpha: {
+          from: 1,
+          to: 0,
+          delay: 1000,
+          duration: 1000,
+          ease: "Cubic",
+        },
+      });
+      return;
+    }
+    if (choice === "shield") {
+      scene.swordChosen = scene.make
+        .image({ x: 500, y: 200, key: "shield_chosen", add: true })
+        .setDepth(100)
+        .setScale(0.5);
+
+      scene.tweens.add({
+        targets: scene.swordChosen,
+        scale: {
+          from: 0.5,
+          to: 0.8,
+          duration: 800,
+          ease: "Expo",
+        },
+
+        alpha: {
+          from: 1,
+          to: 0,
+          delay: 1000,
+          duration: 1000,
+          ease: "Cubic",
+        },
+      });
+      return;
+    }
+    if (choice === "magic") {
+      scene.swordChosen = scene.make
+        .image({ x: 500, y: 200, key: "magic_chosen", add: true })
+        .setDepth(100)
+        .setScale(0.5);
+
+      scene.tweens.add({
+        targets: scene.swordChosen,
+        scale: {
+          from: 0.5,
+          to: 0.8,
+          duration: 800,
+          ease: "Expo",
+        },
+
+        alpha: {
+          from: 1,
+          to: 0,
+          delay: 1000,
+          duration: 1000,
+          ease: "Cubic",
+        },
+      });
+      return;
+    }
+
+    // scene.shieldChosen = scene.make
+    //   .image({ x: 500, y: 200, key: "magic_chosen", add: true })
+    //   .setDepth(100);
+    // scene.magicChosen = scene.make
+    //   .image({ x: 500, y: 200, key: "shield_chosen", add: true })
+    //   .setDepth(100);
+    console.log(scene, choice);
+
+    //   this.sword = this.make
+    //   .image({ x: 200, y: 640, key: "sword", add: true })
+    //   .setDepth(100);
+    // this.sword.setInteractive();
+    // this.magic = this.make
+    //   .image({ x: 400, y: 640, key: "magic", add: true })
+    //   .setDepth(100);
+    // this.magic.setInteractive();
+    // this.shield = this.make
+    //   .image({ x: 600, y: 640, key: "shield", add: true })
+    //   .setDepth(100);
+    // this.shield.setInteractive();
+  }
+
+  displayPlayerChose(scene, choice) {}
 }
