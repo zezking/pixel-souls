@@ -353,9 +353,9 @@ class CombatPromptScene extends Phaser.Scene {
       })
       .setDepth(300);
     scene.bossName = scene.add
-      .text(this.scale.width / 2 + 220, this.scale.height / 2 - 50, `${name}`, {
+      .text(this.scale.width / 2 + 225, this.scale.height / 2 - 50, `${name}`, {
         fontFamily: "titleFont",
-        fontSize: "20px",
+        fontSize: "18px",
       })
       .setDepth(500);
   }
