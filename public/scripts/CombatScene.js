@@ -239,7 +239,7 @@ class CombatScene extends Phaser.Scene {
     this.enemyCombat = new Enemy({
       scene: this,
       x: 650,
-      y: 150,
+      y: 140,
       key: "skeleton_sprite",
       frame: "skele_idling8",
       id: 5,
