@@ -152,7 +152,6 @@ class UiScene extends Phaser.Scene {
         )
         .setFontFamily("HonokaMincho");
 
-
       scene.tweens.add({
         targets: scene.helperText,
         alpha: { from: 1, to: 0, ease: "Linear" },
@@ -176,8 +175,6 @@ class UiScene extends Phaser.Scene {
         .setFontFamily("HonokaMincho")
         .setDepth(3000);
 
-      // console.log(scene.helperText);
-
       scene.tweens.add({
         targets: scene.helperText,
         alpha: { from: 1, to: 0, ease: "Linear" },
@@ -188,12 +185,11 @@ class UiScene extends Phaser.Scene {
 
     if (obj.texture.key === "well") {
       scene.helperText = scene.add
-        .text(735,1750,"?", {
-            fill: "#FFFFFF",
-            fontSize: "10px",
-            wordWrap: { width: 400, useAdvancedWrap: true }, 
-          }
-        )
+        .text(735, 1750, "?", {
+          fill: "#FFFFFF",
+          fontSize: "10px",
+          wordWrap: { width: 400, useAdvancedWrap: true },
+        })
         .setFontFamily("HonokaMincho")
         .setDepth(3000);
 

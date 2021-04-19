@@ -32,11 +32,11 @@ class AudioScene extends Phaser.Scene {
       volume: 0.3,
     });
     this.menuBGM.play();
-    //change the startMenue sond between 0 and 1
+    //change the startMenue sound between 0 and 1
   }
   stopMenuBgm() {
     this.menuBGM.stop();
-    //change the startMenue sond between 0 and 1
+    //change the startMenue sound between 0 and 1
   }
 
   playStartSFX() {

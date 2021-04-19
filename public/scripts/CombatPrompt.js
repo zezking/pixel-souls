@@ -313,4 +313,7 @@ class CombatPromptScene extends Phaser.Scene {
   healthDecreaseEffect() {
     this.damageText = this.add.text();
   }
+  createHearts(){
+    
+  }
 }
