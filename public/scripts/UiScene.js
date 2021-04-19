@@ -139,7 +139,6 @@ class UiScene extends Phaser.Scene {
 
   displayHelper(scene, obj) {
     if (obj.texture.key === "bonfire") {
-      console.log("here");
       scene.helperText = scene.add
         .text(
           485, // x position of text
@@ -153,18 +152,57 @@ class UiScene extends Phaser.Scene {
         )
         .setFontFamily("HonokaMincho");
 
-      console.log(scene.helperText);
 
       scene.tweens.add({
         targets: scene.helperText,
         alpha: { from: 1, to: 0, ease: "Linear" },
-        delay: 3000,
+        delay: 2000,
         duration: 1000,
       });
+    }
 
-      // scene.input.keyboard.on("keydown-" + "E", () => {
-      //   scene.scene.remove("Dialog");
-      // });
+    if (obj.texture.key === "eventTrigger") {
+      scene.helperText = scene.add
+        .text(
+          1177, // x position of text
+          850, // y position of text
+          "E: Use lift", //this will generate a random conversation with NPC
+          {
+            fill: "#FFFFFF",
+            fontSize: "10px",
+            wordWrap: { width: 400, useAdvancedWrap: true }, //change here to make dialogues text wrap
+          }
+        )
+        .setFontFamily("HonokaMincho")
+        .setDepth(3000);
+
+      // console.log(scene.helperText);
+
+      scene.tweens.add({
+        targets: scene.helperText,
+        alpha: { from: 1, to: 0, ease: "Linear" },
+        delay: 1000,
+        duration: 500,
+      });
+    }
+
+    if (obj.texture.key === "well") {
+      scene.helperText = scene.add
+        .text(735,1750,"?", {
+            fill: "#FFFFFF",
+            fontSize: "10px",
+            wordWrap: { width: 400, useAdvancedWrap: true }, 
+          }
+        )
+        .setFontFamily("HonokaMincho")
+        .setDepth(3000);
+
+      scene.tweens.add({
+        targets: scene.helperText,
+        alpha: { from: 1, to: 0, ease: "Linear" },
+        delay: 250,
+        duration: 250,
+      });
     }
   }
 }
