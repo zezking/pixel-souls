@@ -46,7 +46,7 @@ class Enemy extends Phaser.Physics.Matter.Sprite {
   }
 
   update() {
-    // const speed = 10;
+    const speed = 10;
     let enemyVelocity = new Phaser.Math.Vector2();
 
     this.setFlipX(this.velocity.x > 0);
