@@ -344,7 +344,7 @@ class CombatPromptScene extends Phaser.Scene {
       .image({
         key: "skeleton-name",
         x: this.scale.width / 2 + 260,
-        y: this.scale.height / 2 - 40,
+        y: this.scale.height / 2 - 110,
         scale: {
           x: 1,
           y: 1,
@@ -353,10 +353,15 @@ class CombatPromptScene extends Phaser.Scene {
       })
       .setDepth(300);
     scene.bossName = scene.add
-      .text(this.scale.width / 2 + 225, this.scale.height / 2 - 50, `${name}`, {
-        fontFamily: "titleFont",
-        fontSize: "18px",
-      })
+      .text(
+        this.scale.width / 2 + 225,
+        this.scale.height / 2 - 120,
+        `${name}`,
+        {
+          fontFamily: "titleFont",
+          fontSize: "18px",
+        }
+      )
       .setDepth(500);
   }
 }
