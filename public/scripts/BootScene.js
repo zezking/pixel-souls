@@ -140,6 +140,8 @@ class BootScene extends Phaser.Scene {
       "public/assets/audio/fine_della_vento_aureo_cut.mp3"
     );
     this.load.audio("rumbleSFX", "public/assets/audio/RumbleSFX.mp3");
+    this.load.audio("select", "public/assets/audio/select.wav.mp3");
+    this.load.audio("ok", "public/assets/audio/ok.wav.mp3");
   }
 
   loadVideo() {
@@ -175,6 +177,6 @@ class BootScene extends Phaser.Scene {
   }
 
   create() {
-    this.scene.launch("Title");
+    this.scene.launch("Logo");
   }
 }

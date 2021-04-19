@@ -22,7 +22,7 @@ const config = {
     default: "matter",
     matter: {
       gravity: { y: 0 },
-      debug: true, // set to true to view collision boxes
+      debug: false, // set to true to view collision boxes
       plugins: {
         attractors: true,
       },
