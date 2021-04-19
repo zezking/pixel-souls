@@ -2,7 +2,9 @@ class BossLoadingScene extends Phaser.Scene {
   constructor() {
     super("BossLoading");
   }
-  init() {}
+  init() {
+    this.AudioScene = this.scene.get("Audio");
+  }
 
   create() {
     this.createBackground();
@@ -12,6 +14,7 @@ class BossLoadingScene extends Phaser.Scene {
 
   playVideo() {
     this.cameras.main.shake(300);
+    this.AudioScene.playRumble();
     this.bossLoadingVideo = this.add
       .video(this.scale.width / 2 + 20, this.scale.height / 2, "boss-loading")
       .setScale(0.7)
@@ -34,6 +37,7 @@ class BossLoadingScene extends Phaser.Scene {
     this.time.addEvent({
       delay: 4000,
       callback: () => {
+        this.AudioScene.stopRumble();
         this.scene.remove("BossLoading");
       },
     });

@@ -17,3 +17,7 @@ canvas {
   font-family: "HonokaMincho";
   font-family: "titleFont";
 }
+
+* {
+  background-color: black;
+}

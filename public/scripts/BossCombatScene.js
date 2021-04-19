@@ -22,7 +22,6 @@ class BossCombatScene extends Phaser.Scene {
 
   create() {
     this.createSwordCursor();
-
     this.cameras.main.fadeIn(1000);
     this.setupCombatUi();
     this.resultListener();
@@ -36,6 +35,7 @@ class BossCombatScene extends Phaser.Scene {
     this.loadingTimer();
     this.flashIntro();
     this.AudioScene.playBossReveal(); //boss music
+    this.CombatPromptScene.bossName(this);
     // this.AudioScene.playBattleBgm(); //boss music
   }
 
@@ -287,51 +287,6 @@ class BossCombatScene extends Phaser.Scene {
       .setScale(1.5);
   }
 
-  // generateCombatMap() {
-  //   //tiles combatMap
-  //   if (
-  //     this.playerX >= 665 &&
-  //     this.playerX <= 1110 &&
-  //     this.playerY >= 760 &&
-  //     this.playerY <= 1257
-  //   ) {
-  //     this.combatMapX = this.scale.width - 865;
-  //     this.combatMapY = this.scale.height;
-  //     return;
-  //   }
-  //   //carpet combatMap
-  //   if (
-  //     this.playerX >= 361 &&
-  //     this.playerX <= 597 &&
-  //     this.playerY >= 650 &&
-  //     this.playerY <= 1221
-  //   ) {
-  //     this.combatMapX = this.scale.width + 260;
-  //     this.combatMapY = this.scale.height;
-  //     return;
-  //   }
-  //   //cementary combatMap
-  //   if (
-  //     this.playerX >= 60 &&
-  //     this.playerX <= 488 &&
-  //     this.playerY >= 278 &&
-  //     this.playerY <= 517
-  //   ) {
-  //     this.combatMapX = this.scale.width + 1600;
-  //     this.combatMapY = this.scale.height + 1800;
-  //     return;
-  //   }
-
-  //   this.combatMapX = this.scale.width;
-  //   this.combatMapY = this.scale.height - 1700;
-  //   return;
-  // }
-
-  // playerPosition(playerX, playerY) {
-  //   this.playerX = playerX;
-  //   this.playerY = playerY;
-  // }
-
   /************************** Player/Enemy Damage FX *************************/
 
   playerHurt() {
@@ -453,5 +408,4 @@ class BossCombatScene extends Phaser.Scene {
       },
     });
   }
-  
 }

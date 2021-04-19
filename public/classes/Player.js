@@ -9,7 +9,7 @@ class Player extends Phaser.Physics.Matter.Sprite {
     // the scene this container will be added to
     const { Body, Bodies } = Phaser.Physics.Matter.Matter;
 
-    let playerCollider = Bodies.rectangle(this.x, this.y + 20, 20, 20, {
+    let playerCollider = Bodies.rectangle(this.x, this.y + 20, 28, 28, {
       isSensor: false,
       lable: "playerCollider",
     });
@@ -34,8 +34,9 @@ class Player extends Phaser.Physics.Matter.Sprite {
               bodyB.position.y - bodyA.position.y < 125
             ) {
               return {
-                x: (bodyA.position.x - bodyB.position.x) * 0.000045, //You can change this value to adjust the force of X axis
-                y: (bodyA.position.y - bodyB.position.y) * 0.000045, //You can change this value to adjust the force of Y axis
+                // adjusts the enemy chase speeds
+                x: (bodyA.position.x - bodyB.position.x) * 0.000300, //You can change this value to adjust the force of X axis
+                y: (bodyA.position.y - bodyB.position.y) * 0.000300, //You can change this value to adjust the force of Y axis
               };
             } else {
               return {
@@ -79,7 +80,7 @@ class Player extends Phaser.Physics.Matter.Sprite {
     return this.body.velocity;
   }
 
-  update() {
+  update(delta) {
 
     // this.body.setVelocity()
     if (this.inputKeys.left.isDown && this.inputKeys.up.isDown) {
@@ -110,7 +111,7 @@ class Player extends Phaser.Physics.Matter.Sprite {
       this.anims.stop();
     }
 
-    const speed = 4;
+    const speed = 0.25 * delta;
     let playerVelocity = new Phaser.Math.Vector2();
     if (this.inputKeys.left.isDown) {
       playerVelocity.x = -1;

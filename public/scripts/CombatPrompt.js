@@ -6,8 +6,6 @@ class CombatPromptScene extends Phaser.Scene {
   init() {}
 
   displayWinLoseDraw(scene, msg) {
-    console.log(scene.scene.key) === "BossCombat";
-
     //create player damage text
     if (msg === "enemy") {
       scene.damageText = scene.add
@@ -312,5 +310,58 @@ class CombatPromptScene extends Phaser.Scene {
 
   healthDecreaseEffect() {
     this.damageText = this.add.text();
+  }
+
+  bossName(scene) {
+    scene.enemyNameUi = scene.make
+      .image({
+        key: "enemy-name",
+        x: this.scale.width / 2 + 170,
+        y: this.scale.height / 2 - 29,
+        scale: {
+          x: 1.5,
+          y: 1.5,
+        },
+        add: true,
+      })
+      .setDepth(300);
+
+    scene.bossName = scene.add
+      .text(
+        this.scale.width / 2 + 50,
+        this.scale.height / 2 - 40,
+        "King Andy Lord of Cinder",
+        {
+          fontFamily: "titleFont",
+          fontSize: "20px",
+        }
+      )
+      .setDepth(500);
+  }
+
+  enemyName(scene, name) {
+    scene.enemyNameUi = scene.make
+      .image({
+        key: "skeleton-name",
+        x: this.scale.width / 2 + 260,
+        y: this.scale.height / 2 - 110,
+        scale: {
+          x: 1,
+          y: 1,
+        },
+        add: true,
+      })
+      .setDepth(300);
+    scene.bossName = scene.add
+      .text(
+        this.scale.width / 2 + 225,
+        this.scale.height / 2 - 120,
+        `${name}`,
+        {
+          fontFamily: "titleFont",
+          fontSize: "18px",
+        }
+      )
+      .setDepth(500);
   }
 }

@@ -59,11 +59,11 @@ class GameScene extends Phaser.Scene {
     this.OverlayLayer.setDepth(2239); //MUST ALWAYS BE LAST ON THIS LIST!!
   }
 
-  update() {
-    this.player.update();
+  update(time, delta) {
+    this.player.update(delta);
     // enemies list
     this.enemies.forEach((enemy) => {
-      enemy.update();
+      enemy.update(delta);
     });
 
     this.npcs.forEach((npc) => {
@@ -86,6 +86,7 @@ class GameScene extends Phaser.Scene {
   }
   //--------------SPAWN SPRITES IN GAME------------------
   createPlayer() {
+    // original player location
     this.player = new Player({
       scene: this,
       x: 530,
@@ -93,6 +94,15 @@ class GameScene extends Phaser.Scene {
       key: "ashen_one",
       frame: "player_00",
     });
+
+    // location outside boss room
+    // this.player = new Player({
+    //   scene: this,
+    //   x: 1060,
+    //   y: 822,
+    //   key: "ashen_one",
+    //   frame: "player_00",
+    // });
   }
 
   createEnemy() {
@@ -247,10 +257,10 @@ class GameScene extends Phaser.Scene {
       this.createDialogs(npc);
     }
   }
-//------------------------------------------
-//------------------------------------------
+  //------------------------------------------
+  //------------------------------------------
 
-//------------SPAWN ENTITIES IN GAME---------------
+  //------------SPAWN ENTITIES IN GAME---------------
   createEntity() {
     // this.entity = new Entity({
     //   scene: this,
@@ -350,14 +360,6 @@ class GameScene extends Phaser.Scene {
     });
   }
 
-  createWell() {
-    this.well = new Well({
-      scene: this,
-      x: 735,
-      y: 1770,
-      key: "well",
-    });
-  }
   createBonfire() {
     this.bonfire = new Bonfire({
       scene: this,
@@ -367,10 +369,27 @@ class GameScene extends Phaser.Scene {
       frame: "bonfire0",
     });
   }
-//------------------------------------------
-//------------------------------------------
 
-//Boss event trigger for elevator
+  createWell() {
+    this.well = new Well({
+      scene: this,
+      x: 735,
+      y: 1770,
+      key: "well",
+    });
+    this.matterCollision.addOnCollideStart({
+      objectA: this.player,
+      objectB: this.well,
+      callback: (eventData) => {
+        this.uiScene.displayHelper(this, this.well);
+      },
+    });
+  }
+
+  //------------------------------------------
+  //------------------------------------------
+
+  //Boss event trigger for elevator
   createEventTrigger() {
     this.event1 = new EventTrigger({
       scene: this,
@@ -382,6 +401,13 @@ class GameScene extends Phaser.Scene {
     this.event1.setVisible(false);
 
     //Interact listener
+    this.matterCollision.addOnCollideStart({
+      objectA: this.player,
+      objectB: this.event1,
+      callback: (eventData) => {
+        this.uiScene.displayHelper(this, this.event1);
+      },
+    });
     this.matterCollision.addOnCollideActive({
       objectA: this.player,
       objectB: this.event1,
@@ -420,10 +446,10 @@ class GameScene extends Phaser.Scene {
 
     camera.fadeIn(1000);
     // used when player spawns in as invisible, plz dont delete
-    // this.player.update(this.player.anims.play("player_down"));
+    this.player.update(this.player.anims.play("player_down"));
   }
 
-//------------------MAP CREATION-----------------------
+  //------------------MAP CREATION-----------------------
   addCollisions() {
     // grab the physics map from FULLMAP_collision.json
     let shapes = this.cache.json.get("shapes");
@@ -470,9 +496,8 @@ class GameScene extends Phaser.Scene {
     );
     this.OverlayLayer = map.createLayer("overlay", this.tilesOverlay, 0, 0);
   }
-//------------------------------------------
-//------------------------------------------
-
+  //------------------------------------------
+  //------------------------------------------
 
   createCombat() {
     this.matterCollision.addOnCollideStart({
@@ -523,6 +548,8 @@ class GameScene extends Phaser.Scene {
       objectA: this.player,
       objectB: this.bonfire,
       callback: () => {
+        this.uiScene.displayHelper(this, this.bonfire);
+
         this.events.emit("characterLit");
       },
     });
@@ -560,7 +587,7 @@ class GameScene extends Phaser.Scene {
     this.events.emit("deathClear");
   }
 
-//---------------EVENT LISTENERS-------------------
+  //---------------EVENT LISTENERS-------------------
   setupEventListener() {
     this.events.on("pickupItem", (item) => {
       this.items = this.items.filter((e) => e.id !== item.id);
@@ -583,7 +610,6 @@ class GameScene extends Phaser.Scene {
       this.enemies = this.enemies.filter((e) => e.id !== enemy.id);
       enemy.enemyKilled();
       this.cameras.main.flash(300).shake(300);
-      // this.events.off("enemyDeath");
     });
 
     this.events.once("deathClear", () => {
@@ -619,7 +645,6 @@ class GameScene extends Phaser.Scene {
       this.createEnemy();
       this.createCombat();
       this.freeEnemy(this.enemies);
-
     });
 
     this.events.on("useWell", () => {
@@ -629,9 +654,6 @@ class GameScene extends Phaser.Scene {
 
     this.events.on("bossTrigger", () => {
       if (this.player.souls >= 300) {
-        // let prevSouls = this.player.souls;
-        // this.player.souls -= 1000;
-        // this.events.emit("updateSouls", prevSouls, this.player.souls);
 
         this.AudioScene.stopMainBgm();
         this.scene.sleep();
@@ -641,7 +663,25 @@ class GameScene extends Phaser.Scene {
           player: this.player,
         });
       } else {
-        console.log("Not enough souls?");
+        this.warningText = this.add
+          .text(1140,880,"You Require 1500 Souls \n to Enter",
+            {
+              fill: "#FFFFFF",
+              fontSize: "10px",
+              align: "center",
+              wordWrap: { width: 400, useAdvancedWrap: true },
+            }
+          )
+          .setFontFamily("HonokaMincho")
+          .setDepth(3000);
+
+        this.tweens.add({
+          targets: this.warningText,
+          alpha: { from: 1, to: 0, ease: "Linear" },
+          delay: 3000,
+          duration: 1000,
+        });
+  
       }
     });
   }

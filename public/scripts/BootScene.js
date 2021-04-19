@@ -62,6 +62,11 @@ class BootScene extends Phaser.Scene {
     this.load.image("damage", "public/assets/ui/battle/hurt/damage.png");
     this.load.image("sword_cursor", "public/assets/ui/battle/sword_cursor.png");
     this.load.image("kana", "public/assets/ui/battle/hurt/kana.png");
+    this.load.image("enemy-name", "public/assets/ui/battle/enemy-name.png");
+    this.load.image(
+      "skeleton-name",
+      "public/assets/ui/battle/skeleton-name.png"
+    );
   }
 
   loadSpriteSheets() {
@@ -134,6 +139,9 @@ class BootScene extends Phaser.Scene {
       "bossReveal",
       "public/assets/audio/fine_della_vento_aureo_cut.mp3"
     );
+    this.load.audio("rumbleSFX", "public/assets/audio/RumbleSFX.mp3");
+    this.load.audio("select", "public/assets/audio/select.wav.mp3");
+    this.load.audio("ok", "public/assets/audio/ok.wav.mp3");
   }
 
   loadVideo() {
@@ -169,6 +177,6 @@ class BootScene extends Phaser.Scene {
   }
 
   create() {
-    this.scene.launch("Title");
+    this.scene.launch("Logo");
   }
 }

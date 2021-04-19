@@ -16,7 +16,7 @@ class UiScene extends Phaser.Scene {
     this.createSoulSuckSFX();
   }
 
-//----------Initial UI Setup---------------
+  //----------Initial UI Setup---------------
   setupUiElements() {
     //Health Hearts
     this.hearts = this.add.group({
@@ -78,7 +78,7 @@ class UiScene extends Phaser.Scene {
       });
       this.healthUpdater(health);
     });
-  //-------------------------------------------
+    //-------------------------------------------
     //Health and Estus flasks from GAMESCENE:
     this.gameScene.events.on("updateHealth", (health, estus) => {
       //Health hearts
@@ -137,4 +137,68 @@ class UiScene extends Phaser.Scene {
     });
   }
 
+  displayHelper(scene, obj) {
+    if (obj.texture.key === "bonfire") {
+      scene.helperText = scene.add
+        .text(
+          485, // x position of text
+          1800, // y position of text
+          "E: Rest at bonfire", //this will generate a random conversation with NPC
+          {
+            fill: "#FFFFFF",
+            fontSize: "10px",
+            wordWrap: { width: 400, useAdvancedWrap: true }, //change here to make dialogues text wrap
+          }
+        )
+        .setFontFamily("HonokaMincho");
+
+      scene.tweens.add({
+        targets: scene.helperText,
+        alpha: { from: 1, to: 0, ease: "Linear" },
+        delay: 2000,
+        duration: 1000,
+      });
+    }
+
+    if (obj.texture.key === "eventTrigger") {
+      scene.helperText = scene.add
+        .text(
+          1177, // x position of text
+          850, // y position of text
+          "E: Use lift", //this will generate a random conversation with NPC
+          {
+            fill: "#FFFFFF",
+            fontSize: "10px",
+            wordWrap: { width: 400, useAdvancedWrap: true }, //change here to make dialogues text wrap
+          }
+        )
+        .setFontFamily("HonokaMincho")
+        .setDepth(3000);
+
+      scene.tweens.add({
+        targets: scene.helperText,
+        alpha: { from: 1, to: 0, ease: "Linear" },
+        delay: 1000,
+        duration: 500,
+      });
+    }
+
+    if (obj.texture.key === "well") {
+      scene.helperText = scene.add
+        .text(735, 1750, "?", {
+          fill: "#FFFFFF",
+          fontSize: "10px",
+          wordWrap: { width: 400, useAdvancedWrap: true },
+        })
+        .setFontFamily("HonokaMincho")
+        .setDepth(3000);
+
+      scene.tweens.add({
+        targets: scene.helperText,
+        alpha: { from: 1, to: 0, ease: "Linear" },
+        delay: 250,
+        duration: 250,
+      });
+    }
+  }
 }

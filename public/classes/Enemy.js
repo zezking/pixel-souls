@@ -45,13 +45,14 @@ class Enemy extends Phaser.Physics.Matter.Sprite {
     return this.body.velocity;
   }
 
-  update() {
-    // const speed = 10;
+  update(delta) {
+    const speed = delta * 0.5;
+
     let enemyVelocity = new Phaser.Math.Vector2();
 
     this.setFlipX(this.velocity.x > 0);
 
-    this.setFlipX(this.velocity.x > 0);
+    // this.setFlipX(this.velocity.x > 0);
     // this.setFlipY(this.velocity.y < 0);
 
     if (Math.abs(this.velocity.x) > 0.1 || Math.abs(this.velocity.y) > 0.1) {
@@ -61,8 +62,8 @@ class Enemy extends Phaser.Physics.Matter.Sprite {
     }
 
     enemyVelocity.normalize();
-    // enemyVelocity.scale(speed);
-    // this.setVelocity(enemyVelocity.x, enemyVelocity.y);
+    enemyVelocity.scale(speed);
+    this.setVelocity(enemyVelocity.x, enemyVelocity.y);
   }
 
   enemyKilled() {

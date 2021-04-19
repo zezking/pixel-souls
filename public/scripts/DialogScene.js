@@ -3,6 +3,7 @@ class DialogScene extends Phaser.Scene {
     super("Dialog");
   }
   init(data) {
+    this.AudioScene = this.scene.get("Audio");
     if (Object.keys(data).length !== 0) {
       this.npcName = data.npc.texture.key; //only asign the NPC name as key if it's found
     }
@@ -47,6 +48,7 @@ class DialogScene extends Phaser.Scene {
       });
 
       this.input.keyboard.on("keydown-" + "E", () => {
+        this.AudioScene.confirm();
         this.scene.remove("Dialog");
       });
     }
