@@ -6,7 +6,7 @@ class NPC extends Phaser.Physics.Matter.Sprite {
     this.name = name;
     this.depthSorting = true; //Allows this entity to be depth-sorted
     const { Body, Bodies } = Phaser.Physics.Matter.Matter;
-    // let NPCCollider = Bodies.circle(this.x,this.y,12,{isSensor:false, lable:'NPCCollider'});
+ 
     let NPCSensor = Bodies.circle(this.x, this.y, 12, {
       isSensor: true,
       label: "NPCSensor",

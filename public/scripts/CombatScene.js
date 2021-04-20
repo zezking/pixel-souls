@@ -142,7 +142,9 @@ class CombatScene extends Phaser.Scene {
     this.events.on("results", () => {
       let winner = this.result[0];
       let enemyChoice = this.result[1];
+
       this.CombatPromptScene.displayWinLoseDraw(this, winner);
+      this.CombatPromptScene.displayWinner(this, winner);
       switch (winner) {
         case "draw":
           console.log("winner: ", winner, "Enemy chose: ", enemyChoice);
@@ -317,6 +319,8 @@ class CombatScene extends Phaser.Scene {
       this.combatMapY = this.scale.height + 1800;
       return;
     }
+
+    //create regular grass combatMap
 
     this.combatMapX = this.scale.width;
     this.combatMapY = this.scale.height - 1700;
