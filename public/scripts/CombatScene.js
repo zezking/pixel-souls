@@ -147,7 +147,7 @@ class CombatScene extends Phaser.Scene {
       let enemyChoice = this.result[1];
 
       this.CombatPromptScene.displayWinLoseDraw(this, winner);
-      this.CombatPromptScene.displayEnemyChose(this, enemyChoice);
+      this.CombatPromptScene.displayWinner(this, winner);
       switch (winner) {
         case "draw":
           console.log("winner: ", winner, "Enemy chose: ", enemyChoice);
