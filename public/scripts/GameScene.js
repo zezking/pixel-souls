@@ -498,7 +498,6 @@ class GameScene extends Phaser.Scene {
       callback: (eventData) => {
         this.combatScene.playerPosition(this.player.x, this.player.y);
         this.events.emit("enemyDeath", eventData.gameObjectB);
-        console.log("eventData: ", eventData.gameObjectB);
         this.enemies.forEach((enemy) => {
           enemy.setStatic(true);
         });
@@ -705,6 +704,7 @@ class GameScene extends Phaser.Scene {
   }
 
   wellEasterEgg() {
+    console.log("Thank you for helping us figure out Phaser, Travis!~")
     this.wellEasterEggFX = this.make
       .image({
         x: this.player.x,
