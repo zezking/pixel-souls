@@ -41,7 +41,7 @@ class GameScene extends Phaser.Scene {
     // Near Bonfire for light up on player?
     this.createNearBonfire();
     this.createWell();
-    this.createNearWell();
+    // this.createNearWell();
     this.createCombat();
 
     // Spawn Effect
@@ -557,18 +557,18 @@ class GameScene extends Phaser.Scene {
     });
   }
 
-  createNearWell() {
-    this.matterCollision.addOnCollideActive({
-      objectA: this.player,
-      objectB: this.well,
-      callback: () => {
-        if (this.player.inputKeys.interact.isDown) {
-          this.events.emit("useWell");
-          this.player.inputKeys.interact.reset();
-        }
-      },
-    });
-  }
+  // createNearWell() {
+  //   this.matterCollision.addOnCollideActive({
+  //     objectA: this.player,
+  //     objectB: this.well,
+  //     callback: () => {
+  //       if (this.player.inputKeys.interact.isDown) {
+  //         this.events.emit("useWell");
+  //         this.player.inputKeys.interact.reset();
+  //       }
+  //     },
+  //   });
+  // }
 
   //Delay and activation for
   createDelay() {
@@ -645,7 +645,7 @@ class GameScene extends Phaser.Scene {
     });
 
     this.events.on("bossTrigger", () => {
-      if (this.player.souls >= 1500) {
+      if (this.player.souls >= 900) {
 
         this.AudioScene.stopMainBgm();
         this.scene.sleep();
@@ -656,7 +656,7 @@ class GameScene extends Phaser.Scene {
         });
       } else {
         this.warningText = this.add
-          .text(1140,880,"You Require 1500 Souls \n to Enter",
+          .text(1140,880,"You Require 900 Souls \n to Enter",
             {
               fill: "#FFFFFF",
               fontSize: "10px",

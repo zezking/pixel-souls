@@ -60,10 +60,14 @@ class CombatScene extends Phaser.Scene {
       }
     };
 
-    //pointer action
+    //pointer action 
+    /*  SWORD IS PLAYER-WIN
+        MAGIC IS ENEMY-WIN
+        SHIELD IS DRAW
+    */
     this.sword
       .on("pointerdown", () => {
-        this.result = this.checkWinner("sword", aiResult());
+        this.result = this.checkWinner("sword", "magic");
         this.events.emit("results", this.result);
       })
       .on("pointerover", () => {
@@ -75,7 +79,7 @@ class CombatScene extends Phaser.Scene {
 
     this.magic
       .on("pointerdown", () => {
-        this.result = this.checkWinner("magic", aiResult());
+        this.result = this.checkWinner("magic", "sword");
         this.events.emit("results", this.result);
       })
       .on("pointerover", () => {
@@ -86,7 +90,7 @@ class CombatScene extends Phaser.Scene {
       });
     this.shield
       .on("pointerdown", () => {
-        this.result = this.checkWinner("shield", aiResult());
+        this.result = this.checkWinner("shield", "shield");
         this.events.emit("results", this.result);
       })
       .on("pointerover", () => {
