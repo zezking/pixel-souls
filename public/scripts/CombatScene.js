@@ -65,6 +65,7 @@ class CombatScene extends Phaser.Scene {
       .on("pointerdown", () => {
         this.result = this.checkWinner("sword", aiResult());
         this.events.emit("results", this.result);
+        this.CombatPromptScene.displayPlayerChose(this, "sword");
       })
       .on("pointerover", () => {
         this.swordCursor.setVisible(true);
@@ -77,6 +78,7 @@ class CombatScene extends Phaser.Scene {
       .on("pointerdown", () => {
         this.result = this.checkWinner("magic", aiResult());
         this.events.emit("results", this.result);
+        this.CombatPromptScene.displayPlayerChose(this, "magic");
       })
       .on("pointerover", () => {
         this.magicCursor.setVisible(true);
@@ -88,6 +90,7 @@ class CombatScene extends Phaser.Scene {
       .on("pointerdown", () => {
         this.result = this.checkWinner("shield", aiResult());
         this.events.emit("results", this.result);
+        this.CombatPromptScene.displayPlayerChose(this, "shield");
       })
       .on("pointerover", () => {
         this.shieldCursor.setVisible(true);
@@ -142,7 +145,9 @@ class CombatScene extends Phaser.Scene {
     this.events.on("results", () => {
       let winner = this.result[0];
       let enemyChoice = this.result[1];
+
       this.CombatPromptScene.displayWinLoseDraw(this, winner);
+      this.CombatPromptScene.displayWinner(this, winner);
       switch (winner) {
         case "draw":
           console.log("winner: ", winner, "Enemy chose: ", enemyChoice);
@@ -317,6 +322,8 @@ class CombatScene extends Phaser.Scene {
       this.combatMapY = this.scale.height + 1800;
       return;
     }
+
+    //create regular grass combatMap
 
     this.combatMapX = this.scale.width;
     this.combatMapY = this.scale.height - 1700;

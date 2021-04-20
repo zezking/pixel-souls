@@ -146,7 +146,7 @@ class BossCombatScene extends Phaser.Scene {
     this.events.on("results", () => {
       let winner = this.result[0];
       let enemyChoice = this.result[1];
-      //this.CombatPromptScene.winLoseDrawMsg(winner);
+      this.CombatPromptScene.displayWinner(this, winner);
       this.CombatPromptScene.displayWinLoseDraw(this, winner);
       switch (winner) {
         case "draw":

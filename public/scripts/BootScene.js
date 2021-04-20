@@ -67,6 +67,12 @@ class BootScene extends Phaser.Scene {
       "skeleton-name",
       "public/assets/ui/battle/skeleton-name.png"
     );
+    this.load.image("sword_chosen", "public/assets/ui/battle/sword_chosen.png");
+    this.load.image(
+      "shield_chosen",
+      "public/assets/ui/battle/shield_chosen.png"
+    );
+    this.load.image("magic_chosen", "public/assets/ui/battle/magic_chosen.png");
   }
 
   loadSpriteSheets() {
@@ -177,6 +183,6 @@ class BootScene extends Phaser.Scene {
   }
 
   create() {
-    this.scene.launch("Logo");
+    this.scene.launch("Title");
   }
 }

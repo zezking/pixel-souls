@@ -308,10 +308,6 @@ class CombatPromptScene extends Phaser.Scene {
     return;
   }
 
-  healthDecreaseEffect() {
-    this.damageText = this.add.text();
-  }
-
   bossName(scene) {
     scene.enemyNameUi = scene.make
       .image({
@@ -363,5 +359,80 @@ class CombatPromptScene extends Phaser.Scene {
         }
       )
       .setDepth(500);
+  }
+
+  displayWinner(scene, result) {
+    if (result === "enemy") {
+      scene.winner = scene.add
+        .text(
+          scene.scale.width / 2 - 100,
+          scene.scale.height / 2 - 350,
+          "Enemy Wins!",
+          {
+            fontFamily: "titleFont",
+            fontSize: "30px",
+          }
+        )
+        .setDepth(500);
+      scene.tweens.add({
+        targets: scene.winner,
+
+        alpha: {
+          start: 0,
+          from: 1,
+          to: 0,
+          duration: 2300,
+          ease: "Expo.easeInOut",
+        },
+      });
+    }
+    if (result === "player") {
+      scene.winner = scene.add
+        .text(
+          scene.scale.width / 2 - 100,
+          scene.scale.height / 2 - 350,
+          "Player Wins!",
+          {
+            fontFamily: "titleFont",
+            fontSize: "30px",
+          }
+        )
+        .setDepth(500);
+      scene.tweens.add({
+        targets: scene.winner,
+
+        alpha: {
+          start: 0,
+          from: 1,
+          to: 0,
+          duration: 2300,
+          ease: "Expo.easeInOut",
+        },
+      });
+    }
+    if (result === "draw") {
+      scene.winner = scene.add
+        .text(
+          scene.scale.width / 2 - 100,
+          scene.scale.height / 2 - 350,
+          "It's a draw",
+          {
+            fontFamily: "titleFont",
+            fontSize: "30px",
+          }
+        )
+        .setDepth(500);
+      scene.tweens.add({
+        targets: scene.winner,
+
+        alpha: {
+          start: 0,
+          from: 1,
+          to: 0,
+          duration: 2300,
+          ease: "Expo.easeInOut",
+        },
+      });
+    }
   }
 }
