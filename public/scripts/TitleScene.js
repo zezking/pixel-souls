@@ -143,7 +143,7 @@ class LogoScene extends Phaser.Scene {
 
   productionTextEffects() {
     this.productionText = this.add
-      .text(210, 470, "two and a half asians presents", {
+      .text(210, 470, "FromHardware Studios presents", {
         fontFamily: "titleFont",
         fontSize: "26px",
         fill: "#ffffff",
@@ -161,7 +161,7 @@ class LogoScene extends Phaser.Scene {
         ease: "Linear",
       },
       onComplete: () => {
-        this.scene.start("Title");
+        this.scene.start("Logo");
       },
     });
   }
