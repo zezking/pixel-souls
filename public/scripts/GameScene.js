@@ -95,14 +95,6 @@ class GameScene extends Phaser.Scene {
       frame: "player_00",
     });
 
-    // location outside boss room
-    // this.player = new Player({
-    //   scene: this,
-    //   x: 1060,
-    //   y: 822,
-    //   key: "ashen_one",
-    //   frame: "player_00",
-    // });
   }
 
   createEnemy() {
@@ -122,14 +114,14 @@ class GameScene extends Phaser.Scene {
       frame: "skele_idling0",
       id: 2,
     });
-    // this.enemy3 = new Enemy({
-    //   scene: this,
-    //   x: 1060,
-    //   y: 822,
-    //   key: "skeleton_sprite",
-    //   frame: "skele_idling0",
-    //   id: 3,
-    // });
+    this.enemy3 = new Enemy({
+      scene: this,
+      x: 1060,
+      y: 822,
+      key: "skeleton_sprite",
+      frame: "skele_idling0",
+      id: 3,
+    });
     this.enemy4 = new Enemy({
       scene: this,
       x: 100,
@@ -149,7 +141,7 @@ class GameScene extends Phaser.Scene {
     this.enemies = [
       this.enemy,
       this.enemy2,
-      // this.enemy3,
+      this.enemy3,
       this.enemy4,
       this.enemy5,
     ];
@@ -653,7 +645,7 @@ class GameScene extends Phaser.Scene {
     });
 
     this.events.on("bossTrigger", () => {
-      if (this.player.souls >= 300) {
+      if (this.player.souls >= 1500) {
 
         this.AudioScene.stopMainBgm();
         this.scene.sleep();
