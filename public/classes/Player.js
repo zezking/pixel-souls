@@ -13,7 +13,7 @@ class Player extends Phaser.Physics.Matter.Sprite {
       isSensor: false,
       lable: "playerCollider",
     });
-    let playerSensor = Bodies.circle(this.x, this.y, 20, {
+    let playerSensor = Bodies.circle(this.x, this.y, 18, {
       isSensor: true,
       label: "playerSensor",
     });

@@ -6,6 +6,7 @@ class UiScene extends Phaser.Scene {
   init() {
     //Scene references for event listening
     this.gameScene = this.scene.get("Game");
+    this.bossScene = this.scene.get("Boss")
     this.combatScene = this.scene.get("Combat");
     this.bossCombatScene = this.scene.get("BossCombat");
   }
@@ -103,7 +104,7 @@ class UiScene extends Phaser.Scene {
       }
     });
     //Health and Estus flasks from BOSS-SCENE:
-    this.gameScene.events.on("updateHealth", (health, estus) => {
+    this.bossScene.events.on("updateHealth", (health, estus) => {
       //Health hearts
       this.hearts.children.each((gameObj, index) => {
         const heart = gameObj;
