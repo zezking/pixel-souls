@@ -150,7 +150,7 @@ class BossCombatScene extends Phaser.Scene {
       this.CombatPromptScene.displayWinLoseDraw(this, winner);
       switch (winner) {
         case "draw":
-          console.log("winner: ", winner, "Enemy chose: ", enemyChoice);
+          console.log("YOU CANNOT WIN!!");
           this.playerHealth -= 1;
           this.enemyHealth -= 1;
           this.AudioScene.playPlayerDmgSFX();
@@ -161,7 +161,7 @@ class BossCombatScene extends Phaser.Scene {
           this.healthChecker();
           break;
         case "enemy":
-          console.log("winner: ", winner, "Enemy chose: ", enemyChoice);
+          console.log("ANDY IS TOO POWERFUL!!");
           this.playerHealth -= 1;
           this.AudioScene.playPlayerDmgSFX();
           //this.playerHurt();
@@ -169,7 +169,7 @@ class BossCombatScene extends Phaser.Scene {
           this.healthChecker();
           break;
         case "player":
-          console.log("winner: ", winner, "Enemy chose: ", enemyChoice);
+          console.log("YOU DARE FACE ANDY, LORD OF CINDER? YOU FOOL!");
           this.enemyHealth -= 1;
           this.AudioScene.playEnemyDmgSFX();
           //this.enemyHurt();
@@ -337,11 +337,9 @@ class BossCombatScene extends Phaser.Scene {
 
   cursorHover() {
     this.swordCursor.on("pointerover", () => {
-      console.log(this);
       swordCursor.setVisible(true);
     });
     this.swordCursor.on("pointerout", () => {
-      console.log("here");
       swordCursor.setVisible(false);
     });
   }
