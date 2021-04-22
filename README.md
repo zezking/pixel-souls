@@ -34,4 +34,8 @@ R - drink estus
 
 ## CHECK IT OUT:
 
-Run using your choice of HTML server (we used LiveServer on VSCode)!
+Temporarily deployed on Digital Ocean: https://pixel-souls-w8kd2.ondigitalocean.app/  
+Alternatively, you can download the latest release and run it using your choice of HTML server (we used LiveServer on VSCode)!  
+  
+Chiptune background music is by [CrimsonColbalt](https://soundcloud.com/crimsoncobalt)!
+
