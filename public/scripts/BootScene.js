@@ -19,11 +19,6 @@ class BootScene extends Phaser.Scene {
     this.load.image("overlay", "public/assets/map/FULLMAP_overlay.png");
     this.load.image("bonfireFX", "public/assets/map/bonfireEffect.png");
 
-    this.load.image(
-      "saintTravis",
-      "public/assets/entities/easter_eggs/saint travis.png"
-    );
-
     this.load.image("andyHighRes", "public/assets/sprites/andy high res.png");
 
     this.load.image("boss_bottom", "public/assets/map/BOSSMAP_bottom.png");
@@ -46,32 +41,17 @@ class BootScene extends Phaser.Scene {
     this.load.image("shield", "public/assets/ui/battle/shield.png");
     this.load.image("PLAYERBACK", "public/assets/sprites/PLAYERBACK.png");
     this.load.image("ui_background", "public/assets/ui/ui_background.png");
-    this.load.image(
-      "combat_background",
-      "public/assets/map/FULLMAP_bottom.png"
-    );
+    this.load.image("combat_background", "public/assets/map/FULLMAP_bottom.png");
     this.load.image("boss_background", "public/assets/map/boss_bg.png");
-    this.load.image(
-      "enemy_hurt",
-      "public/assets/ui/battle/hurt/enemy_hurt.png"
-    );
-    this.load.image(
-      "player_hurt",
-      "public/assets/ui/battle/hurt/player_hurt.png"
-    );
+    this.load.image("enemy_hurt", "public/assets/ui/battle/hurt/enemy_hurt.png");
+    this.load.image("player_hurt", "public/assets/ui/battle/hurt/player_hurt.png");
     this.load.image("damage", "public/assets/ui/battle/hurt/damage.png");
     this.load.image("sword_cursor", "public/assets/ui/battle/sword_cursor.png");
     this.load.image("kana", "public/assets/ui/battle/hurt/kana.png");
     this.load.image("enemy-name", "public/assets/ui/battle/enemy-name.png");
-    this.load.image(
-      "skeleton-name",
-      "public/assets/ui/battle/skeleton-name.png"
-    );
+    this.load.image("skeleton-name", "public/assets/ui/battle/skeleton-name.png");
     this.load.image("sword_chosen", "public/assets/ui/battle/sword_chosen.png");
-    this.load.image(
-      "shield_chosen",
-      "public/assets/ui/battle/shield_chosen.png"
-    );
+    this.load.image("shield_chosen", "public/assets/ui/battle/shield_chosen.png");
     this.load.image("magic_chosen", "public/assets/ui/battle/magic_chosen.png");
   }
 
@@ -102,10 +82,10 @@ class BootScene extends Phaser.Scene {
       frameHeight: 70,
     });
 
-    // this.load.spritesheet("well", "public/assets/entities/well.png", {
-    //   frameWidth: 88,
-    //   frameHeight: 56,
-    // });
+    this.load.spritesheet("well", "public/assets/entities/well.png", {
+      frameWidth: 88,
+      frameHeight: 56,
+    });
 
     this.load.spritesheet("pillar01", "public/assets/entities/pillar01.png", {
       frameWidth: 24,
@@ -116,10 +96,7 @@ class BootScene extends Phaser.Scene {
       frameWidth: 24,
       frameHeight: 148,
     });
-    this.load.spritesheet(
-      "eventTrigger",
-      "public/assets/sprites/eventTrigger.png",
-      {
+    this.load.spritesheet("eventTrigger", "public/assets/sprites/eventTrigger.png", {
         frameWidth: 5,
         frameHeight: 5,
       }
@@ -139,12 +116,8 @@ class BootScene extends Phaser.Scene {
     this.load.audio("bonfireSFX", "public/assets/audio/bonfire_lit.mp3");
     this.load.audio("estusSFX", "public/assets/audio/estusSFX.mp3");
     this.load.audio("soul-suck", "public/assets/audio/soul-suck.wav.mp3");
-    this.load.audio("heavenlySFX", "public/assets/audio/Heavens Choir SFX.mp3");
     this.load.audio("bossRoom", "public/assets/audio/boss_andy.mp3");
-    this.load.audio(
-      "bossReveal",
-      "public/assets/audio/fine_della_vento_aureo_cut.mp3"
-    );
+    this.load.audio("bossReveal", "public/assets/audio/fine_della_vento_aureo_cut.mp3");
     this.load.audio("rumbleSFX", "public/assets/audio/RumbleSFX.mp3");
     this.load.audio("select", "public/assets/audio/select.wav.mp3");
     this.load.audio("ok", "public/assets/audio/ok.wav.mp3");
