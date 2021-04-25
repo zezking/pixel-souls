@@ -6,7 +6,7 @@ class BossScene extends Phaser.Scene {
   init(data) {
     let { player } = data;
     this.oldPlayer = player;
-    this.scene.moveAbove("Game");
+    this.scene.moveAbove("Firelink");
     //references to other scenes for event listening
     this.uiScene = this.scene.get("Ui");
     this.combatScene = this.scene.get("Combat");

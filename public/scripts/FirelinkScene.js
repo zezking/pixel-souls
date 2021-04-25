@@ -1,9 +1,9 @@
 let enemy_speed = 20;
 let timedEvent;
 
-class GameScene extends Phaser.Scene {
+class FirelinkScene extends Phaser.Scene {
   constructor() {
-    super("Game");
+    super("Firelink");
   }
 
   init(data) {
