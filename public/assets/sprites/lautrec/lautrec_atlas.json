@@ -1,0 +1,60 @@
+{
+    "frames": [
+        {
+            "filename": "lautrec_0",
+            "frame": {
+                "w": 25,
+                "h": 35,
+                "x": 0,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "lautrec_1",
+            "frame": {
+                "w": 25,
+                "h": 35,
+                "x": 25,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "lautrec_2",
+            "frame": {
+                "w": 25,
+                "h": 35,
+                "x": 0,
+                "y": 35
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "lautrec_3",
+            "frame": {
+                "w": 25,
+                "h": 35,
+                "x": 25,
+                "y": 35
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        }
+    ],
+    "meta": {
+        "description": "Atlas generado con Atlas Packer Gamma V2",
+        "web": "https://gammafp.github.io/atlas-packer-phaser/"
+    }
+}

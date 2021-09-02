@@ -1,10 +1,10 @@
 {
     "frames": [
         {
-            "filename": "skele_idle0",
+            "filename": "griggs_0",
             "frame": {
                 "w": 32,
-                "h": 32,
+                "h": 54,
                 "x": 0,
                 "y": 0
             },
@@ -14,10 +14,10 @@
             }
         },
         {
-            "filename": "skele_idle1",
+            "filename": "griggs_1",
             "frame": {
                 "w": 32,
-                "h": 32,
+                "h": 54,
                 "x": 32,
                 "y": 0
             },
@@ -27,12 +27,12 @@
             }
         },
         {
-            "filename": "skele_idle2",
+            "filename": "griggs_2",
             "frame": {
                 "w": 32,
-                "h": 32,
+                "h": 54,
                 "x": 0,
-                "y": 32
+                "y": 54
             },
             "anchor": {
                 "x": 0.5,
@@ -40,12 +40,12 @@
             }
         },
         {
-            "filename": "skele_idle3",
+            "filename": "griggs_3",
             "frame": {
                 "w": 32,
-                "h": 32,
+                "h": 54,
                 "x": 32,
-                "y": 32
+                "y": 54
             },
             "anchor": {
                 "x": 0.5,
@@ -53,10 +53,10 @@
             }
         },
         {
-            "filename": "skele_idle4",
+            "filename": "griggs_4",
             "frame": {
                 "w": 32,
-                "h": 32,
+                "h": 54,
                 "x": 64,
                 "y": 0
             },
@@ -66,12 +66,12 @@
             }
         },
         {
-            "filename": "skele_idle5",
+            "filename": "griggs_5",
             "frame": {
                 "w": 32,
-                "h": 32,
+                "h": 54,
                 "x": 64,
-                "y": 32
+                "y": 54
             },
             "anchor": {
                 "x": 0.5,

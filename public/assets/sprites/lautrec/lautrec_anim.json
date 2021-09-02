@@ -1,0 +1,40 @@
+{
+    "anims": [
+        {
+            "key": "lautrec_idle",
+            "type": "frames",
+            "repeat": -1,
+            "frameRate": 2,
+            "frames": [
+                {
+                    "key": "lautrec",
+                    "frame": "lautrec_0"
+                },
+                {
+                    "key": "lautrec",
+                    "frame": "lautrec_1"
+                },
+                {
+                    "key": "lautrec",
+                    "frame": "lautrec_2"
+                },
+                {
+                    "key": "lautrec",
+                    "frame": "lautrec_2"
+                },
+                {
+                    "key": "lautrec",
+                    "frame": "lautrec_2"
+                },
+                {
+                    "key": "lautrec",
+                    "frame": "lautrec_2"
+                },
+                {
+                    "key": "lautrec",
+                    "frame": "lautrec_3"
+                }
+            ]
+        }
+    ]
+}

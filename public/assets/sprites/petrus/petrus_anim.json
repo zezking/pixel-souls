@@ -1,0 +1,28 @@
+{
+    "anims": [
+        {
+            "key": "petrus_idle",
+            "type": "frames",
+            "repeat": -1,
+            "frameRate": 4,
+            "frames": [
+                {
+                    "key": "petrus",
+                    "frame": "petrus_0"
+                },
+                {
+                    "key": "petrus",
+                    "frame": "petrus_1"
+                },
+                {
+                    "key": "petrus",
+                    "frame": "petrus_2"
+                },
+                {
+                    "key": "petrus",
+                    "frame": "petrus_3"
+                }
+            ]
+        }
+    ]
+}
