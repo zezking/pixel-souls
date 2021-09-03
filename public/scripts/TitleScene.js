@@ -6,7 +6,7 @@ class TitleScene extends Phaser.Scene {
   init() {
     //completely removes old scenes to destroy events
     this.scene.remove("Boss");
-    this.scene.remove("Game");
+    this.scene.remove("Firelink");
 
     this.AudioScene = this.scene.get("Audio");
   }
@@ -71,7 +71,7 @@ class TitleScene extends Phaser.Scene {
     this.input.keyboard.on("keydown", () => {
       this.AudioScene.stopMenuBgm();
       this.AudioScene.playStartSFX();
-      this.scene.add("Game", GameScene, true);
+      this.scene.add("Firelink", FirelinkScene, true);
       this.scene.add("Boss", BossScene, false);
       this.scene.stop("Title");
     });

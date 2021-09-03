@@ -206,7 +206,7 @@ class BossCombatScene extends Phaser.Scene {
       this.events.emit("enemySoulGet");
       this.events.off("results");
       this.scene.stop("Combat");
-      this.scene.wake("Game", { gameOver: true, playback: this.mainBGM }); //pass a game status to the Game Scene
+      this.scene.wake("Firelink", { gameOver: true, playback: this.mainBGM }); //pass a game status to the Firelink Scene
     }
 
     this.events.emit("updateHealth", this.playerHealth);
