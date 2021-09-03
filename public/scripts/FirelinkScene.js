@@ -1,9 +1,9 @@
 let enemy_speed = 20;
 let timedEvent;
 
-class GameScene extends Phaser.Scene {
+class FirelinkScene extends Phaser.Scene {
   constructor() {
-    super("Game");
+    super("Firelink");
   }
 
   init(data) {
@@ -21,7 +21,6 @@ class GameScene extends Phaser.Scene {
     NPC.preload(this);
     Item.preload(this);
     Player.preload(this);
-    Well.preload(this);
   }
 
   create() {
@@ -40,8 +39,6 @@ class GameScene extends Phaser.Scene {
     this.createBonfire();
     // Near Bonfire for light up on player?
     this.createNearBonfire();
-    this.createWell();
-    this.createNearWell();
     this.createCombat();
 
     // Spawn Effect
@@ -254,12 +251,12 @@ class GameScene extends Phaser.Scene {
 
   //------------SPAWN ENTITIES IN GAME---------------
   createEntity() {
-    // this.entity = new Entity({
-    //   scene: this,
-    //   x: 735,
-    //   y: 1770,
-    //   key: "well",
-    // });
+    this.entity = new Entity({
+      scene: this,
+      x: 735,
+      y: 1770,
+      key: "well",
+    });
     this.entity = new Entity({
       scene: this,
       x: 769,
@@ -362,21 +359,6 @@ class GameScene extends Phaser.Scene {
     });
   }
 
-  createWell() {
-    this.well = new Well({
-      scene: this,
-      x: 735,
-      y: 1770,
-      key: "well",
-    });
-    this.matterCollision.addOnCollideStart({
-      objectA: this.player,
-      objectB: this.well,
-      callback: (eventData) => {
-        this.uiScene.displayHelper(this, this.well);
-      },
-    });
-  }
 
   //------------------------------------------
   //------------------------------------------
@@ -556,18 +538,6 @@ class GameScene extends Phaser.Scene {
     });
   }
 
-  createNearWell() {
-    this.matterCollision.addOnCollideActive({
-      objectA: this.player,
-      objectB: this.well,
-      callback: () => {
-        if (this.player.inputKeys.interact.isDown) {
-          this.events.emit("useWell");
-          this.player.inputKeys.interact.reset();
-        }
-      },
-    });
-  }
 
   //Delay and activation for
   createDelay() {
@@ -638,11 +608,6 @@ class GameScene extends Phaser.Scene {
       this.freeEnemy(this.enemies);
     });
 
-    this.events.on("useWell", () => {
-      this.AudioScene.playHeavenly();
-      this.wellEasterEgg();
-    });
-
     this.events.on("bossTrigger", () => {
       if (this.player.souls >= 1500) {
 
@@ -698,32 +663,6 @@ class GameScene extends Phaser.Scene {
     this.tweens.add({
       targets: this.bonfireEffect,
       alpha: { start: 0, from: 0, to: 1, duration: 2000, ease: "Linear" },
-      yoyo: true,
-      // loop: -1,
-    });
-  }
-
-  wellEasterEgg() {
-    console.log("Thank you for helping us figure out Phaser, Travis!~")
-    this.wellEasterEggFX = this.make
-      .image({
-        x: this.player.x,
-        y: this.player.y,
-        key: "saintTravis",
-        add: true,
-        scale: {
-          //fog FX distance
-          x: 1,
-          y: 1,
-        },
-      })
-      .setOrigin(0.5)
-      .setDepth(3000)
-      .setAlpha(0);
-
-    this.tweens.add({
-      targets: this.wellEasterEggFX,
-      alpha: { start: 0, from: 0, to: 1, duration: 3000, ease: "Linear" },
       yoyo: true,
       // loop: -1,
     });

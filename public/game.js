@@ -6,7 +6,7 @@ const config = {
     BootScene,
     TitleScene,
     //These ones are disabled, but here as a reminder to where it needs to sit on this list:
-    // GameScene,
+    // FirelinkScene,
     // BossScene,
     UiScene,
     LogoScene,
@@ -31,7 +31,7 @@ const config = {
   plugins: {
     scene: [
       {
-        plugin: PhaserMatterCollisionPlugin,
+        plugin: PhaserMatterCollisionPlugin.default,
         key: "matterCollision",
         mapping: "matterCollision",
       },

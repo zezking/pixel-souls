@@ -5,7 +5,7 @@ class UiScene extends Phaser.Scene {
 
   init() {
     //Scene references for event listening
-    this.gameScene = this.scene.get("Game");
+    this.firelinkScene = this.scene.get("Firelink");
     this.bossScene = this.scene.get("Boss")
     this.combatScene = this.scene.get("Combat");
     this.bossCombatScene = this.scene.get("BossCombat");
@@ -46,7 +46,7 @@ class UiScene extends Phaser.Scene {
 
   setupEvents() {
     // listen for the updateSouls event from the game scene
-    this.gameScene.events.on("updateSouls", (prevSouls, newSouls) => {
+    this.firelinkScene.events.on("updateSouls", (prevSouls, newSouls) => {
       this.soulGet.play();
       let counter = prevSouls;
       let timer = 0;
@@ -80,8 +80,8 @@ class UiScene extends Phaser.Scene {
       this.healthUpdater(health);
     });
     //-------------------------------------------
-    //Health and Estus flasks from GAMESCENE:
-    this.gameScene.events.on("updateHealth", (health, estus) => {
+    //Health and Estus flasks from FIRELINKSCENE:
+    this.firelinkScene.events.on("updateHealth", (health, estus) => {
       //Health hearts
       this.hearts.children.each((gameObj, index) => {
         const heart = gameObj;

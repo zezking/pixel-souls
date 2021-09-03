@@ -89,13 +89,6 @@ class AudioScene extends Phaser.Scene {
     this.soulSucking.play();
   }
 
-  playHeavenly() {
-    this.heavenly = this.sound.add("heavenlySFX", {
-      volume: 0.06,
-    });
-    this.heavenly.play();
-  }
-
   playBossRoom() {
     this.bossRoomBGM = this.sound.add("bossRoom", {
       volume: 0.06,
