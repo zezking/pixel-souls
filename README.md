@@ -34,7 +34,7 @@ R - drink estus
 
 ## CHECK IT OUT:
 
-Temporarily deployed on Digital Ocean: https://pixel-souls-w8kd2.ondigitalocean.app/  
+Temporarily deployed on Netlify: https://pixel-souls.netlify.app/
 Alternatively, you can download the latest release and run it using your choice of HTML server (we used LiveServer on VSCode)!  
   
 Chiptune background music is by [CrimsonColbalt](https://soundcloud.com/crimsoncobalt)!
